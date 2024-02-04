@@ -21,7 +21,7 @@ const spaceGrotesk = Space_Grotesk({
 export const metadata: Metadata = {
   title: "DevFlow",
   description: "A community of developers helping each other",
-  icons: { icon: "/assets/images/site-logo.svg" },
+  icons: { icon: "/images/site-logo.svg" },
 };
 
 export default function RootLayout({

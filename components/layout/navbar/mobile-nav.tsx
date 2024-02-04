@@ -25,7 +25,10 @@ const NavContent = () => {
           pathName === item.route;
 
         return (
-          <SheetClose asChild key={item.route}>
+          <SheetClose
+            asChild
+            key={item.route}
+          >
             <Link
               href={item.route}
               className={`${isActive ? "primary-gradient text-light-900" : "text-dark-300_light-900 hover:bg-light-700_dark-300"} flex items-center justify-start gap-4 rounded-lg bg-transparent p-4`}
@@ -55,17 +58,23 @@ const MobileNav = () => {
     <Sheet>
       <SheetTrigger asChild>
         <Image
-          src="/assets/icons/hamburger.svg"
+          src="/icons/hamburger.svg"
           width={36}
           height={36}
           alt="Menu"
           className="invert-colors sm:hidden"
         />
       </SheetTrigger>
-      <SheetContent side="left" className="bg-light-900_dark-200 border-none">
-        <Link href="/" className="flex items-center gap-1">
+      <SheetContent
+        side="left"
+        className="bg-light-900_dark-200 border-none"
+      >
+        <Link
+          href="/"
+          className="flex items-center gap-1"
+        >
           <Image
-            src="/assets/images/site-logo.svg"
+            src="/images/site-logo.svg"
             alt="DevFlow"
             width={23}
             height={23}
