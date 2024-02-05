@@ -31,7 +31,7 @@ const NavContent = () => {
           >
             <Link
               href={item.route}
-              className={`${isActive ? "primary-gradient text-light-900" : "text-dark-300_light-900 hover:bg-light-700_dark-300"} flex items-center justify-start gap-4 rounded-lg bg-transparent p-4`}
+              className={`${isActive ? "primary-gradient text-light-900" : "text-dark-300_light-900 hover:bg-light-700_dark-300"} flex items-center justify-start gap-4 rounded-lg bg-transparent p-3`}
             >
               <Image
                 src={item.imgURL}
@@ -92,7 +92,7 @@ const MobileNav = () => {
             <SheetClose asChild>
               <Link href="/sign-in">
                 <Button className="btn-secondary no-focus min-h-[41px] w-full rounded-lg px-4 py-3 shadow-none">
-                  <span className="primary-text-gradient font-base-medium">
+                  <span className="font-base-medium text-primary-500">
                     Sign in
                   </span>
                 </Button>
