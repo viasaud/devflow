@@ -10,8 +10,8 @@ import { usePathname } from "next/navigation";
 const LeftSidebar = () => {
   const pathName = usePathname();
   return (
-    <section className="bg-light-900_dark-200 custom-scrollbar sticky left-0 top-0 flex h-screen flex-col justify-between overflow-y-auto p-6 pt-36 shadow-light-300 dark:shadow-none max-sm:hidden lg:w-[266px]">
-      <div className="flex flex-1 flex-col gap-4">
+    <section className="bg-light-900_dark-200 custom-scrollbar border-light-700_dark-400 sticky left-0 top-0 flex h-screen flex-col justify-between overflow-y-auto border-r p-8 pt-24 shadow-light-300 dark:shadow-none max-lg:px-4 max-sm:hidden lg:w-72">
+      <div className="flex flex-1 flex-col gap-3">
         {sidebarLinks.map((item) => {
           const isActive =
             (pathName.includes(item.route) && item.route.length > 1) ||
@@ -21,18 +21,16 @@ const LeftSidebar = () => {
             <Link
               href={item.route}
               key={item.route}
-              className={`${isActive ? "primary-gradient text-light-900" : "text-dark-300_light-900 hover:bg-light-700_dark-300"} flex items-center justify-start gap-4 rounded-lg bg-transparent px-6 py-3`}
+              className={`${isActive ? "bg-light-800_dark-400" : " hover:bg-light-800_dark-400"} text-dark-300_light-900 flex items-center justify-start gap-3 rounded-lg px-4 py-2`}
             >
               <Image
                 src={item.imgURL}
                 width={20}
                 height={20}
                 alt={item.label}
-                className={`${!isActive && "invert-colors"}`}
+                className={`invert-colors`}
               />
-              <p
-                className={`${isActive ? "font-base-bold" : "font-base-medium"} max-lg:hidden`}
-              >
+              <p className="font-base-medium font-light max-lg:hidden">
                 {item.label}
               </p>
             </Link>
@@ -42,7 +40,7 @@ const LeftSidebar = () => {
 
       <SignedOut>
         <Link href="/sign-in">
-          <Button className="btn-secondary no-focus min-h-[41px] w-full rounded-lg px-4 py-3 shadow-none">
+          <Button variant={"sign_in"}>
             <Image
               src="/icons/account.svg"
               alt="login"
@@ -50,7 +48,7 @@ const LeftSidebar = () => {
               height={20}
               className="invert-colors lg:hidden"
             />
-            <span className="font-base-medium p-2 text-primary-500 max-lg:hidden">
+            <span className="font-base-medium font-normal text-white max-lg:hidden">
               Sign in
             </span>
           </Button>

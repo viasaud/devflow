@@ -18,7 +18,7 @@ const NavContent = () => {
   const pathName = usePathname();
 
   return (
-    <section className="flex h-full flex-col gap-4 pt-16">
+    <section className="flex flex-1 flex-col gap-3 pt-16">
       {sidebarLinks.map((item) => {
         const isActive =
           (pathName.includes(item.route) && item.route.length > 1) ||
@@ -31,20 +31,16 @@ const NavContent = () => {
           >
             <Link
               href={item.route}
-              className={`${isActive ? "primary-gradient text-light-900" : "text-dark-300_light-900 hover:bg-light-700_dark-300"} flex items-center justify-start gap-4 rounded-lg bg-transparent p-3`}
+              className={`${isActive ? "bg-light-800_dark-400" : " hover:bg-light-800_dark-400"} text-dark-300_light-900 flex items-center justify-start gap-3 rounded-lg px-4 py-2`}
             >
               <Image
                 src={item.imgURL}
                 width={20}
                 height={20}
                 alt={item.label}
-                className={`${!isActive && "invert-colors"}`}
+                className={`invert-colors`}
               />
-              <p
-                className={`${isActive ? "font-base-bold" : "font-base-medium"}`}
-              >
-                {item.label}
-              </p>
+              <p className="font-base-medium font-light">{item.label}</p>
             </Link>
           </SheetClose>
         );
@@ -91,8 +87,8 @@ const MobileNav = () => {
           <SignedOut>
             <SheetClose asChild>
               <Link href="/sign-in">
-                <Button className="btn-secondary no-focus min-h-[41px] w-full rounded-lg px-4 py-3 shadow-none">
-                  <span className="font-base-medium text-primary-500">
+                <Button variant={"sign_in"}>
+                  <span className="font-base-medium font-normal text-white">
                     Sign in
                   </span>
                 </Button>
