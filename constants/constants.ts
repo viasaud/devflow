@@ -1,46 +1,58 @@
 import { SidebarLink } from "@/types";
+import {
+  RiHome6Line,
+  RiGroupLine,
+  RiFileList2Line,
+  RiMenuSearchLine,
+  RiHashtag,
+  RiUser3Line,
+  RiQuestionLine,
+  RiSunLine,
+  RiMoonLine,
+  RiComputerLine,
+} from "@remixicon/react";
 
 export const themes = [
-  { value: "light", label: "Light", icon: "/icons/sun.svg" },
-  { value: "dark", label: "Dark", icon: "/icons/moon.svg" },
-  { value: "system", label: "System", icon: "/icons/computer.svg" },
+  { value: "light", label: "Light", icon: RiSunLine },
+  { value: "dark", label: "Dark", icon: RiMoonLine },
+  { value: "system", label: "System", icon: RiComputerLine },
 ];
 
 export const sidebarLinks: SidebarLink[] = [
   {
-    imgURL: "/icons/home.svg",
     route: "/",
     label: "Home",
+    icon: RiHome6Line,
   },
   {
-    imgURL: "/icons/users.svg",
     route: "/community",
     label: "Community",
+    icon: RiGroupLine,
   },
   {
-    imgURL: "/icons/star.svg",
     route: "/collection",
     label: "Collections",
+    icon: RiFileList2Line,
   },
   {
-    imgURL: "/icons/suitcase.svg",
     route: "/jobs",
     label: "Find Jobs",
+    icon: RiMenuSearchLine,
   },
   {
-    imgURL: "/icons/tag.svg",
     route: "/tags",
     label: "Tags",
+    icon: RiHashtag,
   },
   {
-    imgURL: "/icons/user.svg",
     route: "/profile",
     label: "Profile",
+    icon: RiUser3Line,
   },
   {
-    imgURL: "/icons/question.svg",
     route: "/ask-question",
     label: "Ask a question",
+    icon: RiQuestionLine,
   },
 ];
 

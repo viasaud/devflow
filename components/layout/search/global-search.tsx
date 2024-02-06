@@ -1,21 +1,18 @@
 import { Input } from "@/components/ui/input";
-import Image from "next/image";
+import { RiSearch2Line } from "@remixicon/react";
 
 const GlobalSearch = () => {
   return (
     <div className="relative w-full max-w-[600px] max-lg:hidden">
-      <div className="bg-light-800_dark-300 border-light-700_dark-400 relative flex min-h-10 grow items-center gap-1 rounded-xl border px-4">
-        <Image
-          src="/icons/search.svg"
-          alt="search"
-          width={24}
-          height={24}
-          className="cursor-pointer"
+      <div className="border-light-700_dark-400 relative flex min-h-10 grow items-center gap-1 rounded-xl border bg-light-800 px-4 dark:bg-dark-500">
+        <RiSearch2Line
+          size={24}
+          className="cursor-pointer text-light-400"
         />
         <Input
           type="text"
           placeholder="Search"
-          className="font-paragraph-regular no-focus placeholder bg-light-800_dark-gradient text-dark-100_light-900 border-none bg-transparent shadow-none outline-none"
+          className="font-paragraph-regular no-focus bg-light-800_dark-gradient text-dark-100_light-900 border-none bg-transparent shadow-none outline-none placeholder:text-light-400"
         />
       </div>
     </div>

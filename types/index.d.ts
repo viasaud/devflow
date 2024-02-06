@@ -1,9 +1,10 @@
 import { BADGE_CRITERIA } from "@/constants/constants";
+import React from "react";
 
 export interface SidebarLink {
-  imgURL: string;
   route: string;
   label: string;
+  icon: React.ElementType;
 }
 
 export interface Job {

@@ -12,18 +12,13 @@ import Link from "next/link";
 import { SignedOut } from "@clerk/nextjs";
 import { Button } from "@/components/ui/button";
 import NavContent from "../nav-content";
+import { RiMenuFill } from "@remixicon/react";
 
 const MobileNav = () => {
   return (
     <Sheet>
       <SheetTrigger asChild>
-        <Image
-          src="/icons/hamburger.svg"
-          width={36}
-          height={36}
-          alt="Menu"
-          className="invert-colors sm:hidden"
-        />
+        <RiMenuFill className="text-black dark:text-white sm:hidden" />
       </SheetTrigger>
       <SheetContent
         side="left"
