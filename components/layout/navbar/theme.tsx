@@ -17,7 +17,7 @@ const Theme = () => {
   return (
     <Menubar className="relative border-none bg-transparent shadow-none">
       <MenubarMenu>
-        <MenubarTrigger className="hover:bg-light-800_dark-300 rounded-lg focus:bg-light-900 data-[state=open]:bg-light-900 dark:focus:bg-dark-200 dark:data-[state=open]:bg-dark-200">
+        <MenubarTrigger className="hover:bg-light-800_dark-300 rounded-3xl data-[state=open]:bg-light-900  dark:data-[state=open]:bg-dark-200">
           {mode === "light" ? (
             <RiSunLine className="text-light-400" />
           ) : (

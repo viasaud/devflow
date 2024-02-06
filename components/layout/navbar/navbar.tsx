@@ -10,7 +10,7 @@ import { RiLoginCircleLine } from "@remixicon/react";
 
 const Navbar = () => {
   return (
-    <nav className="flex-between border-light-700_dark-400 fixed z-50 h-16 w-full gap-5 border-b-2 bg-white p-4 shadow-light-300 dark:bg-black dark:shadow-none lg:px-8">
+    <nav className="flex-between border-light-700_dark-400 fixed z-50 h-16 w-full gap-5 border-b bg-white p-4 shadow-light-300 dark:bg-black dark:shadow-none lg:px-8">
       <Link
         href="/"
         className="flex items-center gap-1"
