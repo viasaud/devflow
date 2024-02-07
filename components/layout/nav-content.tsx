@@ -15,11 +15,11 @@ const NavContent = ({ isMobile }: { isMobile: boolean }) => {
           <Link
             href={item.route}
             key={item.route}
-            className={`${isActive ? "bg-light-800_dark-300" : " hover:bg-light-800_dark-300"} text-dark-300_light-900 flex items-center justify-start gap-2 rounded-lg px-4 py-2`}
+            className={`${isActive ? "bg-select text-primary-500" : "hover:bg-hover text-dark-300_light-900"}  flex items-center justify-start gap-2 rounded-lg px-5 py-2`}
           >
-            <item.icon size={20} />
+            <item.icon size={24} />
             <p
-              className={`${isMobile ? "font-paragraph-medium font-light" : "font-body-regular max-lg:hidden"} `}
+              className={`${isMobile ? "font-paragraph-regular" : "font-body-regular max-lg:hidden"} `}
             >
               {item.label}
             </p>

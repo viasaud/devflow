@@ -3,6 +3,14 @@
 @tailwind utilities;
 
 @layer utilities {
+  .bg-select {
+    @apply bg-zinc-100 dark:bg-zinc-900;
+  }
+
+  .bg-hover {
+    @apply bg-zinc-100/80 dark:bg-zinc-900/80;
+  }
+
   .bg-light-850_dark-100 {
     @apply bg-light-850 dark:bg-dark-100;
   }
@@ -91,8 +99,8 @@
     @apply text-light-400 dark:text-light-500 !important;
   }
 
-  .border-light-800_dark-300 {
-    @apply border-light-800 dark:border-dark-300;
+  .border-zinc {
+    @apply border-zinc-300 dark:border-zinc-800;
   }
 
   .border-light-700_dark-400 {

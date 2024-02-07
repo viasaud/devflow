@@ -17,12 +17,15 @@ import { RiMenuFill } from "@remixicon/react";
 const MobileNav = () => {
   return (
     <Sheet>
-      <SheetTrigger asChild>
-        <RiMenuFill className="text-black dark:text-white sm:hidden" />
+      <SheetTrigger
+        asChild
+        className="w-11"
+      >
+        <RiMenuFill className="text-dark-300_light-900 sm:hidden" />
       </SheetTrigger>
       <SheetContent
         side="left"
-        className="bg-light-900_dark-200 border-none"
+        className="bg-light-850_dark-100 border-none"
       >
         <Link
           href="/"

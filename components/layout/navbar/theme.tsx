@@ -17,18 +17,18 @@ const Theme = () => {
   return (
     <Menubar className="relative border-none bg-transparent shadow-none">
       <MenubarMenu>
-        <MenubarTrigger className="hover:bg-light-800_dark-300 rounded-3xl data-[state=open]:bg-light-900  dark:data-[state=open]:bg-dark-200">
+        <MenubarTrigger className="hover:bg-hover rounded-3xl data-[state=open]:bg-light-900  dark:data-[state=open]:bg-dark-200">
           {mode === "light" ? (
-            <RiSunLine className="text-light-400" />
+            <RiSunLine className="text-dark-300_light-900" />
           ) : (
-            <RiMoonLine className="text-light-400" />
+            <RiMoonLine className="text-dark-300_light-900" />
           )}
         </MenubarTrigger>
-        <MenubarContent className="absolute right-[-2.5rem] mt-3 min-w-[120px] rounded-md border py-2 dark:border-dark-400 dark:bg-dark-200">
+        <MenubarContent className="border-zinc bg-light-850_dark-100 absolute right-[-2.5rem] mt-3 min-w-28 rounded-lg border py-2">
           {themes.map((theme) => (
             <MenubarItem
               key={theme.value}
-              className="hover:bg-light-800_dark-400 focus:bg-light-700_dark-300 flex items-center gap-4 rounded-lg px-2.5 py-2 dark:focus:bg-dark-400"
+              className={`${mode === theme.value && "bg-select"} hover:bg-hover flex items-center gap-2 rounded-lg px-2.5 py-2`}
               onClick={() => {
                 setMode(theme.value);
 
@@ -41,10 +41,10 @@ const Theme = () => {
             >
               <theme.icon
                 size={22}
-                className={`${mode === theme.value ? "active-theme" : "text-light-400"}`}
+                className={`${mode === theme.value ? "active-theme" : "text-dark-300_light-900"}`}
               />
               <p
-                className={`font-body-regular ${mode === theme.value ? "text-primary-500" : "text-dark-100_light-900"}`}
+                className={`font-body-regular ${mode === theme.value ? "text-primary-500" : "text-dark-300_light-900"}`}
               >
                 {theme.label}
               </p>
