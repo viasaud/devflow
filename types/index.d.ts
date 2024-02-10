@@ -5,6 +5,7 @@ export interface SidebarLink {
   route: string;
   label: string;
   icon: React.ElementType;
+  iconFilled: React.ElementType;
 }
 
 export interface Job {

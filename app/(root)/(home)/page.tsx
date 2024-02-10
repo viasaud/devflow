@@ -1,6 +1,6 @@
 export default function Home() {
   return (
-    <div className="text-dark-300_light-900">
+    <div className="text-default">
       Lorem ipsum dolor sit amet consectetur, adipisicing elit. Molestias dolor
       suscipit aperiam in tempore neque maiores optio atque, voluptatum ullam et
       repellendus, reprehenderit quod sint minima eaque, quis consectetur omnis.

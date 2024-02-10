@@ -9,30 +9,28 @@ import { Button } from "@/components/ui/button";
 
 const Navbar = () => {
   return (
-    <nav className="flex-between border-zinc bg-light-850_dark-100 fixed z-50 h-16 w-full gap-3 border-b p-4 shadow-light-300 dark:shadow-none lg:px-8">
+    <nav className="flex-between border-default bg-default fixed z-50 h-16 w-full gap-3 border-b p-4 shadow-zinc-300 dark:shadow-none lg:px-8">
       <MobileNav />
       <Link
         href="/"
-        className="flex w-14 items-center gap-1 sm:w-10 lg:w-72"
+        className="flex h-16 w-16 items-center gap-1 lg:w-72 xl:w-48"
       >
         <Image
-          src="/images/site-logo.svg"
+          src="/svg/logo.svg"
           alt="DevFlow"
-          width={28}
-          height={28}
+          width={34}
+          height={34}
         />
-        <p className="font-h2-bold text-dark-100_light-900 ml-1 font-spaceGrotesk max-lg:hidden">
-          Dev<span className="text-primary-500">Overflow</span>
+        <p className="font-h2-bold text-default ml-1 font-spaceGrotesk max-lg:hidden">
+          Dev<span className="text-orange-500">Overflow</span>
         </p>
       </Link>
       <GlobalSearch />
-      <div className="flex w-32 justify-end gap-3 xl:w-72">
+      <div className="flex w-32 justify-end gap-3 xl:w-48">
         <Theme />
         <SignedOut>
           <Link href="/sign-in">
-            <Button variant={"sign_in"}>
-              <span className="font-body-regular text-white">Sign in</span>
-            </Button>
+            <Button variant={"sign_in"}>Sign in</Button>
           </Link>
         </SignedOut>
         <SignedIn>

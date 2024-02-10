@@ -4,107 +4,23 @@
 
 @layer utilities {
   .bg-select {
-    @apply bg-zinc-100 dark:bg-zinc-900;
+    @apply dark:bg-zinc-800/60 bg-zinc-200/60;
   }
 
   .bg-hover {
-    @apply bg-zinc-100/80 dark:bg-zinc-900/80;
+    @apply bg-zinc-200/40 dark:bg-zinc-800/40;
   }
 
-  .bg-light-850_dark-100 {
-    @apply bg-light-850 dark:bg-dark-100;
+  .bg-default {
+    @apply bg-zinc-50 dark:bg-zinc-950;
   }
 
-  .bg-light-900_dark-200 {
-    @apply bg-light-900 dark:bg-dark-200;
+  .text-default {
+    @apply text-zinc-900 dark:text-zinc-300 !important;
   }
 
-  .bg-light-900_dark-300 {
-    @apply bg-light-900 dark:bg-dark-300;
-  }
-
-  .bg-light-800_dark-gradient {
-    @apply bg-light-800 dark:dark-gradient;
-  }
-
-  .bg-light-800_dark-400 {
-    @apply bg-light-800 dark:bg-dark-400 !important;
-  }
-
-  .bg-light-700_dark-400 {
-    @apply bg-light-700 dark:bg-dark-400;
-  }
-
-  .bg-light-700_dark-300 {
-    @apply bg-light-700 dark:bg-dark-300;
-  }
-
-  .bg-light-800_dark-400 {
-    @apply bg-light-800 dark:bg-dark-400;
-  }
-
-  .bg-light-800_dark-300 {
-    @apply bg-light-800 dark:bg-dark-300 !important;
-  }
-
-  .text-dark-100_light-900 {
-    @apply text-dark-100 dark:text-light-900 !important;
-  }
-
-  .text-dark-200_light-900 {
-    @apply text-dark-200 dark:text-light-900;
-  }
-
-  .text-dark-200_light-800 {
-    @apply text-dark-200 dark:text-light-800 !important;
-  }
-
-  .text-dark-300_light-700 {
-    @apply text-dark-300 dark:text-light-700;
-  }
-
-  .text-dark-400_light-700 {
-    @apply text-dark-400 dark:text-light-700;
-  }
-
-  .text-dark-500_light-700 {
-    @apply text-dark-500 dark:text-light-700 !important;
-  }
-
-  .text-dark-500_light-500 {
-    @apply text-dark-500 dark:text-light-500;
-  }
-
-  .text-dark-300_light-900 {
-    @apply text-dark-300 dark:text-light-900;
-  }
-
-  .text-dark-400_light-800 {
-    @apply text-dark-400 dark:text-light-800;
-  }
-
-  .text-light-400_light-500 {
-    @apply text-light-400 dark:text-light-500 !important;
-  }
-
-  .text-dark-400_light-500 {
-    @apply text-dark-400 dark:text-light-500;
-  }
-
-  .text-dark-400_light-900 {
-    @apply text-dark-400 dark:text-light-900 !important;
-  }
-
-  .text-light-400_light-500 {
-    @apply text-light-400 dark:text-light-500 !important;
-  }
-
-  .border-zinc {
-    @apply border-zinc-300 dark:border-zinc-800;
-  }
-
-  .border-light-700_dark-400 {
-    @apply border-light-700 dark:border-dark-400 !important;
+  .border-default {
+    @apply border-zinc-300 dark:border-zinc-800 !important;
   }
 
   .font-h1-bold {
@@ -184,26 +100,26 @@
   }
 
   .placeholder {
-    @apply placeholder:text-light-400 dark:placeholder:text-light-500;
+    @apply placeholder:text-zinc-400 dark:placeholder:text-zinc-500;
   }
 
   .invert-colors {
     @apply invert dark:invert-0;
   }
 
-  .shadow-light-100_dark-100 {
-    @apply shadow-light-100 dark:shadow-dark-100;
+  .shadow-zinc-100_zinc-100 {
+    @apply shadow-zinc-100 dark:shadow-zinc-100;
   }
 
-  .shadow-light-100_dark-none {
-    @apply shadow-light-100 dark:shadow-none;
+  .shadow-zinc-100_zinc-none {
+    @apply shadow-zinc-100 dark:shadow-none;
   }
 
   .bg-primary-gradient {
     background: linear-gradient(129deg, #ff7000 0%, #e2995f 100%);
   }
 
-  .dark-gradient {
+  .zinc-gradient {
     background: linear-gradient(
       232deg,
       rgba(23, 28, 35, 0.41) 0%,
@@ -211,7 +127,7 @@
     );
   }
 
-  .bg-dark-gradient {
+  .bg-zinc-gradient {
     background: linear-gradient(
       232deg,
       rgba(23, 28, 35, 0.41) 0%,

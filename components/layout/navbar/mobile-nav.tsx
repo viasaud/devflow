@@ -9,8 +9,6 @@ import {
 } from "@/components/ui/sheet";
 import Image from "next/image";
 import Link from "next/link";
-import { SignedOut } from "@clerk/nextjs";
-import { Button } from "@/components/ui/button";
 import NavContent from "../nav-content";
 import { RiMenuFill } from "@remixicon/react";
 
@@ -21,42 +19,30 @@ const MobileNav = () => {
         asChild
         className="w-11"
       >
-        <RiMenuFill className="text-dark-300_light-900 sm:hidden" />
+        <RiMenuFill className="text-default sm:hidden" />
       </SheetTrigger>
       <SheetContent
         side="left"
-        className="bg-light-850_dark-100 border-none"
+        className="bg-default border-none"
       >
         <Link
           href="/"
           className="flex items-center gap-1"
         >
           <Image
-            src="/images/site-logo.svg"
+            src="/svg/logo.svg"
             alt="DevFlow"
-            width={23}
-            height={23}
+            width={34}
+            height={34}
           />
-          <p className="font-h2-bold text-dark-100_light-900 font-spaceGrotesk">
-            Dev <span className="text-primary-500">Overflow</span>
+          <p className="font-h2-bold text-default font-spaceGrotesk">
+            Dev<span className="text-orange-500">Overflow</span>
           </p>
         </Link>
         <div className="flex h-full flex-col justify-end pb-12">
           <SheetClose asChild>
             <NavContent isMobile={true} />
           </SheetClose>
-
-          <SignedOut>
-            <SheetClose asChild>
-              <Link href="/sign-in">
-                <Button variant={"sign_in"}>
-                  <span className="font-base-medium font-normal text-white">
-                    Sign in
-                  </span>
-                </Button>
-              </Link>
-            </SheetClose>
-          </SignedOut>
         </div>
       </SheetContent>
     </Sheet>

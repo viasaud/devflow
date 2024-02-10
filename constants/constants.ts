@@ -10,12 +10,26 @@ import {
   RiSunLine,
   RiMoonLine,
   RiComputerLine,
+  RiHome6Fill,
+  RiGroupFill,
+  RiFileList2Fill,
+  RiMenuSearchFill,
+  RiUser3Fill,
+  RiQuestionFill,
+  RiSunFill,
+  RiMoonFill,
+  RiComputerFill,
 } from "@remixicon/react";
 
 export const themes = [
-  { value: "light", label: "Light", icon: RiSunLine },
-  { value: "dark", label: "Dark", icon: RiMoonLine },
-  { value: "system", label: "System", icon: RiComputerLine },
+  { value: "light", label: "Light", icon: RiSunLine, iconFilled: RiSunFill },
+  { value: "dark", label: "Dark", icon: RiMoonLine, iconFilled: RiMoonFill },
+  {
+    value: "system",
+    label: "System",
+    icon: RiComputerLine,
+    iconFilled: RiComputerFill,
+  },
 ];
 
 export const sidebarLinks: SidebarLink[] = [
@@ -23,36 +37,43 @@ export const sidebarLinks: SidebarLink[] = [
     route: "/",
     label: "Home",
     icon: RiHome6Line,
+    iconFilled: RiHome6Fill,
   },
   {
     route: "/community",
     label: "Community",
     icon: RiGroupLine,
+    iconFilled: RiGroupFill,
   },
   {
     route: "/collection",
     label: "Collections",
     icon: RiFileList2Line,
+    iconFilled: RiFileList2Fill,
   },
   {
     route: "/jobs",
     label: "Find Jobs",
     icon: RiMenuSearchLine,
+    iconFilled: RiMenuSearchFill,
   },
   {
     route: "/tags",
     label: "Tags",
     icon: RiHashtag,
+    iconFilled: RiHashtag,
   },
   {
     route: "/profile",
     label: "Profile",
     icon: RiUser3Line,
+    iconFilled: RiUser3Fill,
   },
   {
     route: "/ask-question",
     label: "Ask a question",
     icon: RiQuestionLine,
+    iconFilled: RiQuestionFill,
   },
 ];
 
