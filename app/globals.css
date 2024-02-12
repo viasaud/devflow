@@ -30,7 +30,7 @@ body {
   }
 
   .btn-secondary {
-    @apply bg-light-800 dark:bg-dark-400 !important;
+    @apply bg-light-700/40 dark:bg-dark-400 hover:bg-light-700/60 hover:dark:bg-dark-300 border-[.5px] border-light-400/20  !important;
   }
 
   .btn-tertiary {
@@ -42,15 +42,7 @@ body {
   }
 
   .primary-gradient {
-    background: linear-gradient(129deg, #ff7000 0%, #e2995f 100%);
-  }
-
-  .dark-gradient {
-    background: linear-gradient(
-      232deg,
-      rgba(23, 28, 35, 0.41) 0%,
-      rgba(19, 22, 28, 0.7) 100%
-    );
+    background: linear-gradient(129deg, #ff7000 50%, #e2995f 100%);
   }
 
   .tab {
