@@ -4,10 +4,10 @@ import { RiSearch2Line } from "@remixicon/react";
 const GlobalSearch = () => {
   return (
     <div className="relative w-full xl:w-2/5">
-      <div className="border-default bg-hover relative flex h-10 grow items-center gap-1 rounded-3xl border px-4 ">
+      <div className="border-default bg-default relative flex h-10 grow items-center gap-1 rounded-3xl border-[1.5px] px-4 ">
         <RiSearch2Line
-          size={24}
-          className="cursor-pointer text-zinc-500"
+          size={20}
+          className="cursor-pointer text-zinc-900 dark:text-zinc-300"
         />
         <Input
           type="text"

@@ -9,18 +9,13 @@ import { Button } from "@/components/ui/button";
 
 const Navbar = () => {
   return (
-    <nav className="flex-between border-default bg-default fixed z-50 h-16 w-full gap-3 border-b p-4 shadow-zinc-300 dark:shadow-none lg:px-8">
+    <nav className="flex-between border-default bg-default fixed z-50 h-14 w-full gap-3 border-b p-4 shadow-zinc-300 dark:shadow-none lg:px-8">
       <MobileNav />
       <Link
         href="/"
         className="flex h-16 w-16 items-center gap-1 lg:w-72 xl:w-48"
       >
-        <Image
-          src="/svg/logo.svg"
-          alt="DevFlow"
-          width={34}
-          height={34}
-        />
+        <Image src="/svg/logo.svg" alt="DevFlow" width={34} height={34} />
         <p className="font-h2-bold text-default ml-1 font-spaceGrotesk max-lg:hidden">
           Dev<span className="text-orange-500">Overflow</span>
         </p>

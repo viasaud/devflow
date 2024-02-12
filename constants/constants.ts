@@ -4,9 +4,6 @@ import {
   RiGroupLine,
   RiFileList2Line,
   RiMenuSearchLine,
-  RiHashtag,
-  RiUser3Line,
-  RiQuestionLine,
   RiSunLine,
   RiMoonLine,
   RiComputerLine,
@@ -14,8 +11,6 @@ import {
   RiGroupFill,
   RiFileList2Fill,
   RiMenuSearchFill,
-  RiUser3Fill,
-  RiQuestionFill,
   RiSunFill,
   RiMoonFill,
   RiComputerFill,
@@ -57,24 +52,24 @@ export const sidebarLinks: SidebarLink[] = [
     icon: RiMenuSearchLine,
     iconFilled: RiMenuSearchFill,
   },
-  {
-    route: "/tags",
-    label: "Tags",
-    icon: RiHashtag,
-    iconFilled: RiHashtag,
-  },
-  {
-    route: "/profile",
-    label: "Profile",
-    icon: RiUser3Line,
-    iconFilled: RiUser3Fill,
-  },
-  {
-    route: "/ask-question",
-    label: "Ask a question",
-    icon: RiQuestionLine,
-    iconFilled: RiQuestionFill,
-  },
+  // {
+  //   route: "/tags",
+  //   label: "Tags",
+  //   icon: RiHashtag,
+  //   iconFilled: RiHashtag,
+  // },
+  // {
+  //   route: "/profile",
+  //   label: "Profile",
+  //   icon: RiUser3Line,
+  //   iconFilled: RiUser3Fill,
+  // },
+  // {
+  //   route: "/ask-question",
+  //   label: "Ask a question",
+  //   icon: RiQuestionLine,
+  //   iconFilled: RiQuestionFill,
+  // },
 ];
 
 export const BADGE_CRITERIA = {

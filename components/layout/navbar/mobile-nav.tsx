@@ -15,26 +15,12 @@ import { RiMenuFill } from "@remixicon/react";
 const MobileNav = () => {
   return (
     <Sheet>
-      <SheetTrigger
-        asChild
-        className="w-11"
-      >
-        <RiMenuFill className="text-default sm:hidden" />
+      <SheetTrigger className="w-11" asChild>
+        <RiMenuFill className="text-default lg:hidden" />
       </SheetTrigger>
-      <SheetContent
-        side="left"
-        className="bg-default border-none"
-      >
-        <Link
-          href="/"
-          className="flex items-center gap-1"
-        >
-          <Image
-            src="/svg/logo.svg"
-            alt="DevFlow"
-            width={34}
-            height={34}
-          />
+      <SheetContent side="left" className="bg-default border-none">
+        <Link href="/" className="flex items-center gap-1">
+          <Image src="/svg/logo.svg" alt="DevFlow" width={34} height={34} />
           <p className="font-h2-bold text-default font-spaceGrotesk">
             Dev<span className="text-orange-500">Overflow</span>
           </p>
