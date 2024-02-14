@@ -1,5 +1,3 @@
-"use client";
-
 import NavContent from "../nav-content";
 
 const LeftSidebar = () => {

@@ -11,6 +11,10 @@
     @apply bg-zinc-200/50 dark:bg-zinc-800/50;
   }
 
+  .bg-post {
+    @apply bg-zinc-200/30 dark:bg-zinc-800/30;
+  }
+
   .bg-default {
     @apply bg-zinc-50 dark:bg-zinc-950;
   }

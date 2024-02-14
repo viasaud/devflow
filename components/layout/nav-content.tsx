@@ -1,3 +1,5 @@
+"use client";
+
 import React from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -13,16 +15,17 @@ const popularTags = [
   { _id: 5, name: "redux", totalQuestions: 11 },
 ];
 
-const NavContent = ({ isMobile }: { isMobile: boolean }) => {
+const Dicover = ({ isMobile }: { isMobile: boolean }) => {
   const pathName = usePathname();
+
   return (
-    <div className={`flex flex-1 flex-col ${isMobile && "pt-16"}`}>
+    <section>
       {sidebarLinks.map((item) => {
         const isActive =
           (pathName.includes(item.route) && item.route.length > 1) ||
           pathName === item.route;
         return (
-          <>
+          <React.Fragment key={item.route}>
             {item.label === "Home" && (
               <h3 className="text-default font-base-bold mb-2 ml-5 mt-4">
                 Discover
@@ -40,10 +43,16 @@ const NavContent = ({ isMobile }: { isMobile: boolean }) => {
                 {item.label}
               </p>
             </Link>
-          </>
+          </React.Fragment>
         );
       })}
+    </section>
+  );
+};
 
+const PopularTags = ({ isMobile }: { isMobile: boolean }) => {
+  return (
+    <section>
       <h3 className="text-default font-base-bold mb-2 ml-5 mt-4">
         Popular Tags
       </h3>
@@ -70,7 +79,15 @@ const NavContent = ({ isMobile }: { isMobile: boolean }) => {
       >
         See More
       </Link>
+    </section>
+  );
+};
 
+const NavContent = ({ isMobile }: { isMobile: boolean }) => {
+  return (
+    <div className={`flex flex-1 flex-col ${isMobile && "pt-16"}`}>
+      <Dicover isMobile />
+      <PopularTags isMobile />
       <Link href="/ask-question" className="mt-8 rounded-3xl">
         <Button variant={"zinc"} className="w-full">
           Ask a Question
