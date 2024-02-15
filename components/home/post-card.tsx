@@ -40,7 +40,7 @@ const PostCard = ({
         {/* Delete Post is shown only when signed-in */}
       </header>
 
-      <h3 className="font-h3-semibold mb-6">{title}</h3>
+      <p className="font-base-semibold mb-6">{title}</p>
 
       <footer className="flex items-center gap-2">
         {tags.map((tag) => (
