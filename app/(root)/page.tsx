@@ -1,5 +1,5 @@
-import Filter from "@/components/home/filter";
 import PostCard from "@/components/home/post-card";
+import FilterContent from "@/components/shared/filter-content";
 
 const Questions = [
   {
@@ -97,7 +97,7 @@ export default function Home() {
   return (
     <main className="text-default border-default w-full pt-4 lg:border-x">
       <header className="border-default w-full border-b">
-        <Filter />
+        <FilterContent />
       </header>
 
       {Questions.map((question) => (

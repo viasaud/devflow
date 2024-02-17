@@ -1,6 +1,6 @@
 import React from "react";
 import { RiChat1Line, RiDeleteBinLine, RiEyeLine } from "@remixicon/react";
-import { formatAndDivideNumber, getTimeAgo } from "../../lib/utils";
+import { formatAndDivideNumber, getTimeAgo } from "@/lib/utils";
 import UserCard from "./user-card";
 import Tag from "../layout/tag";
 import QuantitySelector from "../layout/quantity-selector";
