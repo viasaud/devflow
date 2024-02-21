@@ -11,7 +11,10 @@ import {
 } from "@/components/ui/menubar";
 import { RiMoonFill, RiSunFill } from "@remixicon/react";
 
-import { THEME_OPTIONS } from "@/constants/constants";
+import {
+  DEFAULT_THEME_MENU_ICON_SIZE,
+  THEME_OPTIONS,
+} from "@/constants/constants";
 
 const Theme = () => {
   const { mode, setMode } = useTheme();
@@ -37,9 +40,15 @@ const Theme = () => {
               }}
             >
               {mode === theme.value ? (
-                <theme.iconFilled size={22} className="text-default" />
+                <theme.iconFilled
+                  size={DEFAULT_THEME_MENU_ICON_SIZE}
+                  className="text-default"
+                />
               ) : (
-                <theme.icon size={22} className="text-default" />
+                <theme.icon
+                  size={DEFAULT_THEME_MENU_ICON_SIZE}
+                  className="text-default"
+                />
               )}
               <p className={`font-body-regular text-default`}>{theme.label}</p>
             </MenubarItem>

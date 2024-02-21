@@ -15,7 +15,7 @@ const popularTags = [
   { _id: 5, name: "redux", totalQuestions: 11 },
 ];
 
-const Dicover = ({ isMobile }: { isMobile: boolean }) => {
+const Discover = ({ isMobile }: { isMobile: boolean }) => {
   const pathName = usePathname();
 
   return (
@@ -86,7 +86,7 @@ const PopularTags = ({ isMobile }: { isMobile: boolean }) => {
 const NavContent = ({ isMobile }: { isMobile: boolean }) => {
   return (
     <div className={`flex flex-1 flex-col ${isMobile && "pt-16"}`}>
-      <Dicover isMobile />
+      <Discover isMobile />
       <PopularTags isMobile />
       <Link href="/ask-question" className="mt-8 rounded-3xl">
         <Button variant={"zinc"} className="w-full">

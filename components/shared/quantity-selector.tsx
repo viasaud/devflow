@@ -1,5 +1,6 @@
 "use client";
 
+import { DEFAULT_POST_ICON_SIZE } from "@/constants/constants";
 import { formatAndDivideNumber } from "@/lib/utils";
 import { RiArrowUpLine, RiArrowDownLine } from "@remixicon/react";
 import React from "react";
@@ -12,7 +13,7 @@ const QuantitySelector = ({ upVotes }: Props) => {
   return (
     <div className="border-default hover:border-hover flex items-center rounded-md border p-1">
       <RiArrowUpLine
-        size={18}
+        size={DEFAULT_POST_ICON_SIZE}
         className="cursor-pointer text-zinc-500 hover:text-green-500 dark:text-zinc-400 hover:dark:text-green-500"
         onClick={() => {}}
       />
@@ -20,7 +21,7 @@ const QuantitySelector = ({ upVotes }: Props) => {
         {formatAndDivideNumber(upVotes)}
       </p>
       <RiArrowDownLine
-        size={18}
+        size={DEFAULT_POST_ICON_SIZE}
         className="cursor-pointer text-zinc-500 hover:text-red-500 dark:text-zinc-400 hover:dark:text-red-500"
         onClick={() => {}}
       />

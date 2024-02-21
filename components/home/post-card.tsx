@@ -2,8 +2,9 @@ import React from "react";
 import { RiChat1Line, RiDeleteBinLine, RiEyeLine } from "@remixicon/react";
 import { formatAndDivideNumber, getTimeAgo } from "@/lib/utils";
 import UserCard from "./user-card";
-import Tag from "../layout/tag";
-import QuantitySelector from "../layout/quantity-selector";
+import Tag from "../shared/tag";
+import QuantitySelector from "../shared/quantity-selector";
+import { DEFAULT_POST_ICON_SIZE } from "@/constants/constants";
 
 interface Props {
   _id: number;
@@ -34,7 +35,7 @@ const PostCard = ({
           {getTimeAgo(createdAt)}
         </p>
         <RiDeleteBinLine
-          size={18}
+          size={DEFAULT_POST_ICON_SIZE}
           className="ml-1 hidden cursor-pointer text-zinc-500 hover:text-red-500 dark:text-zinc-400 hover:dark:text-red-500"
         />
         {/* Delete Post is shown only when signed-in */}
@@ -52,7 +53,7 @@ const PostCard = ({
 
           <div className="border-default flex items-center rounded-md border p-1">
             <RiChat1Line
-              size={18}
+              size={DEFAULT_POST_ICON_SIZE}
               className="text-zinc-500 dark:text-zinc-400"
             />
             <p className="font-small-regular px-1">
@@ -60,7 +61,10 @@ const PostCard = ({
             </p>
           </div>
           <div className="border-default flex items-center rounded-md border p-1">
-            <RiEyeLine size={18} className="text-zinc-500 dark:text-zinc-400" />
+            <RiEyeLine
+              size={DEFAULT_POST_ICON_SIZE}
+              className="text-zinc-500 dark:text-zinc-400"
+            />
             <p className="font-small-regular px-1">
               {formatAndDivideNumber(views)}
             </p>
