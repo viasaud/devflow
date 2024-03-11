@@ -9,23 +9,23 @@ import {
   MenubarMenu,
   MenubarTrigger,
 } from "@/components/ui/menubar";
-import { themes } from "@/constants/constants";
 import { RiMoonFill, RiSunFill } from "@remixicon/react";
+
+import {
+  DEFAULT_THEME_MENU_ICON_SIZE,
+  THEME_OPTIONS,
+} from "@/constants/constants";
 
 const Theme = () => {
   const { mode, setMode } = useTheme();
   return (
     <Menubar className="relative border-none shadow-none">
       <MenubarMenu>
-        <MenubarTrigger className="hover:bg-hover data-[state=open]:bg-select rounded-3xl">
-          {mode === "light" ? (
-            <RiSunFill className="text-default" />
-          ) : (
-            <RiMoonFill className="text-default" />
-          )}
+        <MenubarTrigger className="hover:bg-hover data-[state=open]:bg-select text-default rounded-3xl">
+          {mode === "light" ? <RiSunFill /> : <RiMoonFill />}
         </MenubarTrigger>
         <MenubarContent className="border-default bg-default absolute right-[-2.5rem] mt-[.70rem] min-w-28 rounded-md border">
-          {themes.map((theme) => (
+          {THEME_OPTIONS.map((theme) => (
             <MenubarItem
               key={theme.value}
               className={`${mode === theme.value ? "bg-select" : "text-default hover:bg-hover"} flex items-center gap-2 rounded-sm px-2.5 py-2`}
@@ -40,9 +40,15 @@ const Theme = () => {
               }}
             >
               {mode === theme.value ? (
-                <theme.iconFilled size={22} className="text-default" />
+                <theme.iconFilled
+                  size={DEFAULT_THEME_MENU_ICON_SIZE}
+                  className="text-default"
+                />
               ) : (
-                <theme.icon size={22} className="text-default" />
+                <theme.icon
+                  size={DEFAULT_THEME_MENU_ICON_SIZE}
+                  className="text-default"
+                />
               )}
               <p className={`font-body-regular text-default`}>{theme.label}</p>
             </MenubarItem>

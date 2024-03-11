@@ -9,7 +9,7 @@ import {
 } from "@/components/ui/sheet";
 import Image from "next/image";
 import Link from "next/link";
-import NavContent from "../nav-content";
+import NavContent from "../../shared/nav-content";
 import { RiMenuFill } from "@remixicon/react";
 
 const MobileNav = () => {

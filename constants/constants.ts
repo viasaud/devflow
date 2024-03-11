@@ -16,7 +16,10 @@ import {
   RiComputerFill,
 } from "@remixicon/react";
 
-export const themes = [
+export const SORT_OPTIONS = ["Best", "Hot", "New", "Open"];
+export const DEFAULT_SORT_OPTION = SORT_OPTIONS[2];
+
+export const THEME_OPTIONS = [
   { value: "light", label: "Light", icon: RiSunLine, iconFilled: RiSunFill },
   { value: "dark", label: "Dark", icon: RiMoonLine, iconFilled: RiMoonFill },
   {
@@ -26,6 +29,9 @@ export const themes = [
     iconFilled: RiComputerFill,
   },
 ];
+export const DEFAULT_THEME_MENU_ICON_SIZE = 22;
+
+export const DEFAULT_POST_ICON_SIZE = 18;
 
 export const sidebarLinks: SidebarLink[] = [
   {

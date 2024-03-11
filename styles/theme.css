@@ -11,6 +11,10 @@
     @apply bg-zinc-200/50 dark:bg-zinc-800/50;
   }
 
+  .bg-post {
+    @apply bg-zinc-200/30 dark:bg-zinc-800/30;
+  }
+
   .bg-default {
     @apply bg-zinc-50 dark:bg-zinc-950;
   }
@@ -27,8 +31,16 @@
     @apply text-zinc-500 dark:text-zinc-400 hover:text-default !important;
   }
 
+  .text-secondary-2 {
+    @apply text-zinc-700 dark:text-zinc-300 hover:text-default !important;
+  }
+
   .border-default {
     @apply border-zinc-300 dark:border-zinc-800 !important;
+  }
+
+  .border-hover {
+    @apply border-zinc-500 dark:border-zinc-500 !important;
   }
 
   .font-h1-bold {

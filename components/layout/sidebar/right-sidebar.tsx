@@ -16,7 +16,7 @@ const hotQuestions = [
 
 const RightSidebar = () => {
   return (
-    <section className="border-default sticky right-0 top-20 h-fit rounded-md border p-4 shadow shadow-zinc-100 dark:shadow-none max-xl:hidden max-sm:hidden lg:w-80">
+    <section className="border-default sticky right-0 top-20 h-fit rounded-md border p-4 shadow shadow-zinc-100 dark:shadow-none max-2xl:hidden lg:w-80">
       <div>
         <h3 className="text-default font-base-bold mb-4">Top Questions</h3>
         <div className="flex w-full flex-col gap-5">

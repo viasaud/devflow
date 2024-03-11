@@ -1,11 +1,11 @@
-import { SignedIn, SignedOut, UserButton } from "@clerk/nextjs";
+import React from "react";
 import Image from "next/image";
 import Link from "next/link";
-import React from "react";
+import { Button } from "@/components/ui/button";
+import { SignedIn, SignedOut, UserButton } from "@clerk/nextjs";
 import Theme from "./theme";
 import MobileNav from "./mobile-nav";
 import GlobalSearch from "../search/global-search";
-import { Button } from "@/components/ui/button";
 
 const Navbar = () => {
   return (
