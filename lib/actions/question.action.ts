@@ -5,5 +5,7 @@ import { connectToDatabase } from "../mongoose";
 export const createQuestion = async (params: any) => {
   try {
     connectToDatabase();
-  } catch (error) {}
+  } catch (error) {
+    console.log(error);
+  }
 };
