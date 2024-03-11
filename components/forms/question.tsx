@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import { Editor } from "@tinymce/tinymce-react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
@@ -17,9 +17,12 @@ import {
 import { Input } from "@/components/ui/input";
 import { QuestionSchema } from "@/lib/validations";
 import { RiCloseLine } from "@remixicon/react";
+import { createQuestion } from "@/lib/actions/question.action";
 
 const Question = () => {
   const editorRef = useRef(null);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const type = "question";
 
   const form = useForm<z.infer<typeof QuestionSchema>>({
     resolver: zodResolver(QuestionSchema),
@@ -67,8 +70,13 @@ const Question = () => {
     );
   };
 
-  function onSubmit(values: z.infer<typeof QuestionSchema>) {
-    console.log(values);
+  async function onSubmit(values: z.infer<typeof QuestionSchema>) {
+    try {
+      await createQuestion({});
+      setIsSubmitting(true);
+    } catch (error) {
+      console.log("error");
+    }
   }
 
   return (
@@ -114,6 +122,9 @@ const Question = () => {
                     editor // @ts-ignore
                   ) => (editorRef.current = editor)}
                   initialValue=""
+                  onEditorChange={(content) =>
+                    form.setValue("description", content)
+                  }
                   init={{
                     height: 350,
                     menubar: false,
@@ -190,8 +201,15 @@ const Question = () => {
           type="submit"
           variant={"zinc"}
           className="mx-auto w-fit px-5 py-3"
+          disabled={isSubmitting}
         >
-          Submit
+          {isSubmitting
+            ? type === "question"
+              ? "Posting Question..."
+              : "Editing Question..."
+            : type === "question"
+              ? "Post Question"
+              : "Edit Question"}
         </Button>
       </form>
     </Form>
