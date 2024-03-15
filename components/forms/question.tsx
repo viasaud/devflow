@@ -18,11 +18,18 @@ import { Input } from "@/components/ui/input";
 import { QuestionSchema } from "@/lib/validations";
 import { RiCloseLine } from "@remixicon/react";
 import { createQuestion } from "@/lib/actions/question.action";
+import { useRouter, usePathname } from "next/navigation";
 
-const Question = () => {
+interface Props {
+  mongoUserId: string;
+}
+
+const Question = ({ mongoUserId }: Props) => {
   const editorRef = useRef(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const type = "question";
+  const router = useRouter();
+  const pathname = usePathname();
 
   const form = useForm<z.infer<typeof QuestionSchema>>({
     resolver: zodResolver(QuestionSchema),
@@ -72,8 +79,15 @@ const Question = () => {
 
   async function onSubmit(values: z.infer<typeof QuestionSchema>) {
     try {
-      await createQuestion({});
+      await createQuestion({
+        title: values.title,
+        content: values.description,
+        tags: values.tags,
+        author: JSON.parse(mongoUserId),
+      });
       setIsSubmitting(true);
+
+      router.push("/");
     } catch (error) {
       console.log("error");
     }
