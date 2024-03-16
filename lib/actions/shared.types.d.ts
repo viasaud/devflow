@@ -1,4 +1,5 @@
 import { Schema } from "mongoose";
+
 import { IUser } from "@/database/user.model";
 
 export interface getQuestionsParams {
@@ -113,7 +114,7 @@ export interface createUserParams {
   name: string;
   username: string;
   email: string;
-  picture: string;
+  avatar: string;
 }
 
 export interface getUserByIdParams {

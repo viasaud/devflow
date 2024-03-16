@@ -77,7 +77,7 @@ const Question = ({ mongoUserId }: Props) => {
     );
   };
 
-  async function onSubmit(values: z.infer<typeof QuestionSchema>) {
+  const onSubmit = async (values: z.infer<typeof QuestionSchema>) => {
     try {
       await createQuestion({
         title: values.title,
@@ -92,7 +92,7 @@ const Question = ({ mongoUserId }: Props) => {
     } catch (error) {
       console.log("error");
     }
-  }
+  };
 
   return (
     <Form {...form}>

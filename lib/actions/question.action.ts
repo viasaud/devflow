@@ -10,8 +10,6 @@ import { connectToDatabase } from "../mongoose";
 
 import { createQuestionParams, getQuestionsParams } from "./shared.types";
 
-
-
 export const createQuestion = async (params: createQuestionParams) => {
   try {
     connectToDatabase();
