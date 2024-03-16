@@ -1,9 +1,12 @@
 "use server";
 
 import User from "@/database/user.model";
+
 import { connectToDatabase } from "../mongoose";
 
-export const getUserById = async (params: any) => {
+import { getUserByIdParams } from "./shared.types";
+
+export const getUserById = async (params: getUserByIdParams) => {
   try {
     connectToDatabase();
 

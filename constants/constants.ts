@@ -1,4 +1,3 @@
-import { SidebarLink } from "@/types";
 import {
   RiHome6Line,
   RiGroupLine,
@@ -15,6 +14,8 @@ import {
   RiMoonFill,
   RiComputerFill,
 } from "@remixicon/react";
+
+import { SidebarLink } from "@/types";
 
 export const SORT_OPTIONS = ["Best", "Hot", "New", "Open"];
 export const DEFAULT_SORT_OPTION = SORT_OPTIONS[2];

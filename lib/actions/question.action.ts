@@ -1,11 +1,16 @@
 "use server";
 
-import { connectToDatabase } from "../mongoose";
+import { revalidatePath } from "next/cache";
+
 import Question from "@/database/question.model";
 import Tag from "@/database/tag.model";
-import { createQuestionParams, getQuestionsParams } from "./shared.types";
 import User from "@/database/user.model";
-import { revalidatePath } from "next/cache";
+
+import { connectToDatabase } from "../mongoose";
+
+import { createQuestionParams, getQuestionsParams } from "./shared.types";
+
+
 
 export const createQuestion = async (params: createQuestionParams) => {
   try {

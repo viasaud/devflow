@@ -1,10 +1,14 @@
-import React from "react";
 import { RiChat1Line, RiDeleteBinLine, RiEyeLine } from "@remixicon/react";
-import { formatAndDivideNumber, getTimeAgo } from "@/lib/utils";
-import UserCard from "./user-card";
-import Tag from "../shared/tag";
-import QuantitySelector from "../shared/quantity-selector";
+import React from "react";
+
 import { DEFAULT_POST_ICON_SIZE } from "@/constants/constants";
+import { formatAndDivideNumber, getTimeAgo } from "@/lib/utils";
+
+import QuantitySelector from "../shared/quantity-selector";
+import Tag from "../shared/tag";
+
+import UserCard from "./user-card";
+
 
 interface Props {
   _id: number;
