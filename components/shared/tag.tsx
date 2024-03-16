@@ -9,7 +9,7 @@ const Tag = ({ tag }: Props) => {
   return (
     <Link
       href={`/tags/${tag.id}`}
-      className="text-secondary border-default hover:border-hover font-small-regular rounded-md border px-2 py-1"
+      className="text-secondary border-default hover:border-hover font-small-regular rounded-md border p-1.5 leading-none"
     >
       {tag.name}
     </Link>

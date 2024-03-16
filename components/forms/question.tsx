@@ -84,6 +84,7 @@ const Question = ({ mongoUserId }: Props) => {
         content: values.description,
         tags: values.tags,
         author: JSON.parse(mongoUserId),
+        path: pathname,
       });
       setIsSubmitting(true);
 
