@@ -11,13 +11,11 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
       <div className="flex grow justify-center max-lg:flex-col max-lg:items-center">
         <LeftSidebar />
         <section className="min-h-screen pt-10 lg:pl-12 xl:pl-32 2xl:pr-12">
-          <div className="w-full max-w-2xl pt-4 max-lg:max-w-full">
-            {children}
-          </div>
+          <div className="w-full max-w-2xl pt-4 max-lg:max-w-full">{children}</div>
         </section>
         <RightSidebar />
       </div>
-      Toaster
+      {/* Toaster */}
     </main>
   );
 };
