@@ -9,14 +9,7 @@ import { useForm } from "react-hook-form";
 import { z } from "zod";
 
 import { Button } from "@/components/ui/button";
-import {
-  Form,
-  FormControl,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from "@/components/ui/form";
+import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { createQuestion } from "@/lib/actions/question.action";
 import { QuestionSchema } from "@/lib/validations";
@@ -41,10 +34,7 @@ const Question = ({ mongoUserId }: Props) => {
     },
   });
 
-  const handleKeyDown = (
-    e: React.KeyboardEvent<HTMLInputElement>,
-    field: any
-  ) => {
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>, field: any) => {
     if (e.key !== "Enter" || field.name !== "tags") return;
 
     e.preventDefault();
@@ -97,10 +87,7 @@ const Question = ({ mongoUserId }: Props) => {
 
   return (
     <Form {...form}>
-      <form
-        onSubmit={form.handleSubmit(onSubmit)}
-        className="flex w-screen max-w-full flex-col gap-10 pt-7 max-lg:px-8"
-      >
+      <form onSubmit={form.handleSubmit(onSubmit)} className="flex w-screen max-w-full flex-col gap-10 max-lg:px-8">
         <FormField
           control={form.control}
           name="title"
@@ -138,9 +125,7 @@ const Question = ({ mongoUserId }: Props) => {
                     editor // @ts-ignore
                   ) => (editorRef.current = editor)}
                   initialValue=""
-                  onEditorChange={(content) =>
-                    form.setValue("description", content)
-                  }
+                  onEditorChange={(content) => form.setValue("description", content)}
                   init={{
                     height: 350,
                     menubar: false,
@@ -213,12 +198,7 @@ const Question = ({ mongoUserId }: Props) => {
             </FormItem>
           )}
         />
-        <Button
-          type="submit"
-          variant={"zinc"}
-          className="mx-auto w-fit px-5 py-3"
-          disabled={isSubmitting}
-        >
+        <Button type="submit" variant={"zinc"} className="mx-auto w-fit px-5 py-3" disabled={isSubmitting}>
           {isSubmitting
             ? type === "question"
               ? "Posting Question..."
