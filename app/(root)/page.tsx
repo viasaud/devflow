@@ -6,7 +6,7 @@ export default async function Home() {
   const questions = await getQuestions({});
 
   return (
-    <main className="text-default border-default w-screen pt-4 md:max-w-2xl lg:border-x">
+    <main className="text-default border-default w-screen md:max-w-2xl lg:border-x">
       <header className="border-default w-full border-b">
         <FilterContent />
       </header>
