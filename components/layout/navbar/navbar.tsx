@@ -17,7 +17,7 @@ const Navbar = () => {
       <MobileNav />
       <Link
         href="/"
-        className="flex h-16 w-16 items-center gap-1 lg:w-72 xl:w-48"
+        className="flex size-16 items-center gap-1 lg:w-72 xl:w-48"
       >
         <Image src="/svg/logo.svg" alt="DevFlow" width={34} height={34} />
         <p className="font-h2-bold text-default ml-1 font-spaceGrotesk max-lg:hidden">
