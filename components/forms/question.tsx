@@ -1,8 +1,10 @@
 "use client";
 
-import React, { useRef, useState } from "react";
-import { Editor } from "@tinymce/tinymce-react";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { RiCloseLine } from "@remixicon/react";
+import { Editor } from "@tinymce/tinymce-react";
+import { useRouter, usePathname } from "next/navigation";
+import React, { useRef, useState } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { Button } from "@/components/ui/button";
@@ -15,10 +17,8 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { QuestionSchema } from "@/lib/validations";
-import { RiCloseLine } from "@remixicon/react";
 import { createQuestion } from "@/lib/actions/question.action";
-import { useRouter, usePathname } from "next/navigation";
+import { QuestionSchema } from "@/lib/validations";
 
 interface Props {
   mongoUserId: string;
@@ -77,13 +77,14 @@ const Question = ({ mongoUserId }: Props) => {
     );
   };
 
-  async function onSubmit(values: z.infer<typeof QuestionSchema>) {
+  const onSubmit = async (values: z.infer<typeof QuestionSchema>) => {
     try {
       await createQuestion({
         title: values.title,
         content: values.description,
         tags: values.tags,
         author: JSON.parse(mongoUserId),
+        path: pathname,
       });
       setIsSubmitting(true);
 
@@ -91,7 +92,7 @@ const Question = ({ mongoUserId }: Props) => {
     } catch (error) {
       console.log("error");
     }
-  }
+  };
 
   return (
     <Form {...form}>

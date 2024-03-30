@@ -1,10 +1,13 @@
 "use client";
 
-import React from "react";
+import { RiHashtag } from "@remixicon/react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import React from "react";
+
 import { sidebarLinks } from "@/constants/constants";
-import { RiHashtag } from "@remixicon/react";
+
+
 import { Button } from "../ui/button";
 
 const popularTags = [

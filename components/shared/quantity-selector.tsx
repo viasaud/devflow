@@ -1,9 +1,10 @@
 "use client";
 
-import { DEFAULT_POST_ICON_SIZE } from "@/constants/constants";
-import { formatAndDivideNumber } from "@/lib/utils";
 import { RiArrowUpLine, RiArrowDownLine } from "@remixicon/react";
 import React from "react";
+
+import { DEFAULT_POST_ICON_SIZE } from "@/constants/constants";
+import { formatAndDivideNumber } from "@/lib/utils";
 
 interface Props {
   upVotes: number;

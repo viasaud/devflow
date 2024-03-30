@@ -1,7 +1,8 @@
 "use client";
 
+import { RiMoonFill, RiSunFill } from "@remixicon/react";
 import React from "react";
-import { useTheme } from "@/context/ThemeProvider";
+
 import {
   Menubar,
   MenubarContent,
@@ -9,12 +10,11 @@ import {
   MenubarMenu,
   MenubarTrigger,
 } from "@/components/ui/menubar";
-import { RiMoonFill, RiSunFill } from "@remixicon/react";
-
 import {
   DEFAULT_THEME_MENU_ICON_SIZE,
   THEME_OPTIONS,
 } from "@/constants/constants";
+import { useTheme } from "@/context/ThemeProvider";
 
 const Theme = () => {
   const { mode, setMode } = useTheme();

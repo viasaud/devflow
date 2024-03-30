@@ -2,6 +2,8 @@
 
 import React, { useState } from "react";
 
+import { DEFAULT_SORT_OPTION, SORT_OPTIONS } from "@/constants/constants";
+
 import {
   Select,
   SelectContent,
@@ -10,7 +12,6 @@ import {
   SelectValue,
 } from "../ui/select";
 
-import { DEFAULT_SORT_OPTION, SORT_OPTIONS } from "@/constants/constants";
 
 const FilterContent = () => {
   const [selectedOption, setSelectedOption] = useState(DEFAULT_SORT_OPTION);

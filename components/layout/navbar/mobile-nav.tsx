@@ -1,16 +1,19 @@
 "use client";
 
+import { RiMenuFill } from "@remixicon/react";
+import Image from "next/image";
+import Link from "next/link";
 import React from "react";
+
 import {
   Sheet,
   SheetClose,
   SheetContent,
   SheetTrigger,
 } from "@/components/ui/sheet";
-import Image from "next/image";
-import Link from "next/link";
+
 import NavContent from "../../shared/nav-content";
-import { RiMenuFill } from "@remixicon/react";
+
 
 const MobileNav = () => {
   return (

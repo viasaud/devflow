@@ -1,5 +1,6 @@
-import { BADGE_CRITERIA } from "@/constants/constants";
 import React from "react";
+
+import { BADGE_CRITERIA } from "@/constants/constants";
 
 export interface SidebarLink {
   route: string;

@@ -1,5 +1,6 @@
-import { Input } from "@/components/ui/input";
 import { RiSearch2Line } from "@remixicon/react";
+
+import { Input } from "@/components/ui/input";
 
 const GlobalSearch = () => {
   return (
