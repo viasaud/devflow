@@ -8,7 +8,7 @@ const Page = async () => {
   const users = await getUsers({});
 
   return (
-    <div className="text-default border-default w-full md:w-[42rem]">
+    <div className="text-default border-default w-full">
       <header className="border-default w-full border-b">
         <CommunityFilterContent />
       </header>
