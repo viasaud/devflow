@@ -13,7 +13,7 @@ const AskQuestion = async () => {
   const mongoUser = await getUserById({ userId });
 
   return (
-    <div className="text-default w-full">
+    <div className="text-default w-full pt-7 md:w-[42rem]">
       <Question mongoUserId={JSON.stringify(mongoUser._id)} />
     </div>
   );

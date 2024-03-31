@@ -2,16 +2,16 @@ import Link from "next/link";
 import React from "react";
 
 interface Props {
-  tag: { id: number; name: string };
+  name: string;
 }
 
-const Tag = ({ tag }: Props) => {
+const Tag = ({ name }: Props) => {
   return (
     <Link
-      href={`/tags/${tag.id}`}
+      href={`/tags/${name}`}
       className="text-secondary border-default hover:border-hover font-small-regular rounded-md border p-1.5 leading-none"
     >
-      {tag.name}
+      {name}
     </Link>
   );
 };

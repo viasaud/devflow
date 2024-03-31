@@ -49,7 +49,7 @@ const PostCard = ({
 
       <footer className="flex items-center gap-2">
         {tags.map((tag) => (
-          <Tag key={tag.id} tag={tag} />
+          <Tag key={tag.name} name={tag.name} />
         ))}
 
         <div className="ml-auto flex items-center gap-2">
