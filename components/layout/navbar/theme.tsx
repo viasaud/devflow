@@ -24,7 +24,7 @@ const Theme = () => {
         <MenubarTrigger className="hover:bg-hover data-[state=open]:bg-select text-default rounded-3xl">
           {mode === "light" ? <RiSunFill /> : <RiMoonFill />}
         </MenubarTrigger>
-        <MenubarContent className="border-default bg-default absolute right-[-2.5rem] mt-[.70rem] min-w-28 rounded-md border">
+        <MenubarContent className="border-default bg-default absolute -right-10 mt-[.70rem] min-w-28 rounded-md border">
           {THEME_OPTIONS.map((theme) => (
             <MenubarItem
               key={theme.value}
