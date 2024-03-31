@@ -5,6 +5,7 @@ import { Inter, Space_Grotesk } from "next/font/google";
 import React from "react";
 
 import "./globals.css";
+import "../styles/prism.css";
 import { ThemeProvider } from "@/context/ThemeProvider";
 
 const inter = Inter({
@@ -25,11 +26,7 @@ export const metadata: Metadata = {
   icons: { icon: "/svg/logo.svg" },
 };
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
       <body className={`${inter.variable} ${spaceGrotesk.variable}`}>

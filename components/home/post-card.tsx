@@ -1,10 +1,11 @@
-import { RiChat1Line, RiDeleteBinLine, RiEyeLine } from "@remixicon/react";
+import { RiDeleteBinLine } from "@remixicon/react";
+import Link from "next/link";
 import React from "react";
 
 import { DEFAULT_POST_ICON_SIZE } from "@/constants/constants";
-import { formatAndDivideNumber, getTimeAgo } from "@/lib/utils";
+import { getTimeAgo } from "@/lib/utils";
 
-import QuantitySelector from "../shared/quantity-selector";
+import Stats from "../shared/stats";
 import Tag from "../shared/tag";
 
 import UserCard from "./user-card";
@@ -15,14 +16,15 @@ interface Props {
   tags: { id: number; name: string }[];
   author: { name: string; avatar: string };
   upVotes: number[];
+  downVotes: number[];
   answers: number[];
-  views: number[];
+  views: number;
   createdAt: string;
 }
 
-const PostCard = ({ _id, title, tags, author, upVotes, answers, views, createdAt }: Props) => {
+const PostCard = ({ _id, title, tags, author, upVotes, downVotes, answers, views, createdAt }: Props) => {
   return (
-    <div key={_id}>
+    <Link key={_id} href={`/question/${_id}`} passHref>
       <header className="mb-4 flex items-center">
         <UserCard author={author} />
         <p className="font-small-medium ml-auto text-zinc-500 dark:text-zinc-400">{getTimeAgo(createdAt)}</p>
@@ -40,20 +42,9 @@ const PostCard = ({ _id, title, tags, author, upVotes, answers, views, createdAt
           <Tag key={tag.name} name={tag.name} />
         ))}
 
-        <div className="ml-auto flex items-center gap-2">
-          <QuantitySelector upVotes={upVotes} />
-
-          <div className="border-default flex items-center rounded-md border p-1">
-            <RiChat1Line size={DEFAULT_POST_ICON_SIZE} className="text-zinc-500 dark:text-zinc-400" />
-            <p className="font-small-regular px-1">{formatAndDivideNumber(answers)}</p>
-          </div>
-          <div className="border-default flex items-center rounded-md border p-1">
-            <RiEyeLine size={DEFAULT_POST_ICON_SIZE} className="text-zinc-500 dark:text-zinc-400" />
-            <p className="font-small-regular px-1">{formatAndDivideNumber(views)}</p>
-          </div>
-        </div>
+        <Stats upVotes={upVotes} downVotes={downVotes} answers={answers} views={views} />
       </footer>
-    </div>
+    </Link>
   );
 };
 

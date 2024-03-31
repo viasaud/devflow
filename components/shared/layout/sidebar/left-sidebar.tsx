@@ -1,4 +1,4 @@
-import NavContent from "../../shared/nav-content";
+import NavContent from "../../nav-content";
 
 const LeftSidebar = () => {
   return (

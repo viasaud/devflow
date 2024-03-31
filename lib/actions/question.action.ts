@@ -8,7 +8,7 @@ import User from "@/database/user.model";
 
 import { connectToDatabase } from "../mongoose";
 
-import { createQuestionParams, getQuestionsParams } from "./shared.types";
+import { createQuestionParams, getQuestionByIdParams, getQuestionsParams } from "./shared.types";
 
 export const createQuestion = async (params: createQuestionParams) => {
   try {
@@ -57,6 +57,20 @@ export const getQuestions = async (params: getQuestionsParams) => {
       .sort({ createdAt: -1 });
 
     return questions;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const getQuestionById = async (params: getQuestionByIdParams) => {
+  try {
+    connectToDatabase();
+
+    const { questionId } = params;
+
+    return await Question.findById(questionId)
+      .populate({ path: "tags", model: Tag })
+      .populate({ path: "author", model: User });
   } catch (error) {
     console.log(error);
   }
