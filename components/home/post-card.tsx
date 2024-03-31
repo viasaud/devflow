@@ -24,7 +24,7 @@ interface Props {
 
 const PostCard = ({ _id, title, tags, author, upVotes, downVotes, answers, views, createdAt }: Props) => {
   return (
-    <Link key={_id} href={`/question/${_id}`} passHref>
+    <>
       <header className="mb-4 flex items-center">
         <UserCard author={author} />
         <p className="font-small-medium ml-auto text-zinc-500 dark:text-zinc-400">{getTimeAgo(createdAt)}</p>
@@ -35,7 +35,9 @@ const PostCard = ({ _id, title, tags, author, upVotes, downVotes, answers, views
         {/* Delete Post is shown only when signed-in */}
       </header>
 
-      <p className="font-base-semibold mb-6">{title}</p>
+      <Link key={_id} href={`/question/${_id}`}>
+        <p className="font-base-semibold mb-6">{title}</p>
+      </Link>
 
       <footer className="flex items-center gap-2">
         {tags.map((tag) => (
@@ -44,7 +46,7 @@ const PostCard = ({ _id, title, tags, author, upVotes, downVotes, answers, views
 
         <Stats upVotes={upVotes} downVotes={downVotes} answers={answers} views={views} />
       </footer>
-    </Link>
+    </>
   );
 };
 
