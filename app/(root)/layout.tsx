@@ -11,7 +11,7 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
       <div className="flex justify-center pt-14">
         <LeftSidebar />
         <section className="min-h-screen lg:pl-32 2xl:pr-12">
-          <div className="w-full lg:max-w-2xl">{children}</div>
+          <div className="w-full pt-2 lg:max-w-2xl">{children}</div>
         </section>
         <RightSidebar />
       </div>

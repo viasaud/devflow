@@ -9,35 +9,23 @@ import Tag from "../shared/tag";
 
 import UserCard from "./user-card";
 
-
 interface Props {
   _id: number;
   title: string;
   tags: { id: number; name: string }[];
   author: { name: string; avatar: string };
-  upVotes: number;
-  answers: number;
-  views: number;
+  upVotes: number[];
+  answers: number[];
+  views: number[];
   createdAt: string;
 }
 
-const PostCard = ({
-  _id,
-  title,
-  tags,
-  author,
-  upVotes,
-  answers,
-  views,
-  createdAt,
-}: Props) => {
+const PostCard = ({ _id, title, tags, author, upVotes, answers, views, createdAt }: Props) => {
   return (
     <div key={_id}>
       <header className="mb-4 flex items-center">
         <UserCard author={author} />
-        <p className="font-small-medium ml-auto text-zinc-500 dark:text-zinc-400">
-          {getTimeAgo(createdAt)}
-        </p>
+        <p className="font-small-medium ml-auto text-zinc-500 dark:text-zinc-400">{getTimeAgo(createdAt)}</p>
         <RiDeleteBinLine
           size={DEFAULT_POST_ICON_SIZE}
           className="ml-1 hidden cursor-pointer text-zinc-500 hover:text-red-500 dark:text-zinc-400 hover:dark:text-red-500"
@@ -56,22 +44,12 @@ const PostCard = ({
           <QuantitySelector upVotes={upVotes} />
 
           <div className="border-default flex items-center rounded-md border p-1">
-            <RiChat1Line
-              size={DEFAULT_POST_ICON_SIZE}
-              className="text-zinc-500 dark:text-zinc-400"
-            />
-            <p className="font-small-regular px-1">
-              {formatAndDivideNumber(answers)}
-            </p>
+            <RiChat1Line size={DEFAULT_POST_ICON_SIZE} className="text-zinc-500 dark:text-zinc-400" />
+            <p className="font-small-regular px-1">{formatAndDivideNumber(answers)}</p>
           </div>
           <div className="border-default flex items-center rounded-md border p-1">
-            <RiEyeLine
-              size={DEFAULT_POST_ICON_SIZE}
-              className="text-zinc-500 dark:text-zinc-400"
-            />
-            <p className="font-small-regular px-1">
-              {formatAndDivideNumber(views)}
-            </p>
+            <RiEyeLine size={DEFAULT_POST_ICON_SIZE} className="text-zinc-500 dark:text-zinc-400" />
+            <p className="font-small-regular px-1">{formatAndDivideNumber(views)}</p>
           </div>
         </div>
       </footer>

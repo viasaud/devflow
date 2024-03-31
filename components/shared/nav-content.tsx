@@ -7,7 +7,6 @@ import React from "react";
 
 import { sidebarLinks } from "@/constants/constants";
 
-
 import { Button } from "../ui/button";
 
 const popularTags = [
@@ -24,27 +23,17 @@ const Discover = ({ isMobile }: { isMobile: boolean }) => {
   return (
     <section>
       {sidebarLinks.map((item) => {
-        const isActive =
-          (pathName.includes(item.route) && item.route.length > 1) ||
-          pathName === item.route;
+        const isActive = (pathName.includes(item.route) && item.route.length > 1) || pathName === item.route;
         return (
           <React.Fragment key={item.route}>
-            {item.label === "Home" && (
-              <h3 className="text-default font-base-bold mb-2 ml-5 mt-4">
-                Discover
-              </h3>
-            )}
+            {item.label === "Home" && <h3 className="text-default font-base-bold my-2 ml-2">Discover</h3>}
             <Link
               href={item.route}
               key={item.route}
               className={`${isActive ? "bg-select text-default" : "hover:bg-hover text-default"}  flex items-center justify-start gap-2 rounded-md px-5 py-2`}
             >
               {isActive ? <item.iconFilled /> : <item.icon />}
-              <p
-                className={`${isMobile ? "font-paragraph-regular" : "font-body-regular"}`}
-              >
-                {item.label}
-              </p>
+              <p className={`${isMobile ? "font-paragraph-regular" : "font-body-regular"}`}>{item.label}</p>
             </Link>
           </React.Fragment>
         );
@@ -56,9 +45,7 @@ const Discover = ({ isMobile }: { isMobile: boolean }) => {
 const PopularTags = ({ isMobile }: { isMobile: boolean }) => {
   return (
     <section>
-      <h3 className="text-default font-base-bold mb-2 ml-5 mt-4">
-        Popular Tags
-      </h3>
+      <h3 className="text-default font-base-bold mb-2 ml-5 mt-4">Popular Tags</h3>
       {popularTags.map((tag) => (
         <Link
           href={`/tags/${tag._id}`}
@@ -66,20 +53,11 @@ const PopularTags = ({ isMobile }: { isMobile: boolean }) => {
           className={`hover:bg-hover text-default flex items-center justify-start gap-2 rounded-md px-5 py-2`}
         >
           <RiHashtag />
-          <p
-            className={`${isMobile ? "font-paragraph-regular" : "font-body-regular"} capitalize`}
-          >
-            {tag.name}
-          </p>
-          <p className="font-small-medium ml-auto text-zinc-500 dark:text-zinc-400">
-            {tag.totalQuestions}
-          </p>
+          <p className={`${isMobile ? "font-paragraph-regular" : "font-body-regular"} capitalize`}>{tag.name}</p>
+          <p className="font-small-medium ml-auto text-zinc-500 dark:text-zinc-400">{tag.totalQuestions}</p>
         </Link>
       ))}
-      <Link
-        href="/tags"
-        className="text-default font-small-medium hover:bg-hover mt-1 w-fit rounded-3xl px-5 py-2"
-      >
+      <Link href="/tags" className="text-default font-small-medium hover:bg-hover mt-1 w-fit rounded-3xl px-5 py-2">
         See More
       </Link>
     </section>

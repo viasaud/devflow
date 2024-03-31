@@ -8,8 +8,7 @@ const hotQuestions = [
   { _id: 3, title: "How to Perfectly Center a Div with Tailwind CSS?" },
   {
     _id: 4,
-    title:
-      "Best practices for data fetching in a Next.js application with Server-Side Rendering (SSR)?",
+    title: "Best practices for data fetching in a Next.js application with Server-Side Rendering (SSR)?",
   },
   { _id: 5, title: "Redux Toolkit Not Updating State as Expected" },
 ];
