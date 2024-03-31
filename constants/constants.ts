@@ -17,8 +17,10 @@ import {
 
 import { SidebarLink } from "@/types";
 
-export const SORT_OPTIONS = ["Best", "Hot", "New", "Open"];
-export const DEFAULT_SORT_OPTION = SORT_OPTIONS[2];
+export const HOME_SORT_OPTIONS = ["Best", "Hot", "New", "Open"];
+export const HOME_DEFAULT_SORT_OPTION = HOME_SORT_OPTIONS[2];
+export const COMMUNITY_SORT_OPTIONS = ["Top Contributors", "New Users", "Old Users"];
+export const COMMUNITY_DEFAULT_SORT_OPTION = COMMUNITY_SORT_OPTIONS[0];
 
 export const THEME_OPTIONS = [
   { value: "light", label: "Light", icon: RiSunLine, iconFilled: RiSunFill },

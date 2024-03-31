@@ -7,7 +7,13 @@ import User from "@/database/user.model";
 
 import { connectToDatabase } from "../mongoose";
 
-import { createUserParams, deleteUserParams, getUserByIdParams, updateUserParams } from "./shared.types";
+import {
+  createUserParams,
+  deleteUserParams,
+  getAllUsersParams,
+  getUserByIdParams,
+  updateUserParams,
+} from "./shared.types";
 
 export const getUserById = async (params: getUserByIdParams) => {
   try {
@@ -52,3 +58,23 @@ export const deleteUser = async (params: deleteUserParams) => {
     console.log(error);
   }
 };
+
+export const getUsers = async (params: getAllUsersParams) => {
+  try {
+    connectToDatabase();
+    // const { page = 1, pageSize = 20 } = params;
+    const users = await User.find({}).sort({ createdAt: -1 });
+    return { users };
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+// export const getUsers = async (params: getAllUsersParams) => {
+//   try {
+//     connectToDatabase();
+//     return await User.find();
+//   } catch (error) {
+//     console.log(error);
+//   }
+// };
