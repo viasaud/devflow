@@ -2,8 +2,8 @@ import PostCard from "@/components/home/post-card";
 import Filter from "@/components/shared/filter";
 import { getQuestions } from "@/lib/actions/question.action";
 
-export const SORT_OPTIONS = ["Best", "Hot", "New", "Open"];
-export const DEFAULT_SORT_OPTION = SORT_OPTIONS[2];
+const SORT_OPTIONS = ["Best", "Hot", "New", "Open"];
+const DEFAULT_SORT_OPTION = SORT_OPTIONS[2];
 
 export default async function Home() {
   const questions = await getQuestions({});

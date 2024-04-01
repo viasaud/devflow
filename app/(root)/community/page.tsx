@@ -4,8 +4,8 @@ import UserCard from "@/components/community/user-card";
 import Filter from "@/components/shared/filter";
 import { getUsers } from "@/lib/actions/user.action";
 
-export const SORT_OPTIONS = ["Top Contributors", "New Users", "Old Users"];
-export const DEFAULT_SORT_OPTION = SORT_OPTIONS[0];
+const SORT_OPTIONS = ["Top Contributors", "New Users", "Old Users"];
+const DEFAULT_SORT_OPTION = SORT_OPTIONS[0];
 
 const Page = async () => {
   const users = await getUsers({});
