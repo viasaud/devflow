@@ -1,6 +1,9 @@
-import HomeFilterContent from "@/components/home/home-filter-content";
 import PostCard from "@/components/home/post-card";
+import Filter from "@/components/shared/filter";
 import { getQuestions } from "@/lib/actions/question.action";
+
+export const SORT_OPTIONS = ["Best", "Hot", "New", "Open"];
+export const DEFAULT_SORT_OPTION = SORT_OPTIONS[2];
 
 export default async function Home() {
   const questions = await getQuestions({});
@@ -8,7 +11,7 @@ export default async function Home() {
   return (
     <main className="text-default border-default w-full">
       <header className="border-default w-full border-b">
-        <HomeFilterContent />
+        <Filter sortOptions={SORT_OPTIONS} defaultSortOption={DEFAULT_SORT_OPTION} />
       </header>
 
       {questions?.map((question) => (

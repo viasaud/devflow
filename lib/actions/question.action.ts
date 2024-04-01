@@ -16,6 +16,8 @@ export const createQuestion = async (params: createQuestionParams) => {
 
     const { title, content, tags, author, path } = params;
 
+    const lowerCaseTags = tags.map((tag) => tag.toLowerCase());
+
     const question = await Question.create({
       title,
       content,
@@ -24,7 +26,7 @@ export const createQuestion = async (params: createQuestionParams) => {
 
     const tagDocs = [];
 
-    for (const tag of tags) {
+    for (const tag of lowerCaseTags) {
       const existingTag = await Tag.findOneAndUpdate(
         { name: { $regex: new RegExp(`^${tag}$`, "i") } },
         { $setOnInsert: { name: tag }, $push: { questions: question._id } },
@@ -52,6 +54,7 @@ export const getQuestions = async (params: getQuestionsParams) => {
       .populate({
         path: "tags",
         model: Tag,
+        options: { sort: { name: 1 } },
       })
       .populate({ path: "author", model: User })
       .sort({ createdAt: -1 });

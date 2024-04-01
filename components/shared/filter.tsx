@@ -2,12 +2,15 @@
 
 import React, { useState } from "react";
 
-import { HOME_DEFAULT_SORT_OPTION, HOME_SORT_OPTIONS } from "@/constants/constants";
-
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "../ui/select";
 
-const HomeFilterContent = () => {
-  const [selectedOption, setSelectedOption] = useState(HOME_DEFAULT_SORT_OPTION);
+interface Props {
+  sortOptions: string[];
+  defaultSortOption: string;
+}
+
+const Filter = ({ sortOptions, defaultSortOption }: Props) => {
+  const [selectedOption, setSelectedOption] = useState(defaultSortOption);
 
   const handleOptionChange = (value: string) => setSelectedOption(value);
 
@@ -17,7 +20,7 @@ const HomeFilterContent = () => {
         <SelectValue />
       </SelectTrigger>
       <SelectContent className="bg-default text-default border-default">
-        {HOME_SORT_OPTIONS.map((option) => (
+        {sortOptions.map((option) => (
           <SelectItem key={option} value={option} className="hover:bg-hover py-2">
             {option}
           </SelectItem>
@@ -27,4 +30,4 @@ const HomeFilterContent = () => {
   );
 };
 
-export default HomeFilterContent;
+export default Filter;
