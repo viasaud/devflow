@@ -1,4 +1,4 @@
-import { SignedIn, SignedOut } from "@clerk/nextjs";
+import { SignedIn, SignedOut, auth } from "@clerk/nextjs";
 import Link from "next/link";
 import React from "react";
 
@@ -9,9 +9,13 @@ import Stats from "@/components/shared/stats";
 import Tag from "@/components/shared/tag";
 import { Avatar, AvatarImage } from "@/components/ui/avatar";
 import { getQuestionById } from "@/lib/actions/question.action";
+import { getUserById } from "@/lib/actions/user.action";
 
 const Page = async ({ params, searchParams }: { params: any; searchParams: unknown }) => {
   const question = await getQuestionById({ questionId: params.id });
+  const { userId } = auth();
+  let mongoUser;
+  if (userId) mongoUser = await getUserById({ userId });
   return (
     <div className="pt-2 max-md:px-5">
       <div className="flex items-center justify-between">
@@ -44,13 +48,16 @@ const Page = async ({ params, searchParams }: { params: any; searchParams: unkno
         />
       </section>
       <SignedIn>
-        <p className="font-paragraph-semibold text-default mt-3.5">Your Answer</p>
-        <Answer />
+        <Answer
+          authorId={JSON.stringify(mongoUser._id)}
+          questionId={JSON.stringify(question._id)}
+          question={question.content}
+        />
       </SignedIn>
       <SignedOut>
         <Link
           href="/sign-up"
-          className="font-body-regular text-default border-hover hover:text-invert mt-3.5 flex cursor-pointer justify-center rounded-full border py-2 text-center transition-colors duration-200 ease-linear hover:bg-white"
+          className="font-body-regular text-default border-hover hover:text-invert mt-3.5 flex cursor-pointer justify-center rounded-full border py-2 text-center transition-colors duration-200 ease-linear hover:bg-zinc-900 dark:hover:bg-zinc-200"
         >
           Join us and share your knowledge by answering this question
         </Link>

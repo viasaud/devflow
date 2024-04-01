@@ -1,19 +1,25 @@
 "use client";
 
 import { zodResolver } from "@hookform/resolvers/zod";
+import { RiBardFill } from "@remixicon/react";
 import { Editor } from "@tinymce/tinymce-react";
-import React, { useRef } from "react";
+import { usePathname } from "next/navigation";
+import React, { useRef, useState } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 
 import { useTheme } from "@/context/ThemeProvider";
+import { createAnswer } from "@/lib/actions/answer.action";
 import { AnswerSchema } from "@/lib/validations";
 
+import { Button } from "../ui/button";
 import { Form, FormControl, FormField, FormItem, FormMessage } from "../ui/form";
 
-const Answer = () => {
+const Answer = ({ authorId, questionId, question }: { authorId: string; questionId: string; question: string }) => {
+  const pathname = usePathname();
   const editorRef = useRef(null);
   const { mode } = useTheme();
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const form = useForm<z.infer<typeof AnswerSchema>>({
     resolver: zodResolver(AnswerSchema),
@@ -23,13 +29,38 @@ const Answer = () => {
   });
 
   const handleCreateAnswer = async (data: z.infer<typeof AnswerSchema>) => {
-    console.log(data);
+    setIsSubmitting(true);
+    try {
+      await createAnswer({
+        content: data.answer,
+        path: pathname,
+        author: JSON.parse(authorId),
+        question: JSON.parse(questionId),
+      });
+      form.reset();
+      setIsSubmitting(false);
+      if (editorRef.current) {
+        // @ts-ignore
+        editorRef.current.setContent("");
+      }
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
     <Form {...form}>
+      <div className="mt-5 flex items-center  justify-between">
+        <p className="font-paragraph-semibold text-default">Your Answer</p>
+        <Button variant={"ai"} disabled={isSubmitting} onClick={() => {}}>
+          <RiBardFill size={16} />
+          Generate an AI answer
+        </Button>
+      </div>
       <form
-        className="flex max-w-full flex-col gap-10 max-xl:px-8 lg:w-screen"
+        className="mt-1 flex max-w-full flex-col gap-10 max-xl:px-8 lg:w-screen"
         onSubmit={form.handleSubmit(handleCreateAnswer)}
       >
         <FormField
@@ -81,6 +112,9 @@ const Answer = () => {
             </FormItem>
           )}
         />
+        <Button type="submit" variant={"zinc"} className="mx-auto w-fit px-5 py-3" disabled={isSubmitting}>
+          {isSubmitting ? "Submitting..." : "Submit Answer"}
+        </Button>
       </form>
     </Form>
   );
