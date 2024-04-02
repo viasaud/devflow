@@ -7,7 +7,7 @@ import Question from "@/database/question.model";
 
 import { connectToDatabase } from "../mongoose";
 
-import { createAnswerParams } from "./shared.types";
+import { createAnswerParams, getAnswersParams } from "./shared.types";
 
 export const createAnswer = async (params: createAnswerParams) => {
   try {
@@ -24,6 +24,20 @@ export const createAnswer = async (params: createAnswerParams) => {
     await Question.findByIdAndUpdate(question, { $push: { answers: newAnswer._id } });
 
     revalidatePath(path);
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const getAnswers = async (params: getAnswersParams) => {
+  try {
+    connectToDatabase();
+
+    const { questionId } = params;
+
+    const answers = await Answer.find({ question: questionId }).populate("author").sort({ createdAt: -1 });
+
+    return { answers };
   } catch (error) {
     console.log(error);
   }

@@ -11,10 +11,10 @@ import Tag from "../shared/tag";
 import UserCard from "./user-card";
 
 interface Props {
-  _id: number;
+  _id: string;
   title: string;
   tags: { id: number; name: string }[];
-  author: { name: string; avatar: string };
+  author: { name: string; avatar: string; username: string };
   upVotes: number[];
   downVotes: number[];
   answers: number[];
@@ -22,7 +22,7 @@ interface Props {
   createdAt: string;
 }
 
-const PostCard = ({ _id, title, tags, author, upVotes, downVotes, answers, views, createdAt }: Props) => {
+const PostCard = async ({ _id, title, tags, author, upVotes, downVotes, answers, views, createdAt }: Props) => {
   return (
     <>
       <header className="mb-4 flex items-center">
@@ -44,7 +44,7 @@ const PostCard = ({ _id, title, tags, author, upVotes, downVotes, answers, views
           <Tag key={tag.name} name={tag.name} />
         ))}
 
-        <Stats upVotes={upVotes} downVotes={downVotes} answers={answers} views={views} />
+        <Stats answers={answers.length} views={views} />
       </footer>
     </>
   );

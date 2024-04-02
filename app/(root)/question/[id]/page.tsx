@@ -3,6 +3,7 @@ import Link from "next/link";
 import React from "react";
 
 import Answer from "@/components/forms/answer";
+import AllAnswers from "@/components/shared/all-answers";
 import ParseHTML from "@/components/shared/parse-html";
 import QuantitySelector from "@/components/shared/quantity-selector";
 import Stats from "@/components/shared/stats";
@@ -10,6 +11,7 @@ import Tag from "@/components/shared/tag";
 import { Avatar, AvatarImage } from "@/components/ui/avatar";
 import { getQuestionById } from "@/lib/actions/question.action";
 import { getUserById } from "@/lib/actions/user.action";
+import { getTimeAgo } from "@/lib/utils";
 
 const Page = async ({ params, searchParams }: { params: any; searchParams: unknown }) => {
   const question = await getQuestionById({ questionId: params.id });
@@ -26,12 +28,21 @@ const Page = async ({ params, searchParams }: { params: any; searchParams: unkno
           <Avatar className="size-9">
             <AvatarImage src={question.author.avatar} />
           </Avatar>
-          <div className="flex flex-col">
+          <div className="flex items-center justify-center gap-1.5">
             <p className="text-default font-body-medium">{question.author.name}</p>
-            <p className="font-body-regular text-secondary">@{question.author.username}</p>
+            <span>&#183;</span>
+            <p className="font-small-regular text-mid">{getTimeAgo(question.createdAt)}</p>
           </div>
         </Link>
-        <QuantitySelector upVotes={question.upVotes} downVotes={question.downVotes} />
+        <QuantitySelector
+          upVotes={question.upVotes}
+          downVotes={question.downVotes}
+          type={"question"}
+          itemId={JSON.stringify(question._id)}
+          userId={JSON.stringify(mongoUser?._id)}
+          hasUpVoted={question.upVotes.includes(mongoUser?._id)}
+          hasDownVoted={question.downVotes.includes(mongoUser?._id)}
+        />
       </div>
       <h2 className="font-h3-bold text-default my-3.5">{question.title}</h2>
       <ParseHTML content={question.content} />
@@ -40,16 +51,16 @@ const Page = async ({ params, searchParams }: { params: any; searchParams: unkno
           <Tag key={tag.name} name={tag.name} />
         ))}
 
-        <Stats
-          upVotes={question.upVotes}
-          downVotes={question.downVotes}
-          answers={question.answers}
-          views={question.views}
-        />
+        <Stats answers={question.answers.length} views={question.views} />
       </section>
+      <AllAnswers
+        totalAnswers={question.answers.length}
+        authorId={JSON.stringify(mongoUser?._id)}
+        questionId={JSON.stringify(question._id)}
+      />
       <SignedIn>
         <Answer
-          authorId={JSON.stringify(mongoUser._id)}
+          authorId={JSON.stringify(mongoUser?._id)}
           questionId={JSON.stringify(question._id)}
           question={question.content}
         />
@@ -57,9 +68,9 @@ const Page = async ({ params, searchParams }: { params: any; searchParams: unkno
       <SignedOut>
         <Link
           href="/sign-up"
-          className="font-body-regular text-default border-hover hover:text-invert mt-3.5 flex cursor-pointer justify-center rounded-full border py-2 text-center transition-colors duration-200 ease-linear hover:bg-zinc-900 dark:hover:bg-zinc-200"
+          className="font-body-regular text-default border-hover hover:text-invert mt-3.5 flex cursor-pointer items-center justify-center gap-1.5 rounded-full border py-2 text-center transition-colors duration-200 ease-linear hover:bg-zinc-900 dark:hover:bg-zinc-200"
         >
-          Join us and share your knowledge by answering this question
+          <p>Join us and share your knowledge by answering this question</p>
         </Link>
       </SignedOut>
     </div>

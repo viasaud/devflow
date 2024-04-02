@@ -8,7 +8,7 @@ import User from "@/database/user.model";
 
 import { connectToDatabase } from "../mongoose";
 
-import { createQuestionParams, getQuestionByIdParams, getQuestionsParams } from "./shared.types";
+import { createQuestionParams, getQuestionByIdParams, getQuestionsParams, questionVoteParams } from "./shared.types";
 
 export const createQuestion = async (params: createQuestionParams) => {
   try {
@@ -74,6 +74,56 @@ export const getQuestionById = async (params: getQuestionByIdParams) => {
     return await Question.findById(questionId)
       .populate({ path: "tags", model: Tag })
       .populate({ path: "author", model: User });
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const upVoteQuestion = async (params: questionVoteParams) => {
+  try {
+    connectToDatabase();
+
+    const { questionId, userId, hasUpVoted, hasDownVoted, path } = params;
+
+    let updateQuery = {};
+    if (hasUpVoted) {
+      updateQuery = { $pull: { upVotes: userId } };
+    } else if (hasDownVoted) {
+      updateQuery = { $pull: { downVotes: userId }, $push: { upVotes: userId } };
+    } else {
+      updateQuery = { $addToSet: { upVotes: userId } };
+    }
+
+    const question = await Question.findByIdAndUpdate(questionId, updateQuery, { new: true });
+
+    if (!question) throw new Error("Question not found");
+
+    revalidatePath(path);
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const downVoteQuestion = async (params: questionVoteParams) => {
+  try {
+    connectToDatabase();
+
+    const { questionId, userId, hasUpVoted, hasDownVoted, path } = params;
+
+    let updateQuery = {};
+    if (hasDownVoted) {
+      updateQuery = { $pull: { downVotes: userId } };
+    } else if (hasUpVoted) {
+      updateQuery = { $pull: { upVotes: userId }, $push: { downVotes: userId } };
+    } else {
+      updateQuery = { $addToSet: { downVotes: userId } };
+    }
+
+    const question = await Question.findByIdAndUpdate(questionId, updateQuery, { new: true });
+
+    if (!question) throw new Error("Question not found");
+
+    revalidatePath(path);
   } catch (error) {
     console.log(error);
   }
