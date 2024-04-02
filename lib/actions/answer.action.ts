@@ -21,7 +21,9 @@ export const createAnswer = async (params: createAnswerParams) => {
       content,
     });
 
-    await Question.findByIdAndUpdate(question, { $push: { answers: newAnswer._id } });
+    await Question.findByIdAndUpdate(question, {
+      $push: { answers: newAnswer._id },
+    });
 
     revalidatePath(path);
   } catch (error) {
@@ -35,7 +37,9 @@ export const getAnswers = async (params: getAnswersParams) => {
 
     const { questionId } = params;
 
-    const answers = await Answer.find({ question: questionId }).populate("author").sort({ createdAt: -1 });
+    const answers = await Answer.find({ question: questionId })
+      .populate("author")
+      .sort({ createdAt: -1 });
 
     return { answers };
   } catch (error) {

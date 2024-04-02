@@ -5,7 +5,10 @@ import { usePathname } from "next/navigation";
 import React from "react";
 
 import { DEFAULT_POST_ICON_SIZE } from "@/constants/constants";
-import { downVoteQuestion, upVoteQuestion } from "@/lib/actions/question.action";
+import {
+  downVoteQuestion,
+  upVoteQuestion,
+} from "@/lib/actions/question.action";
 import { formatLargeNumber } from "@/lib/utils";
 
 interface Props {
@@ -18,7 +21,15 @@ interface Props {
   hasDownVoted: boolean;
 }
 
-const QuantitySelector = ({ upVotes, downVotes, type, itemId, userId, hasUpVoted, hasDownVoted }: Props) => {
+const QuantitySelector = ({
+  upVotes,
+  downVotes,
+  type,
+  itemId,
+  userId,
+  hasUpVoted,
+  hasDownVoted,
+}: Props) => {
   const pathname = usePathname();
 
   const handleVote = async (voteType: string) => {
@@ -57,7 +68,9 @@ const QuantitySelector = ({ upVotes, downVotes, type, itemId, userId, hasUpVoted
         }
         onClick={() => handleVote("upVote")}
       />
-      <p className="font-small-regular px-1">{formatLargeNumber(upVotes.length, downVotes.length)}</p>
+      <p className="font-small-regular px-1">
+        {formatLargeNumber(upVotes.length, downVotes.length)}
+      </p>
       <RiArrowDownLine
         size={DEFAULT_POST_ICON_SIZE}
         className={

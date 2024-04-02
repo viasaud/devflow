@@ -13,7 +13,13 @@ import { getQuestionById } from "@/lib/actions/question.action";
 import { getUserById } from "@/lib/actions/user.action";
 import { getTimeAgo } from "@/lib/utils";
 
-const Page = async ({ params, searchParams }: { params: any; searchParams: unknown }) => {
+const Page = async ({
+  params,
+  searchParams,
+}: {
+  params: any;
+  searchParams: unknown;
+}) => {
   const question = await getQuestionById({ questionId: params.id });
   const { userId } = auth();
   let mongoUser;
@@ -29,9 +35,13 @@ const Page = async ({ params, searchParams }: { params: any; searchParams: unkno
             <AvatarImage src={question.author.avatar} />
           </Avatar>
           <div className="flex items-center justify-center gap-1.5">
-            <p className="text-default font-body-medium">{question.author.name}</p>
+            <p className="text-default font-body-medium">
+              {question.author.name}
+            </p>
             <span>&#183;</span>
-            <p className="font-small-regular text-mid">{getTimeAgo(question.createdAt)}</p>
+            <p className="font-small-regular text-mid">
+              {getTimeAgo(question.createdAt)}
+            </p>
           </div>
         </Link>
         <QuantitySelector

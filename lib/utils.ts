@@ -5,7 +5,10 @@ export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
 }
 
-export const formatLargeNumber = (length: number, length2: number = 0): string => {
+export const formatLargeNumber = (
+  length: number,
+  length2: number = 0,
+): string => {
   const diff = length - length2;
   if (diff >= 1000000) {
     const formattedNum = (diff / 1000000).toFixed(1);

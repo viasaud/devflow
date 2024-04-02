@@ -7,7 +7,9 @@ import { connectToDatabase } from "../mongoose";
 
 import { getAllTagsParams, getTopInteractedTagsParams } from "./shared.types";
 
-export const getTopInteractedTags = async (params: getTopInteractedTagsParams) => {
+export const getTopInteractedTags = async (
+  params: getTopInteractedTagsParams,
+) => {
   try {
     connectToDatabase();
     const { userId } = params;

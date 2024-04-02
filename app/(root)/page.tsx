@@ -11,11 +11,17 @@ export default async function Home() {
   return (
     <main className="text-default border-default w-full">
       <header className="border-default w-full border-b">
-        <Filter sortOptions={SORT_OPTIONS} defaultSortOption={DEFAULT_SORT_OPTION} />
+        <Filter
+          sortOptions={SORT_OPTIONS}
+          defaultSortOption={DEFAULT_SORT_OPTION}
+        />
       </header>
 
       {questions?.map((question) => (
-        <div className="border-default text-default hover:bg-post border-b p-5" key={question._id}>
+        <div
+          className="border-default text-default hover:bg-post border-b p-5"
+          key={question._id}
+        >
           <PostCard
             _id={question._id}
             title={question.title}

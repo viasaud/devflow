@@ -13,7 +13,10 @@ const Page = async () => {
   return (
     <div className="text-default border-default w-full">
       <header className="border-default w-full border-b">
-        <Filter sortOptions={SORT_OPTIONS} defaultSortOption={DEFAULT_SORT_OPTION} />
+        <Filter
+          sortOptions={SORT_OPTIONS}
+          defaultSortOption={DEFAULT_SORT_OPTION}
+        />
       </header>
 
       <div className="flex flex-wrap justify-center gap-2 pt-4">

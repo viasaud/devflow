@@ -5,7 +5,12 @@ import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 
-import { Sheet, SheetClose, SheetContent, SheetTrigger } from "@/components/ui/sheet";
+import {
+  Sheet,
+  SheetClose,
+  SheetContent,
+  SheetTrigger,
+} from "@/components/ui/sheet";
 
 import NavContent from "../../nav-content";
 

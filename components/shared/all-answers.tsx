@@ -19,7 +19,13 @@ interface Props {
   filter?: number;
 }
 
-const AllAnswers = async ({ questionId, authorId, totalAnswers, page, filter }: Props) => {
+const AllAnswers = async ({
+  questionId,
+  authorId,
+  totalAnswers,
+  page,
+  filter,
+}: Props) => {
   const answers = await getAnswers({ questionId: JSON.parse(questionId) });
   const { userId } = auth();
   let mongoUser: any;
@@ -38,9 +44,13 @@ const AllAnswers = async ({ questionId, authorId, totalAnswers, page, filter }: 
                 <AvatarImage src={answer.author.avatar} />
               </Avatar>
               <div className="flex items-center justify-center gap-1.5">
-                <p className="text-default font-body-medium">{answer.author.name}</p>
+                <p className="text-default font-body-medium">
+                  {answer.author.name}
+                </p>
                 <span>&#183;</span>
-                <p className="font-small-regular text-mid">{getTimeAgo(answer.createdAt)}</p>
+                <p className="font-small-regular text-mid">
+                  {getTimeAgo(answer.createdAt)}
+                </p>
               </div>
             </Link>
             <QuantitySelector

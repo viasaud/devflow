@@ -22,12 +22,24 @@ interface Props {
   createdAt: string;
 }
 
-const PostCard = async ({ _id, title, tags, author, upVotes, downVotes, answers, views, createdAt }: Props) => {
+const PostCard = async ({
+  _id,
+  title,
+  tags,
+  author,
+  upVotes,
+  downVotes,
+  answers,
+  views,
+  createdAt,
+}: Props) => {
   return (
     <>
       <header className="mb-4 flex items-center">
         <UserCard author={author} />
-        <p className="font-small-medium ml-auto text-zinc-500 dark:text-zinc-400">{getTimeAgo(createdAt)}</p>
+        <p className="font-small-medium ml-auto text-zinc-500 dark:text-zinc-400">
+          {getTimeAgo(createdAt)}
+        </p>
         <RiDeleteBinLine
           size={DEFAULT_POST_ICON_SIZE}
           className="ml-1 hidden cursor-pointer text-zinc-500 hover:text-red-500 dark:text-zinc-400 hover:dark:text-red-500"

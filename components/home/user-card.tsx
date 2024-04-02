@@ -9,7 +9,10 @@ interface Props {
 
 const UserCard = ({ author }: Props) => {
   return (
-    <Link href={`/profile/${author.username}`} className="text-secondary-2 flex cursor-pointer items-center gap-2">
+    <Link
+      href={`/profile/${author.username}`}
+      className="text-secondary-2 flex cursor-pointer items-center gap-2"
+    >
       <Avatar>
         <AvatarImage src={author.avatar} />
       </Avatar>

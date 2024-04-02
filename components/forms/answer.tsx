@@ -13,9 +13,23 @@ import { createAnswer } from "@/lib/actions/answer.action";
 import { AnswerSchema } from "@/lib/validations";
 
 import { Button } from "../ui/button";
-import { Form, FormControl, FormField, FormItem, FormMessage } from "../ui/form";
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormMessage,
+} from "../ui/form";
 
-const Answer = ({ authorId, questionId, question }: { authorId: string; questionId: string; question: string }) => {
+const Answer = ({
+  authorId,
+  questionId,
+  question,
+}: {
+  authorId: string;
+  questionId: string;
+  question: string;
+}) => {
   const pathname = usePathname();
   const editorRef = useRef(null);
   const { mode } = useTheme();
@@ -73,7 +87,7 @@ const Answer = ({ authorId, questionId, question }: { authorId: string; question
                   apiKey={process.env.NEXT_PUBLIC_TINYMCE_API_KEY}
                   onInit={(
                     evt,
-                    editor // @ts-ignore
+                    editor, // @ts-ignore
                   ) => (editorRef.current = editor)}
                   onEditorChange={(content) => form.setValue("answer", content)}
                   init={{
@@ -112,7 +126,12 @@ const Answer = ({ authorId, questionId, question }: { authorId: string; question
             </FormItem>
           )}
         />
-        <Button type="submit" variant={"zinc"} className="mx-auto w-fit px-5 py-3" disabled={isSubmitting}>
+        <Button
+          type="submit"
+          variant={"zinc"}
+          className="mx-auto w-fit px-5 py-3"
+          disabled={isSubmitting}
+        >
           {isSubmitting ? "Submitting..." : "Submit Answer"}
         </Button>
       </form>

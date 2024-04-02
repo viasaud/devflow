@@ -2,7 +2,13 @@
 
 import React, { useState } from "react";
 
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "../ui/select";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "../ui/select";
 
 interface Props {
   sortOptions: string[];
@@ -21,7 +27,11 @@ const Filter = ({ sortOptions, defaultSortOption }: Props) => {
       </SelectTrigger>
       <SelectContent className="bg-default text-default border-default">
         {sortOptions.map((option) => (
-          <SelectItem key={option} value={option} className="hover:bg-hover py-2">
+          <SelectItem
+            key={option}
+            value={option}
+            className="hover:bg-hover py-2"
+          >
             {option}
           </SelectItem>
         ))}

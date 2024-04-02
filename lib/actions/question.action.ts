@@ -8,7 +8,12 @@ import User from "@/database/user.model";
 
 import { connectToDatabase } from "../mongoose";
 
-import { createQuestionParams, getQuestionByIdParams, getQuestionsParams, questionVoteParams } from "./shared.types";
+import {
+  createQuestionParams,
+  getQuestionByIdParams,
+  getQuestionsParams,
+  questionVoteParams,
+} from "./shared.types";
 
 export const createQuestion = async (params: createQuestionParams) => {
   try {
@@ -30,7 +35,7 @@ export const createQuestion = async (params: createQuestionParams) => {
       const existingTag = await Tag.findOneAndUpdate(
         { name: { $regex: new RegExp(`^${tag}$`, "i") } },
         { $setOnInsert: { name: tag }, $push: { questions: question._id } },
-        { upsert: true, new: true }
+        { upsert: true, new: true },
       );
 
       tagDocs.push(existingTag);
@@ -89,12 +94,17 @@ export const upVoteQuestion = async (params: questionVoteParams) => {
     if (hasUpVoted) {
       updateQuery = { $pull: { upVotes: userId } };
     } else if (hasDownVoted) {
-      updateQuery = { $pull: { downVotes: userId }, $push: { upVotes: userId } };
+      updateQuery = {
+        $pull: { downVotes: userId },
+        $push: { upVotes: userId },
+      };
     } else {
       updateQuery = { $addToSet: { upVotes: userId } };
     }
 
-    const question = await Question.findByIdAndUpdate(questionId, updateQuery, { new: true });
+    const question = await Question.findByIdAndUpdate(questionId, updateQuery, {
+      new: true,
+    });
 
     if (!question) throw new Error("Question not found");
 
@@ -114,12 +124,17 @@ export const downVoteQuestion = async (params: questionVoteParams) => {
     if (hasDownVoted) {
       updateQuery = { $pull: { downVotes: userId } };
     } else if (hasUpVoted) {
-      updateQuery = { $pull: { upVotes: userId }, $push: { downVotes: userId } };
+      updateQuery = {
+        $pull: { upVotes: userId },
+        $push: { downVotes: userId },
+      };
     } else {
       updateQuery = { $addToSet: { downVotes: userId } };
     }
 
-    const question = await Question.findByIdAndUpdate(questionId, updateQuery, { new: true });
+    const question = await Question.findByIdAndUpdate(questionId, updateQuery, {
+      new: true,
+    });
 
     if (!question) throw new Error("Question not found");
 

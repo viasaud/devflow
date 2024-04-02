@@ -9,7 +9,14 @@ import { useForm } from "react-hook-form";
 import { z } from "zod";
 
 import { Button } from "@/components/ui/button";
-import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { useTheme } from "@/context/ThemeProvider";
 import { createQuestion } from "@/lib/actions/question.action";
@@ -36,7 +43,10 @@ const Question = ({ mongoUserId }: Props) => {
     },
   });
 
-  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>, field: any) => {
+  const handleKeyDown = (
+    e: React.KeyboardEvent<HTMLInputElement>,
+    field: any,
+  ) => {
     if (e.key !== "Enter" || field.name !== "tags") return;
 
     e.preventDefault();
@@ -66,7 +76,7 @@ const Question = ({ mongoUserId }: Props) => {
   const handleTagRemove = (tag: string, field: any) => {
     form.setValue(
       "tags",
-      field.value.filter((t: string) => t !== tag)
+      field.value.filter((t: string) => t !== tag),
     );
   };
 
@@ -90,7 +100,10 @@ const Question = ({ mongoUserId }: Props) => {
   return (
     <div className="max-w-full lg:w-screen">
       <Form {...form}>
-        <form onSubmit={form.handleSubmit(onSubmit)} className="flex flex-col gap-10 max-xl:px-8">
+        <form
+          onSubmit={form.handleSubmit(onSubmit)}
+          className="flex flex-col gap-10 max-xl:px-8"
+        >
           <FormField
             control={form.control}
             name="title"
@@ -125,10 +138,12 @@ const Question = ({ mongoUserId }: Props) => {
                     apiKey={process.env.NEXT_PUBLIC_TINYMCE_API_KEY}
                     onInit={(
                       evt,
-                      editor // @ts-ignore
+                      editor, // @ts-ignore
                     ) => (editorRef.current = editor)}
                     initialValue=""
-                    onEditorChange={(content) => form.setValue("description", content)}
+                    onEditorChange={(content) =>
+                      form.setValue("description", content)
+                    }
                     init={{
                       height: 350,
                       menubar: false,
@@ -153,7 +168,8 @@ const Question = ({ mongoUserId }: Props) => {
                         "undo redo | blocks | " +
                         "codesample | bold italic forecolor | alignleft aligncenter |" +
                         "alignright alignjustify | bullist numlist",
-                      content_style: "body { font-family:Inter; font-size:14px }",
+                      content_style:
+                        "body { font-family:Inter; font-size:14px }",
                       skin: mode === "dark" ? "oxide-dark" : "oxide",
                       content_css: mode === "dark" ? "dark" : "default",
                     }}
@@ -203,7 +219,12 @@ const Question = ({ mongoUserId }: Props) => {
               </FormItem>
             )}
           />
-          <Button type="submit" variant={"zinc"} className="mx-auto w-fit px-5 py-3" disabled={isSubmitting}>
+          <Button
+            type="submit"
+            variant={"zinc"}
+            className="mx-auto w-fit px-5 py-3"
+            disabled={isSubmitting}
+          >
             {isSubmitting
               ? type === "question"
                 ? "Posting Question..."
