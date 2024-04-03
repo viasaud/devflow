@@ -28,8 +28,8 @@ const AllAnswers = async ({
 }: Props) => {
   const answers = await getAnswers({ questionId: JSON.parse(questionId) });
   const { userId } = auth();
-  let mongoUser: any;
-  if (userId) mongoUser = await getUserById({ userId });
+  if (!userId) return null;
+  const mongoUser = await getUserById({ userId });
 
   return (
     <div className="border-default border-b py-3.5 max-md:px-5">
@@ -58,9 +58,9 @@ const AllAnswers = async ({
               downVotes={answer.downVotes.length}
               type={"answer"}
               itemId={JSON.stringify(answer._id)}
-              userId={JSON.stringify(mongoUser?._id)}
-              hasUpVoted={answer.upVotes.includes(mongoUser?._id)}
-              hasDownVoted={answer.downVotes.includes(mongoUser?._id)}
+              userId={JSON.stringify(mongoUser._id)}
+              hasUpVoted={answer.upVotes.includes(mongoUser._id)}
+              hasDownVoted={answer.downVotes.includes(mongoUser._id)}
             />
           </div>
           <ParseHTML content={answer.content} />

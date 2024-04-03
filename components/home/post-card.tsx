@@ -1,12 +1,15 @@
+import { auth } from "@clerk/nextjs";
 import { RiDeleteBinLine } from "@remixicon/react";
 import Link from "next/link";
 import React from "react";
 
 import { DEFAULT_POST_ICON_SIZE } from "@/constants/constants";
+import { getUserById } from "@/lib/actions/user.action";
 import { getTimeAgo } from "@/lib/utils";
 
 import Stats from "../shared/stats";
 import Tag from "../shared/tag";
+import VoteAndSave from "../shared/vote-and-save";
 
 import UserCard from "./user-card";
 
@@ -33,6 +36,9 @@ const PostCard = async ({
   views,
   createdAt,
 }: Props) => {
+  const { userId } = auth();
+  if (!userId) return null;
+  const mongoUser = await getUserById({ userId });
   return (
     <>
       <header className="mb-4 flex items-center">
@@ -51,12 +57,26 @@ const PostCard = async ({
         <p className="font-base-semibold mb-6">{title}</p>
       </Link>
 
-      <footer className="flex items-center gap-2">
-        {tags.map((tag) => (
-          <Tag key={tag.name} name={tag.name} />
-        ))}
+      <footer className="flex items-center justify-between">
+        <div className="flex items-center justify-center gap-2">
+          {tags.map((tag) => (
+            <Tag key={tag.name} name={tag.name} />
+          ))}
+        </div>
 
-        <Stats answers={answers.length} views={views} />
+        <div className="flex items-center justify-center gap-2">
+          <VoteAndSave
+            upVotes={upVotes.length}
+            downVotes={downVotes.length}
+            type={"question"}
+            itemId={JSON.stringify(_id)}
+            userId={JSON.stringify(mongoUser._id)}
+            hasUpVoted={upVotes.includes(mongoUser._id)}
+            hasDownVoted={downVotes.includes(mongoUser._id)}
+            hasSaved={mongoUser.savedQuestions.includes(_id)}
+          />
+          <Stats answers={answers.length} views={views} />
+        </div>
       </footer>
     </>
   );

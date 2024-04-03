@@ -22,8 +22,8 @@ const Page = async ({
 }) => {
   const question = await getQuestionById({ questionId: params.id });
   const { userId } = auth();
-  let mongoUser;
-  if (userId) mongoUser = await getUserById({ userId });
+  if (!userId) return null;
+  const mongoUser = await getUserById({ userId });
   return (
     <div className="pt-2 max-md:px-5">
       <div className="flex items-center justify-between">
@@ -49,10 +49,11 @@ const Page = async ({
           downVotes={question.downVotes.length}
           type={"question"}
           itemId={JSON.stringify(question._id)}
-          userId={JSON.stringify(mongoUser?._id)}
-          hasUpVoted={question.upVotes.includes(mongoUser?._id)}
-          hasDownVoted={question.downVotes.includes(mongoUser?._id)}
-          hasSaved={mongoUser?.savedQuestions.includes(question._id)}
+          userId={JSON.stringify(mongoUser._id)}
+          hasUpVoted={question.upVotes.includes(mongoUser._id)}
+          hasDownVoted={question.downVotes.includes(mongoUser._id)}
+          hasSaved={mongoUser.savedQuestions.includes(question._id)}
+          bookmarkButton
         />
       </div>
       <h2 className="font-h3-bold text-default my-3.5">{question.title}</h2>
@@ -66,12 +67,12 @@ const Page = async ({
       </section>
       <AllAnswers
         totalAnswers={question.answers.length}
-        authorId={JSON.stringify(mongoUser?._id)}
+        authorId={JSON.stringify(mongoUser._id)}
         questionId={JSON.stringify(question._id)}
       />
       <SignedIn>
         <Answer
-          authorId={JSON.stringify(mongoUser?._id)}
+          authorId={JSON.stringify(mongoUser._id)}
           questionId={JSON.stringify(question._id)}
           question={question.content}
         />

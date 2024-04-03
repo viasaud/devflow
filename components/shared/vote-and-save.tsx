@@ -27,6 +27,7 @@ interface Props {
   hasUpVoted: boolean;
   hasDownVoted: boolean;
   hasSaved?: boolean;
+  bookmarkButton?: boolean;
 }
 
 const VoteAndSave = ({
@@ -38,6 +39,7 @@ const VoteAndSave = ({
   hasUpVoted,
   hasDownVoted,
   hasSaved,
+  bookmarkButton,
 }: Props) => {
   const pathname = usePathname();
 
@@ -116,7 +118,7 @@ const VoteAndSave = ({
           onClick={() => handleVote("downVote")}
         />
       </div>
-      {type === "question" && (
+      {bookmarkButton && (
         <div className="border-default hover:border-hover text-default flex items-center rounded-md border p-1">
           {hasSaved ? (
             <RiBookmarkFill

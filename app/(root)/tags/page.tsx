@@ -4,7 +4,7 @@ import Filter from "@/components/shared/filter";
 import Tag from "@/components/shared/tag";
 import { getTags } from "@/lib/actions/tag.action";
 
-const SORT_OPTIONS = ["Popular", "Latest", "Name", "Oldest"];
+const SORT_OPTIONS = ["Popular", "Name", "Latest", "Oldest"];
 const DEFAULT_SORT_OPTION = SORT_OPTIONS[0];
 
 const Page = async () => {

@@ -1,18 +1,18 @@
 import {
   RiHome6Line,
   RiGroupLine,
-  RiFileList2Line,
   RiMenuSearchLine,
   RiSunLine,
   RiMoonLine,
   RiComputerLine,
   RiHome6Fill,
   RiGroupFill,
-  RiFileList2Fill,
   RiMenuSearchFill,
   RiSunFill,
   RiMoonFill,
   RiComputerFill,
+  RiBookmarkLine,
+  RiBookmarkFill,
 } from "@remixicon/react";
 
 import { SidebarLink } from "@/types";
@@ -45,10 +45,10 @@ export const sidebarLinks: SidebarLink[] = [
     iconFilled: RiGroupFill,
   },
   {
-    route: "/collection",
-    label: "Collections",
-    icon: RiFileList2Line,
-    iconFilled: RiFileList2Fill,
+    route: "/bookmarks",
+    label: "Bookmarks",
+    icon: RiBookmarkLine,
+    iconFilled: RiBookmarkFill,
   },
   {
     route: "/jobs",
