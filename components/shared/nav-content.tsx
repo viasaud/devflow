@@ -87,7 +87,7 @@ const PopularTags = ({ isMobile }: { isMobile: boolean }) => {
 
 const NavContent = ({ isMobile }: { isMobile: boolean }) => {
   return (
-    <div className={`flex flex-1 flex-col ${isMobile && "pt-16"}`}>
+    <div className={`flex flex-1 flex-col ${isMobile && "pt-3.5"}`}>
       <Discover isMobile />
       <PopularTags isMobile />
       <Link href="/ask-question" className="mt-8 rounded-3xl">

@@ -66,7 +66,7 @@ const Answer = ({
 
   return (
     <Form {...form}>
-      <div className="mt-5 flex items-center  justify-between">
+      <div className="mt-5 flex items-center justify-between">
         <p className="font-paragraph-semibold text-default">Your Answer</p>
         <Button variant={"ai"} disabled={isSubmitting} onClick={() => {}}>
           <RiBardFill size={16} />
@@ -74,7 +74,7 @@ const Answer = ({
         </Button>
       </div>
       <form
-        className="mt-1 flex max-w-full flex-col gap-10 max-xl:px-8 lg:w-screen"
+        className="mt-1 flex max-w-full flex-col gap-10 lg:w-screen"
         onSubmit={form.handleSubmit(handleCreateAnswer)}
       >
         <FormField
@@ -87,7 +87,7 @@ const Answer = ({
                   apiKey={process.env.NEXT_PUBLIC_TINYMCE_API_KEY}
                   onInit={(
                     evt,
-                    editor, // @ts-ignore
+                    editor // @ts-ignore
                   ) => (editorRef.current = editor)}
                   onEditorChange={(content) => form.setValue("answer", content)}
                   init={{

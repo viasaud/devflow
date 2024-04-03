@@ -32,7 +32,7 @@ const AllAnswers = async ({
   const mongoUser = await getUserById({ userId });
 
   return (
-    <div className="border-default border-b py-3.5 max-md:px-5">
+    <div className="border-default border-b py-3.5">
       {answers?.answers.map((answer) => (
         <div key={answer._id}>
           <div className="flex items-center justify-between pb-3.5">
