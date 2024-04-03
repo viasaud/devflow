@@ -9,7 +9,7 @@ import { getTimeAgo } from "@/lib/utils";
 import { Avatar, AvatarImage } from "../ui/avatar";
 
 import ParseHTML from "./parse-html";
-import QuantitySelector from "./quantity-selector";
+import VoteAndSave from "./vote-and-save";
 
 interface Props {
   questionId: string;
@@ -53,9 +53,9 @@ const AllAnswers = async ({
                 </p>
               </div>
             </Link>
-            <QuantitySelector
-              upVotes={answer.upVotes}
-              downVotes={answer.downVotes}
+            <VoteAndSave
+              upVotes={answer.upVotes.length}
+              downVotes={answer.downVotes.length}
               type={"answer"}
               itemId={JSON.stringify(answer._id)}
               userId={JSON.stringify(mongoUser?._id)}

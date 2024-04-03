@@ -5,9 +5,9 @@ import React from "react";
 import Answer from "@/components/forms/answer";
 import AllAnswers from "@/components/shared/all-answers";
 import ParseHTML from "@/components/shared/parse-html";
-import QuantitySelector from "@/components/shared/quantity-selector";
 import Stats from "@/components/shared/stats";
 import Tag from "@/components/shared/tag";
+import VoteAndSave from "@/components/shared/vote-and-save";
 import { Avatar, AvatarImage } from "@/components/ui/avatar";
 import { getQuestionById } from "@/lib/actions/question.action";
 import { getUserById } from "@/lib/actions/user.action";
@@ -44,14 +44,15 @@ const Page = async ({
             </p>
           </div>
         </Link>
-        <QuantitySelector
-          upVotes={question.upVotes}
-          downVotes={question.downVotes}
+        <VoteAndSave
+          upVotes={question.upVotes.length}
+          downVotes={question.downVotes.length}
           type={"question"}
           itemId={JSON.stringify(question._id)}
           userId={JSON.stringify(mongoUser?._id)}
           hasUpVoted={question.upVotes.includes(mongoUser?._id)}
           hasDownVoted={question.downVotes.includes(mongoUser?._id)}
+          hasSaved={mongoUser?.savedQuestions.includes(question._id)}
         />
       </div>
       <h2 className="font-h3-bold text-default my-3.5">{question.title}</h2>

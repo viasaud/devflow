@@ -12,6 +12,7 @@ import {
   deleteUserParams,
   getAllUsersParams,
   getUserByIdParams,
+  toggleSaveQuestionParams,
   updateUserParams,
 } from "./shared.types";
 
@@ -65,6 +66,36 @@ export const getUsers = async (params: getAllUsersParams) => {
     // const { page = 1, pageSize = 20 } = params;
     const users = await User.find({}).sort({ createdAt: -1 });
     return { users };
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const toggleSaveQuestion = async (params: toggleSaveQuestionParams) => {
+  try {
+    connectToDatabase();
+    const { userId, questionId, path } = params;
+    const user = await User.findById(userId);
+    if (!user) throw new Error("User not found");
+    const hasSaved = user.savedQuestions.includes(questionId);
+    if (hasSaved) {
+      await User.findByIdAndUpdate(
+        userId,
+        {
+          $pull: { savedQuestions: questionId },
+        },
+        { new: true },
+      );
+    } else {
+      await User.findByIdAndUpdate(
+        userId,
+        {
+          $addToSet: { savedQuestions: questionId },
+        },
+        { new: true },
+      );
+    }
+    revalidatePath(path);
   } catch (error) {
     console.log(error);
   }
