@@ -1,17 +1,15 @@
 import { auth } from "@clerk/nextjs";
 import { RiDeleteBinLine } from "@remixicon/react";
 import Link from "next/link";
-import React from "react";
 
 import { DEFAULT_POST_ICON_SIZE } from "@/constants/constants";
 import { getUserById } from "@/lib/actions/user.action";
 import { getTimeAgo } from "@/lib/utils";
 
+import Account from "../shared/account";
 import Stats from "../shared/stats";
 import Tag from "../shared/tag";
 import VoteAndSave from "../shared/vote-and-save";
-
-import UserCard from "./user-card";
 
 interface Props {
   _id: string;
@@ -25,7 +23,7 @@ interface Props {
   createdAt: string;
 }
 
-const PostCard = async ({
+const QuestionCard = async ({
   _id,
   title,
   tags,
@@ -42,18 +40,17 @@ const PostCard = async ({
   return (
     <>
       <header className="mb-4 flex items-center">
-        <UserCard author={author} />
-        <p className="font-small-medium ml-auto text-zinc-500 dark:text-zinc-400">
-          {getTimeAgo(createdAt)}
-        </p>
+        <Account author={author} />
+        <p className="text-mid ml-auto text-xs">{getTimeAgo(createdAt)}</p>
+
+        {/* Delete Post is shown only when signed-in */}
         <RiDeleteBinLine
           size={DEFAULT_POST_ICON_SIZE}
           className="ml-1 hidden cursor-pointer text-zinc-500 hover:text-red-500 dark:text-zinc-400 hover:dark:text-red-500"
         />
-        {/* Delete Post is shown only when signed-in */}
       </header>
 
-      <Link key={_id} href={`/question/${_id}`}>
+      <Link key={_id} href={`/questions/${_id}`}>
         <p className="font-base-semibold mb-6">{title}</p>
       </Link>
 
@@ -87,4 +84,4 @@ const PostCard = async ({
   );
 };
 
-export default PostCard;
+export default QuestionCard;

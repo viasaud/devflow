@@ -7,7 +7,7 @@ interface Props {
   author: { name: string; avatar: string; username: string };
 }
 
-const UserCard = ({ author }: Props) => {
+const Account = ({ author }: Props) => {
   return (
     <Link
       href={`/profile/${author.username}`}
@@ -22,4 +22,4 @@ const UserCard = ({ author }: Props) => {
   );
 };
 
-export default UserCard;
+export default Account;

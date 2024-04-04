@@ -1,5 +1,8 @@
+import { auth } from "@clerk/nextjs";
 import { type ClassValue, clsx } from "clsx";
 import { twMerge } from "tailwind-merge";
+
+import { getUserById } from "./actions/user.action";
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
@@ -45,3 +48,10 @@ export function getTimeAgo(date: string) {
     return `${seconds} second${seconds > 1 ? "s" : ""} ago`;
   }
 }
+
+export const getMongoUserId = async () => {
+  const { userId } = auth();
+  let mongoUser;
+  if (userId) mongoUser = await getUserById({ userId });
+  return mongoUser;
+};

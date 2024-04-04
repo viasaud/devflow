@@ -9,7 +9,7 @@ import {
   sidebarLinks,
 } from "@/constants/constants";
 
-import { Button } from "../ui/button";
+import { Button } from "../../ui/button";
 
 const popularTags = [
   { _id: 1, name: "javascript", totalQuestions: 24 },
@@ -24,28 +24,22 @@ const Discover = () => {
 
   return (
     <section className="text-default">
+      <h3 className="my-2 font-semibold">Discover</h3>
       {sidebarLinks.map((item) => {
-        const isActive =
-          (pathName.includes(item.route) && item.route.length > 1) ||
-          pathName === item.route;
+        const isActive = pathName === item.route;
         return (
-          <div key={item.route}>
-            {item.label === "Home" && (
-              <h3 className="my-2 font-semibold">Discover</h3>
+          <Link
+            href={item.route}
+            key={item.route}
+            className={`${isActive ? "bg-select" : "hover:bg-hover"} flex items-center justify-start gap-2 rounded-md px-3.5 py-1.5`}
+          >
+            {isActive ? (
+              <item.iconFilled size={DEFAULT_THEME_MENU_ICON_SIZE} />
+            ) : (
+              <item.icon size={DEFAULT_THEME_MENU_ICON_SIZE} />
             )}
-            <Link
-              href={item.route}
-              key={item.route}
-              className={`${isActive ? "bg-select" : "hover:bg-hover"} flex items-center justify-start gap-2 rounded-md px-3.5 py-1.5`}
-            >
-              {isActive ? (
-                <item.iconFilled size={DEFAULT_THEME_MENU_ICON_SIZE} />
-              ) : (
-                <item.icon size={DEFAULT_THEME_MENU_ICON_SIZE} />
-              )}
-              <p className="text-sm">{item.label}</p>
-            </Link>
-          </div>
+            <p className="text-sm">{item.label}</p>
+          </Link>
         );
       })}
     </section>
@@ -58,7 +52,7 @@ const PopularTags = () => {
       <h3 className="text-default mb-2 mt-4 font-semibold">Popular Tags</h3>
       {popularTags.map((tag) => (
         <Link
-          href={`/tags/${tag.name}`}
+          href={`/tag/${tag.name}`}
           key={tag.name}
           className={`hover:bg-hover text-default flex items-center justify-start gap-2 rounded-md px-3.5 py-1.5`}
         >
@@ -84,8 +78,8 @@ const NavContent = () => {
     <div className={`flex flex-1 flex-col`}>
       <Discover />
       <PopularTags />
-      <Link href="/ask-question" className="mt-8 rounded-3xl">
-        <Button variant={"zinc"} className="w-full">
+      <Link href="/questions/ask" className="mt-8 rounded-3xl">
+        <Button variant={"zinc"} className="max-h-8 w-full">
           Ask a Question
         </Button>
       </Link>

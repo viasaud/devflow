@@ -1,39 +1,17 @@
-import { auth } from "@clerk/nextjs";
-
-import PostCard from "@/components/home/post-card";
+import PostCard from "@/components/home/question-card";
 import Filter from "@/components/shared/filter";
 import { getSavedQuestions } from "@/lib/actions/user.action";
+import { getMongoUserId } from "@/lib/utils";
 
-const SORT_OPTIONS = ["Best", "Hot", "New", "Open"];
-const DEFAULT_SORT_OPTION = SORT_OPTIONS[2];
-
-interface Question {
-  _id: string;
-  title: string;
-  tags: { id: number; name: string }[];
-  author: { name: string; avatar: string; username: string };
-  upVotes: number[];
-  downVotes: number[];
-  views: number;
-  answers: number[];
-  createdAt: string;
-}
-
-export default async function Page() {
-  const { userId } = auth();
-  if (!userId) return null;
-  const questions = await getSavedQuestions({ clerkId: userId });
+const BookmarksPage = async () => {
+  const mongoUser = await getMongoUserId();
+  const questions = await getSavedQuestions(mongoUser);
 
   return (
-    <main className="text-default border-default w-full">
-      <header className="border-default w-full border-b">
-        <Filter
-          sortOptions={SORT_OPTIONS}
-          defaultSortOption={DEFAULT_SORT_OPTION}
-        />
-      </header>
+    <div>
+      <Filter type="bookmarks" />
 
-      {questions?.savedQuestions.map((question: Question) => (
+      {questions?.savedQuestions.map((question: any) => (
         <div
           className="border-default text-default hover:bg-post border-b p-5"
           key={question._id}
@@ -51,6 +29,8 @@ export default async function Page() {
           />
         </div>
       ))}
-    </main>
+    </div>
   );
-}
+};
+
+export default BookmarksPage;

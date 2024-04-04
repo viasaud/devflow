@@ -12,7 +12,7 @@ import {
   SheetTrigger,
 } from "@/components/ui/sheet";
 
-import NavContent from "../../nav-content";
+import NavContent from "../nav-content";
 
 const MobileNav = () => {
   return (

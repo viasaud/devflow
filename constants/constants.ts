@@ -91,3 +91,28 @@ export const BADGE_CRITERIA = {
     GOLD: 100000,
   },
 };
+
+export const getSortOptions = (type: string) => {
+  let sortOptions;
+  let defaultSortOption;
+  switch (type) {
+    case "bookmarks":
+      sortOptions = ["Best", "Hot", "New", "Open"];
+      defaultSortOption = sortOptions[2];
+      break;
+    case "community":
+      sortOptions = ["Top Contributors", "New Users", "Old Users"];
+      defaultSortOption = sortOptions[0];
+      break;
+    case "tags":
+      sortOptions = ["Popular", "Name", "Latest", "Oldest"];
+      defaultSortOption = sortOptions[0];
+      break;
+    case "home":
+      sortOptions = ["Best", "Hot", "New", "Open"];
+      defaultSortOption = sortOptions[2];
+      break;
+  }
+
+  return { sortOptions, defaultSortOption };
+};

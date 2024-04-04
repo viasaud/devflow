@@ -1,15 +1,12 @@
 import { auth } from "@clerk/nextjs";
-import Link from "next/link";
-import React from "react";
 
 import { getAnswers } from "@/lib/actions/answer.action";
 import { getUserById } from "@/lib/actions/user.action";
 import { getTimeAgo } from "@/lib/utils";
 
-import { Avatar, AvatarImage } from "../ui/avatar";
-
-import ParseHTML from "./parse-html";
-import VoteAndSave from "./vote-and-save";
+import Account from "../shared/account";
+import ParseHTML from "../shared/parse-html";
+import VoteAndSave from "../shared/vote-and-save";
 
 interface Props {
   questionId: string;
@@ -32,27 +29,17 @@ const AllAnswers = async ({
   if (userId) mongoUser = await getUserById({ userId });
 
   return (
-    <div className="border-default border-b py-3.5">
+    <div>
       {answers?.answers.map((answer) => (
         <div key={answer._id}>
-          <div className="flex items-center justify-between pb-3.5">
-            <Link
-              href={`/profile/${answer.author.username}`}
-              className="text-secondary-2 flex w-fit cursor-pointer items-center justify-start gap-2"
-            >
-              <Avatar className="size-9">
-                <AvatarImage src={answer.author.avatar} />
-              </Avatar>
-              <div className="flex items-center justify-center gap-1.5">
-                <p className="text-default font-body-medium">
-                  {answer.author.name}
-                </p>
-                <span>&#183;</span>
-                <p className="font-small-regular text-mid">
-                  {getTimeAgo(answer.createdAt)}
-                </p>
-              </div>
-            </Link>
+          <div className="flex items-center justify-between py-3.5">
+            <Account author={answer.author} />
+            <p className="text-mid text-xs">{getTimeAgo(answer.createdAt)}</p>
+          </div>
+
+          <ParseHTML content={answer.content} />
+
+          <div className="border-default border-b py-3.5">
             <VoteAndSave
               upVotes={answer.upVotes.length}
               downVotes={answer.downVotes.length}
@@ -63,7 +50,6 @@ const AllAnswers = async ({
               hasDownVoted={answer.downVotes.includes(mongoUser?._id)}
             />
           </div>
-          <ParseHTML content={answer.content} />
         </div>
       ))}
     </div>
