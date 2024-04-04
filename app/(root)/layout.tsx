@@ -8,14 +8,14 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
   return (
     <main className="bg-default relative">
       <Navbar />
-      <div className="flex justify-center pt-14">
+      <div className="flex pt-14 lg:px-8 2xl:justify-between">
         <LeftSidebar />
-        <section className="min-h-screen lg:pl-32 2xl:pr-12">
+        <section className="min-h-screen max-2xl:mx-auto">
           <div className="w-[95vw] pt-2 md:w-[42rem]">{children}</div>
         </section>
         <RightSidebar />
       </div>
-      Toaster
+      {/* Toaster */}
     </main>
   );
 };

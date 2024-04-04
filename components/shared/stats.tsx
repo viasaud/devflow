@@ -1,15 +1,31 @@
+"use client";
+
 import { RiChat1Line, RiEyeLine } from "@remixicon/react";
-import React from "react";
+import { usePathname, useRouter } from "next/navigation";
+import React, { useEffect } from "react";
 
 import { DEFAULT_POST_ICON_SIZE } from "@/constants/constants";
+import { viewQuestion } from "@/lib/actions/interaction.action";
 import { formatLargeNumber } from "@/lib/utils";
 
 interface QuestionProps {
   answers: number;
   views: number;
+  itemId: string;
+  userId: string;
 }
 
-const Stats = ({ answers, views }: QuestionProps) => {
+const Stats = ({ answers, views, itemId, userId }: QuestionProps) => {
+  const pathname = usePathname();
+  const router = useRouter();
+
+  useEffect(() => {
+    viewQuestion({
+      userId: userId ? JSON.parse(userId) : undefined,
+      questionId: JSON.parse(itemId),
+    });
+  }, [itemId, userId, pathname, router]);
+
   return (
     <>
       <div className="text-default ml-auto flex items-center gap-2">

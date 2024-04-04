@@ -27,9 +27,9 @@ const MobileNav = () => {
             Dev<span className="text-orange-500">Overflow</span>
           </p>
         </Link>
-        <div className="flex h-full flex-col justify-end pb-12">
+        <div className="flex h-full flex-col justify-end pb-12 pt-3.5">
           <SheetClose asChild>
-            <NavContent isMobile={true} />
+            <NavContent />
           </SheetClose>
         </div>
       </SheetContent>

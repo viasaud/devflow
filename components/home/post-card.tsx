@@ -37,8 +37,8 @@ const PostCard = async ({
   createdAt,
 }: Props) => {
   const { userId } = auth();
-  if (!userId) return null;
-  const mongoUser = await getUserById({ userId });
+  let mongoUser;
+  if (userId) mongoUser = await getUserById({ userId });
   return (
     <>
       <header className="mb-4 flex items-center">
@@ -70,12 +70,17 @@ const PostCard = async ({
             downVotes={downVotes.length}
             type={"question"}
             itemId={JSON.stringify(_id)}
-            userId={JSON.stringify(mongoUser._id)}
-            hasUpVoted={upVotes.includes(mongoUser._id)}
-            hasDownVoted={downVotes.includes(mongoUser._id)}
-            hasSaved={mongoUser.savedQuestions.includes(_id)}
+            userId={JSON.stringify(mongoUser?._id)}
+            hasUpVoted={upVotes.includes(mongoUser?._id)}
+            hasDownVoted={downVotes.includes(mongoUser?._id)}
+            hasSaved={mongoUser?.savedQuestions.includes(_id)}
           />
-          <Stats answers={answers.length} views={views} />
+          <Stats
+            answers={answers.length}
+            views={views}
+            itemId={JSON.stringify(_id)}
+            userId={JSON.stringify(mongoUser?._id)}
+          />
         </div>
       </footer>
     </>

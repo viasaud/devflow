@@ -87,7 +87,7 @@ const Answer = ({
                   apiKey={process.env.NEXT_PUBLIC_TINYMCE_API_KEY}
                   onInit={(
                     evt,
-                    editor // @ts-ignore
+                    editor, // @ts-ignore
                   ) => (editorRef.current = editor)}
                   onEditorChange={(content) => form.setValue("answer", content)}
                   init={{
