@@ -45,7 +45,7 @@ const Question = ({ mongoUserId }: Props) => {
 
   const handleKeyDown = (
     e: React.KeyboardEvent<HTMLInputElement>,
-    field: any
+    field: any,
   ) => {
     if (e.key !== "Enter" || field.name !== "tags") return;
 
@@ -76,7 +76,7 @@ const Question = ({ mongoUserId }: Props) => {
   const handleTagRemove = (tag: string, field: any) => {
     form.setValue(
       "tags",
-      field.value.filter((t: string) => t !== tag)
+      field.value.filter((t: string) => t !== tag),
     );
   };
 
@@ -138,7 +138,7 @@ const Question = ({ mongoUserId }: Props) => {
                     apiKey={process.env.NEXT_PUBLIC_TINYMCE_API_KEY}
                     onInit={(
                       evt,
-                      editor // @ts-ignore
+                      editor, // @ts-ignore
                     ) => (editorRef.current = editor)}
                     initialValue=""
                     onEditorChange={(content) =>
