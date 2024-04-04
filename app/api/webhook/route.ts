@@ -1,5 +1,4 @@
 /* eslint-disable camelcase */
-
 import { WebhookEvent } from "@clerk/nextjs/server";
 import { headers } from "next/headers";
 import { NextResponse } from "next/server";
@@ -9,11 +8,11 @@ import { createUser, deleteUser, updateUser } from "@/lib/actions/user.action";
 
 export async function POST(req: Request) {
   // You can find this in the Clerk Dashboard -> Webhooks -> choose the webhook
-  const WEBHOOK_SECRET = process.env.WEBHOOK_SECRET;
+  const WEBHOOK_SECRET = process.env.NEXT_CLERK_WEBHOOK_SECRET;
 
   if (!WEBHOOK_SECRET) {
     throw new Error(
-      "Please add WEBHOOK_SECRET from Clerk Dashboard to .env or .env.local",
+      "Please add WEBHOOK_SECRET from Clerk Dashboard to .env or .env.local"
     );
   }
 
@@ -34,7 +33,7 @@ export async function POST(req: Request) {
   const payload = await req.json();
   const body = JSON.stringify(payload);
 
-  // Create a new Svix instance with your secret.
+  // Create a new SVIX instance with your secret.
   const wh = new Webhook(WEBHOOK_SECRET);
 
   let evt: WebhookEvent;
@@ -55,15 +54,18 @@ export async function POST(req: Request) {
 
   const eventType = evt.type;
 
+  console.log({ eventType });
+
   if (eventType === "user.created") {
     const { id, email_addresses, image_url, first_name, last_name, username } =
       evt.data;
 
+    // Create a new user in your database
     const mongoUser = await createUser({
       clerkId: id,
-      email: email_addresses[0].email_address,
-      name: `${first_name} ${last_name || ""}`,
+      name: `${first_name}${last_name ? ` ${last_name}` : ""}`,
       username: username!,
+      email: email_addresses[0].email_address,
       avatar: image_url,
     });
 
@@ -74,12 +76,13 @@ export async function POST(req: Request) {
     const { id, email_addresses, image_url, first_name, last_name, username } =
       evt.data;
 
+    // Create a new user in your database
     const mongoUser = await updateUser({
       clerkId: id,
       updateData: {
-        email: email_addresses[0].email_address,
-        name: `${first_name} ${last_name || ""}`,
+        name: `${first_name}${last_name ? ` ${last_name}` : ""}`,
         username: username!,
+        email: email_addresses[0].email_address,
         avatar: image_url,
       },
       path: `/profile/${id}`,
@@ -91,10 +94,12 @@ export async function POST(req: Request) {
   if (eventType === "user.deleted") {
     const { id } = evt.data;
 
-    const deletedUser = await deleteUser({ clerkId: id! });
+    const deletedUser = await deleteUser({
+      clerkId: id!,
+    });
 
     return NextResponse.json({ message: "OK", user: deletedUser });
   }
 
-  return new Response("", { status: 200 });
+  return new Response("", { status: 201 });
 }

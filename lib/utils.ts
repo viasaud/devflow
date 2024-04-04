@@ -7,7 +7,7 @@ export function cn(...inputs: ClassValue[]) {
 
 export const formatLargeNumber = (
   length: number,
-  length2: number = 0,
+  length2: number = 0
 ): string => {
   const diff = length - length2;
   if (diff >= 1000000) {
@@ -23,6 +23,7 @@ export const formatLargeNumber = (
 
 export function getTimeAgo(date: string) {
   const currentDate = new Date();
+  currentDate.setHours(currentDate.getHours());
   currentDate.setHours(currentDate.getHours());
   const createdAt = new Date(date);
   const timeDiff = currentDate.getTime() - createdAt.getTime();
