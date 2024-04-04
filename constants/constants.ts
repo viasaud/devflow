@@ -1,24 +1,21 @@
 import {
   RiHome6Line,
   RiGroupLine,
-  RiFileList2Line,
   RiMenuSearchLine,
   RiSunLine,
   RiMoonLine,
   RiComputerLine,
   RiHome6Fill,
   RiGroupFill,
-  RiFileList2Fill,
   RiMenuSearchFill,
   RiSunFill,
   RiMoonFill,
   RiComputerFill,
+  RiBookmarkLine,
+  RiBookmarkFill,
 } from "@remixicon/react";
 
 import { SidebarLink } from "@/types";
-
-export const SORT_OPTIONS = ["Best", "Hot", "New", "Open"];
-export const DEFAULT_SORT_OPTION = SORT_OPTIONS[2];
 
 export const THEME_OPTIONS = [
   { value: "light", label: "Light", icon: RiSunLine, iconFilled: RiSunFill },
@@ -48,10 +45,10 @@ export const sidebarLinks: SidebarLink[] = [
     iconFilled: RiGroupFill,
   },
   {
-    route: "/collection",
-    label: "Collections",
-    icon: RiFileList2Line,
-    iconFilled: RiFileList2Fill,
+    route: "/bookmarks",
+    label: "Bookmarks",
+    icon: RiBookmarkLine,
+    iconFilled: RiBookmarkFill,
   },
   {
     route: "/jobs",
@@ -60,22 +57,10 @@ export const sidebarLinks: SidebarLink[] = [
     iconFilled: RiMenuSearchFill,
   },
   // {
-  //   route: "/tags",
-  //   label: "Tags",
-  //   icon: RiHashtag,
-  //   iconFilled: RiHashtag,
-  // },
-  // {
   //   route: "/profile",
   //   label: "Profile",
   //   icon: RiUser3Line,
   //   iconFilled: RiUser3Fill,
-  // },
-  // {
-  //   route: "/ask-question",
-  //   label: "Ask a question",
-  //   icon: RiQuestionLine,
-  //   iconFilled: RiQuestionFill,
   // },
 ];
 

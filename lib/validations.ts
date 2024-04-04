@@ -11,3 +11,10 @@ export const QuestionSchema = z.object({
     .min(1, "Please select at least one tag")
     .max(3, "You can only select up to 3 tags"),
 });
+
+export const AnswerSchema = z.object({
+  answer: z
+    .string()
+    .min(50, "Answer is too short")
+    .max(3000, "Answer is too long"),
+});

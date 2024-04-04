@@ -5,22 +5,25 @@ export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
 }
 
-export const formatAndDivideNumber = (num: number[]): string => {
-  if (num.length === 0) {
-    return "0";
-  } else if (num.length >= 1000000) {
-    const formattedNum = (num.length / 1000000).toFixed(1);
+export const formatLargeNumber = (
+  length: number,
+  length2: number = 0
+): string => {
+  const diff = length - length2;
+  if (diff >= 1000000) {
+    const formattedNum = (diff / 1000000).toFixed(1);
     return `${formattedNum}M`;
-  } else if (num.length >= 1000) {
-    const formattedNum = (num.length / 1000).toFixed(1);
+  } else if (diff >= 1000) {
+    const formattedNum = (diff / 1000).toFixed(1);
     return `${formattedNum}K`;
   } else {
-    return num.toString();
+    return diff.toString();
   }
 };
 
 export function getTimeAgo(date: string) {
   const currentDate = new Date();
+  currentDate.setHours(currentDate.getHours());
   currentDate.setHours(currentDate.getHours());
   const createdAt = new Date(date);
   const timeDiff = currentDate.getTime() - createdAt.getTime();

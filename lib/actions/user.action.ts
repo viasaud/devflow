@@ -1,5 +1,6 @@
 "use server";
 
+import { FilterQuery } from "mongoose";
 import { revalidatePath } from "next/cache";
 
 import Question from "@/database/question.model";
@@ -7,7 +8,15 @@ import User from "@/database/user.model";
 
 import { connectToDatabase } from "../mongoose";
 
-import { createUserParams, deleteUserParams, getUserByIdParams, updateUserParams } from "./shared.types";
+import {
+  createUserParams,
+  deleteUserParams,
+  getAllUsersParams,
+  getSavedQuestionsParams,
+  getUserByIdParams,
+  toggleSaveQuestionParams,
+  updateUserParams,
+} from "./shared.types";
 
 export const getUserById = async (params: getUserByIdParams) => {
   try {
@@ -48,6 +57,74 @@ export const deleteUser = async (params: deleteUserParams) => {
     // const userQuestionsIds = await Question.find({ author: user._id }).distinct("_id");
     await Question.deleteMany({ author: user._id });
     return await User.findByIdAndDelete(user._id);
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const getUsers = async (params: getAllUsersParams) => {
+  try {
+    connectToDatabase();
+    // const { page = 1, pageSize = 20 } = params;
+    const users = await User.find({}).sort({ createdAt: -1 });
+    return { users };
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const toggleSaveQuestion = async (params: toggleSaveQuestionParams) => {
+  try {
+    connectToDatabase();
+    const { userId, questionId, path } = params;
+    const user = await User.findById(userId);
+    if (!user) throw new Error("User not found");
+    const hasSaved = user.savedQuestions.includes(questionId);
+    if (hasSaved) {
+      await User.findByIdAndUpdate(
+        userId,
+        {
+          $pull: { savedQuestions: questionId },
+        },
+        { new: true },
+      );
+    } else {
+      await User.findByIdAndUpdate(
+        userId,
+        {
+          $addToSet: { savedQuestions: questionId },
+        },
+        { new: true },
+      );
+    }
+    revalidatePath(path);
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const getSavedQuestions = async (params: getSavedQuestionsParams) => {
+  try {
+    connectToDatabase();
+    const { clerkId, searchQuery } = params;
+    const query: FilterQuery<typeof Question> = searchQuery
+      ? { title: { $regex: new RegExp(searchQuery, "i") } }
+      : {};
+
+    const user = await User.findOne({ clerkId }).populate({
+      path: "savedQuestions",
+      match: query,
+      options: {
+        sort: { createdAt: -1 },
+      },
+      populate: [
+        { path: "author", model: "User" },
+        { path: "tags", model: "Tag" },
+      ],
+    });
+    if (!user) throw new Error("User not found");
+
+    return { savedQuestions: user.savedQuestions };
   } catch (error) {
     console.log(error);
   }

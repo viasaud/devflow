@@ -2,8 +2,6 @@
 
 import React, { useState } from "react";
 
-import { DEFAULT_SORT_OPTION, SORT_OPTIONS } from "@/constants/constants";
-
 import {
   Select,
   SelectContent,
@@ -12,19 +10,23 @@ import {
   SelectValue,
 } from "../ui/select";
 
+interface Props {
+  sortOptions: string[];
+  defaultSortOption: string;
+}
 
-const FilterContent = () => {
-  const [selectedOption, setSelectedOption] = useState(DEFAULT_SORT_OPTION);
+const Filter = ({ sortOptions, defaultSortOption }: Props) => {
+  const [selectedOption, setSelectedOption] = useState(defaultSortOption);
 
   const handleOptionChange = (value: string) => setSelectedOption(value);
 
   return (
     <Select value={selectedOption} onValueChange={handleOptionChange}>
-      <SelectTrigger className="text-secondary hover:text-default no-focus w-24 border-none outline-none">
+      <SelectTrigger className="text-secondary hover:text-default no-focus w-fit border-none outline-none">
         <SelectValue />
       </SelectTrigger>
       <SelectContent className="bg-default text-default border-default">
-        {SORT_OPTIONS.map((option) => (
+        {sortOptions.map((option) => (
           <SelectItem
             key={option}
             value={option}
@@ -38,4 +40,4 @@ const FilterContent = () => {
   );
 };
 
-export default FilterContent;
+export default Filter;

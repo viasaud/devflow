@@ -21,14 +21,14 @@ const Theme = () => {
   return (
     <Menubar className="relative border-none shadow-none">
       <MenubarMenu>
-        <MenubarTrigger className="hover:bg-hover data-[state=open]:bg-select text-default rounded-3xl">
+        <MenubarTrigger className="hover:bg-hover data-[state=open]:bg-select text-default cursor-pointer rounded-3xl">
           {mode === "light" ? <RiSunFill /> : <RiMoonFill />}
         </MenubarTrigger>
         <MenubarContent className="border-default bg-default absolute -right-10 mt-[.70rem] min-w-28 rounded-md border">
           {THEME_OPTIONS.map((theme) => (
             <MenubarItem
               key={theme.value}
-              className={`${mode === theme.value ? "bg-select" : "text-default hover:bg-hover"} flex items-center gap-2 rounded-sm px-2.5 py-2`}
+              className={`cursor-pointer ${mode === theme.value ? "bg-select" : "text-default hover:bg-hover"} flex items-center gap-2 rounded-sm px-2.5 py-2`}
               onClick={() => {
                 setMode(theme.value);
 

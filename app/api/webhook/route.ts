@@ -11,7 +11,9 @@ export async function POST(req: Request) {
   const WEBHOOK_SECRET = process.env.NEXT_CLERK_WEBHOOK_SECRET;
 
   if (!WEBHOOK_SECRET) {
-    throw new Error("Please add WEBHOOK_SECRET from Clerk Dashboard to .env or .env.local");
+    throw new Error(
+      "Please add WEBHOOK_SECRET from Clerk Dashboard to .env or .env.local"
+    );
   }
 
   // Get the headers
@@ -55,7 +57,8 @@ export async function POST(req: Request) {
   console.log({ eventType });
 
   if (eventType === "user.created") {
-    const { id, email_addresses, image_url, username, first_name, last_name } = evt.data;
+    const { id, email_addresses, image_url, first_name, last_name, username } =
+      evt.data;
 
     // Create a new user in your database
     const mongoUser = await createUser({
@@ -70,7 +73,8 @@ export async function POST(req: Request) {
   }
 
   if (eventType === "user.updated") {
-    const { id, email_addresses, image_url, username, first_name, last_name } = evt.data;
+    const { id, email_addresses, image_url, first_name, last_name, username } =
+      evt.data;
 
     // Create a new user in your database
     const mongoUser = await updateUser({

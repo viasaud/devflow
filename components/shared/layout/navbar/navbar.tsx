@@ -5,7 +5,6 @@ import React from "react";
 
 import { Button } from "@/components/ui/button";
 
-
 import GlobalSearch from "../search/global-search";
 
 import MobileNav from "./mobile-nav";

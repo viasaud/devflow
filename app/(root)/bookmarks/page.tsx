@@ -1,12 +1,28 @@
+import { auth } from "@clerk/nextjs";
+
 import PostCard from "@/components/home/post-card";
 import Filter from "@/components/shared/filter";
-import { getQuestions } from "@/lib/actions/question.action";
+import { getSavedQuestions } from "@/lib/actions/user.action";
 
 const SORT_OPTIONS = ["Best", "Hot", "New", "Open"];
 const DEFAULT_SORT_OPTION = SORT_OPTIONS[2];
 
-export default async function Home() {
-  const questions = await getQuestions({});
+interface Question {
+  _id: string;
+  title: string;
+  tags: { id: number; name: string }[];
+  author: { name: string; avatar: string; username: string };
+  upVotes: number[];
+  downVotes: number[];
+  views: number;
+  answers: number[];
+  createdAt: string;
+}
+
+export default async function Page() {
+  const { userId } = auth();
+  if (!userId) return null;
+  const questions = await getSavedQuestions({ clerkId: userId });
 
   return (
     <main className="text-default border-default w-full">
@@ -17,7 +33,7 @@ export default async function Home() {
         />
       </header>
 
-      {questions?.map((question) => (
+      {questions?.savedQuestions.map((question: Question) => (
         <div
           className="border-default text-default hover:bg-post border-b p-5"
           key={question._id}
