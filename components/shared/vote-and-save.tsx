@@ -99,7 +99,7 @@ const VoteAndSave = ({
           size={DEFAULT_POST_ICON_SIZE}
           className={
             hasUpVoted
-              ? "cursor-pointer text-green-500 hover:text-zinc-500 dark:hover:text-zinc-400"
+              ? "cursor-pointer text-green-500 hover:text-green-700 dark:hover:text-green-600"
               : "cursor-pointer text-zinc-500 hover:text-green-500 dark:text-zinc-400 hover:dark:text-green-500"
           }
           onClick={() => handleVote("upVote")}
@@ -111,25 +111,26 @@ const VoteAndSave = ({
           size={DEFAULT_POST_ICON_SIZE}
           className={
             hasDownVoted
-              ? "cursor-pointer text-red-500 hover:text-zinc-500 dark:hover:text-zinc-400"
+              ? "cursor-pointer text-red-500 hover:text-red-700 dark:hover:text-red-600"
               : "cursor-pointer text-zinc-500 hover:text-red-500 dark:text-zinc-400 hover:dark:text-red-500 "
           }
           onClick={() => handleVote("downVote")}
         />
       </div>
       {bookmarkButton && (
-        <div className="border-default hover:border-hover no-focus text-default flex items-center rounded-md border p-1">
+        <div
+          className="border-default hover:border-hover no-focus text-default group flex cursor-pointer items-center rounded-md border p-1"
+          onClick={() => handleSave()}
+        >
           {hasSaved ? (
             <RiBookmarkFill
               size={DEFAULT_POST_ICON_SIZE}
-              className="cursor-pointer text-sky-500 hover:text-zinc-500 dark:hover:text-zinc-400"
-              onClick={() => handleSave()}
+              className="text-sky-500 group-hover:text-sky-700 dark:group-hover:text-sky-600"
             />
           ) : (
             <RiBookmarkLine
               size={DEFAULT_POST_ICON_SIZE}
-              className="cursor-pointer text-zinc-500 hover:text-sky-500 dark:text-zinc-400 hover:dark:text-sky-500"
-              onClick={() => handleSave()}
+              className="text-zinc-500 hover:text-sky-500 dark:text-zinc-400 hover:dark:text-sky-500"
             />
           )}
         </div>
