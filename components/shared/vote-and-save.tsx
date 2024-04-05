@@ -94,13 +94,13 @@ const VoteAndSave = ({
 
   return (
     <div className="flex items-center justify-end gap-2">
-      <div className="border-default hover:border-hover text-default flex items-center rounded-md border p-1">
+      <div className="border-default hover:border-hover text-default no-focus flex items-center rounded-md border p-1">
         <RiArrowUpLine
           size={DEFAULT_POST_ICON_SIZE}
           className={
             hasUpVoted
-              ? "cursor-pointer text-green-500 hover:text-zinc-500 focus:text-green-500 dark:hover:text-zinc-400"
-              : "cursor-pointer text-zinc-500 hover:text-green-500 focus:text-zinc-500 dark:text-zinc-400 hover:dark:text-green-500 focus:dark:text-zinc-400"
+              ? "cursor-pointer text-green-500 hover:text-zinc-500 dark:hover:text-zinc-400"
+              : "cursor-pointer text-zinc-500 hover:text-green-500 dark:text-zinc-400 hover:dark:text-green-500"
           }
           onClick={() => handleVote("upVote")}
         />
@@ -118,7 +118,7 @@ const VoteAndSave = ({
         />
       </div>
       {bookmarkButton && (
-        <div className="border-default hover:border-hover text-default flex items-center rounded-md border p-1">
+        <div className="border-default hover:border-hover no-focus text-default flex items-center rounded-md border p-1">
           {hasSaved ? (
             <RiBookmarkFill
               size={DEFAULT_POST_ICON_SIZE}
