@@ -13,7 +13,7 @@ const UserProfileLink = ({ author }: Props) => {
       className="text-secondary-2 flex cursor-pointer items-center gap-2"
     >
       <Avatar>
-        <AvatarImage src={author.avatar} />
+        <AvatarImage src={author.avatar} width={24} height={24} />
       </Avatar>
 
       <p className="font-small-medium">{author.name}</p>
