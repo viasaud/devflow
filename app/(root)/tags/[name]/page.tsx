@@ -1,17 +1,14 @@
 import QuestionCard from "@/components/home/question-card";
 import Filter from "@/components/shared/filter";
-import { getSavedQuestions } from "@/lib/actions/user.action";
-import { getMongoUserId } from "@/lib/utils";
+import { getQuestionsByTagName } from "@/lib/actions/tag.action";
 
-const BookmarksPage = async () => {
-  const mongoUser = await getMongoUserId();
-  const questions = await getSavedQuestions(mongoUser);
+const TagPage = async ({ params, searchParams }: any) => {
+  const questions = await getQuestionsByTagName({ name: params.name });
 
   return (
-    <main className="text-default border-default w-full">
-      <Filter type="bookmarks" />
-
-      {questions?.savedQuestions.map((question: any) => (
+    <div className="text-default border-default w-full">
+      <Filter type="home" />
+      {questions?.questions.map((question: any) => (
         <div
           className="border-default text-default hover:bg-post border-b p-5"
           key={question._id}
@@ -26,11 +23,12 @@ const BookmarksPage = async () => {
             views={question.views}
             answers={question.answers}
             createdAt={question.createdAt}
+            glow={params.name}
           />
         </div>
       ))}
-    </main>
+    </div>
   );
 };
 
-export default BookmarksPage;
+export default TagPage;

@@ -1,10 +1,8 @@
-import { auth } from "@clerk/nextjs";
 import { RiDeleteBinLine } from "@remixicon/react";
 import Link from "next/link";
 
 import { DEFAULT_POST_ICON_SIZE } from "@/constants/constants";
-import { getUserById } from "@/lib/actions/user.action";
-import { getTimeAgo } from "@/lib/utils";
+import { getMongoUserId, getTimeAgo } from "@/lib/utils";
 
 import ContentStats from "../shared/content-stats";
 import Tag from "../shared/tag";
@@ -21,6 +19,7 @@ interface Props {
   answers: number[];
   views: number;
   createdAt: string;
+  glow?: string;
 }
 
 const QuestionCard = async ({
@@ -33,10 +32,9 @@ const QuestionCard = async ({
   answers,
   views,
   createdAt,
+  glow,
 }: Props) => {
-  const { userId } = auth();
-  let mongoUser;
-  if (userId) mongoUser = await getUserById({ userId });
+  const mongoUser = await getMongoUserId();
   return (
     <>
       <header className="mb-4 flex items-center">
@@ -57,7 +55,7 @@ const QuestionCard = async ({
       <footer className="flex items-center justify-between">
         <div className="flex items-center justify-center gap-2">
           {tags.map((tag) => (
-            <Tag key={tag.name} name={tag.name} />
+            <Tag key={tag.name} name={tag.name} glow={glow} />
           ))}
         </div>
 

@@ -97,8 +97,8 @@ export interface getAllTagsParams {
   searchQuery?: string;
 }
 
-export interface getQuestionsByTagIdParams {
-  tagId: string;
+export interface getQuestionsByTagNameParams {
+  name: string;
   page?: number;
   pageSize?: number;
   searchQuery?: string;

@@ -106,7 +106,7 @@ export const getSortOptions = (type: string) => {
       break;
     case "tags":
       sortOptions = ["Popular", "Name", "Latest", "Oldest"];
-      defaultSortOption = sortOptions[0];
+      defaultSortOption = sortOptions[1];
       break;
     case "home":
       sortOptions = ["Best", "Hot", "New", "Open"];

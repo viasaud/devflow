@@ -2,7 +2,7 @@
 
 import { RiChat1Line, RiEyeLine } from "@remixicon/react";
 import { usePathname, useRouter } from "next/navigation";
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 
 import { DEFAULT_POST_ICON_SIZE } from "@/constants/constants";
 import { viewQuestion } from "@/lib/actions/interaction.action";

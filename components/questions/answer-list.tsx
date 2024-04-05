@@ -1,8 +1,5 @@
-import { auth } from "@clerk/nextjs";
-
 import { getAnswers } from "@/lib/actions/answer.action";
-import { getUserById } from "@/lib/actions/user.action";
-import { getTimeAgo } from "@/lib/utils";
+import { getMongoUserId, getTimeAgo } from "@/lib/utils";
 
 import ParseHTML from "../shared/parse-html";
 import UserProfileLink from "../shared/user-profile-link";
@@ -24,9 +21,7 @@ const AnswerList = async ({
   filter,
 }: Props) => {
   const answers = await getAnswers({ questionId: JSON.parse(questionId) });
-  const { userId } = auth();
-  let mongoUser: any;
-  if (userId) mongoUser = await getUserById({ userId });
+  const mongoUser = await getMongoUserId();
 
   return (
     <div>

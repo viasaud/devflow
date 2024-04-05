@@ -7,7 +7,6 @@ import {
   RiBookmarkFill,
 } from "@remixicon/react";
 import { usePathname } from "next/navigation";
-import React from "react";
 
 import { DEFAULT_POST_ICON_SIZE } from "@/constants/constants";
 import { upVoteAnswer, downVoteAnswer } from "@/lib/actions/answer.action";

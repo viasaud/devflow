@@ -1,6 +1,5 @@
 import { RiArrowRightSLine } from "@remixicon/react";
 import Link from "next/link";
-import React from "react";
 
 const hotQuestions = [
   { _id: 1, title: "How do I use express as a custom server in NextJS?" },

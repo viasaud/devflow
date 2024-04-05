@@ -2,7 +2,6 @@
 import { RiHashtag } from "@remixicon/react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import React from "react";
 
 import {
   DEFAULT_THEME_MENU_ICON_SIZE,

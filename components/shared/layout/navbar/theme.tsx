@@ -1,7 +1,6 @@
 "use client";
 
 import { RiMoonFill, RiSunFill } from "@remixicon/react";
-import React from "react";
 
 import {
   Menubar,
