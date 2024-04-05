@@ -1,6 +1,6 @@
 import { redirect } from "next/navigation";
 
-import Question from "@/components/forms/question";
+import QuestionForm from "@/components/forms/question-form";
 import { getMongoUserId } from "@/lib/utils";
 
 const AskQuestionPage = async () => {
@@ -9,7 +9,7 @@ const AskQuestionPage = async () => {
 
   return (
     <div className="text-default w-full pt-7">
-      <Question mongoUserId={JSON.stringify(mongoUser._id)} />
+      <QuestionForm mongoUserId={JSON.stringify(mongoUser._id)} />
     </div>
   );
 };

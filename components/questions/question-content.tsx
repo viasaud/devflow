@@ -1,11 +1,11 @@
 import { getTimeAgo } from "@/lib/utils";
 
+import ContentStats from "../shared/content-stats";
 import ParseHTML from "../shared/parse-html";
-import Stats from "../shared/stats";
 import Tag from "../shared/tag";
 import VoteAndSave from "../shared/vote-and-save";
 
-import Account from "./account";
+import UserProfileLink from "./user-profile-link";
 
 interface Props {
   question: {
@@ -26,11 +26,11 @@ interface Props {
   };
 }
 
-const Question = ({ question, mongoUser }: Props) => {
+const QuestionContent = ({ question, mongoUser }: Props) => {
   return (
     <div>
       <div className="flex items-center justify-between">
-        <Account author={question.author} />
+        <UserProfileLink author={question.author} />
         <p className="text-mid text-xs">{getTimeAgo(question.createdAt)}</p>
       </div>
 
@@ -42,7 +42,7 @@ const Question = ({ question, mongoUser }: Props) => {
           <Tag key={tag.name} name={tag.name} />
         ))}
         <div className="flex-center ml-auto gap-2">
-          <Stats
+          <ContentStats
             answers={question.answers.length}
             views={question.views}
             itemId={JSON.stringify(question._id)}
@@ -65,4 +65,4 @@ const Question = ({ question, mongoUser }: Props) => {
   );
 };
 
-export default Question;
+export default QuestionContent;

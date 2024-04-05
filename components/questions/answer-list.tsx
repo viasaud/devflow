@@ -4,8 +4,8 @@ import { getAnswers } from "@/lib/actions/answer.action";
 import { getUserById } from "@/lib/actions/user.action";
 import { getTimeAgo } from "@/lib/utils";
 
-import Account from "../shared/account";
 import ParseHTML from "../shared/parse-html";
+import UserProfileLink from "../shared/user-profile-link";
 import VoteAndSave from "../shared/vote-and-save";
 
 interface Props {
@@ -16,7 +16,7 @@ interface Props {
   filter?: number;
 }
 
-const AllAnswers = async ({
+const AnswerList = async ({
   questionId,
   authorId,
   totalAnswers,
@@ -33,7 +33,7 @@ const AllAnswers = async ({
       {answers?.answers.map((answer) => (
         <div key={answer._id}>
           <div className="flex items-center justify-between py-3.5">
-            <Account author={answer.author} />
+            <UserProfileLink author={answer.author} />
             <p className="text-mid text-xs">{getTimeAgo(answer.createdAt)}</p>
           </div>
 
@@ -56,4 +56,4 @@ const AllAnswers = async ({
   );
 };
 
-export default AllAnswers;
+export default AnswerList;

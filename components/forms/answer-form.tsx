@@ -21,7 +21,7 @@ import {
   FormMessage,
 } from "../ui/form";
 
-const Answer = ({
+const AnswerForm = ({
   authorId,
   questionId,
   question,
@@ -139,4 +139,4 @@ const Answer = ({
   );
 };
 
-export default Answer;
+export default AnswerForm;

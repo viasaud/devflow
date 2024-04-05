@@ -52,7 +52,7 @@ const PopularTags = () => {
       <h3 className="text-default mb-2 mt-4 font-semibold">Popular Tags</h3>
       {popularTags.map((tag) => (
         <Link
-          href={`/tag/${tag.name}`}
+          href={`/tags/${tag.name}`}
           key={tag.name}
           className={`hover:bg-hover text-default flex items-center justify-start gap-2 rounded-md px-3.5 py-1.5`}
         >

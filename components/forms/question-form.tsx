@@ -26,7 +26,7 @@ interface Props {
   mongoUserId: string;
 }
 
-const Question = ({ mongoUserId }: Props) => {
+const QuestionForm = ({ mongoUserId }: Props) => {
   const { mode } = useTheme();
   const editorRef = useRef(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -239,4 +239,4 @@ const Question = ({ mongoUserId }: Props) => {
   );
 };
 
-export default Question;
+export default QuestionForm;

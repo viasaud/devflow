@@ -6,9 +6,9 @@ import { DEFAULT_POST_ICON_SIZE } from "@/constants/constants";
 import { getUserById } from "@/lib/actions/user.action";
 import { getTimeAgo } from "@/lib/utils";
 
-import Account from "../shared/account";
-import Stats from "../shared/stats";
+import ContentStats from "../shared/content-stats";
 import Tag from "../shared/tag";
+import UserProfileLink from "../shared/user-profile-link";
 import VoteAndSave from "../shared/vote-and-save";
 
 interface Props {
@@ -40,7 +40,7 @@ const QuestionCard = async ({
   return (
     <>
       <header className="mb-4 flex items-center">
-        <Account author={author} />
+        <UserProfileLink author={author} />
         <p className="text-mid ml-auto text-xs">{getTimeAgo(createdAt)}</p>
 
         {/* Delete Post is shown only when signed-in */}
@@ -62,6 +62,12 @@ const QuestionCard = async ({
         </div>
 
         <div className="flex items-center justify-center gap-2">
+          <ContentStats
+            answers={answers.length}
+            views={views}
+            itemId={JSON.stringify(_id)}
+            userId={JSON.stringify(mongoUser?._id)}
+          />
           <VoteAndSave
             upVotes={upVotes.length}
             downVotes={downVotes.length}
@@ -71,12 +77,6 @@ const QuestionCard = async ({
             hasUpVoted={upVotes.includes(mongoUser?._id)}
             hasDownVoted={downVotes.includes(mongoUser?._id)}
             hasSaved={mongoUser?.savedQuestions.includes(_id)}
-          />
-          <Stats
-            answers={answers.length}
-            views={views}
-            itemId={JSON.stringify(_id)}
-            userId={JSON.stringify(mongoUser?._id)}
           />
         </div>
       </footer>

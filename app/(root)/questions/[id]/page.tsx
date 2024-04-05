@@ -1,9 +1,9 @@
 import { SignedIn, SignedOut } from "@clerk/nextjs";
 import Link from "next/link";
 
-import Answer from "@/components/forms/answer";
-import AllAnswers from "@/components/questions/all-answers";
-import Question from "@/components/questions/question";
+import AnswerForm from "@/components/forms/answer-form";
+import AnswerList from "@/components/questions/answer-list";
+import QuestionContent from "@/components/questions/question-content";
 import { getQuestionById } from "@/lib/actions/question.action";
 import { getMongoUserId } from "@/lib/utils";
 
@@ -13,16 +13,16 @@ const QuestionPage = async ({ params, searchParams }: any) => {
 
   return (
     <div className="pt-2 max-md:px-5">
-      <Question question={question} mongoUser={mongoUser} />
+      <QuestionContent question={question} mongoUser={mongoUser} />
 
-      <AllAnswers
+      <AnswerList
         totalAnswers={question.answers.length}
         authorId={JSON.stringify(mongoUser?._id)}
         questionId={JSON.stringify(question._id)}
       />
 
       <SignedIn>
-        <Answer
+        <AnswerForm
           authorId={JSON.stringify(mongoUser?._id)}
           questionId={JSON.stringify(question._id)}
           question={question.content}
