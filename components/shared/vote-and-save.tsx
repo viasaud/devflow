@@ -99,8 +99,8 @@ const VoteAndSave = ({
           size={DEFAULT_POST_ICON_SIZE}
           className={
             hasUpVoted
-              ? "cursor-pointer text-green-500 hover:text-zinc-500 dark:hover:text-zinc-400"
-              : "cursor-pointer text-zinc-500 hover:text-green-500 dark:text-zinc-400 hover:dark:text-green-500"
+              ? "cursor-pointer text-green-500 hover:text-zinc-500 focus:text-green-500 dark:hover:text-zinc-400"
+              : "cursor-pointer text-zinc-500 hover:text-green-500 focus:text-zinc-500 dark:text-zinc-400 hover:dark:text-green-500 focus:dark:text-zinc-400"
           }
           onClick={() => handleVote("upVote")}
         />
