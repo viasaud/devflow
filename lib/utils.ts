@@ -10,7 +10,7 @@ export function cn(...inputs: ClassValue[]) {
 
 export const formatLargeNumber = (
   length: number,
-  length2: number = 0
+  length2: number = 0,
 ): string => {
   const diff = length - length2;
   if (diff >= 1000000) {

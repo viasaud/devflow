@@ -87,7 +87,7 @@ export const toggleSaveQuestion = async (params: toggleSaveQuestionParams) => {
         {
           $pull: { savedQuestions: questionId },
         },
-        { new: true }
+        { new: true },
       );
     } else {
       await User.findByIdAndUpdate(
@@ -95,7 +95,7 @@ export const toggleSaveQuestion = async (params: toggleSaveQuestionParams) => {
         {
           $addToSet: { savedQuestions: questionId },
         },
-        { new: true }
+        { new: true },
       );
     }
     revalidatePath(path);
