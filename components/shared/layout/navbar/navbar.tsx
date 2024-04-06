@@ -3,16 +3,18 @@ import Image from "next/image";
 import Link from "next/link";
 
 import { Button } from "@/components/ui/button";
+import { getMongoUser } from "@/lib/utils";
 
 import GlobalSearch from "../search/global-search";
 
 import MobileNav from "./mobile-nav";
 import Theme from "./theme";
 
-const Navbar = () => {
+const Navbar = async () => {
+  const mongoUser = await getMongoUser();
   return (
     <nav className="flex-between border-default bg-default fixed z-50 h-14 w-full gap-3 border-b p-4 shadow-zinc-300 dark:shadow-none lg:px-8">
-      <MobileNav />
+      <MobileNav username={mongoUser?.username} />
       <Link
         href="/"
         className="flex size-16 items-center gap-1 lg:w-72 xl:w-48"
