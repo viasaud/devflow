@@ -2,7 +2,7 @@ import { RiDeleteBinLine } from "@remixicon/react";
 import Link from "next/link";
 
 import { DEFAULT_POST_ICON_SIZE } from "@/constants/constants";
-import { getMongoUserId, getTimeAgo } from "@/lib/utils";
+import { getMongoUser, getTimeAgo } from "@/lib/utils";
 
 import ContentStats from "../shared/content-stats";
 import Tag from "../shared/tag";
@@ -34,7 +34,7 @@ const QuestionCard = async ({
   createdAt,
   glow,
 }: Props) => {
-  const mongoUser = await getMongoUserId();
+  const mongoUser = await getMongoUser();
   return (
     <>
       <header className="mb-4 flex items-center">

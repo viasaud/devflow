@@ -1,10 +1,10 @@
 import { redirect } from "next/navigation";
 
 import QuestionForm from "@/components/forms/question-form";
-import { getMongoUserId } from "@/lib/utils";
+import { getMongoUser } from "@/lib/utils";
 
 const AskQuestionPage = async () => {
-  const mongoUser = await getMongoUserId();
+  const mongoUser = await getMongoUser();
   if (!mongoUser) redirect("/sign-in");
 
   return (

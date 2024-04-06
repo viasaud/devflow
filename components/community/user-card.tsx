@@ -18,7 +18,9 @@ const UserCard = async ({ user }: { user: User }) => {
         </Avatar>
         <div className="text-default text-center">
           <p className="font-paragraph-semibold">{user.name}</p>
-          <p className="font-body-regular text-secondary">@{user.username}</p>
+          <p className="font-body-regular text-secondary font-mono">
+            @{user.username}
+          </p>
         </div>
       </div>
     </Link>

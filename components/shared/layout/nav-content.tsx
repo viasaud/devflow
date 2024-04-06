@@ -1,4 +1,5 @@
 "use client";
+
 import { RiHashtag } from "@remixicon/react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -18,17 +19,19 @@ const popularTags = [
   { _id: 5, name: "redux", totalQuestions: 11 },
 ];
 
-const Discover = () => {
-  const pathName = usePathname();
+const Discover = ({ username }: { username: string }) => {
+  const pathname = usePathname();
 
   return (
     <section className="text-default">
       <h3 className="my-2 font-semibold">Discover</h3>
       {sidebarLinks.map((item) => {
-        const isActive = pathName === item.route;
+        const isActive = pathname === item.route;
         return (
           <Link
-            href={item.route}
+            href={
+              item.label === "Profile" ? `/profile/${username}` : item.route
+            }
             key={item.route}
             className={`${isActive ? "bg-select" : "hover:bg-hover"} flex items-center justify-start gap-2 rounded-md px-3.5 py-1.5`}
           >
@@ -72,10 +75,10 @@ const PopularTags = () => {
   );
 };
 
-const NavContent = () => {
+const NavContent = ({ username }: { username: string }) => {
   return (
     <div className={`flex flex-1 flex-col`}>
-      <Discover />
+      <Discover username={username} />
       <PopularTags />
       <Link href="/questions/ask" className="mt-8 rounded-3xl">
         <Button variant={"zinc"} className="max-h-8 w-full">

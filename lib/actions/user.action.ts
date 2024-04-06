@@ -3,6 +3,7 @@
 import { FilterQuery } from "mongoose";
 import { revalidatePath } from "next/cache";
 
+import Answer from "@/database/answer.model";
 import Question from "@/database/question.model";
 import User from "@/database/user.model";
 
@@ -86,7 +87,7 @@ export const toggleSaveQuestion = async (params: toggleSaveQuestionParams) => {
         {
           $pull: { savedQuestions: questionId },
         },
-        { new: true },
+        { new: true }
       );
     } else {
       await User.findByIdAndUpdate(
@@ -94,7 +95,7 @@ export const toggleSaveQuestion = async (params: toggleSaveQuestionParams) => {
         {
           $addToSet: { savedQuestions: questionId },
         },
-        { new: true },
+        { new: true }
       );
     }
     revalidatePath(path);
@@ -125,6 +126,27 @@ export const getSavedQuestions = async (params: getSavedQuestionsParams) => {
     if (!user) throw new Error("User not found");
 
     return { savedQuestions: user.savedQuestions };
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const getUserInfo = async ({ username }: { username: string }) => {
+  try {
+    connectToDatabase();
+
+    const user = await User.findOne({ username });
+    if (!user) throw new Error("User not found in getUserInfo()");
+
+    const totalQuestions = await Question.countDocuments({
+      author: user._id,
+    });
+
+    const totalAnswers = await Answer.countDocuments({
+      author: user._id,
+    });
+
+    return { user, totalQuestions, totalAnswers };
   } catch (error) {
     console.log(error);
   }

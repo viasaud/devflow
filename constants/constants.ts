@@ -1,18 +1,18 @@
 import {
   RiHome6Line,
   RiGroupLine,
-  RiMenuSearchLine,
   RiSunLine,
   RiMoonLine,
   RiComputerLine,
   RiHome6Fill,
   RiGroupFill,
-  RiMenuSearchFill,
   RiSunFill,
   RiMoonFill,
   RiComputerFill,
   RiBookmarkLine,
   RiBookmarkFill,
+  RiUser3Fill,
+  RiUser3Line,
 } from "@remixicon/react";
 
 import { SidebarLink } from "@/types";
@@ -50,18 +50,18 @@ export const sidebarLinks: SidebarLink[] = [
     icon: RiBookmarkLine,
     iconFilled: RiBookmarkFill,
   },
-  {
-    route: "/jobs",
-    label: "Find Jobs",
-    icon: RiMenuSearchLine,
-    iconFilled: RiMenuSearchFill,
-  },
   // {
-  //   route: "/profile",
-  //   label: "Profile",
-  //   icon: RiUser3Line,
-  //   iconFilled: RiUser3Fill,
+  //   route: "/jobs",
+  //   label: "Find Jobs",
+  //   icon: RiMenuSearchLine,
+  //   iconFilled: RiMenuSearchFill,
   // },
+  {
+    route: "/profile",
+    label: "Profile",
+    icon: RiUser3Line,
+    iconFilled: RiUser3Fill,
+  },
 ];
 
 export const BADGE_CRITERIA = {

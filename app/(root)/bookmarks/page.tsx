@@ -1,10 +1,10 @@
 import QuestionCard from "@/components/home/question-card";
 import Filter from "@/components/shared/filter";
 import { getSavedQuestions } from "@/lib/actions/user.action";
-import { getMongoUserId } from "@/lib/utils";
+import { getMongoUser } from "@/lib/utils";
 
 const BookmarksPage = async () => {
-  const mongoUser = await getMongoUserId();
+  const mongoUser = await getMongoUser();
   const questions = await getSavedQuestions(mongoUser);
 
   return (

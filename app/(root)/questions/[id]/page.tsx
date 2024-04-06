@@ -1,15 +1,18 @@
 import { SignedIn, SignedOut } from "@clerk/nextjs";
 import Link from "next/link";
+import { redirect } from "next/navigation";
 
 import AnswerForm from "@/components/forms/answer-form";
 import AnswerList from "@/components/questions/answer-list";
 import QuestionContent from "@/components/questions/question-content";
 import { getQuestionById } from "@/lib/actions/question.action";
-import { getMongoUserId } from "@/lib/utils";
+import { getMongoUser } from "@/lib/utils";
+import { URLProps } from "@/types";
 
-const QuestionPage = async ({ params, searchParams }: any) => {
+const QuestionPage = async ({ params, searchParams }: URLProps) => {
   const question = await getQuestionById({ questionId: params.id });
-  const mongoUser = await getMongoUserId();
+  if (!question) redirect("/404");
+  const mongoUser = await getMongoUser();
 
   return (
     <div className="pt-2 max-md:px-5">

@@ -1,5 +1,5 @@
 import { getAnswers } from "@/lib/actions/answer.action";
-import { getMongoUserId, getTimeAgo } from "@/lib/utils";
+import { getMongoUser, getTimeAgo } from "@/lib/utils";
 
 import ParseHTML from "../shared/parse-html";
 import UserProfileLink from "../shared/user-profile-link";
@@ -21,7 +21,7 @@ const AnswerList = async ({
   filter,
 }: Props) => {
   const answers = await getAnswers({ questionId: JSON.parse(questionId) });
-  const mongoUser = await getMongoUserId();
+  const mongoUser = await getMongoUser();
 
   return (
     <div>
