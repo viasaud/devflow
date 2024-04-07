@@ -5,6 +5,7 @@ import { revalidatePath } from "next/cache";
 
 import Answer from "@/database/answer.model";
 import Question from "@/database/question.model";
+import Tag from "@/database/tag.model";
 import User from "@/database/user.model";
 
 import { connectToDatabase } from "../mongoose";
@@ -116,7 +117,7 @@ export const getSavedQuestions = async (params: getSavedQuestionsParams) => {
       path: "savedQuestions",
       match: query,
       options: {
-        sort: { createdAt: -1 },
+        sort: { views: -1, upVotes: -1 },
       },
       populate: [
         { path: "author", model: "User" },
@@ -147,6 +148,30 @@ export const getUserInfo = async ({ username }: { username: string }) => {
     });
 
     return { user, totalQuestions, totalAnswers };
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const getUserQuestions = async ({ username }: { username: string }) => {
+  try {
+    connectToDatabase();
+
+    const user = await User.findOne({ username });
+    if (!user) throw new Error("User not found in getUserInfo()");
+
+    const questions = await Question.find({
+      author: user._id,
+    })
+      .sort({ views: -1, upVotes: -1 })
+      .populate({
+        path: "tags",
+        model: Tag,
+        options: { sort: { name: 1 } },
+      })
+      .populate({ path: "author", model: User });
+
+    return { questions };
   } catch (error) {
     console.log(error);
   }
