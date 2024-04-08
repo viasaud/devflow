@@ -13,7 +13,7 @@ import {
 
 import NavContent from "../nav-content";
 
-const MobileNav = ({ username }: { username: string }) => {
+const MobileNav = ({ username, tags }: { username: string; tags: string }) => {
   return (
     <Sheet>
       <SheetTrigger className="w-11" asChild>
@@ -28,7 +28,7 @@ const MobileNav = ({ username }: { username: string }) => {
         </Link>
         <div className="flex h-full flex-col justify-end pb-12 pt-3.5">
           <SheetClose asChild>
-            <NavContent username={username} />
+            <NavContent username={username} tags={tags} />
           </SheetClose>
         </div>
       </SheetContent>
