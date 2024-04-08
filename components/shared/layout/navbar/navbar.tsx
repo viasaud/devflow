@@ -3,6 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 
 import { Button } from "@/components/ui/button";
+import { getTopInteractedTags } from "@/lib/actions/tag.action";
 import { getMongoUser } from "@/lib/utils";
 
 import GlobalSearch from "../search/global-search";
@@ -12,9 +13,10 @@ import Theme from "./theme";
 
 const Navbar = async () => {
   const mongoUser = await getMongoUser();
+  const tags = await getTopInteractedTags({});
   return (
     <nav className="flex-between border-default bg-default fixed z-50 h-14 w-full gap-3 border-b p-4 shadow-zinc-300 dark:shadow-none lg:px-8">
-      <MobileNav username={mongoUser?.username} />
+      <MobileNav username={mongoUser?.username} tags={JSON.stringify(tags)} />
       <Link
         href="/"
         className="flex size-16 items-center gap-1 lg:w-72 xl:w-48"
