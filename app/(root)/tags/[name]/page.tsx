@@ -10,7 +10,7 @@ const TagPage = async ({ params, searchParams }: any) => {
       <Filter type="home" />
       {questions?.questions.map((question: any) => (
         <div
-          className="border-default text-default hover:bg-post border-b p-5"
+          className="border-default text-default hover:bg-question border-b p-5"
           key={question._id}
         >
           <QuestionCard

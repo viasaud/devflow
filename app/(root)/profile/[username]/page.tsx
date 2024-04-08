@@ -1,4 +1,4 @@
-import { SignedIn, auth } from "@clerk/nextjs";
+import { SignedIn } from "@clerk/nextjs";
 import {
   RiBug2Line,
   RiCalendar2Line,
@@ -14,11 +14,8 @@ import Filter from "@/components/shared/filter";
 import { Avatar, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import { DEFAULT_POST_ICON_SIZE } from "@/constants/constants";
-import {
-  getUserById,
-  getUserInfo,
-  getUserQuestions,
-} from "@/lib/actions/user.action";
+import { getUserInfo, getUserQuestions } from "@/lib/actions/user.action";
+import { getMongoUser } from "@/lib/utils";
 
 const ProfilePage = async ({
   params,
@@ -30,9 +27,7 @@ const ProfilePage = async ({
   const userInfo = await getUserInfo({ username: params.username });
   if (!userInfo) redirect("/404");
 
-  const { userId } = auth();
-  let mongoUser;
-  if (userId) mongoUser = await getUserById({ userId });
+  const mongoUser = await getMongoUser();
   const questions = await getUserQuestions({ username: params.username });
 
   return (
@@ -109,10 +104,10 @@ const ProfilePage = async ({
           )}
         </div>
       </div>
-      {questions?.questions.length !== 0 && <Filter type="bookmarks" />}
-      {questions?.questions.map((question) => (
+      {questions?.length !== 0 && <Filter type="bookmarks" />}
+      {questions?.map((question: any) => (
         <div
-          className="border-default text-default hover:bg-post border-b p-5"
+          className="border-default text-default hover:bg-question border-b p-5"
           key={question._id}
         >
           <QuestionCard

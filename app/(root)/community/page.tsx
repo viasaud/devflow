@@ -10,9 +10,9 @@ const CommunityPage = async () => {
       <Filter type="community" />
 
       <div className="flex flex-wrap justify-center gap-2 pt-4">
-        {users?.users?.map((user) => (
+        {users?.map((user: any) => (
           <div
-            className="border-default hover:bg-post w-40 cursor-pointer rounded border"
+            className="border-default hover:bg-question w-40 cursor-pointer rounded border"
             key={user._id}
           >
             <UserCard user={user} />

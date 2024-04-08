@@ -10,7 +10,7 @@ export function cn(...inputs: ClassValue[]) {
 
 export const formatLargeNumber = (
   length: number,
-  length2: number = 0,
+  length2: number = 0
 ): string => {
   const diff = length - length2;
   if (diff >= 1000000) {
@@ -51,7 +51,5 @@ export function getTimeAgo(date: string) {
 
 export const getMongoUser = async () => {
   const { userId } = auth();
-  let mongoUser;
-  if (userId) mongoUser = await getUserById({ userId });
-  return mongoUser;
+  return userId ? await getUserById({ clerkId: userId }) : undefined;
 };

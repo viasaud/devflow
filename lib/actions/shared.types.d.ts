@@ -117,10 +117,6 @@ export interface createUserParams {
   avatar: string;
 }
 
-export interface getUserByIdParams {
-  userId: string;
-}
-
 export interface getAllUsersParams {
   page?: number;
   pageSize?: number;
@@ -152,8 +148,4 @@ export interface getUserStatsParams {
   userId: string;
   page?: number;
   pageSize?: number;
-}
-
-export interface deleteUserParams {
-  clerkId: string;
 }

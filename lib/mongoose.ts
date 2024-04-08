@@ -8,7 +8,7 @@ export const connectToDatabase = async () => {
   if (!process.env.MONGODB_URL) {
     return console.log("MONGODB_URI is not defined");
   } else if (isConnected) {
-    return console.log("Already connected to the database");
+    return;
   }
 
   try {
@@ -17,5 +17,16 @@ export const connectToDatabase = async () => {
     });
     isConnected = true;
     console.log("Connected to the database");
-  } catch (error) {}
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const runWithDatabase = async (callback: () => Promise<any>) => {
+  connectToDatabase();
+  try {
+    return await callback();
+  } catch (error) {
+    console.log(error);
+  }
 };
