@@ -3,14 +3,12 @@
 import Interaction from "@/database/interaction.model";
 import Question from "@/database/question.model";
 
-import { connectToDatabase } from "../mongoose";
+import { runWithDatabase } from "../mongoose";
 
 import { viewQuestionParams } from "./shared.types";
 
 export const viewQuestion = async (params: viewQuestionParams) => {
-  try {
-    connectToDatabase();
-
+  return await runWithDatabase(async () => {
     const { userId, questionId } = params;
 
     await Question.findByIdAndUpdate(questionId, { $inc: { views: 1 } });
@@ -22,8 +20,7 @@ export const viewQuestion = async (params: viewQuestionParams) => {
         question: questionId,
       });
 
-      if (existingInteraction)
-        return console.log("The user already viewed the Question");
+      if (existingInteraction) return;
 
       await Interaction.create({
         user: userId,
@@ -31,7 +28,5 @@ export const viewQuestion = async (params: viewQuestionParams) => {
         question: questionId,
       });
     }
-  } catch (error) {
-    console.log(error);
-  }
+  });
 };

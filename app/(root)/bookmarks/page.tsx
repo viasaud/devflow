@@ -2,6 +2,7 @@ import QuestionCard from "@/components/home/question-card";
 import Filter from "@/components/shared/filter";
 import { getSavedQuestions } from "@/lib/actions/user.action";
 import { getMongoUser } from "@/lib/utils";
+import { Question } from "@/types";
 
 const BookmarksPage = async () => {
   const mongoUser = await getMongoUser();
@@ -10,7 +11,7 @@ const BookmarksPage = async () => {
     <main className="text-default border-default w-full">
       <Filter type="bookmarks" />
 
-      {questions?.map((question: any) => (
+      {questions?.map((question: Question) => (
         <div
           className="border-default text-default hover:bg-question border-b p-5"
           key={question._id}

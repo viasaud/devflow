@@ -22,11 +22,7 @@ import { useTheme } from "@/context/ThemeProvider";
 import { createQuestion } from "@/lib/actions/question.action";
 import { QuestionSchema } from "@/lib/validations";
 
-interface Props {
-  mongoUserId: string;
-}
-
-const QuestionForm = ({ mongoUserId }: Props) => {
+const QuestionForm = ({ mongoUserId }: { mongoUserId: string }) => {
   const { mode } = useTheme();
   const editorRef = useRef(null);
   const [isSubmitting, setIsSubmitting] = useState(false);

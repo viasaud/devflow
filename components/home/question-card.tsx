@@ -3,24 +3,12 @@ import Link from "next/link";
 
 import { DEFAULT_POST_ICON_SIZE } from "@/constants/constants";
 import { getMongoUser, getTimeAgo } from "@/lib/utils";
+import { Question } from "@/types";
 
 import ContentStats from "../shared/content-stats";
 import Tag from "../shared/tag";
 import UserProfileLink from "../shared/user-profile-link";
 import VoteAndSave from "../shared/vote-and-save";
-
-interface Props {
-  _id: string;
-  title: string;
-  tags: { id: number; name: string }[];
-  author: { name: string; avatar: string; username: string };
-  upVotes: number[];
-  downVotes: number[];
-  answers: number[];
-  views: number;
-  createdAt: string;
-  glow?: string;
-}
 
 const QuestionCard = async ({
   _id,
@@ -33,7 +21,7 @@ const QuestionCard = async ({
   views,
   createdAt,
   glow,
-}: Props) => {
+}: Question) => {
   const mongoUser = await getMongoUser();
   return (
     <>

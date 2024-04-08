@@ -8,16 +8,9 @@ import {
   DEFAULT_THEME_MENU_ICON_SIZE,
   sidebarLinks,
 } from "@/constants/constants";
+import { Tag } from "@/types";
 
 import { Button } from "../../ui/button";
-
-const popularTags = [
-  { _id: 1, name: "javascript", totalQuestions: 24 },
-  { _id: 2, name: "react", totalQuestions: 21 },
-  { _id: 3, name: "next", totalQuestions: 15 },
-  { _id: 4, name: "vue", totalQuestions: 11 },
-  { _id: 5, name: "redux", totalQuestions: 11 },
-];
 
 const Discover = ({ username }: { username: string }) => {
   const pathname = usePathname();
@@ -48,11 +41,11 @@ const Discover = ({ username }: { username: string }) => {
   );
 };
 
-const PopularTags = () => {
+const PopularTags = ({ tags }: { tags: string }) => {
   return (
     <section>
       <h3 className="text-default mb-2 mt-4 font-semibold">Popular Tags</h3>
-      {popularTags.map((tag) => (
+      {JSON.parse(tags).map((tag: Tag) => (
         <Link
           href={`/tags/${tag.name}`}
           key={tag.name}
@@ -61,7 +54,7 @@ const PopularTags = () => {
           <RiHashtag />
           <p className="text-sm">{tag.name}</p>
           <p className="font-small-medium ml-auto text-zinc-500 dark:text-zinc-400">
-            {tag.totalQuestions}
+            {tag.questions.length}
           </p>
         </Link>
       ))}
@@ -75,11 +68,11 @@ const PopularTags = () => {
   );
 };
 
-const NavContent = ({ username }: { username: string }) => {
+const NavContent = ({ username, tags }: { username: string; tags: string }) => {
   return (
     <div className={`flex flex-1 flex-col`}>
       <Discover username={username} />
-      <PopularTags />
+      <PopularTags tags={tags} />
       <Link href="/questions/ask" className="mt-8 rounded-3xl">
         <Button variant={"zinc"} className="max-h-8 w-full">
           Ask a Question

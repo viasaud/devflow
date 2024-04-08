@@ -2,45 +2,31 @@ import Question from "@/database/question.model";
 import Tag from "@/database/tag.model";
 import User from "@/database/user.model";
 
-import { connectToDatabase } from "../mongoose";
+import { runWithDatabase } from "../mongoose";
 
-import {
-  getAllTagsParams,
-  getQuestionsByTagNameParams,
-  getTopInteractedTagsParams,
-} from "./shared.types";
+import { getAllTagsParams, getQuestionsByTagNameParams } from "./shared.types";
 
-export const getTopInteractedTags = async (
-  params: getTopInteractedTagsParams,
-) => {
-  try {
-    connectToDatabase();
-    const { userId } = params;
-    const user = await User.findById(userId);
-    if (!user) throw new Error("User not found");
-
-    // find all tags that user has interacted with
-    return [{ name: "JavaScript" }, { name: "HTML" }];
-  } catch (error) {
-    console.log(error);
-  }
+export const getTopInteractedTags = async ({
+  limit = 5,
+}: {
+  limit?: number;
+}) => {
+  return await runWithDatabase(async () => {
+    return await Tag.find().sort({ questions: 1 }).limit(limit);
+  });
 };
 
 export const getTags = async (params: getAllTagsParams) => {
-  try {
-    connectToDatabase();
-    return await Tag.find().sort({ name: 1 });
-  } catch (error) {
-    console.log(error);
-  }
+  return await runWithDatabase(async () => {
+    return await Tag.find().sort({ name: -1 });
+  });
 };
 
 export const getQuestionsByTagName = async (
-  params: getQuestionsByTagNameParams,
+  params: getQuestionsByTagNameParams
 ) => {
-  try {
-    connectToDatabase();
-    const { name, searchQuery } = params;
+  const { name, searchQuery } = params;
+  return await runWithDatabase(async () => {
     const tag = await Tag.findOne({ name })
       .populate({
         path: "questions",
@@ -64,8 +50,6 @@ export const getQuestionsByTagName = async (
 
     const questions = tag.questions;
 
-    return { questions };
-  } catch (error) {
-    console.log(error);
-  }
+    return questions;
+  });
 };

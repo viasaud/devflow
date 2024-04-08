@@ -42,7 +42,7 @@ export const deleteUser = async ({ clerkId }: { clerkId: string }) => {
 
     await Tag.updateMany(
       { questions: { $in: questionIds } },
-      { $pull: { questions: { $in: questionIds } } }
+      { $pull: { questions: { $in: questionIds } } },
     );
 
     await Tag.deleteMany({ questions: { $size: 0 } });
@@ -82,7 +82,7 @@ export const toggleSaveQuestion = async (params: toggleSaveQuestionParams) => {
         {
           $pull: { savedQuestions: questionId },
         },
-        { new: true }
+        { new: true },
       );
     } else {
       await User.findByIdAndUpdate(
@@ -90,7 +90,7 @@ export const toggleSaveQuestion = async (params: toggleSaveQuestionParams) => {
         {
           $addToSet: { savedQuestions: questionId },
         },
-        { new: true }
+        { new: true },
       );
     }
     revalidatePath(path);

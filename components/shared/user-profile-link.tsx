@@ -1,12 +1,10 @@
 import Link from "next/link";
 
+import { Author } from "@/types";
+
 import { Avatar, AvatarImage } from "../ui/avatar";
 
-interface Props {
-  author: { name: string; avatar: string; username: string };
-}
-
-const UserProfileLink = ({ author }: Props) => {
+const UserProfileLink = ({ author }: { author: Author }) => {
   return (
     <Link
       href={`/profile/${author.username}`}

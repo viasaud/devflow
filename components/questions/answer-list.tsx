@@ -1,5 +1,6 @@
 import { getAnswers } from "@/lib/actions/answer.action";
 import { getMongoUser, getTimeAgo } from "@/lib/utils";
+import { Answer } from "@/types";
 
 import ParseHTML from "../shared/parse-html";
 import UserProfileLink from "../shared/user-profile-link";
@@ -25,7 +26,7 @@ const AnswerList = async ({
 
   return (
     <div>
-      {answers?.answers.map((answer) => (
+      {answers?.map((answer: Answer) => (
         <div key={answer._id}>
           <div className="flex items-center justify-between py-3.5">
             <UserProfileLink author={answer.author} />

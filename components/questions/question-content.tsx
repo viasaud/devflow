@@ -1,4 +1,5 @@
 import { getTimeAgo } from "@/lib/utils";
+import { Question } from "@/types";
 
 import ContentStats from "../shared/content-stats";
 import ParseHTML from "../shared/parse-html";
@@ -7,26 +8,17 @@ import VoteAndSave from "../shared/vote-and-save";
 
 import UserProfileLink from "./user-profile-link";
 
-interface Props {
-  question: {
-    _id: string;
-    author: { name: string; avatar: string; username: string };
-    title: string;
-    content: string;
-    tags: { name: string }[];
-    views: number;
-    upVotes: string[];
-    downVotes: string[];
-    answers: string[];
-    createdAt: string;
-  };
-  mongoUser: {
-    _id: string;
-    savedQuestions: string[];
-  };
+interface Content extends Question {
+  content: string;
 }
 
-const QuestionContent = ({ question, mongoUser }: Props) => {
+const QuestionContent = ({
+  question,
+  mongoUser,
+}: {
+  question: Content;
+  mongoUser: { _id: string; savedQuestions: string[] };
+}) => {
   return (
     <div>
       <div className="flex items-center justify-between">

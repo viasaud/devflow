@@ -7,9 +7,14 @@ import AnswerList from "@/components/questions/answer-list";
 import QuestionContent from "@/components/questions/question-content";
 import { getQuestionById } from "@/lib/actions/question.action";
 import { getMongoUser } from "@/lib/utils";
-import { URLProps } from "@/types";
 
-const QuestionPage = async ({ params, searchParams }: URLProps) => {
+const QuestionPage = async ({
+  params,
+  searchParams,
+}: {
+  params: { id: string };
+  searchParams: { [key: string]: string | undefined };
+}) => {
   const question = await getQuestionById({ questionId: params.id });
   if (!question) redirect("/404");
   const mongoUser = await getMongoUser();

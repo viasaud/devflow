@@ -6,7 +6,7 @@ import Question from "@/database/question.model";
 import Tag from "@/database/tag.model";
 import User from "@/database/user.model";
 
-import { connectToDatabase } from "../mongoose";
+import { runWithDatabase } from "../mongoose";
 
 import {
   createQuestionParams,
@@ -16,11 +16,8 @@ import {
 } from "./shared.types";
 
 export const createQuestion = async (params: createQuestionParams) => {
-  try {
-    connectToDatabase();
-
-    const { title, content, tags, author, path } = params;
-
+  const { title, content, tags, author, path } = params;
+  return await runWithDatabase(async () => {
     const lowerCaseTags = tags.map((tag) => tag.toLowerCase());
 
     const question = await Question.create({
@@ -35,7 +32,7 @@ export const createQuestion = async (params: createQuestionParams) => {
       const existingTag = await Tag.findOneAndUpdate(
         { name: { $regex: new RegExp(`^${tag}$`, "i") } },
         { $setOnInsert: { name: tag }, $push: { questions: question._id } },
-        { upsert: true, new: true },
+        { upsert: true, new: true }
       );
 
       tagDocs.push(existingTag);
@@ -46,15 +43,11 @@ export const createQuestion = async (params: createQuestionParams) => {
     });
 
     revalidatePath(path);
-  } catch (error) {
-    console.log(error);
-  }
+  });
 };
 
 export const getQuestions = async (params: getQuestionsParams) => {
-  try {
-    connectToDatabase();
-
+  return await runWithDatabase(async () => {
     const questions = await Question.find({})
       .populate({
         path: "tags",
@@ -65,31 +58,21 @@ export const getQuestions = async (params: getQuestionsParams) => {
       .sort({ createdAt: -1 });
 
     return questions;
-  } catch (error) {
-    console.log(error);
-  }
+  });
 };
 
 export const getQuestionById = async (params: getQuestionByIdParams) => {
-  try {
-    connectToDatabase();
-
-    const { questionId } = params;
-
+  const { questionId } = params;
+  return await runWithDatabase(async () => {
     return await Question.findById(questionId)
       .populate({ path: "tags", model: Tag })
       .populate({ path: "author", model: User });
-  } catch (error) {
-    console.log(error);
-  }
+  });
 };
 
 export const upVoteQuestion = async (params: questionVoteParams) => {
-  try {
-    connectToDatabase();
-
-    const { questionId, userId, hasUpVoted, hasDownVoted, path } = params;
-
+  const { questionId, userId, hasUpVoted, hasDownVoted, path } = params;
+  return await runWithDatabase(async () => {
     let updateQuery = {};
     if (hasUpVoted) {
       updateQuery = { $pull: { upVotes: userId } };
@@ -109,17 +92,12 @@ export const upVoteQuestion = async (params: questionVoteParams) => {
     if (!question) throw new Error("Question not found");
 
     revalidatePath(path);
-  } catch (error) {
-    console.log(error);
-  }
+  });
 };
 
 export const downVoteQuestion = async (params: questionVoteParams) => {
-  try {
-    connectToDatabase();
-
-    const { questionId, userId, hasUpVoted, hasDownVoted, path } = params;
-
+  const { questionId, userId, hasUpVoted, hasDownVoted, path } = params;
+  return await runWithDatabase(async () => {
     let updateQuery = {};
     if (hasDownVoted) {
       updateQuery = { $pull: { downVotes: userId } };
@@ -139,7 +117,5 @@ export const downVoteQuestion = async (params: questionVoteParams) => {
     if (!question) throw new Error("Question not found");
 
     revalidatePath(path);
-  } catch (error) {
-    console.log(error);
-  }
+  });
 };

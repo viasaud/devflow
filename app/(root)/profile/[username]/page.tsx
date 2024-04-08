@@ -16,13 +16,14 @@ import { Button } from "@/components/ui/button";
 import { DEFAULT_POST_ICON_SIZE } from "@/constants/constants";
 import { getUserInfo, getUserQuestions } from "@/lib/actions/user.action";
 import { getMongoUser } from "@/lib/utils";
+import { Question } from "@/types";
 
 const ProfilePage = async ({
   params,
   searchParams,
 }: {
   params: { username: string };
-  searchParams: any;
+  searchParams: { [key: string]: string | undefined };
 }) => {
   const userInfo = await getUserInfo({ username: params.username });
   if (!userInfo) redirect("/404");
@@ -105,7 +106,7 @@ const ProfilePage = async ({
         </div>
       </div>
       {questions?.length !== 0 && <Filter type="bookmarks" />}
-      {questions?.map((question: any) => (
+      {questions?.map((question: Question) => (
         <div
           className="border-default text-default hover:bg-question border-b p-5"
           key={question._id}

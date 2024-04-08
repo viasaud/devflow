@@ -3,7 +3,6 @@ import Link from "next/link";
 import { Avatar, AvatarImage } from "../ui/avatar";
 
 interface User {
-  _id: string;
   username: string;
   avatar: string;
   name: string;
