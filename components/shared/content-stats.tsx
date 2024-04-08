@@ -27,7 +27,7 @@ const ContentStats = ({ answers, views, itemId, userId }: QuestionProps) => {
   }, [itemId, userId, pathname, router]);
 
   return (
-    <>
+    <div className="font-geistMono">
       <div className="text-primary ml-auto flex items-center gap-2">
         <div className="border-primary flex items-center rounded-md border p-1">
           <RiChat1Line
@@ -44,7 +44,7 @@ const ContentStats = ({ answers, views, itemId, userId }: QuestionProps) => {
           <p className="px-1 text-xs">{formatLargeNumber(views)}</p>
         </div>
       </div>
-    </>
+    </div>
   );
 };
 

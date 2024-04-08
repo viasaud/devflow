@@ -93,7 +93,7 @@ const VoteAndSave = ({
   };
 
   return (
-    <div className="flex items-center justify-end gap-2">
+    <div className="flex items-center justify-end gap-2 font-geistMono">
       <div className="border-primary hover:border-hover text-primary no-focus flex items-center rounded-md border p-1">
         <RiArrowUpLine
           size={QUESTION_ICON_SIZE}

@@ -43,7 +43,7 @@ const ProfilePage = async ({
             <p className="text-primary text-xl font-semibold">
               {userInfo?.user.name}
             </p>
-            <p className="text-secondary font-mono text-sm">
+            <p className="text-secondary font-geistMono text-sm">
               @{userInfo?.user.username}
             </p>
           </div>
@@ -53,23 +53,25 @@ const ProfilePage = async ({
           <div className="text-secondary flex-center w-full gap-4">
             <div className="flex-center gap-1">
               <RiCalendar2Line size={QUESTION_ICON_SIZE} />
-              <p className="font-mono text-xs">
+              <p className="font-geistMono text-xs">
                 Joined {userInfo?.user.joinedAt.toLocaleDateString()}
               </p>
             </div>
             <div className="flex-center gap-1">
               <RiMapPinLine size={QUESTION_ICON_SIZE} />
-              <p className="font-mono text-xs">
+              <p className="font-geistMono text-xs">
                 {userInfo.user.location ?? "Earth"}
               </p>
             </div>
             <div className="flex-center gap-1">
               <RiBug2Line size={QUESTION_ICON_SIZE} />
-              <p className="font-mono text-xs">{userInfo?.totalQuestions}</p>
+              <p className="font-geistMono text-xs">
+                {userInfo?.totalQuestions}
+              </p>
             </div>
             <div className="flex-center gap-1">
               <RiChat1Line size={QUESTION_ICON_SIZE} />
-              <p className="font-mono text-xs">{userInfo?.totalAnswers}</p>
+              <p className="font-geistMono text-xs">{userInfo?.totalAnswers}</p>
             </div>
           </div>
           <div className="text-secondary flex-center w-full gap-4">
@@ -78,21 +80,21 @@ const ProfilePage = async ({
                 size={QUESTION_ICON_SIZE}
                 className="text-[#cd7f32]"
               />
-              <p className="font-mono text-xs">0</p>
+              <p className="font-geistMono text-xs">0</p>
             </div>
             <div className="flex-center gap-1">
               <RiMedalLine
                 size={QUESTION_ICON_SIZE}
                 className=" dark:text-[#ecebff]"
               />
-              <p className="font-mono text-xs">0</p>
+              <p className="font-geistMono text-xs">0</p>
             </div>
             <div className="flex-center gap-1">
               <RiMedalLine
                 size={QUESTION_ICON_SIZE}
                 className="text-[#f9d300] dark:text-[#ffd700]"
               />
-              <p className="font-mono text-xs">0</p>
+              <p className="font-geistMono text-xs">0</p>
             </div>
           </div>
           {params.username === mongoUser?.username && (

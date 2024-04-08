@@ -22,7 +22,7 @@ const Navbar = async () => {
         className="flex size-16 items-center gap-1 lg:w-72 xl:w-48"
       >
         <Image src="/svg/logo.svg" alt="DevFlow" width={34} height={34} />
-        <p className="text-primary ml-1 font-spaceGrotesk text-2xl font-bold max-lg:hidden">
+        <p className="text-primary ml-1 font-geistMono text-2xl font-bold max-lg:hidden">
           Dev<span className="text-orange-500">Overflow</span>
         </p>
       </Link>

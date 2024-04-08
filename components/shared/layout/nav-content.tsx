@@ -50,7 +50,7 @@ const PopularTags = ({ tags }: { tags: string }) => {
         >
           <RiHashtag />
           <p className="text-sm">{tag.name}</p>
-          <p className="ml-auto text-xs font-medium text-zinc-500 dark:text-zinc-400">
+          <p className="ml-auto font-geistMono text-xs font-medium text-zinc-500 dark:text-zinc-400">
             {tag.questions.length}
           </p>
         </Link>

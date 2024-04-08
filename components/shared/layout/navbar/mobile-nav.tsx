@@ -22,7 +22,7 @@ const MobileNav = ({ username, tags }: { username: string; tags: string }) => {
       <SheetContent side="left" className="bg-primary border-none">
         <Link href="/" className="flex items-center gap-1">
           <Image src="/svg/logo.svg" alt="DevFlow" width={34} height={34} />
-          <p className="text-primary font-spaceGrotesk text-2xl font-bold">
+          <p className="text-primary font-geistMono text-2xl font-bold">
             Dev<span className="text-orange-500">Overflow</span>
           </p>
         </Link>
