@@ -1,6 +1,7 @@
 import QuestionCard from "@/components/home/question-card";
 import Filter from "@/components/shared/filter";
 import { getQuestions } from "@/lib/actions/question.action";
+import { Question } from "@/types";
 
 const HomePage = async () => {
   const questions = await getQuestions({});
@@ -9,7 +10,7 @@ const HomePage = async () => {
     <main className="text-default border-default w-full">
       <Filter type="home" />
 
-      {questions?.map((question) => (
+      {questions?.map((question: Question) => (
         <div
           className="border-default text-default hover:bg-question border-b p-5"
           key={question._id}
