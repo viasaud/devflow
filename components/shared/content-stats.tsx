@@ -28,22 +28,20 @@ const ContentStats = ({ answers, views, itemId, userId }: QuestionProps) => {
 
   return (
     <>
-      <div className="text-default ml-auto flex items-center gap-2">
-        <div className="border-default flex items-center rounded-md border p-1">
+      <div className="text-primary ml-auto flex items-center gap-2">
+        <div className="border-primary flex items-center rounded-md border p-1">
           <RiChat1Line
             size={DEFAULT_POST_ICON_SIZE}
             className="text-zinc-500 dark:text-zinc-400"
           />
-          <p className="font-small-regular px-1">
-            {formatLargeNumber(answers)}
-          </p>
+          <p className="px-1 text-xs">{formatLargeNumber(answers)}</p>
         </div>
-        <div className="border-default flex items-center rounded-md border p-1">
+        <div className="border-primary flex items-center rounded-md border p-1">
           <RiEyeLine
             size={DEFAULT_POST_ICON_SIZE}
             className="text-zinc-500 dark:text-zinc-400"
           />
-          <p className="font-small-regular px-1">{formatLargeNumber(views)}</p>
+          <p className="px-1 text-xs">{formatLargeNumber(views)}</p>
         </div>
       </div>
     </>

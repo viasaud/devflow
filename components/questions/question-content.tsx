@@ -23,13 +23,17 @@ const QuestionContent = ({
     <div>
       <div className="flex items-center justify-between">
         <UserProfileLink author={question.author} />
-        <p className="text-mid text-xs">{getTimeAgo(question.createdAt)}</p>
+        <p className="text-secondary text-xs">
+          {getTimeAgo(question.createdAt)}
+        </p>
       </div>
 
-      <h2 className="font-h3-bold text-default my-3.5">{question.title}</h2>
+      <h2 className="text-primary my-3.5 text-xl font-bold">
+        {question.title}
+      </h2>
       <ParseHTML content={question.content} />
 
-      <section className="border-default flex items-center gap-2 border-b py-3.5">
+      <section className="border-primary flex items-center gap-2 border-b py-3.5">
         {question.tags.map((tag: { name: string }) => (
           <Tag key={tag.name} name={tag.name} />
         ))}

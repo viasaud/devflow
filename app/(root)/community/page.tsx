@@ -7,13 +7,13 @@ const CommunityPage = async () => {
   const users = await getUsers({});
 
   return (
-    <div className="text-default border-default w-full">
+    <div className="text-primary border-primary w-full">
       <Filter type="community" />
 
       <div className="flex flex-wrap justify-center gap-2 pt-4">
         {users?.map((user: Author) => (
           <div
-            className="border-default hover:bg-question w-40 cursor-pointer rounded border"
+            className="border-primary hover:bg-hover w-40 cursor-pointer rounded border"
             key={user.username}
           >
             <UserCard user={user} />

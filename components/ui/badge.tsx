@@ -9,14 +9,13 @@ const badgeVariants = cva(
     variants: {
       variant: {
         default: "border-transparent",
-        outline:
-          "text-default font-small-regular border-default border-2 px-3 py-1",
+        outline: "text-primary border-primary border-2 px-3 py-1 text-xs",
       },
     },
     defaultVariants: {
       variant: "default",
     },
-  },
+  }
 );
 
 export interface BadgeProps

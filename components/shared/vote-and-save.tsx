@@ -94,7 +94,7 @@ const VoteAndSave = ({
 
   return (
     <div className="flex items-center justify-end gap-2">
-      <div className="border-default hover:border-hover text-default no-focus flex items-center rounded-md border p-1">
+      <div className="border-primary hover:border-hover text-primary no-focus flex items-center rounded-md border p-1">
         <RiArrowUpLine
           size={DEFAULT_POST_ICON_SIZE}
           className={
@@ -104,9 +104,7 @@ const VoteAndSave = ({
           }
           onClick={() => handleVote("upVote")}
         />
-        <p className="font-small-regular px-1">
-          {formatLargeNumber(upVotes, downVotes)}
-        </p>
+        <p className="px-1 text-xs">{formatLargeNumber(upVotes, downVotes)}</p>
         <RiArrowDownLine
           size={DEFAULT_POST_ICON_SIZE}
           className={
@@ -119,7 +117,7 @@ const VoteAndSave = ({
       </div>
       {bookmarkButton && (
         <div
-          className="border-default hover:border-hover no-focus text-default group flex cursor-pointer items-center rounded-md border p-1"
+          className="border-primary hover:border-hover no-focus text-primary group flex cursor-pointer items-center rounded-md border p-1"
           onClick={() => handleSave()}
         >
           {hasSaved ? (

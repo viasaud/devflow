@@ -31,7 +31,7 @@ const ParseHTML = ({ content }: { content: string }) => {
   React.useEffect(() => {
     Prism.highlightAll();
   }, []);
-  return <div className="text-default">{parse(content)}</div>;
+  return <div className="text-primary">{parse(content)}</div>;
 };
 
 export default ParseHTML;

@@ -8,7 +8,7 @@ const AskQuestionPage = async () => {
   if (!mongoUser) redirect("/sign-in");
 
   return (
-    <div className="text-default w-full pt-7">
+    <div className="text-primary w-full pt-7">
       <QuestionForm mongoUserId={JSON.stringify(mongoUser._id)} />
     </div>
   );

@@ -11,15 +11,13 @@ interface User {
 const UserCard = async ({ user }: { user: User }) => {
   return (
     <Link href={`/profile/${user.username}`}>
-      <div className="flex flex-col items-center justify-center gap-4 p-5">
-        <Avatar className="border-default size-28 border">
+      <div className="flex h-full flex-col items-center justify-center gap-4 p-5">
+        <Avatar className="border-primary size-28 border">
           <AvatarImage src={user.avatar} width={112} height={112} />
         </Avatar>
-        <div className="text-default text-center">
-          <p className="font-paragraph-semibold">{user.name}</p>
-          <p className="font-body-regular text-secondary font-mono">
-            @{user.username}
-          </p>
+        <div className="text-primary text-center">
+          <p className="text-base font-semibold">{user.name}</p>
+          <p className="text-secondary font-mono text-sm">@{user.username}</p>
         </div>
       </div>
     </Link>

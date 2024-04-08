@@ -30,12 +30,14 @@ const AnswerList = async ({
         <div key={answer._id}>
           <div className="flex items-center justify-between py-3.5">
             <UserProfileLink author={answer.author} />
-            <p className="text-mid text-xs">{getTimeAgo(answer.createdAt)}</p>
+            <p className="text-secondary text-xs">
+              {getTimeAgo(answer.createdAt)}
+            </p>
           </div>
 
           <ParseHTML content={answer.content} />
 
-          <div className="border-default border-b py-3.5">
+          <div className="border-primary border-b py-3.5">
             <VoteAndSave
               upVotes={answer.upVotes.length}
               downVotes={answer.downVotes.length}

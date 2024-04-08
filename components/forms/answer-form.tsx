@@ -67,7 +67,7 @@ const AnswerForm = ({
   return (
     <Form {...form}>
       <div className="mt-5 flex items-center justify-between">
-        <p className="font-paragraph-semibold text-default">Your Answer</p>
+        <p className="text-primary text-base font-semibold">Your Answer</p>
         <Button variant={"ai"} disabled={isSubmitting} onClick={() => {}}>
           <RiBardFill size={16} />
           Generate an AI answer
@@ -87,7 +87,7 @@ const AnswerForm = ({
                   apiKey={process.env.NEXT_PUBLIC_TINYMCE_API_KEY}
                   onInit={(
                     evt,
-                    editor, // @ts-ignore
+                    editor // @ts-ignore
                   ) => (editorRef.current = editor)}
                   onEditorChange={(content) => form.setValue("answer", content)}
                   init={{

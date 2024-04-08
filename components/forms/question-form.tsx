@@ -41,7 +41,7 @@ const QuestionForm = ({ mongoUserId }: { mongoUserId: string }) => {
 
   const handleKeyDown = (
     e: React.KeyboardEvent<HTMLInputElement>,
-    field: any,
+    field: any
   ) => {
     if (e.key !== "Enter" || field.name !== "tags") return;
 
@@ -72,7 +72,7 @@ const QuestionForm = ({ mongoUserId }: { mongoUserId: string }) => {
   const handleTagRemove = (tag: string, field: any) => {
     form.setValue(
       "tags",
-      field.value.filter((t: string) => t !== tag),
+      field.value.filter((t: string) => t !== tag)
     );
   };
 
@@ -105,14 +105,14 @@ const QuestionForm = ({ mongoUserId }: { mongoUserId: string }) => {
             name="title"
             render={({ field }) => (
               <FormItem className="flex w-full flex-col">
-                <FormLabel className="text-default font-paragraph-semibold">
+                <FormLabel className="text-primary text-base font-semibold">
                   Question Title
                   <span className="text-orange-500">*</span>
                 </FormLabel>
                 <FormControl>
                   <Input
                     placeholder="e.g. How to use React Query?"
-                    className="bg-default border-default text-default no-focus w-full border outline-none"
+                    className="bg-primary border-primary text-primary no-focus w-full border outline-none"
                     {...field}
                   />
                 </FormControl>
@@ -125,7 +125,7 @@ const QuestionForm = ({ mongoUserId }: { mongoUserId: string }) => {
             name="description"
             render={({ field }) => (
               <FormItem className="flex w-full flex-col">
-                <FormLabel className="text-default font-paragraph-semibold">
+                <FormLabel className="text-primary text-base font-semibold">
                   Question Description
                   <span className="text-orange-500">*</span>
                 </FormLabel>
@@ -134,7 +134,7 @@ const QuestionForm = ({ mongoUserId }: { mongoUserId: string }) => {
                     apiKey={process.env.NEXT_PUBLIC_TINYMCE_API_KEY}
                     onInit={(
                       evt,
-                      editor, // @ts-ignore
+                      editor // @ts-ignore
                     ) => (editorRef.current = editor)}
                     initialValue=""
                     onEditorChange={(content) =>
@@ -182,14 +182,14 @@ const QuestionForm = ({ mongoUserId }: { mongoUserId: string }) => {
             name="tags"
             render={({ field }) => (
               <FormItem className="flex w-full flex-col">
-                <FormLabel className="text-default font-paragraph-semibold">
+                <FormLabel className="text-primary text-base font-semibold">
                   Tags
                   <span className="text-orange-500">*</span>
                 </FormLabel>
                 <FormControl>
                   <Input
                     placeholder="e.g. react, typescript, react-query"
-                    className="bg-default border-default text-default no-focus w-full border outline-none"
+                    className="bg-primary border-primary text-primary no-focus w-full border outline-none"
                     onKeyDown={(e) => {
                       handleKeyDown(e, field);
                     }}
@@ -199,7 +199,7 @@ const QuestionForm = ({ mongoUserId }: { mongoUserId: string }) => {
                   {field.value.map((tag: string) => (
                     <div
                       key={tag}
-                      className="text-secondary border-default hover:border-hover font-small-regular flex w-fit items-center gap-2 rounded-md border px-2 py-1"
+                      className="text-hover border-primary hover:border-hover flex w-fit items-center gap-2 rounded-md border px-2 py-1 text-xs"
                     >
                       <p>{tag}</p>
                       <RiCloseLine

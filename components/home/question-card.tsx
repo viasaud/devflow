@@ -27,7 +27,9 @@ const QuestionCard = async ({
     <>
       <header className="mb-4 flex items-center">
         <UserProfileLink author={author} />
-        <p className="text-mid ml-auto text-xs">{getTimeAgo(createdAt)}</p>
+        <p className="text-secondary ml-auto text-xs">
+          {getTimeAgo(createdAt)}
+        </p>
 
         {/* Delete Post is shown only when signed-in */}
         <RiDeleteBinLine
@@ -37,7 +39,7 @@ const QuestionCard = async ({
       </header>
 
       <Link key={_id} href={`/questions/${_id}`}>
-        <p className="font-base-semibold mb-6">{title}</p>
+        <p className="mb-6 text-lg font-semibold">{title}</p>
       </Link>
 
       <footer className="flex items-center justify-between">

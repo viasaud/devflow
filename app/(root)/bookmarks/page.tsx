@@ -8,12 +8,12 @@ const BookmarksPage = async () => {
   const mongoUser = await getMongoUser();
   const questions = await getSavedQuestions(mongoUser);
   return (
-    <main className="text-default border-default w-full">
+    <main className="text-primary border-primary w-full">
       <Filter type="bookmarks" />
 
       {questions?.map((question: Question) => (
         <div
-          className="border-default text-default hover:bg-question border-b p-5"
+          className="border-primary text-primary hover:bg-question-hover border-b p-5"
           key={question._id}
         >
           <QuestionCard

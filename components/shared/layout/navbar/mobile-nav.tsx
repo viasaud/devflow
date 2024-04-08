@@ -17,12 +17,12 @@ const MobileNav = ({ username, tags }: { username: string; tags: string }) => {
   return (
     <Sheet>
       <SheetTrigger className="w-11" asChild>
-        <RiMenuFill className="text-default lg:hidden" />
+        <RiMenuFill className="text-primary lg:hidden" />
       </SheetTrigger>
-      <SheetContent side="left" className="bg-default border-none">
+      <SheetContent side="left" className="bg-primary border-none">
         <Link href="/" className="flex items-center gap-1">
           <Image src="/svg/logo.svg" alt="DevFlow" width={34} height={34} />
-          <p className="font-h2-bold text-default font-spaceGrotesk">
+          <p className="text-primary font-spaceGrotesk text-2xl font-bold">
             Dev<span className="text-orange-500">Overflow</span>
           </p>
         </Link>

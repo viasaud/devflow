@@ -33,23 +33,23 @@ const ProfilePage = async ({
 
   return (
     <main>
-      <div className="border-default my-4 rounded-md border p-5">
+      <div className="border-primary my-4 rounded-md border p-5">
         <div className="flex-center flex-col gap-3.5">
           <Avatar className="size-32">
             <AvatarImage src={userInfo?.user.avatar} />
           </Avatar>
           <div className="flex-center flex-col">
-            <p className="text-default text-xl font-semibold">
+            <p className="text-primary text-xl font-semibold">
               {userInfo?.user.name}
             </p>
-            <p className="text-mid font-mono text-sm">
+            <p className="text-secondary font-mono text-sm">
               @{userInfo?.user.username}
             </p>
           </div>
-          <p className="text-default text-center text-sm">
+          <p className="text-primary text-center text-sm">
             {userInfo?.user.bio}
           </p>
-          <div className="text-mid flex-center w-full gap-4">
+          <div className="text-secondary flex-center w-full gap-4">
             <div className="flex-center gap-1">
               <RiCalendar2Line size={DEFAULT_POST_ICON_SIZE} />
               <p className="font-mono text-xs">
@@ -71,7 +71,7 @@ const ProfilePage = async ({
               <p className="font-mono text-xs">{userInfo?.totalAnswers}</p>
             </div>
           </div>
-          <div className="text-mid flex-center w-full gap-4">
+          <div className="text-secondary flex-center w-full gap-4">
             <div className="flex-center gap-1">
               <RiMedalLine
                 size={DEFAULT_POST_ICON_SIZE}
@@ -97,7 +97,7 @@ const ProfilePage = async ({
           {params.username === mongoUser?.username && (
             <SignedIn>
               <Link href="/profile/edit" className="flex-center">
-                <Button className="border-default text-secondary hover:border-hover font-small-regular max-h-8 cursor-pointer rounded-full border px-4 leading-none">
+                <Button className="border-primary text-hover hover:border-hover max-h-8 cursor-pointer rounded-full border px-4 text-xs leading-none">
                   Edit Profile
                 </Button>
               </Link>
@@ -108,7 +108,7 @@ const ProfilePage = async ({
       {questions?.length !== 0 && <Filter type="bookmarks" />}
       {questions?.map((question: Question) => (
         <div
-          className="border-default text-default hover:bg-question border-b p-5"
+          className="border-primary text-primary hover:bg-question-hover border-b p-5"
           key={question._id}
         >
           <QuestionCard

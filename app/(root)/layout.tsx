@@ -6,7 +6,7 @@ import RightSidebar from "@/components/shared/layout/sidebar/right-sidebar";
 
 const Layout = ({ children }: { children: React.ReactNode }) => {
   return (
-    <main className="bg-default relative">
+    <main className="bg-primary relative">
       <Navbar />
       <div className="flex pt-14 lg:px-8 2xl:justify-between">
         <LeftSidebar />

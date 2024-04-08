@@ -16,7 +16,7 @@ const Discover = ({ username }: { username: string }) => {
   const pathname = usePathname();
 
   return (
-    <section className="text-default">
+    <section className="text-primary">
       <h3 className="my-2 font-semibold">Discover</h3>
       {sidebarLinks.map((item) => {
         const isActive = pathname === item.route;
@@ -26,7 +26,7 @@ const Discover = ({ username }: { username: string }) => {
               item.label === "Profile" ? `/profile/${username}` : item.route
             }
             key={item.route}
-            className={`${isActive ? "bg-select" : "hover:bg-hover"} flex items-center justify-start gap-2 rounded-md px-3.5 py-1.5`}
+            className={`${isActive ? "bg-active" : "hover:bg-hover"} flex items-center justify-start gap-2 rounded-md px-3.5 py-1.5`}
           >
             {isActive ? (
               <item.iconFilled size={DEFAULT_THEME_MENU_ICON_SIZE} />
@@ -44,23 +44,23 @@ const Discover = ({ username }: { username: string }) => {
 const PopularTags = ({ tags }: { tags: string }) => {
   return (
     <section>
-      <h3 className="text-default mb-2 mt-4 font-semibold">Popular Tags</h3>
+      <h3 className="text-primary mb-2 mt-4 font-semibold">Popular Tags</h3>
       {JSON.parse(tags).map((tag: Tag) => (
         <Link
           href={`/tags/${tag.name}`}
           key={tag.name}
-          className={`hover:bg-hover text-default flex items-center justify-start gap-2 rounded-md px-3.5 py-1.5`}
+          className={`hover:bg-hover text-primary flex items-center justify-start gap-2 rounded-md px-3.5 py-1.5`}
         >
           <RiHashtag />
           <p className="text-sm">{tag.name}</p>
-          <p className="font-small-medium ml-auto text-zinc-500 dark:text-zinc-400">
+          <p className="ml-auto text-xs font-medium text-zinc-500 dark:text-zinc-400">
             {tag.questions.length}
           </p>
         </Link>
       ))}
       <Link
         href="/tags"
-        className="text-default font-small-medium hover:bg-hover mt-1 w-fit rounded-3xl px-5 py-2"
+        className="text-primary hover:bg-hover mt-1 w-fit rounded-3xl px-5 py-2 text-xs font-medium"
       >
         See More
       </Link>
