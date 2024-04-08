@@ -17,7 +17,9 @@ const RightSidebar = () => {
   return (
     <section className="border-primary sticky right-0 top-20 h-fit rounded-md border p-4 shadow shadow-zinc-100 dark:shadow-none max-2xl:hidden lg:w-80">
       <div>
-        <h3 className="text-primary mb-4 text-lg font-bold">Top Questions</h3>
+        <h3 className="text-primary mb-4 text-lg font-semibold">
+          Top Questions
+        </h3>
         <div className="flex w-full flex-col gap-5">
           {hotQuestions.map((question) => (
             <Link

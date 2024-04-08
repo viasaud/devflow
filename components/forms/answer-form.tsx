@@ -67,7 +67,7 @@ const AnswerForm = ({
   return (
     <Form {...form}>
       <div className="mt-5 flex items-center justify-between">
-        <p className="text-primary text-base font-semibold">Your Answer</p>
+        <p className="text-primary font-semibold">Your Answer</p>
         <Button variant={"ai"} disabled={isSubmitting} onClick={() => {}}>
           <RiBardFill size={16} />
           Generate an AI answer
