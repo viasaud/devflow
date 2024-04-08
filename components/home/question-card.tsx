@@ -42,7 +42,7 @@ const QuestionCard = async ({
 
       <footer className="flex items-center justify-between">
         <div className="flex items-center justify-center gap-2">
-          {tags.map((tag) => (
+          {tags.map((tag: { name: string }) => (
             <Tag key={tag.name} name={tag.name} glow={glow} />
           ))}
         </div>
