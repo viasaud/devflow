@@ -24,8 +24,8 @@ const QuestionCard = async ({
 }: Question) => {
   const mongoUser = await getMongoUser();
   return (
-    <>
-      <header className="mb-4 flex items-center">
+    <div className="flex flex-col gap-4">
+      <header className="flex items-center">
         <UserProfileLink author={author} />
         <p className="text-secondary ml-auto text-xs">
           {getTimeAgo(createdAt)}
@@ -39,7 +39,7 @@ const QuestionCard = async ({
       </header>
 
       <Link key={_id} href={`/questions/${_id}`}>
-        <p className="mb-6 text-lg font-semibold">{title}</p>
+        <p className="text-base font-medium">{title}</p>
       </Link>
 
       <footer className="flex items-center justify-between">
@@ -68,7 +68,7 @@ const QuestionCard = async ({
           />
         </div>
       </footer>
-    </>
+    </div>
   );
 };
 
