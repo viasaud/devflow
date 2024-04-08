@@ -1,7 +1,7 @@
 import { RiDeleteBinLine } from "@remixicon/react";
 import Link from "next/link";
 
-import { DEFAULT_POST_ICON_SIZE } from "@/constants/constants";
+import { QUESTION_ICON_SIZE } from "@/constants/constants";
 import { getMongoUser, getTimeAgo } from "@/lib/utils";
 import { Question } from "@/types";
 
@@ -33,7 +33,7 @@ const QuestionCard = async ({
 
         {/* Delete Post is shown only when signed-in */}
         <RiDeleteBinLine
-          size={DEFAULT_POST_ICON_SIZE}
+          size={QUESTION_ICON_SIZE}
           className="ml-1 hidden cursor-pointer text-zinc-500 hover:text-red-500 dark:text-zinc-400 hover:dark:text-red-500"
         />
       </header>

@@ -5,15 +5,16 @@ import {
   RiChat1Line,
   RiMapPinLine,
   RiMedalLine,
+  RiPencilLine,
 } from "@remixicon/react";
 import Link from "next/link";
 import { redirect } from "next/navigation";
 
-import QuestionCard from "@/components/home/question-card";
+import QuestionCard from "@/components/questions/question-card";
 import Filter from "@/components/shared/filter";
 import { Avatar, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
-import { DEFAULT_POST_ICON_SIZE } from "@/constants/constants";
+import { QUESTION_ICON_SIZE, SMALL_ICON_SIZE } from "@/constants/constants";
 import { getUserInfo, getUserQuestions } from "@/lib/actions/user.action";
 import { getMongoUser } from "@/lib/utils";
 import { Question } from "@/types";
@@ -51,44 +52,44 @@ const ProfilePage = async ({
           </p>
           <div className="text-secondary flex-center w-full gap-4">
             <div className="flex-center gap-1">
-              <RiCalendar2Line size={DEFAULT_POST_ICON_SIZE} />
+              <RiCalendar2Line size={QUESTION_ICON_SIZE} />
               <p className="font-mono text-xs">
                 Joined {userInfo?.user.joinedAt.toLocaleDateString()}
               </p>
             </div>
             <div className="flex-center gap-1">
-              <RiMapPinLine size={DEFAULT_POST_ICON_SIZE} />
+              <RiMapPinLine size={QUESTION_ICON_SIZE} />
               <p className="font-mono text-xs">
                 {userInfo.user.location ?? "Earth"}
               </p>
             </div>
             <div className="flex-center gap-1">
-              <RiBug2Line size={DEFAULT_POST_ICON_SIZE} />
+              <RiBug2Line size={QUESTION_ICON_SIZE} />
               <p className="font-mono text-xs">{userInfo?.totalQuestions}</p>
             </div>
             <div className="flex-center gap-1">
-              <RiChat1Line size={DEFAULT_POST_ICON_SIZE} />
+              <RiChat1Line size={QUESTION_ICON_SIZE} />
               <p className="font-mono text-xs">{userInfo?.totalAnswers}</p>
             </div>
           </div>
           <div className="text-secondary flex-center w-full gap-4">
             <div className="flex-center gap-1">
               <RiMedalLine
-                size={DEFAULT_POST_ICON_SIZE}
+                size={QUESTION_ICON_SIZE}
                 className="text-[#cd7f32]"
               />
               <p className="font-mono text-xs">0</p>
             </div>
             <div className="flex-center gap-1">
               <RiMedalLine
-                size={DEFAULT_POST_ICON_SIZE}
+                size={QUESTION_ICON_SIZE}
                 className=" dark:text-[#ecebff]"
               />
               <p className="font-mono text-xs">0</p>
             </div>
             <div className="flex-center gap-1">
               <RiMedalLine
-                size={DEFAULT_POST_ICON_SIZE}
+                size={QUESTION_ICON_SIZE}
                 className="text-[#f9d300] dark:text-[#ffd700]"
               />
               <p className="font-mono text-xs">0</p>
@@ -97,7 +98,8 @@ const ProfilePage = async ({
           {params.username === mongoUser?.username && (
             <SignedIn>
               <Link href="/profile/edit" className="flex-center">
-                <Button className="border-primary text-hover hover:border-hover max-h-8 cursor-pointer rounded-full border px-4 text-xs leading-none">
+                <Button className="border-primary text-hover hover:border-hover max-h-8 cursor-pointer gap-1 rounded-full border px-4 text-xs">
+                  <RiPencilLine size={SMALL_ICON_SIZE} />
                   Edit Profile
                 </Button>
               </Link>

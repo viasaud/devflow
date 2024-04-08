@@ -4,10 +4,7 @@ import { RiHashtag } from "@remixicon/react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
-import {
-  DEFAULT_THEME_MENU_ICON_SIZE,
-  sidebarLinks,
-} from "@/constants/constants";
+import { THEME_MENU_ICON_SIZE, sidebarLinks } from "@/constants/constants";
 import { Tag } from "@/types";
 
 import { Button } from "../../ui/button";
@@ -29,9 +26,9 @@ const Discover = ({ username }: { username: string }) => {
             className={`${isActive ? "bg-active" : "hover:bg-hover"} flex items-center justify-start gap-2 rounded-md px-3.5 py-1.5`}
           >
             {isActive ? (
-              <item.iconFilled size={DEFAULT_THEME_MENU_ICON_SIZE} />
+              <item.iconFilled size={THEME_MENU_ICON_SIZE} />
             ) : (
-              <item.icon size={DEFAULT_THEME_MENU_ICON_SIZE} />
+              <item.icon size={THEME_MENU_ICON_SIZE} />
             )}
             <p className="text-sm">{item.label}</p>
           </Link>

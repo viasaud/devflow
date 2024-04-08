@@ -1,4 +1,4 @@
-import QuestionCard from "@/components/home/question-card";
+import QuestionCard from "@/components/questions/question-card";
 import Filter from "@/components/shared/filter";
 import { getSavedQuestions } from "@/lib/actions/user.action";
 import { getMongoUser } from "@/lib/utils";

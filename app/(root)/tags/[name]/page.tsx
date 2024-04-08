@@ -1,6 +1,6 @@
 import { redirect } from "next/navigation";
 
-import QuestionCard from "@/components/home/question-card";
+import QuestionCard from "@/components/questions/question-card";
 import Filter from "@/components/shared/filter";
 import { getQuestionsByTagName } from "@/lib/actions/tag.action";
 import { Question } from "@/types";

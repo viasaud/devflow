@@ -9,10 +9,7 @@ import {
   MenubarMenu,
   MenubarTrigger,
 } from "@/components/ui/menubar";
-import {
-  DEFAULT_THEME_MENU_ICON_SIZE,
-  THEME_OPTIONS,
-} from "@/constants/constants";
+import { THEME_MENU_ICON_SIZE, THEME_OPTIONS } from "@/constants/constants";
 import { useTheme } from "@/context/ThemeProvider";
 
 const Theme = () => {
@@ -40,12 +37,12 @@ const Theme = () => {
             >
               {mode === theme.value ? (
                 <theme.iconFilled
-                  size={DEFAULT_THEME_MENU_ICON_SIZE}
+                  size={THEME_MENU_ICON_SIZE}
                   className="text-primary"
                 />
               ) : (
                 <theme.icon
-                  size={DEFAULT_THEME_MENU_ICON_SIZE}
+                  size={THEME_MENU_ICON_SIZE}
                   className="text-primary"
                 />
               )}
