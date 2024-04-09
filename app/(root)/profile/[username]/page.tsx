@@ -113,7 +113,7 @@ const ProfilePage = async ({
           {params.username === mongoUser?.username && (
             <SignedIn>
               <Link href="/profile/edit" className="flex-center">
-                <Button className="border-primary text-hover hover:border-hover max-h-8 cursor-pointer gap-1 rounded-full border px-4 text-xs">
+                <Button className="border-primary text-hover hover:border-hover max-h-8 cursor-pointer gap-1 rounded-full border bg-transparent px-4 text-xs">
                   <RiPencilLine size={SMALL_ICON_SIZE} />
                   Edit Profile
                 </Button>

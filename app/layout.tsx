@@ -24,14 +24,14 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${GeistMono.variable} ${GeistSans.variable} bg-primary dark:dark-scrollbar light-scrollbar scroll-smooth`}
+        className={`${GeistMono.variable} ${GeistSans.variable} dark:dark-scrollbar light-scrollbar h-screen min-h-screen scroll-smooth`}
       >
         <ClerkProvider
           appearance={{
             elements: {
               formButtonPrimary:
-                "no-focus text-sm bg-orange-500 text-zinc-50 shadow-none hover:bg-orange-500/90",
-              footerActionLink: "text-orange-500 hover:text-orange-600",
+                "no-focus text-sm bg-teal-500 text-zinc-50 shadow-none hover:bg-teal-500/90",
+              footerActionLink: "text-teal-500 hover:text-teal-600",
             },
           }}
         >

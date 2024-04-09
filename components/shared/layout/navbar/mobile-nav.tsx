@@ -21,9 +21,9 @@ const MobileNav = ({ username, tags }: { username: string; tags: string }) => {
       </SheetTrigger>
       <SheetContent side="left" className="bg-primary border-none">
         <Link href="/" className="flex items-center gap-1">
-          <Image src="/svg/logo.svg" alt="DevFlow" width={34} height={34} />
+          <Image src="/svg/logo.svg" alt="DevFlow" width={24} height={24} />
           <p className="text-primary font-geistMono text-2xl font-bold">
-            Dev<span className="text-orange-500">Overflow</span>
+            Dev<span className="text-teal-500">Overflow</span>
           </p>
         </Link>
         <div className="flex h-full flex-col justify-end pb-12 pt-3.5">

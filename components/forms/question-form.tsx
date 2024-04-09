@@ -107,12 +107,12 @@ const QuestionForm = ({ mongoUserId }: { mongoUserId: string }) => {
               <FormItem className="flex w-full flex-col">
                 <FormLabel className="text-primary">
                   Question Title
-                  <span className="text-orange-500">*</span>
+                  <span className="text-teal-500">*</span>
                 </FormLabel>
                 <FormControl>
                   <Input
                     placeholder="e.g. How to use React Query?"
-                    className="bg-primary border-primary text-primary no-focus w-full border outline-none"
+                    className="border-primary text-primary no-focus w-full border bg-transparent outline-none"
                     {...field}
                   />
                 </FormControl>
@@ -127,7 +127,7 @@ const QuestionForm = ({ mongoUserId }: { mongoUserId: string }) => {
               <FormItem className="flex w-full flex-col">
                 <FormLabel className="text-primary">
                   Question Description
-                  <span className="text-orange-500">*</span>
+                  <span className="text-teal-500">*</span>
                 </FormLabel>
                 <FormControl>
                   <Editor
@@ -183,12 +183,12 @@ const QuestionForm = ({ mongoUserId }: { mongoUserId: string }) => {
               <FormItem className="flex w-full flex-col">
                 <FormLabel className="text-primary">
                   Tags
-                  <span className="text-orange-500">*</span>
+                  <span className="text-teal-500">*</span>
                 </FormLabel>
                 <FormControl>
                   <Input
                     placeholder="e.g. react, typescript, react-query"
-                    className="bg-primary border-primary text-primary no-focus w-full border outline-none"
+                    className="border-primary text-primary w-full border bg-transparent"
                     onKeyDown={(e) => {
                       handleKeyDown(e, field);
                     }}
