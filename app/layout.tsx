@@ -24,7 +24,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${GeistMono.variable} ${GeistSans.variable} dark:dark-scrollbar light-scrollbar h-screen min-h-screen scroll-smooth`}
+        className={`${GeistMono.variable} ${GeistSans.variable} dark:dark-scrollbar light-scrollbar min-h-screen scroll-smooth dark:bg-gradient-to-br dark:from-zinc-950 dark:from-20% dark:to-zinc-900`}
       >
         <ClerkProvider
           appearance={{
