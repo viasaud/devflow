@@ -71,7 +71,7 @@ const NavContent = ({ username, tags }: { username: string; tags: string }) => {
       <Discover username={username} />
       <PopularTags tags={tags} />
       <Link href="/questions/ask" className="mt-8 rounded-3xl">
-        <Button variant={"zinc"} className="max-h-8 w-full">
+        <Button className="w-full rounded-full bg-gradient-to-r from-teal-500 to-teal-600 text-sm text-white shadow-lg transition-all duration-1000 hover:cursor-pointer hover:shadow-teal-800 hover:drop-shadow-xl">
           Ask a Question
         </Button>
       </Link>
