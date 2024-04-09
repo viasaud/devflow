@@ -11,13 +11,25 @@ import Link from "next/link";
 import { redirect } from "next/navigation";
 
 import QuestionCard from "@/components/questions/question-card";
-import Filter from "@/components/shared/filter";
 import { Avatar, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
-import { QUESTION_ICON_SIZE, SMALL_ICON_SIZE } from "@/constants/constants";
-import { getUserInfo, getUserQuestions } from "@/lib/actions/user.action";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import {
+  QUESTION_ICON_SIZE,
+  SMALL_ICON_SIZE,
+  THEME_MENU_ICON_SIZE,
+} from "@/constants/constants";
+import {
+  getUserAnswers,
+  getUserInfo,
+  getUserQuestions,
+} from "@/lib/actions/user.action";
 import { getMongoUser } from "@/lib/utils";
-import { Question } from "@/types";
+import { Answer, Question } from "@/types";
+
+interface AnsweredQuestions extends Answer {
+  question: Question;
+}
 
 const ProfilePage = async ({
   params,
@@ -31,6 +43,7 @@ const ProfilePage = async ({
 
   const mongoUser = await getMongoUser();
   const questions = await getUserQuestions({ username: params.username });
+  const answers = await getUserAnswers({ username: params.username });
 
   return (
     <main>
@@ -40,7 +53,7 @@ const ProfilePage = async ({
             <AvatarImage src={userInfo?.user.avatar} />
           </Avatar>
           <div className="flex-center flex-col">
-            <p className="text-primary text-xl font-semibold">
+            <p className="text-primary text-xl font-bold">
               {userInfo?.user.name}
             </p>
             <p className="text-secondary font-geistMono text-sm">
@@ -77,24 +90,24 @@ const ProfilePage = async ({
           <div className="text-secondary flex-center w-full gap-4">
             <div className="flex-center gap-1">
               <RiMedalLine
-                size={QUESTION_ICON_SIZE}
-                className="text-[#cd7f32]"
+                size={THEME_MENU_ICON_SIZE}
+                className="text-orange-600"
               />
-              <p className="font-geistMono text-xs">0</p>
+              <p className="font-geistMono text-sm">0</p>
             </div>
             <div className="flex-center gap-1">
               <RiMedalLine
-                size={QUESTION_ICON_SIZE}
-                className=" dark:text-[#ecebff]"
+                size={THEME_MENU_ICON_SIZE}
+                className=" dark:text-zinc-200"
               />
-              <p className="font-geistMono text-xs">0</p>
+              <p className="font-geistMono text-sm">0</p>
             </div>
             <div className="flex-center gap-1">
               <RiMedalLine
-                size={QUESTION_ICON_SIZE}
-                className="text-[#f9d300] dark:text-[#ffd700]"
+                size={THEME_MENU_ICON_SIZE}
+                className="text-yellow-500"
               />
-              <p className="font-geistMono text-xs">0</p>
+              <p className="font-geistMono text-sm">0</p>
             </div>
           </div>
           {params.username === mongoUser?.username && (
@@ -109,25 +122,66 @@ const ProfilePage = async ({
           )}
         </div>
       </div>
-      {questions?.length !== 0 && <Filter type="bookmarks" />}
-      {questions?.map((question: Question) => (
-        <div
-          className="border-primary text-primary hover:bg-question-hover border-b p-5"
-          key={question._id}
-        >
-          <QuestionCard
-            _id={question._id}
-            title={question.title}
-            tags={question.tags}
-            author={question.author}
-            upVotes={question.upVotes}
-            downVotes={question.downVotes}
-            views={question.views}
-            answers={question.answers}
-            createdAt={question.createdAt}
-          />
-        </div>
-      ))}
+      {questions?.length !== 0 && (
+        <Tabs defaultValue="questions" className="text-secondary w-full">
+          <TabsList className="border-primary flex-center mx-auto w-fit border">
+            <TabsTrigger
+              value="questions"
+              className="data-[state=active]:bg-active data-[state=active]:text-primary gap-1"
+            >
+              <RiBug2Line size={QUESTION_ICON_SIZE} />
+              Questions
+            </TabsTrigger>
+            <TabsTrigger
+              value="answers"
+              className="data-[state=active]:bg-active data-[state=active]:text-primary gap-1"
+            >
+              <RiChat1Line size={QUESTION_ICON_SIZE} />
+              Answers
+            </TabsTrigger>
+          </TabsList>
+          <TabsContent value="questions">
+            {questions?.map((question: Question) => (
+              <div
+                className="border-primary text-primary hover:bg-question-hover border-b p-5"
+                key={question._id}
+              >
+                <QuestionCard
+                  _id={question._id}
+                  title={question.title}
+                  tags={question.tags}
+                  author={question.author}
+                  upVotes={question.upVotes}
+                  downVotes={question.downVotes}
+                  views={question.views}
+                  answers={question.answers}
+                  createdAt={question.createdAt}
+                />
+              </div>
+            ))}
+          </TabsContent>
+          <TabsContent value="answers">
+            {answers?.map((answer: AnsweredQuestions) => (
+              <div
+                className="border-primary text-primary hover:bg-question-hover border-b p-5"
+                key={answer.question._id}
+              >
+                <QuestionCard
+                  _id={answer.question._id}
+                  title={answer.question.title}
+                  tags={answer.question.tags}
+                  author={answer.question.author}
+                  upVotes={answer.question.upVotes}
+                  downVotes={answer.question.downVotes}
+                  views={answer.question.views}
+                  answers={answer.question.answers}
+                  createdAt={answer.question.createdAt}
+                />
+              </div>
+            ))}
+          </TabsContent>
+        </Tabs>
+      )}
     </main>
   );
 };

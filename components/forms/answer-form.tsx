@@ -67,7 +67,7 @@ const AnswerForm = ({
   return (
     <Form {...form}>
       <div className="mt-5 flex items-center justify-between">
-        <p className="text-primary font-semibold">Your Answer</p>
+        <p className="text-primary">Your Answer</p>
         <Button variant={"ai"} disabled={isSubmitting} onClick={() => {}}>
           <RiBardFill size={16} />
           Generate an AI answer
@@ -114,7 +114,7 @@ const AnswerForm = ({
                       "undo redo | blocks | " +
                       "codesample | bold italic forecolor | alignleft aligncenter |" +
                       "alignright alignjustify | bullist numlist",
-                    content_style: "body { font-family:Inter; font-size:14px }",
+                    content_style: "body { font-size:14px }",
                     skin: mode === "dark" ? "oxide-dark" : "oxide",
                     content_css: mode === "dark" ? "dark" : "default",
                   }}

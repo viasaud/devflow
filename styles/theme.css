@@ -32,7 +32,7 @@
   }
 
   .text-hover {
-    @apply text-zinc-700 dark:text-zinc-300 hover:text-primary !important;
+    @apply text-zinc-500 dark:text-zinc-300 hover:text-primary !important;
   }
 
   .border-primary {

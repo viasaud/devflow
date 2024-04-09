@@ -105,7 +105,7 @@ const QuestionForm = ({ mongoUserId }: { mongoUserId: string }) => {
             name="title"
             render={({ field }) => (
               <FormItem className="flex w-full flex-col">
-                <FormLabel className="text-primary font-medium">
+                <FormLabel className="text-primary">
                   Question Title
                   <span className="text-orange-500">*</span>
                 </FormLabel>
@@ -125,7 +125,7 @@ const QuestionForm = ({ mongoUserId }: { mongoUserId: string }) => {
             name="description"
             render={({ field }) => (
               <FormItem className="flex w-full flex-col">
-                <FormLabel className="text-primary  font-medium">
+                <FormLabel className="text-primary">
                   Question Description
                   <span className="text-orange-500">*</span>
                 </FormLabel>
@@ -164,8 +164,7 @@ const QuestionForm = ({ mongoUserId }: { mongoUserId: string }) => {
                         "undo redo | blocks | " +
                         "codesample | bold italic forecolor | alignleft aligncenter |" +
                         "alignright alignjustify | bullist numlist",
-                      content_style:
-                        "body { font-family:Inter; font-size:14px }",
+                      content_style: "body { font-size:14px }",
                       skin: mode === "dark" ? "oxide-dark" : "oxide",
                       content_css: mode === "dark" ? "dark" : "default",
                     }}
@@ -182,7 +181,7 @@ const QuestionForm = ({ mongoUserId }: { mongoUserId: string }) => {
             name="tags"
             render={({ field }) => (
               <FormItem className="flex w-full flex-col">
-                <FormLabel className="text-primary  font-medium">
+                <FormLabel className="text-primary">
                   Tags
                   <span className="text-orange-500">*</span>
                 </FormLabel>

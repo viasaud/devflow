@@ -23,37 +23,39 @@ const QuestionContent = ({
     <div>
       <div className="flex items-center justify-between">
         <UserProfileLink author={question.author} />
-        <p className="text-secondary text-xs">
+        <p className="text-secondary font-geistMono text-xs">
           {getTimeAgo(question.createdAt)}
         </p>
       </div>
 
-      <h2 className="text-primary mb-1 mt-3.5 text-xl font-semibold">
+      <h2 className="text-primary mb-1 mt-3.5 text-xl font-bold">
         {question.title}
       </h2>
       <ParseHTML content={question.content} />
 
-      <section className="border-primary flex items-center gap-2 border-b py-3.5">
-        {question.tags.map((tag: { name: string }) => (
-          <Tag key={tag.name} name={tag.name} />
-        ))}
+      <section className="border-primary flex items-center gap-3 border-b py-3.5">
+        <VoteAndSave
+          upVotes={question.upVotes.length}
+          downVotes={question.downVotes.length}
+          type={"question"}
+          itemId={JSON.stringify(question._id)}
+          userId={JSON.stringify(mongoUser?._id)}
+          hasUpVoted={question.upVotes.includes(mongoUser?._id)}
+          hasDownVoted={question.downVotes.includes(mongoUser?._id)}
+          hasSaved={mongoUser?.savedQuestions.includes(question._id)}
+          bookmarkButton
+        />
+        <div className="flex-start gap-1">
+          {question.tags.map((tag: { name: string }) => (
+            <Tag key={tag.name} name={tag.name} />
+          ))}
+        </div>
         <div className="flex-center ml-auto gap-2">
           <ContentStats
             answers={question.answers.length}
             views={question.views}
             itemId={JSON.stringify(question._id)}
             userId={JSON.stringify(mongoUser?._id)}
-          />
-          <VoteAndSave
-            upVotes={question.upVotes.length}
-            downVotes={question.downVotes.length}
-            type={"question"}
-            itemId={JSON.stringify(question._id)}
-            userId={JSON.stringify(mongoUser?._id)}
-            hasUpVoted={question.upVotes.includes(mongoUser?._id)}
-            hasDownVoted={question.downVotes.includes(mongoUser?._id)}
-            hasSaved={mongoUser?.savedQuestions.includes(question._id)}
-            bookmarkButton
           />
         </div>
       </section>

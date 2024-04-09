@@ -8,15 +8,6 @@ export interface Author {
   username: string;
 }
 
-export interface Answer {
-  _id: string;
-  author: Author;
-  content: string;
-  upVotes: string[];
-  downVotes: string[];
-  createdAt: Date;
-}
-
 export interface Question {
   _id: string;
   title: string;
@@ -31,6 +22,15 @@ export interface Question {
   answers: string[];
   createdAt: Date;
   glow?: string;
+}
+
+export interface Answer {
+  _id: string;
+  author: Author;
+  content: string;
+  upVotes: string[];
+  downVotes: string[];
+  createdAt: Date;
 }
 
 export interface Tag {

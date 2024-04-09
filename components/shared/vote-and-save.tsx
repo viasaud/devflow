@@ -93,7 +93,25 @@ const VoteAndSave = ({
   };
 
   return (
-    <div className="flex items-center justify-end gap-2 font-geistMono">
+    <div className="flex items-center justify-end gap-3 font-geistMono">
+      {bookmarkButton && (
+        <div
+          className="border-primary hover:border-hover no-focus text-primary group flex cursor-pointer items-center rounded-md border p-1"
+          onClick={() => handleSave()}
+        >
+          {hasSaved ? (
+            <RiBookmarkFill
+              size={QUESTION_ICON_SIZE}
+              className="text-sky-500 group-hover:text-sky-700 dark:group-hover:text-sky-600"
+            />
+          ) : (
+            <RiBookmarkLine
+              size={QUESTION_ICON_SIZE}
+              className="text-zinc-500 hover:text-sky-500 dark:text-zinc-400 hover:dark:text-sky-500"
+            />
+          )}
+        </div>
+      )}
       <div className="border-primary hover:border-hover text-primary no-focus flex items-center rounded-md border p-1">
         <RiArrowUpLine
           size={QUESTION_ICON_SIZE}
@@ -115,24 +133,6 @@ const VoteAndSave = ({
           onClick={() => handleVote("downVote")}
         />
       </div>
-      {bookmarkButton && (
-        <div
-          className="border-primary hover:border-hover no-focus text-primary group flex cursor-pointer items-center rounded-md border p-1"
-          onClick={() => handleSave()}
-        >
-          {hasSaved ? (
-            <RiBookmarkFill
-              size={QUESTION_ICON_SIZE}
-              className="text-sky-500 group-hover:text-sky-700 dark:group-hover:text-sky-600"
-            />
-          ) : (
-            <RiBookmarkLine
-              size={QUESTION_ICON_SIZE}
-              className="text-zinc-500 hover:text-sky-500 dark:text-zinc-400 hover:dark:text-sky-500"
-            />
-          )}
-        </div>
-      )}
     </div>
   );
 };

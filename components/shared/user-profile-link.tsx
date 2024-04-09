@@ -14,7 +14,7 @@ const UserProfileLink = ({ author }: { author: Author }) => {
         <AvatarImage src={author.avatar} width={24} height={24} />
       </Avatar>
 
-      <p className="text-xs font-medium">{author.name}</p>
+      <p className="text-xs">{author.name}</p>
     </Link>
   );
 };

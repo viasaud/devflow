@@ -42,7 +42,7 @@ export const deleteUser = async ({ clerkId }: { clerkId: string }) => {
 
     await Tag.updateMany(
       { questions: { $in: questionIds } },
-      { $pull: { questions: { $in: questionIds } } },
+      { $pull: { questions: { $in: questionIds } } }
     );
 
     await Tag.deleteMany({ questions: { $size: 0 } });
@@ -82,7 +82,7 @@ export const toggleSaveQuestion = async (params: toggleSaveQuestionParams) => {
         {
           $pull: { savedQuestions: questionId },
         },
-        { new: true },
+        { new: true }
       );
     } else {
       await User.findByIdAndUpdate(
@@ -90,7 +90,7 @@ export const toggleSaveQuestion = async (params: toggleSaveQuestionParams) => {
         {
           $addToSet: { savedQuestions: questionId },
         },
-        { new: true },
+        { new: true }
       );
     }
     revalidatePath(path);
@@ -146,7 +146,7 @@ export const getUserQuestions = async ({ username }: { username: string }) => {
     const questions = await Question.find({
       author: user._id,
     })
-      .sort({ views: -1, upVotes: -1 })
+      .sort({ createdAt: -1 })
       .populate({
         path: "tags",
         model: Tag,
@@ -155,5 +155,27 @@ export const getUserQuestions = async ({ username }: { username: string }) => {
       .populate({ path: "author", model: User });
 
     return questions;
+  });
+};
+
+export const getUserAnswers = async ({ username }: { username: string }) => {
+  return await runWithDatabase(async () => {
+    const user = await User.findOne({ username });
+    if (!user) throw new Error("User not found in getUserInfo()");
+
+    const answers = await Answer.find({
+      author: user._id,
+    })
+      .sort({ createdAt: -1 })
+      .populate({
+        path: "question",
+        model: Question,
+        populate: [
+          { path: "tags", model: Tag },
+          { path: "author", model: User },
+        ],
+      });
+
+    return answers;
   });
 };

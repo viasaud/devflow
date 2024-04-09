@@ -28,9 +28,9 @@ const AnswerList = async ({
     <div>
       {answers?.map((answer: Answer) => (
         <div key={answer._id}>
-          <div className="flex items-center justify-between py-3.5">
+          <div className="flex-between py-3.5">
             <UserProfileLink author={answer.author} />
-            <p className="text-secondary text-xs">
+            <p className="text-secondary font-geistMono text-xs">
               {getTimeAgo(answer.createdAt)}
             </p>
           </div>

@@ -24,10 +24,10 @@ const QuestionCard = async ({
 }: Question) => {
   const mongoUser = await getMongoUser();
   return (
-    <div className="flex flex-col gap-4">
+    <div className="flex flex-col">
       <header className="flex items-center">
         <UserProfileLink author={author} />
-        <p className="text-secondary ml-auto text-xs">
+        <p className="text-secondary ml-auto font-geistMono text-xs">
           {getTimeAgo(createdAt)}
         </p>
 
@@ -39,23 +39,11 @@ const QuestionCard = async ({
       </header>
 
       <Link key={_id} href={`/questions/${_id}`}>
-        <p className="text-base font-medium">{title}</p>
+        <p className="py-4 text-base font-bold">{title}</p>
       </Link>
 
       <footer className="flex items-center justify-between">
-        <div className="flex items-center justify-center gap-2">
-          {tags.map((tag: { name: string }) => (
-            <Tag key={tag.name} name={tag.name} glow={glow} />
-          ))}
-        </div>
-
-        <div className="flex items-center justify-center gap-2">
-          <ContentStats
-            answers={answers.length}
-            views={views}
-            itemId={JSON.stringify(_id)}
-            userId={JSON.stringify(mongoUser?._id)}
-          />
+        <div className="flex items-center justify-center gap-3">
           <VoteAndSave
             upVotes={upVotes.length}
             downVotes={downVotes.length}
@@ -65,6 +53,20 @@ const QuestionCard = async ({
             hasUpVoted={upVotes.includes(mongoUser?._id)}
             hasDownVoted={downVotes.includes(mongoUser?._id)}
             hasSaved={mongoUser?.savedQuestions.includes(_id)}
+          />
+          <div className="flex items-center justify-center gap-1">
+            {tags.map((tag: { name: string }) => (
+              <Tag key={tag.name} name={tag.name} glow={glow} />
+            ))}
+          </div>
+        </div>
+
+        <div className="flex items-center justify-center gap-2">
+          <ContentStats
+            answers={answers.length}
+            views={views}
+            itemId={JSON.stringify(_id)}
+            userId={JSON.stringify(mongoUser?._id)}
           />
         </div>
       </footer>

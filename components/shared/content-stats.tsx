@@ -27,16 +27,16 @@ const ContentStats = ({ answers, views, itemId, userId }: QuestionProps) => {
   }, [itemId, userId, pathname, router]);
 
   return (
-    <div className="font-geistMono">
+    <div className="cursor-default font-geistMono">
       <div className="text-primary ml-auto flex items-center gap-2">
-        <div className="border-primary flex items-center rounded-md border p-1">
+        <div className="flex items-center rounded-md p-1">
           <RiChat1Line
             size={QUESTION_ICON_SIZE}
             className="text-zinc-500 dark:text-zinc-400"
           />
           <p className="px-1 text-xs">{formatLargeNumber(answers)}</p>
         </div>
-        <div className="border-primary flex items-center rounded-md border p-1">
+        <div className="flex items-center rounded-md p-1">
           <RiEyeLine
             size={QUESTION_ICON_SIZE}
             className="text-zinc-500 dark:text-zinc-400"
