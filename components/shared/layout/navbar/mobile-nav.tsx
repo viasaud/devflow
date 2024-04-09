@@ -1,23 +1,101 @@
 "use client";
 
-import { RiMenuFill } from "@remixicon/react";
+import { RiHashtag, RiMenuFill } from "@remixicon/react";
 import Image from "next/image";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 
+import { Button } from "@/components/ui/button";
 import {
   Sheet,
   SheetClose,
   SheetContent,
   SheetTrigger,
 } from "@/components/ui/sheet";
+import { sidebarLinks, THEME_MENU_ICON_SIZE } from "@/constants/constants";
+import { Tag } from "@/types";
 
-import NavContent from "../nav-content";
+const Discover = ({ username }: { username: string }) => {
+  const pathname = usePathname();
+
+  return (
+    <section className="text-primary">
+      <h3 className="my-2 font-bold">Discover</h3>
+      {sidebarLinks.map((item) => {
+        const isActive = pathname === item.route;
+        return (
+          <SheetClose asChild key={item.route}>
+            <Link
+              href={
+                item.label === "Profile" ? `/profile/${username}` : item.route
+              }
+              className={`${isActive ? "bg-active" : "hover:bg-hover"} flex-start gap-2 rounded-md px-3.5 py-1.5`}
+            >
+              {isActive ? (
+                <item.iconFilled size={THEME_MENU_ICON_SIZE} />
+              ) : (
+                <item.icon size={THEME_MENU_ICON_SIZE} />
+              )}
+              <p className="text-sm">{item.label}</p>
+            </Link>
+          </SheetClose>
+        );
+      })}
+    </section>
+  );
+};
+
+const PopularTags = ({ tags }: { tags: string }) => {
+  return (
+    <section>
+      <h3 className="text-primary mb-2 mt-4 font-bold">Popular Tags</h3>
+      {JSON.parse(tags).map((tag: Tag) => (
+        <SheetClose asChild key={tag.name}>
+          <Link
+            href={`/tags/${tag.name}`}
+            className={`hover:bg-hover text-primary flex-start gap-2 rounded-md px-3.5 py-1.5`}
+          >
+            <RiHashtag />
+            <p className="text-sm">{tag.name}</p>
+            <p className="ml-auto font-geistMono text-xs text-zinc-500 dark:text-zinc-400">
+              {tag.questions.length}
+            </p>
+          </Link>
+        </SheetClose>
+      ))}
+      <SheetClose asChild>
+        <Link
+          href="/tags"
+          className="text-primary hover:bg-hover mt-1 w-fit rounded-3xl px-5 py-2 text-xs"
+        >
+          See More
+        </Link>
+      </SheetClose>
+    </section>
+  );
+};
+
+const NavContent = ({ username, tags }: { username: string; tags: string }) => {
+  return (
+    <div className={`flex flex-1 flex-col`}>
+      <Discover username={username} />
+      <PopularTags tags={tags} />
+      <Link href="/questions/ask" className="mt-8 rounded-3xl">
+        <SheetClose asChild>
+          <Button className="w-full rounded-full bg-gradient-to-r from-teal-500 to-teal-600 text-sm text-white shadow-lg transition-all duration-1000 hover:cursor-pointer hover:shadow-teal-800 hover:drop-shadow-xl">
+            Ask a Question
+          </Button>
+        </SheetClose>
+      </Link>
+    </div>
+  );
+};
 
 const MobileNav = ({ username, tags }: { username: string; tags: string }) => {
   return (
     <Sheet>
       <SheetTrigger className="w-11" asChild>
-        <RiMenuFill className="text-primary lg:hidden" />
+        <RiMenuFill className="text-primary xl:hidden" />
       </SheetTrigger>
       <SheetContent side="left" className="bg-primary border-none">
         <Link href="/" className="flex items-center gap-1">
@@ -26,14 +104,12 @@ const MobileNav = ({ username, tags }: { username: string; tags: string }) => {
             Dev<span className="text-teal-500">Overflow</span>
           </p>
         </Link>
-        <div className="flex h-full flex-col justify-end pb-12 pt-3.5">
-          <SheetClose asChild>
-            <NavContent username={username} tags={tags} />
-          </SheetClose>
+        <div className="flex h-full flex-col pb-12 pt-3.5">
+          <NavContent username={username} tags={tags} />
         </div>
       </SheetContent>
     </Sheet>
   );
 };
 
-export default MobileNav;
+export { MobileNav, NavContent };

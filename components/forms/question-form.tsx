@@ -94,11 +94,11 @@ const QuestionForm = ({ mongoUserId }: { mongoUserId: string }) => {
   };
 
   return (
-    <div className="max-w-full lg:w-screen">
+    <div className="w-full">
       <Form {...form}>
         <form
           onSubmit={form.handleSubmit(onSubmit)}
-          className="flex flex-col gap-10 max-xl:px-8"
+          className="flex flex-col gap-10"
         >
           <FormField
             control={form.control}

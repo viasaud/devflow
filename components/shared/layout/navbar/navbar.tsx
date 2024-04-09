@@ -8,12 +8,13 @@ import { getMongoUser } from "@/lib/utils";
 
 import GlobalSearch from "../search/global-search";
 
-import MobileNav from "./mobile-nav";
+import { MobileNav } from "./mobile-nav";
 import Theme from "./theme";
 
 const Navbar = async () => {
   const mongoUser = await getMongoUser();
   const tags = await getTopInteractedTags({});
+
   return (
     <nav className="flex-between border-primary fixed z-50 h-14 w-full gap-3 border-b bg-transparent p-4 shadow-zinc-300 dark:shadow-none lg:px-8">
       <MobileNav username={mongoUser?.username} tags={JSON.stringify(tags)} />
