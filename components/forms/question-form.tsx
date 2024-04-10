@@ -181,9 +181,12 @@ const QuestionForm = ({ mongoUserId }: { mongoUserId: string }) => {
             name="tags"
             render={({ field }) => (
               <FormItem className="flex w-full flex-col">
-                <FormLabel className="text-primary">
+                <FormLabel className="text-primary flex-start">
                   Tags
                   <span className="text-teal-500">*</span>
+                  <span className="ml-2 text-xs text-gray-500">
+                    (Press Enter to add a tag)
+                  </span>
                 </FormLabel>
                 <FormControl>
                   <Input
@@ -214,12 +217,7 @@ const QuestionForm = ({ mongoUserId }: { mongoUserId: string }) => {
               </FormItem>
             )}
           />
-          <Button
-            type="submit"
-            variant={"zinc"}
-            className="mx-auto w-fit px-5 py-3"
-            disabled={isSubmitting}
-          >
+          <Button type="submit" variant="default_small" disabled={isSubmitting}>
             {isSubmitting
               ? type === "question"
                 ? "Posting Question..."

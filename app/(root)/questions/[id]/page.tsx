@@ -16,7 +16,7 @@ const QuestionPage = async ({
   searchParams: { [key: string]: string | undefined };
 }) => {
   const question = await getQuestionById({ questionId: params.id });
-  if (!question) redirect("/404");
+  if (!question) return redirect("/404");
   const mongoUser = await getMongoUser();
 
   return (

@@ -32,9 +32,7 @@ const Navbar = async () => {
         <Theme />
         <SignedOut>
           <Link href="/sign-in">
-            <Button className="w-full rounded-full bg-gradient-to-r from-teal-500 to-teal-600 text-sm text-white shadow-lg transition-all duration-1000 hover:cursor-pointer hover:shadow-teal-800 hover:drop-shadow-xl">
-              Sign in
-            </Button>
+            <Button variant="default">Sign in</Button>
           </Link>
         </SignedOut>
         <SignedIn>

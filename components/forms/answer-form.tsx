@@ -74,7 +74,7 @@ const AnswerForm = ({
         </Button>
       </div>
       <form
-        className="mt-1 flex max-w-full flex-col gap-10 lg:w-screen"
+        className="mb-20 mt-1 flex max-w-full flex-col gap-10 lg:w-screen"
         onSubmit={form.handleSubmit(handleCreateAnswer)}
       >
         <FormField
@@ -126,12 +126,7 @@ const AnswerForm = ({
             </FormItem>
           )}
         />
-        <Button
-          type="submit"
-          variant={"zinc"}
-          className="mx-auto w-fit px-5 py-3"
-          disabled={isSubmitting}
-        >
+        <Button type="submit" variant="default_small" disabled={isSubmitting}>
           {isSubmitting ? "Submitting..." : "Submit Answer"}
         </Button>
       </form>

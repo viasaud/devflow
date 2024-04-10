@@ -5,7 +5,7 @@ import { getMongoUser } from "@/lib/utils";
 
 const AskQuestionPage = async () => {
   const mongoUser = await getMongoUser();
-  if (!mongoUser) redirect("/sign-in");
+  if (!mongoUser) return redirect("/sign-in");
 
   return (
     <div className="text-primary w-full pt-7">

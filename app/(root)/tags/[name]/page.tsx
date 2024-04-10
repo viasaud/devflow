@@ -13,7 +13,7 @@ const TagPage = async ({
   searchParams: { [key: string]: string | undefined };
 }) => {
   const questions = await getQuestionsByTagName({ name: params.name });
-  if (!questions) redirect("/404");
+  if (!questions) return redirect("/404");
   return (
     <div className="text-primary border-primary w-full">
       <Filter type="home" />

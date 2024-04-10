@@ -11,7 +11,6 @@ import { Button } from "../../ui/button";
 
 const Discover = ({ username }: { username: string }) => {
   const pathname = usePathname();
-
   return (
     <section className="text-primary">
       <h3 className="my-2 font-bold">Discover</h3>
@@ -20,7 +19,11 @@ const Discover = ({ username }: { username: string }) => {
         return (
           <Link
             href={
-              item.label === "Profile" ? `/profile/${username}` : item.route
+              item.label === "Profile"
+                ? username
+                  ? `/profile/${username}`
+                  : "/sign-in"
+                : item.route
             }
             key={item.route}
             className={`${isActive ? "bg-active" : "hover:bg-hover"} flex-start gap-2 rounded-md px-3.5 py-1.5`}
@@ -71,9 +74,7 @@ const NavContent = ({ username, tags }: { username: string; tags: string }) => {
       <Discover username={username} />
       <PopularTags tags={tags} />
       <Link href="/questions/ask" className="mt-8 rounded-3xl">
-        <Button className="w-full rounded-full bg-gradient-to-r from-teal-500 to-teal-600 text-sm text-white shadow-lg transition-all duration-1000 hover:cursor-pointer hover:shadow-teal-800 hover:drop-shadow-xl">
-          Ask a Question
-        </Button>
+        <Button variant="default">Ask a Question</Button>
       </Link>
     </div>
   );
