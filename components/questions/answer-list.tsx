@@ -1,5 +1,6 @@
 import { getAnswers } from "@/lib/actions/answer.action";
-import { getMongoUserId, getTimeAgo } from "@/lib/utils";
+import { getMongoUser, getTimeAgo } from "@/lib/utils";
+import { Answer } from "@/types";
 
 import ParseHTML from "../shared/parse-html";
 import UserProfileLink from "../shared/user-profile-link";
@@ -21,20 +22,22 @@ const AnswerList = async ({
   filter,
 }: Props) => {
   const answers = await getAnswers({ questionId: JSON.parse(questionId) });
-  const mongoUser = await getMongoUserId();
+  const mongoUser = await getMongoUser();
 
   return (
     <div>
-      {answers?.answers.map((answer) => (
+      {answers?.map((answer: Answer) => (
         <div key={answer._id}>
-          <div className="flex items-center justify-between py-3.5">
+          <div className="flex-between py-3.5">
             <UserProfileLink author={answer.author} />
-            <p className="text-mid text-xs">{getTimeAgo(answer.createdAt)}</p>
+            <p className="text-secondary font-geistMono text-xs">
+              {getTimeAgo(answer.createdAt)}
+            </p>
           </div>
 
           <ParseHTML content={answer.content} />
 
-          <div className="border-default border-b py-3.5">
+          <div className="border-primary border-b py-3.5">
             <VoteAndSave
               upVotes={answer.upVotes.length}
               downVotes={answer.downVotes.length}

@@ -2,6 +2,42 @@ import React from "react";
 
 import { BADGE_CRITERIA } from "@/constants/constants";
 
+export interface Author {
+  name: string;
+  avatar: string;
+  username: string;
+}
+
+export interface Question {
+  _id: string;
+  title: string;
+  tags: {
+    id: number;
+    name: string;
+  }[];
+  author: Author;
+  upVotes: string[];
+  downVotes: string[];
+  views: number;
+  answers: string[];
+  createdAt: Date;
+  glow?: string;
+}
+
+export interface Answer {
+  _id: string;
+  author: Author;
+  content: string;
+  upVotes: string[];
+  downVotes: string[];
+  createdAt: Date;
+}
+
+export interface Tag {
+  name: string;
+  questions: string[];
+}
+
 export interface SidebarLink {
   route: string;
   label: string;
@@ -34,11 +70,6 @@ export interface ParamsProps {
 }
 
 export interface SearchParamsProps {
-  searchParams: { [key: string]: string | undefined };
-}
-
-export interface URLProps {
-  params: { id: string };
   searchParams: { [key: string]: string | undefined };
 }
 

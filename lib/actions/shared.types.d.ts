@@ -104,21 +104,12 @@ export interface getQuestionsByTagNameParams {
   searchQuery?: string;
 }
 
-export interface getTopInteractedTagsParams {
-  userId: string;
-  limit?: number;
-}
-
 export interface createUserParams {
   clerkId: string;
   name: string;
   username: string;
   email: string;
   avatar: string;
-}
-
-export interface getUserByIdParams {
-  userId: string;
 }
 
 export interface getAllUsersParams {
@@ -152,8 +143,4 @@ export interface getUserStatsParams {
   userId: string;
   page?: number;
   pageSize?: number;
-}
-
-export interface deleteUserParams {
-  clerkId: string;
 }

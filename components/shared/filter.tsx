@@ -20,12 +20,12 @@ const Filter = ({ type }: { type: string }) => {
   const handleOptionChange = (value: string) => setSelectedOption(value);
 
   return (
-    <div className="border-default w-full border-b">
+    <div className="border-primary w-full border-b">
       <Select value={selectedOption} onValueChange={handleOptionChange}>
-        <SelectTrigger className="text-secondary hover:text-default no-focus w-fit border-none outline-none">
+        <SelectTrigger className="text-hover hover:text-primary no-focus w-fit border-none outline-none">
           <SelectValue />
         </SelectTrigger>
-        <SelectContent className="bg-default text-default border-default">
+        <SelectContent className="bg-primary text-primary border-primary">
           {sortOptions?.map((option) => (
             <SelectItem
               key={option}

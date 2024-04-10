@@ -1,15 +1,23 @@
 import { SignedIn, SignedOut } from "@clerk/nextjs";
 import Link from "next/link";
+import { redirect } from "next/navigation";
 
 import AnswerForm from "@/components/forms/answer-form";
 import AnswerList from "@/components/questions/answer-list";
 import QuestionContent from "@/components/questions/question-content";
 import { getQuestionById } from "@/lib/actions/question.action";
-import { getMongoUserId } from "@/lib/utils";
+import { getMongoUser } from "@/lib/utils";
 
-const QuestionPage = async ({ params, searchParams }: any) => {
+const QuestionPage = async ({
+  params,
+  searchParams,
+}: {
+  params: { id: string };
+  searchParams: { [key: string]: string | undefined };
+}) => {
   const question = await getQuestionById({ questionId: params.id });
-  const mongoUser = await getMongoUserId();
+  if (!question) return redirect("/404");
+  const mongoUser = await getMongoUser();
 
   return (
     <div className="pt-2 max-md:px-5">
@@ -32,7 +40,7 @@ const QuestionPage = async ({ params, searchParams }: any) => {
       <SignedOut>
         <Link
           href="/sign-up"
-          className="font-body-regular text-default border-hover hover:text-invert flex-center my-5 mt-3.5 cursor-pointer gap-1.5 rounded-full border py-2 text-center transition-colors duration-200 ease-linear hover:bg-zinc-900 dark:hover:bg-zinc-200"
+          className="text-primary border-primary hover:text-invert flex-center my-5 mt-3.5 cursor-pointer gap-1.5 rounded-full border py-2 text-center text-sm transition-colors duration-200 ease-linear hover:bg-zinc-900 dark:hover:bg-zinc-200"
         >
           <p>Share your knowledge by answering this question.</p>
         </Link>

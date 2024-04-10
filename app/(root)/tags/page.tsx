@@ -6,11 +6,13 @@ const TagsPage = async () => {
   const tags = await getTags({});
 
   return (
-    <div className="text-default border-default w-full">
+    <div className="text-primary border-primary w-full">
       <Filter type="tags" />
 
       <div className="flex-center flex-wrap gap-2 pt-4">
-        {tags?.map((tag) => <Tag name={tag.name} key={tag.name} />)}
+        {tags?.map((tag: { name: string }) => (
+          <Tag name={tag.name} key={tag.name} />
+        ))}
       </div>
     </div>
   );

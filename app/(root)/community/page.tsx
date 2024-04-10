@@ -1,19 +1,20 @@
 import UserCard from "@/components/community/user-card";
 import Filter from "@/components/shared/filter";
 import { getUsers } from "@/lib/actions/user.action";
+import { Author } from "@/types";
 
 const CommunityPage = async () => {
   const users = await getUsers({});
 
   return (
-    <div className="text-default border-default w-full">
+    <div className="text-primary border-primary w-full">
       <Filter type="community" />
 
       <div className="flex flex-wrap justify-center gap-2 pt-4">
-        {users?.users?.map((user) => (
+        {users?.map((user: Author) => (
           <div
-            className="border-default hover:bg-post w-40 cursor-pointer rounded border"
-            key={user._id}
+            className="border-primary hover:bg-hover w-40 cursor-pointer rounded border"
+            key={user.username}
           >
             <UserCard user={user} />
           </div>

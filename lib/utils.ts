@@ -9,10 +9,10 @@ export function cn(...inputs: ClassValue[]) {
 }
 
 export const formatLargeNumber = (
-  length: number,
-  length2: number = 0,
+  firstLength: number,
+  secondLength: number = 0,
 ): string => {
-  const diff = length - length2;
+  const diff = firstLength - secondLength;
   if (diff >= 1000000) {
     const formattedNum = (diff / 1000000).toFixed(1);
     return `${formattedNum}M`;
@@ -24,7 +24,7 @@ export const formatLargeNumber = (
   }
 };
 
-export function getTimeAgo(date: string) {
+export function getTimeAgo(date: Date) {
   const currentDate = new Date();
   currentDate.setHours(currentDate.getHours());
   currentDate.setHours(currentDate.getHours());
@@ -49,9 +49,7 @@ export function getTimeAgo(date: string) {
   }
 }
 
-export const getMongoUserId = async () => {
+export const getMongoUser = async () => {
   const { userId } = auth();
-  let mongoUser;
-  if (userId) mongoUser = await getUserById({ userId });
-  return mongoUser;
+  return userId ? await getUserById({ clerkId: userId }) : undefined;
 };

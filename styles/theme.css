@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 @layer utilities {
-  .bg-select {
+  .bg-active {
     @apply dark:bg-zinc-800/70 bg-zinc-200/70;
   }
 
@@ -11,15 +11,15 @@
     @apply bg-zinc-200/50 dark:bg-zinc-800/50;
   }
 
-  .bg-post {
-    @apply bg-zinc-200/30 dark:bg-zinc-800/30;
+  .bg-question-hover {
+    @apply bg-zinc-200/20 dark:bg-zinc-800/20;
   }
 
-  .bg-default {
+  .bg-primary {
     @apply bg-zinc-50 dark:bg-zinc-950;
   }
 
-  .text-default {
+  .text-primary {
     @apply text-zinc-950 dark:text-zinc-50 !important;
   }
 
@@ -27,135 +27,19 @@
     @apply dark:text-zinc-950 text-zinc-50 !important;
   }
 
-  .text-mid {
+  .text-secondary {
     @apply text-zinc-500 dark:text-zinc-400 !important;
   }
 
-  .text-secondary {
-    @apply text-zinc-500 dark:text-zinc-400 hover:text-default !important;
+  .text-hover {
+    @apply text-zinc-500 dark:text-zinc-300 hover:text-primary !important;
   }
 
-  .text-secondary-2 {
-    @apply text-zinc-700 dark:text-zinc-300 hover:text-default !important;
-  }
-
-  .border-default {
+  .border-primary {
     @apply border-zinc-300 dark:border-zinc-800 !important;
   }
 
   .border-hover {
     @apply border-zinc-500 dark:border-zinc-500 !important;
-  }
-
-  .font-h1-bold {
-    @apply text-[30px] font-bold leading-[42px] tracking-tighter;
-  }
-
-  .font-h2-bold {
-    @apply text-[24px] font-bold leading-[31.2px];
-  }
-
-  .font-h2-semibold {
-    @apply text-[24px] font-semibold leading-[31.2px];
-  }
-
-  .font-h3-bold {
-    @apply text-[20px] font-bold leading-[26px];
-  }
-
-  .font-h3-semibold {
-    @apply text-[20px] font-semibold leading-[24.8px];
-  }
-
-  .font-base-medium {
-    @apply text-[18px] font-medium leading-[25.2px];
-  }
-
-  .font-base-semibold {
-    @apply text-[18px] font-semibold leading-[25.2px];
-  }
-
-  .font-base-bold {
-    @apply text-[18px] font-bold leading-[140%];
-  }
-
-  .font-paragraph-regular {
-    @apply text-[16px] font-normal leading-[22.4px];
-  }
-
-  .font-paragraph-medium {
-    @apply text-[16px] font-medium leading-[22.4px];
-  }
-
-  .font-paragraph-semibold {
-    @apply text-[16px] font-semibold leading-[20.8px];
-  }
-
-  .font-body-regular {
-    @apply text-[14px] font-normal leading-[19.6px];
-  }
-
-  .font-body-medium {
-    @apply text-[14px] font-medium leading-[18.2px];
-  }
-
-  .font-body-semibold {
-    @apply text-[14px] font-semibold leading-[18.2px];
-  }
-
-  .font-small-regular {
-    @apply text-[12px] font-normal leading-[15.6px];
-  }
-
-  .font-small-medium {
-    @apply text-[12px] font-medium leading-[15.6px];
-  }
-
-  .font-small-semibold {
-    @apply text-[12px] font-semibold leading-[15.6px];
-  }
-
-  .font-subtle-medium {
-    @apply text-[10px] font-medium leading-[13px] !important;
-  }
-
-  .font-subtle-regular {
-    @apply text-[10px] font-normal leading-[13px];
-  }
-
-  .placeholder {
-    @apply placeholder:text-zinc-400 dark:placeholder:text-zinc-500;
-  }
-
-  .invert-colors {
-    @apply invert dark:invert-0;
-  }
-
-  .shadow-zinc-100_zinc-100 {
-    @apply shadow-zinc-100 dark:shadow-zinc-100;
-  }
-
-  .shadow-zinc-100_zinc-none {
-    @apply shadow-zinc-100 dark:shadow-none;
-  }
-
-  .bg-primary-gradient {
-    background: linear-gradient(129deg, #ff7000 0%, #e2995f 100%);
-  }
-
-  .zinc-gradient {
-    background: linear-gradient(
-      232deg,
-      rgba(23, 28, 35, 0.41) 0%,
-      rgba(19, 22, 28, 0.7) 100%
-    );
-  }
-
-  .bg-zinc-gradient {
-    background: linear-gradient(
-      232deg,
-      rgba(23, 28, 35, 0.41) 0%,
-      rgba(19, 22, 28, 0.7) 100%
-    );
   }
 }

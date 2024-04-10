@@ -1,16 +1,25 @@
-import QuestionCard from "@/components/home/question-card";
+import { redirect } from "next/navigation";
+
+import QuestionCard from "@/components/questions/question-card";
 import Filter from "@/components/shared/filter";
 import { getQuestionsByTagName } from "@/lib/actions/tag.action";
+import { Question } from "@/types";
 
-const TagPage = async ({ params, searchParams }: any) => {
+const TagPage = async ({
+  params,
+  searchParams,
+}: {
+  params: { name: string };
+  searchParams: { [key: string]: string | undefined };
+}) => {
   const questions = await getQuestionsByTagName({ name: params.name });
-
+  if (!questions) return redirect("/404");
   return (
-    <div className="text-default border-default w-full">
+    <div className="text-primary border-primary w-full">
       <Filter type="home" />
-      {questions?.questions.map((question: any) => (
+      {questions?.map((question: Question) => (
         <div
-          className="border-default text-default hover:bg-post border-b p-5"
+          className="border-primary text-primary hover:bg-question-hover border-b p-5"
           key={question._id}
         >
           <QuestionCard

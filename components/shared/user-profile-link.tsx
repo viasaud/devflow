@@ -1,22 +1,20 @@
 import Link from "next/link";
 
+import { Author } from "@/types";
+
 import { Avatar, AvatarImage } from "../ui/avatar";
 
-interface Props {
-  author: { name: string; avatar: string; username: string };
-}
-
-const UserProfileLink = ({ author }: Props) => {
+const UserProfileLink = ({ author }: { author: Author }) => {
   return (
     <Link
       href={`/profile/${author.username}`}
-      className="text-secondary-2 flex cursor-pointer items-center gap-2"
+      className="text-hover flex cursor-pointer items-center gap-2"
     >
       <Avatar>
         <AvatarImage src={author.avatar} width={24} height={24} />
       </Avatar>
 
-      <p className="font-small-medium">{author.name}</p>
+      <p className="text-xs">{author.name}</p>
     </Link>
   );
 };

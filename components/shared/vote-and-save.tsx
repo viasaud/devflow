@@ -8,7 +8,7 @@ import {
 } from "@remixicon/react";
 import { usePathname } from "next/navigation";
 
-import { DEFAULT_POST_ICON_SIZE } from "@/constants/constants";
+import { QUESTION_ICON_SIZE } from "@/constants/constants";
 import { upVoteAnswer, downVoteAnswer } from "@/lib/actions/answer.action";
 import {
   downVoteQuestion,
@@ -93,10 +93,28 @@ const VoteAndSave = ({
   };
 
   return (
-    <div className="flex items-center justify-end gap-2">
-      <div className="border-default hover:border-hover text-default no-focus flex items-center rounded-md border p-1">
+    <div className="flex items-center justify-end gap-3 font-geistMono">
+      {bookmarkButton && (
+        <div
+          className="border-primary hover:border-hover no-focus text-primary group flex cursor-pointer items-center rounded-md border p-1"
+          onClick={() => handleSave()}
+        >
+          {hasSaved ? (
+            <RiBookmarkFill
+              size={QUESTION_ICON_SIZE}
+              className="text-sky-500 group-hover:text-sky-700 dark:group-hover:text-sky-600"
+            />
+          ) : (
+            <RiBookmarkLine
+              size={QUESTION_ICON_SIZE}
+              className="text-zinc-500 hover:text-sky-500 dark:text-zinc-400 hover:dark:text-sky-500"
+            />
+          )}
+        </div>
+      )}
+      <div className="border-primary hover:border-hover text-primary no-focus flex items-center rounded-md border p-1">
         <RiArrowUpLine
-          size={DEFAULT_POST_ICON_SIZE}
+          size={QUESTION_ICON_SIZE}
           className={
             hasUpVoted
               ? "cursor-pointer text-green-500 hover:text-green-700 dark:hover:text-green-600"
@@ -104,11 +122,9 @@ const VoteAndSave = ({
           }
           onClick={() => handleVote("upVote")}
         />
-        <p className="font-small-regular px-1">
-          {formatLargeNumber(upVotes, downVotes)}
-        </p>
+        <p className="px-1 text-xs">{formatLargeNumber(upVotes, downVotes)}</p>
         <RiArrowDownLine
-          size={DEFAULT_POST_ICON_SIZE}
+          size={QUESTION_ICON_SIZE}
           className={
             hasDownVoted
               ? "cursor-pointer text-red-500 hover:text-red-700 dark:hover:text-red-600"
@@ -117,24 +133,6 @@ const VoteAndSave = ({
           onClick={() => handleVote("downVote")}
         />
       </div>
-      {bookmarkButton && (
-        <div
-          className="border-default hover:border-hover no-focus text-default group flex cursor-pointer items-center rounded-md border p-1"
-          onClick={() => handleSave()}
-        >
-          {hasSaved ? (
-            <RiBookmarkFill
-              size={DEFAULT_POST_ICON_SIZE}
-              className="text-sky-500 group-hover:text-sky-700 dark:group-hover:text-sky-600"
-            />
-          ) : (
-            <RiBookmarkLine
-              size={DEFAULT_POST_ICON_SIZE}
-              className="text-zinc-500 hover:text-sky-500 dark:text-zinc-400 hover:dark:text-sky-500"
-            />
-          )}
-        </div>
-      )}
     </div>
   );
 };

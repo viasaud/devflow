@@ -1,19 +1,19 @@
-import QuestionCard from "@/components/home/question-card";
+import QuestionCard from "@/components/questions/question-card";
 import Filter from "@/components/shared/filter";
 import { getSavedQuestions } from "@/lib/actions/user.action";
-import { getMongoUserId } from "@/lib/utils";
+import { getMongoUser } from "@/lib/utils";
+import { Question } from "@/types";
 
 const BookmarksPage = async () => {
-  const mongoUser = await getMongoUserId();
+  const mongoUser = await getMongoUser();
   const questions = await getSavedQuestions(mongoUser);
-
   return (
-    <main className="text-default border-default w-full">
+    <main className="text-primary border-primary w-full">
       <Filter type="bookmarks" />
 
-      {questions?.savedQuestions.map((question: any) => (
+      {questions?.map((question: Question) => (
         <div
-          className="border-default text-default hover:bg-post border-b p-5"
+          className="border-primary text-primary hover:bg-question-hover border-b p-5"
           key={question._id}
         >
           <QuestionCard

@@ -67,14 +67,14 @@ const AnswerForm = ({
   return (
     <Form {...form}>
       <div className="mt-5 flex items-center justify-between">
-        <p className="font-paragraph-semibold text-default">Your Answer</p>
+        <p className="text-primary">Your Answer</p>
         <Button variant={"ai"} disabled={isSubmitting} onClick={() => {}}>
           <RiBardFill size={16} />
           Generate an AI answer
         </Button>
       </div>
       <form
-        className="mt-1 flex max-w-full flex-col gap-10 lg:w-screen"
+        className="mb-20 mt-1 flex max-w-full flex-col gap-10 lg:w-screen"
         onSubmit={form.handleSubmit(handleCreateAnswer)}
       >
         <FormField
@@ -87,7 +87,7 @@ const AnswerForm = ({
                   apiKey={process.env.NEXT_PUBLIC_TINYMCE_API_KEY}
                   onInit={(
                     evt,
-                    editor, // @ts-ignore
+                    editor // @ts-ignore
                   ) => (editorRef.current = editor)}
                   onEditorChange={(content) => form.setValue("answer", content)}
                   init={{
@@ -114,7 +114,7 @@ const AnswerForm = ({
                       "undo redo | blocks | " +
                       "codesample | bold italic forecolor | alignleft aligncenter |" +
                       "alignright alignjustify | bullist numlist",
-                    content_style: "body { font-family:Inter; font-size:14px }",
+                    content_style: "body { font-size:14px }",
                     skin: mode === "dark" ? "oxide-dark" : "oxide",
                     content_css: mode === "dark" ? "dark" : "default",
                   }}
@@ -126,12 +126,7 @@ const AnswerForm = ({
             </FormItem>
           )}
         />
-        <Button
-          type="submit"
-          variant={"zinc"}
-          className="mx-auto w-fit px-5 py-3"
-          disabled={isSubmitting}
-        >
+        <Button type="submit" variant="default_small" disabled={isSubmitting}>
           {isSubmitting ? "Submitting..." : "Submit Answer"}
         </Button>
       </form>

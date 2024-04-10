@@ -1,18 +1,18 @@
 import {
   RiHome6Line,
   RiGroupLine,
-  RiMenuSearchLine,
   RiSunLine,
   RiMoonLine,
   RiComputerLine,
   RiHome6Fill,
   RiGroupFill,
-  RiMenuSearchFill,
   RiSunFill,
   RiMoonFill,
   RiComputerFill,
   RiBookmarkLine,
   RiBookmarkFill,
+  RiUser3Fill,
+  RiUser3Line,
 } from "@remixicon/react";
 
 import { SidebarLink } from "@/types";
@@ -27,9 +27,9 @@ export const THEME_OPTIONS = [
     iconFilled: RiComputerFill,
   },
 ];
-export const DEFAULT_THEME_MENU_ICON_SIZE = 22;
-
-export const DEFAULT_POST_ICON_SIZE = 18;
+export const THEME_MENU_ICON_SIZE = 22;
+export const QUESTION_ICON_SIZE = 18;
+export const SMALL_ICON_SIZE = 16;
 
 export const sidebarLinks: SidebarLink[] = [
   {
@@ -50,18 +50,18 @@ export const sidebarLinks: SidebarLink[] = [
     icon: RiBookmarkLine,
     iconFilled: RiBookmarkFill,
   },
-  {
-    route: "/jobs",
-    label: "Find Jobs",
-    icon: RiMenuSearchLine,
-    iconFilled: RiMenuSearchFill,
-  },
   // {
-  //   route: "/profile",
-  //   label: "Profile",
-  //   icon: RiUser3Line,
-  //   iconFilled: RiUser3Fill,
+  //   route: "/jobs",
+  //   label: "Find Jobs",
+  //   icon: RiMenuSearchLine,
+  //   iconFilled: RiMenuSearchFill,
   // },
+  {
+    route: "/profile",
+    label: "Profile",
+    icon: RiUser3Line,
+    iconFilled: RiUser3Fill,
+  },
 ];
 
 export const BADGE_CRITERIA = {
@@ -98,7 +98,7 @@ export const getSortOptions = (type: string) => {
   switch (type) {
     case "bookmarks":
       sortOptions = ["Best", "Hot", "New", "Open"];
-      defaultSortOption = sortOptions[2];
+      defaultSortOption = sortOptions[1];
       break;
     case "community":
       sortOptions = ["Top Contributors", "New Users", "Old Users"];

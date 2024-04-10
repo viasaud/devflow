@@ -22,11 +22,7 @@ import { useTheme } from "@/context/ThemeProvider";
 import { createQuestion } from "@/lib/actions/question.action";
 import { QuestionSchema } from "@/lib/validations";
 
-interface Props {
-  mongoUserId: string;
-}
-
-const QuestionForm = ({ mongoUserId }: Props) => {
+const QuestionForm = ({ mongoUserId }: { mongoUserId: string }) => {
   const { mode } = useTheme();
   const editorRef = useRef(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -45,7 +41,7 @@ const QuestionForm = ({ mongoUserId }: Props) => {
 
   const handleKeyDown = (
     e: React.KeyboardEvent<HTMLInputElement>,
-    field: any,
+    field: any
   ) => {
     if (e.key !== "Enter" || field.name !== "tags") return;
 
@@ -76,7 +72,7 @@ const QuestionForm = ({ mongoUserId }: Props) => {
   const handleTagRemove = (tag: string, field: any) => {
     form.setValue(
       "tags",
-      field.value.filter((t: string) => t !== tag),
+      field.value.filter((t: string) => t !== tag)
     );
   };
 
@@ -98,25 +94,25 @@ const QuestionForm = ({ mongoUserId }: Props) => {
   };
 
   return (
-    <div className="max-w-full lg:w-screen">
+    <div className="w-full">
       <Form {...form}>
         <form
           onSubmit={form.handleSubmit(onSubmit)}
-          className="flex flex-col gap-10 max-xl:px-8"
+          className="flex flex-col gap-10"
         >
           <FormField
             control={form.control}
             name="title"
             render={({ field }) => (
               <FormItem className="flex w-full flex-col">
-                <FormLabel className="text-default font-paragraph-semibold">
+                <FormLabel className="text-primary">
                   Question Title
-                  <span className="text-orange-500">*</span>
+                  <span className="text-teal-500">*</span>
                 </FormLabel>
                 <FormControl>
                   <Input
                     placeholder="e.g. How to use React Query?"
-                    className="bg-default border-default text-default no-focus w-full border outline-none"
+                    className="border-primary text-primary no-focus w-full border bg-transparent outline-none"
                     {...field}
                   />
                 </FormControl>
@@ -129,16 +125,16 @@ const QuestionForm = ({ mongoUserId }: Props) => {
             name="description"
             render={({ field }) => (
               <FormItem className="flex w-full flex-col">
-                <FormLabel className="text-default font-paragraph-semibold">
+                <FormLabel className="text-primary">
                   Question Description
-                  <span className="text-orange-500">*</span>
+                  <span className="text-teal-500">*</span>
                 </FormLabel>
                 <FormControl>
                   <Editor
                     apiKey={process.env.NEXT_PUBLIC_TINYMCE_API_KEY}
                     onInit={(
                       evt,
-                      editor, // @ts-ignore
+                      editor // @ts-ignore
                     ) => (editorRef.current = editor)}
                     initialValue=""
                     onEditorChange={(content) =>
@@ -168,8 +164,7 @@ const QuestionForm = ({ mongoUserId }: Props) => {
                         "undo redo | blocks | " +
                         "codesample | bold italic forecolor | alignleft aligncenter |" +
                         "alignright alignjustify | bullist numlist",
-                      content_style:
-                        "body { font-family:Inter; font-size:14px }",
+                      content_style: "body { font-size:14px }",
                       skin: mode === "dark" ? "oxide-dark" : "oxide",
                       content_css: mode === "dark" ? "dark" : "default",
                     }}
@@ -186,14 +181,17 @@ const QuestionForm = ({ mongoUserId }: Props) => {
             name="tags"
             render={({ field }) => (
               <FormItem className="flex w-full flex-col">
-                <FormLabel className="text-default font-paragraph-semibold">
+                <FormLabel className="text-primary flex-start">
                   Tags
-                  <span className="text-orange-500">*</span>
+                  <span className="text-teal-500">*</span>
+                  <span className="ml-2 text-xs text-gray-500">
+                    (Press Enter to add a tag)
+                  </span>
                 </FormLabel>
                 <FormControl>
                   <Input
                     placeholder="e.g. react, typescript, react-query"
-                    className="bg-default border-default text-default no-focus w-full border outline-none"
+                    className="border-primary text-primary w-full border bg-transparent"
                     onKeyDown={(e) => {
                       handleKeyDown(e, field);
                     }}
@@ -203,7 +201,7 @@ const QuestionForm = ({ mongoUserId }: Props) => {
                   {field.value.map((tag: string) => (
                     <div
                       key={tag}
-                      className="text-secondary border-default hover:border-hover font-small-regular flex w-fit items-center gap-2 rounded-md border px-2 py-1"
+                      className="text-hover border-primary hover:border-hover flex w-fit items-center gap-2 rounded-md border px-2 py-1 text-xs"
                     >
                       <p>{tag}</p>
                       <RiCloseLine
@@ -219,12 +217,7 @@ const QuestionForm = ({ mongoUserId }: Props) => {
               </FormItem>
             )}
           />
-          <Button
-            type="submit"
-            variant={"zinc"}
-            className="mx-auto w-fit px-5 py-3"
-            disabled={isSubmitting}
-          >
+          <Button type="submit" variant="default_small" disabled={isSubmitting}>
             {isSubmitting
               ? type === "question"
                 ? "Posting Question..."

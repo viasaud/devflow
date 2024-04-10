@@ -15,17 +15,17 @@ const hotQuestions = [
 
 const RightSidebar = () => {
   return (
-    <section className="border-default sticky right-0 top-20 h-fit rounded-md border p-4 shadow shadow-zinc-100 dark:shadow-none max-2xl:hidden lg:w-80">
+    <section className="border-primary fixed right-8 top-20 h-fit rounded-md border p-4 shadow shadow-zinc-100 dark:shadow-none max-2xl:hidden lg:w-80">
       <div>
-        <h3 className="text-default font-base-bold mb-4">Top Questions</h3>
+        <h3 className="text-primary mb-4 text-lg font-bold">Top Questions</h3>
         <div className="flex w-full flex-col gap-5">
           {hotQuestions.map((question) => (
             <Link
               href={`/questions/${question._id}`}
               key={question._id}
-              className="text-secondary flex cursor-pointer items-center justify-between gap-7"
+              className="text-hover flex-between cursor-pointer gap-7"
             >
-              <p className="font-body-regular w-full">{question.title}</p>
+              <p className="w-full text-sm">{question.title}</p>
               <RiArrowRightSLine />
             </Link>
           ))}
