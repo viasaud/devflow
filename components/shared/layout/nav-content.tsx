@@ -2,8 +2,9 @@
 
 import { RiHashtag } from "@remixicon/react";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 
+import { toast, useToast } from "@/components/ui/use-toast";
 import { THEME_MENU_ICON_SIZE, sidebarLinks } from "@/constants/constants";
 import { Tag } from "@/types";
 
@@ -11,22 +12,30 @@ import { Button } from "../../ui/button";
 
 const Discover = ({ username }: { username: string }) => {
   const pathname = usePathname();
+  const { toast } = useToast();
+  const router = useRouter();
+
+  const handleClick = (route: string) => () => {
+    if ((route === "/profile" || route === "/bookmarks") && !username) {
+      return toast({
+        className:
+          "text-primary border-primary border bg-primary dark:bg-gradient-to-r dark:from-zinc-950 dark:to-zinc-900 rounded-md",
+        description: `Sign in to be able to access ${route === "/profile" ? "your profile" : "your bookmarks"}.`,
+      });
+    }
+    return router.push(route === "/profile" ? `/profile/${username}` : route);
+  };
+
   return (
     <section className="text-primary">
       <h3 className="my-2 font-bold">Discover</h3>
       {sidebarLinks.map((item) => {
         const isActive = pathname === item.route;
         return (
-          <Link
-            href={
-              item.label === "Profile"
-                ? username
-                  ? `/profile/${username}`
-                  : "/sign-in"
-                : item.route
-            }
+          <div
             key={item.route}
-            className={`${isActive ? "bg-active" : "hover:bg-hover"} flex-start gap-2 rounded-md px-3.5 py-1.5`}
+            className={`${isActive ? "bg-active" : "hover:bg-hover"} flex-start cursor-pointer gap-2 rounded-md px-3.5 py-1.5`}
+            onClick={handleClick(item.route)}
           >
             {isActive ? (
               <item.iconFilled size={THEME_MENU_ICON_SIZE} />
@@ -34,7 +43,7 @@ const Discover = ({ username }: { username: string }) => {
               <item.icon size={THEME_MENU_ICON_SIZE} />
             )}
             <p className="text-sm">{item.label}</p>
-          </Link>
+          </div>
         );
       })}
     </section>
@@ -73,8 +82,23 @@ const NavContent = ({ username, tags }: { username: string; tags: string }) => {
     <div className={`flex flex-1 flex-col`}>
       <Discover username={username} />
       <PopularTags tags={tags} />
-      <Link href="/questions/ask" className="mt-8 rounded-3xl">
-        <Button variant="default">Ask a Question</Button>
+      <Link
+        href={username ? "/questions/ask" : ""}
+        className="mt-8 rounded-3xl"
+      >
+        <Button
+          variant="default"
+          onClick={() => {
+            if (!username)
+              return toast({
+                className:
+                  "text-primary border-primary border bg-primary dark:bg-gradient-to-r dark:from-zinc-950 dark:to-zinc-900 rounded-md",
+                description: "Sign in to be able to ask a question.",
+              });
+          }}
+        >
+          Ask a Question
+        </Button>
       </Link>
     </div>
   );

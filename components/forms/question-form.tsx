@@ -89,7 +89,7 @@ const QuestionForm = ({ mongoUserId }: { mongoUserId: string }) => {
 
       router.push("/");
     } catch (error) {
-      console.log("error");
+      console.log(error);
     }
   };
 
