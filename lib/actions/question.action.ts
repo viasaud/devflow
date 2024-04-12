@@ -2,6 +2,8 @@
 
 import { revalidatePath } from "next/cache";
 
+import Answer from "@/database/answer.model";
+import Interaction from "@/database/interaction.model";
 import Question from "@/database/question.model";
 import Tag from "@/database/tag.model";
 import User from "@/database/user.model";
@@ -18,7 +20,7 @@ import {
 export const createQuestion = async (params: createQuestionParams) => {
   const { title, content, tags, author, path } = params;
   return await runWithDatabase(async () => {
-    const lowerCaseTags = tags.map((tag) => tag.toLowerCase());
+    const lowerCaseTags = tags.map((tag) => tag.toLowerCase().replace("#", ""));
 
     const question = await Question.create({
       title,
@@ -115,6 +117,20 @@ export const downVoteQuestion = async (params: questionVoteParams) => {
     });
 
     if (!question) throw new Error("Question not found");
+
+    revalidatePath(path);
+  });
+};
+
+export const deleteQuestion = async (questionId: string, path: string) => {
+  return await runWithDatabase(async () => {
+    await Question.deleteOne({ _id: questionId });
+    await Interaction.deleteMany({ question: questionId });
+    await Answer.deleteMany({ question: questionId });
+    await Tag.updateMany(
+      { questions: questionId },
+      { $pull: { questions: questionId } }
+    );
 
     revalidatePath(path);
   });

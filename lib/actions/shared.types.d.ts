@@ -39,11 +39,6 @@ export interface answerVoteParams {
   path: string;
 }
 
-export interface deleteAnswerParams {
-  answerId: string;
-  path: string;
-}
-
 export interface searchParams {
   query?: string | null;
   type?: string | null;
@@ -75,11 +70,6 @@ export interface questionVoteParams {
   userId: string;
   hasUpVoted: boolean;
   hasDownVoted: boolean;
-  path: string;
-}
-
-export interface deleteQuestionParams {
-  questionId: string;
   path: string;
 }
 

@@ -2,6 +2,7 @@ import { getTimeAgo } from "@/lib/utils";
 import { Question } from "@/types";
 
 import ContentStats from "../shared/content-stats";
+import DeleteItem from "../shared/delete-item";
 import ParseHTML from "../shared/parse-html";
 import Tag from "../shared/tag";
 import VoteAndSave from "../shared/vote-and-save";
@@ -17,15 +18,18 @@ const QuestionContent = ({
   mongoUser,
 }: {
   question: Content;
-  mongoUser: { _id: string; savedQuestions: string[] };
+  mongoUser: { _id: string; savedQuestions: string[]; username: string };
 }) => {
   return (
     <div>
-      <div className="flex items-center justify-between">
+      <div className="flex-start">
         <UserProfileLink author={question.author} />
-        <p className="text-secondary font-geistMono text-xs">
+        <p className="text-secondary ml-auto font-geistMono text-xs">
           {getTimeAgo(question.createdAt)}
         </p>
+        {question.author.username === mongoUser?.username && (
+          <DeleteItem type="question" itemId={JSON.stringify(question._id)} />
+        )}
       </div>
 
       <h2 className="text-primary mb-1 mt-3.5 text-xl font-bold">
