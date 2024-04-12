@@ -4,7 +4,6 @@ import { getMongoUser, getTimeAgo } from "@/lib/utils";
 import { Question } from "@/types";
 
 import ContentStats from "../shared/content-stats";
-import DeleteItem from "../shared/delete-item";
 import Tag from "../shared/tag";
 import UserProfileLink from "../shared/user-profile-link";
 import VoteAndSave from "../shared/vote-and-save";
@@ -30,10 +29,6 @@ const QuestionCard = async ({
         <p className="text-secondary ml-auto font-geistMono text-xs">
           {getTimeAgo(createdAt)}
         </p>
-
-        {author.username === mongoUser?.username && (
-          <DeleteItem type="question" itemId={JSON.stringify(_id)} />
-        )}
       </header>
 
       <Link href={`/questions/${_id}`}>

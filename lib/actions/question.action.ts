@@ -12,6 +12,7 @@ import { runWithDatabase } from "../mongoose";
 
 import {
   createQuestionParams,
+  editQuestionParams,
   getQuestionByIdParams,
   getQuestionsParams,
   questionVoteParams,
@@ -132,6 +133,13 @@ export const deleteQuestion = async (questionId: string, path: string) => {
       { $pull: { questions: questionId } }
     );
 
+    revalidatePath(path);
+  });
+};
+export const editQuestion = async (params: editQuestionParams) => {
+  const { title, content, questionId, path } = params;
+  return await runWithDatabase(async () => {
+    await Question.findByIdAndUpdate(questionId, { title, content });
     revalidatePath(path);
   });
 };

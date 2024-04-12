@@ -19,23 +19,36 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { useTheme } from "@/context/ThemeProvider";
-import { createQuestion } from "@/lib/actions/question.action";
+import { createQuestion, editQuestion } from "@/lib/actions/question.action";
 import { QuestionSchema } from "@/lib/validations";
 
-const QuestionForm = ({ mongoUserId }: { mongoUserId: string }) => {
+interface Props {
+  mongoUserId: string;
+  question?: string;
+  edit?: boolean;
+}
+
+const QuestionForm = ({ mongoUserId, question, edit }: Props) => {
   const { mode } = useTheme();
   const editorRef = useRef(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const type = "question";
   const router = useRouter();
   const pathname = usePathname();
 
+  let parsedQuestion = {
+    _id: "",
+    title: "",
+    content: "",
+    tags: [],
+  };
+  if (question) parsedQuestion = JSON.parse(question);
+  const Tags = parsedQuestion.tags.map((tag: { name: string }) => tag.name);
   const form = useForm<z.infer<typeof QuestionSchema>>({
     resolver: zodResolver(QuestionSchema),
     defaultValues: {
-      title: "",
-      description: "",
-      tags: [],
+      title: parsedQuestion.title,
+      description: parsedQuestion.content,
+      tags: Tags,
     },
   });
 
@@ -78,16 +91,28 @@ const QuestionForm = ({ mongoUserId }: { mongoUserId: string }) => {
 
   const onSubmit = async (values: z.infer<typeof QuestionSchema>) => {
     try {
-      await createQuestion({
-        title: values.title,
-        content: values.description,
-        tags: values.tags,
-        author: JSON.parse(mongoUserId),
-        path: pathname,
-      });
-      setIsSubmitting(true);
+      if (edit) {
+        await editQuestion({
+          title: values.title,
+          content: values.description,
+          questionId: parsedQuestion._id,
+          path: pathname,
+        });
+        setIsSubmitting(true);
 
-      router.push("/");
+        router.push(`/questions/${parsedQuestion._id}`);
+      } else {
+        await createQuestion({
+          title: values.title,
+          content: values.description,
+          tags: values.tags,
+          author: JSON.parse(mongoUserId),
+          path: pathname,
+        });
+        setIsSubmitting(true);
+
+        router.push("/");
+      }
     } catch (error) {
       console.log(error);
     }
@@ -136,7 +161,7 @@ const QuestionForm = ({ mongoUserId }: { mongoUserId: string }) => {
                       evt,
                       editor // @ts-ignore
                     ) => (editorRef.current = editor)}
-                    initialValue=""
+                    initialValue={parsedQuestion.content || ""}
                     onEditorChange={(content) =>
                       form.setValue("description", content)
                     }
@@ -192,6 +217,7 @@ const QuestionForm = ({ mongoUserId }: { mongoUserId: string }) => {
                   <Input
                     placeholder="e.g. react, typescript, react-query"
                     className="border-primary text-primary w-full border bg-transparent"
+                    disabled={edit}
                     onKeyDown={(e) => {
                       handleKeyDown(e, field);
                     }}
@@ -206,7 +232,9 @@ const QuestionForm = ({ mongoUserId }: { mongoUserId: string }) => {
                       <p>{tag}</p>
                       <RiCloseLine
                         size={18}
-                        className="cursor-pointer hover:text-red-500"
+                        className={
+                          edit ? "hidden" : "cursor-pointer hover:text-red-500"
+                        }
                         onClick={() => handleTagRemove(tag, field)}
                       />
                     </div>
@@ -219,10 +247,10 @@ const QuestionForm = ({ mongoUserId }: { mongoUserId: string }) => {
           />
           <Button type="submit" variant="default_small" disabled={isSubmitting}>
             {isSubmitting
-              ? type === "question"
+              ? !edit
                 ? "Posting Question..."
                 : "Editing Question..."
-              : type === "question"
+              : !edit
                 ? "Post Question"
                 : "Edit Question"}
           </Button>

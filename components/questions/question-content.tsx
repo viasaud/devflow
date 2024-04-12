@@ -7,6 +7,7 @@ import ParseHTML from "../shared/parse-html";
 import Tag from "../shared/tag";
 import VoteAndSave from "../shared/vote-and-save";
 
+import EditQuestion from "./edit-question";
 import UserProfileLink from "./user-profile-link";
 
 interface Content extends Question {
@@ -28,7 +29,11 @@ const QuestionContent = ({
           {getTimeAgo(question.createdAt)}
         </p>
         {question.author.username === mongoUser?.username && (
-          <DeleteItem type="question" itemId={JSON.stringify(question._id)} />
+          <div className="flex-center ml-3 gap-1">
+            <EditQuestion questionId={JSON.stringify(question._id)} />
+
+            <DeleteItem type="question" itemId={JSON.stringify(question._id)} />
+          </div>
         )}
       </div>
 

@@ -27,7 +27,7 @@ const DeleteItem = ({ type, itemId }: { type: string; itemId: string }) => {
 
   return (
     <div
-      className="border-primary hover:border-hover no-focus text-primary group ml-2 flex cursor-pointer items-center rounded-md border p-1"
+      className="border-primary hover:border-hover no-focus text-primary group flex cursor-pointer items-center rounded-md border p-1"
       onClick={() => {
         toast({
           className:
