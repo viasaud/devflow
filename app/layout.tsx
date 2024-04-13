@@ -6,6 +6,7 @@ import { GeistSans } from "geist/font/sans";
 import { Metadata } from "next";
 import React from "react";
 
+import { Toaster } from "@/components/ui/toaster";
 import "./globals.css";
 import "../styles/prism.css";
 import { ThemeProvider } from "@/context/ThemeProvider";
@@ -37,6 +38,7 @@ export default function RootLayout({
         >
           <ThemeProvider>
             {children}
+            <Toaster />
             <SpeedInsights />
             <Analytics />
           </ThemeProvider>

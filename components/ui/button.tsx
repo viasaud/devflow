@@ -11,9 +11,9 @@ const buttonVariants = cva(
     variants: {
       variant: {
         default:
-          "w-full rounded-full bg-gradient-to-r from-teal-600 to-teal-700 text-sm text-white shadow-lg transition-all duration-1000 hover:cursor-pointer hover:shadow-teal-500/50 hover:drop-shadow-lg",
+          "no-focus w-full rounded-full bg-gradient-to-r from-teal-600 to-teal-700 text-sm text-white shadow-lg transition-all duration-1000 hover:cursor-pointer hover:shadow-teal-500/50 hover:drop-shadow-lg",
         default_small:
-          "mx-auto w-fit rounded-full bg-gradient-to-r from-teal-600 to-teal-700 !px-8 text-sm text-white shadow-lg transition-all duration-1000 hover:cursor-pointer hover:shadow-teal-500/50 hover:drop-shadow-lg",
+          "no-focus mx-auto w-fit rounded-full bg-gradient-to-r from-teal-600 to-teal-700 !px-8 text-sm text-white shadow-lg transition-all duration-1000 hover:cursor-pointer hover:shadow-teal-500/50 hover:drop-shadow-lg",
         destructive:
           "bg-destructive text-destructive-foreground hover:bg-destructive/90",
         outline:

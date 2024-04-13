@@ -3,7 +3,7 @@
 import { RiHashtag, RiMenuFill } from "@remixicon/react";
 import Image from "next/image";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 
 import { Button } from "@/components/ui/button";
 import {
@@ -12,12 +12,26 @@ import {
   SheetContent,
   SheetTrigger,
 } from "@/components/ui/sheet";
+import { toast, useToast } from "@/components/ui/use-toast";
 import { sidebarLinks, THEME_MENU_ICON_SIZE } from "@/constants/constants";
 import { Tag } from "@/types";
 
 const Discover = ({ username }: { username: string }) => {
   const pathname = usePathname();
+  const { toast } = useToast();
+  const router = useRouter();
 
+  const handleClick = (route: string) => () => {
+    if ((route === "/profile" || route === "/bookmarks") && !username) {
+      return toast({
+        className:
+          "text-primary border-primary border bg-yellow-500 dark:bg-yellow-600 rounded-md",
+        title: "Sign In Required",
+        description: `Sign in to be able to access ${route === "/profile" ? "your profile" : "your bookmarks"}.`,
+      });
+    }
+    return router.push(route === "/profile" ? `/profile/${username}` : route);
+  };
   return (
     <section className="text-primary">
       <h3 className="my-2 font-bold">Discover</h3>
@@ -25,15 +39,9 @@ const Discover = ({ username }: { username: string }) => {
         const isActive = pathname === item.route;
         return (
           <SheetClose asChild key={item.route}>
-            <Link
-              href={
-                item.label === "Profile"
-                  ? username
-                    ? `/profile/${username}`
-                    : "/sign-in"
-                  : item.route
-              }
-              className={`${isActive ? "bg-active" : "hover:bg-hover"} flex-start gap-2 rounded-md px-3.5 py-1.5`}
+            <div
+              className={`${isActive ? "bg-active" : "hover:bg-hover"} flex-start cursor-pointer gap-2 rounded-md px-3.5 py-1.5`}
+              onClick={handleClick(item.route)}
             >
               {isActive ? (
                 <item.iconFilled size={THEME_MENU_ICON_SIZE} />
@@ -41,7 +49,7 @@ const Discover = ({ username }: { username: string }) => {
                 <item.icon size={THEME_MENU_ICON_SIZE} />
               )}
               <p className="text-sm">{item.label}</p>
-            </Link>
+            </div>
           </SheetClose>
         );
       })}
@@ -84,9 +92,25 @@ const NavContent = ({ username, tags }: { username: string; tags: string }) => {
     <div className={`flex flex-1 flex-col`}>
       <Discover username={username} />
       <PopularTags tags={tags} />
-      <Link href="/questions/ask" className="mt-8 rounded-3xl">
+      <Link
+        href={username ? "/questions/ask" : ""}
+        className="mt-8 rounded-3xl"
+      >
         <SheetClose asChild>
-          <Button variant="default">Ask a Question</Button>
+          <Button
+            variant="default"
+            onClick={() => {
+              if (!username)
+                return toast({
+                  className:
+                    "text-primary border-primary border bg-yellow-500 dark:bg-yellow-600 rounded-md",
+                  title: "Sign In Required",
+                  description: "Sign in to be able to ask a question.",
+                });
+            }}
+          >
+            Ask a Question
+          </Button>
         </SheetClose>
       </Link>
     </div>
@@ -102,8 +126,8 @@ const MobileNav = ({ username, tags }: { username: string; tags: string }) => {
       <SheetContent side="left" className="bg-primary border-none">
         <Link href="/" className="flex items-center gap-1">
           <Image src="/svg/logo.svg" alt="DevFlow" width={24} height={24} />
-          <p className="text-primary font-geistMono text-2xl font-bold">
-            Dev<span className="text-teal-500">Overflow</span>
+          <p className="text-primary ml-1 font-geistSans text-lg font-semibold max-lg:hidden">
+            DevOverflow
           </p>
         </Link>
         <div className="flex h-full flex-col pb-12 pt-3.5">

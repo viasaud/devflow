@@ -1,7 +1,5 @@
-import { RiDeleteBinLine } from "@remixicon/react";
 import Link from "next/link";
 
-import { QUESTION_ICON_SIZE } from "@/constants/constants";
 import { getMongoUser, getTimeAgo } from "@/lib/utils";
 import { Question } from "@/types";
 
@@ -23,6 +21,7 @@ const QuestionCard = async ({
   glow,
 }: Question) => {
   const mongoUser = await getMongoUser();
+
   return (
     <div className="flex flex-col">
       <header className="flex items-center">
@@ -30,15 +29,9 @@ const QuestionCard = async ({
         <p className="text-secondary ml-auto font-geistMono text-xs">
           {getTimeAgo(createdAt)}
         </p>
-
-        {/* Delete Post is shown only when signed-in */}
-        <RiDeleteBinLine
-          size={QUESTION_ICON_SIZE}
-          className="ml-1 hidden cursor-pointer text-zinc-500 hover:text-red-500 dark:text-zinc-400 hover:dark:text-red-500"
-        />
       </header>
 
-      <Link key={_id} href={`/questions/${_id}`}>
+      <Link href={`/questions/${_id}`}>
         <p className="py-4 text-base font-bold">{title}</p>
       </Link>
 

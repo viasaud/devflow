@@ -12,7 +12,7 @@ export async function POST(req: Request) {
 
   if (!WEBHOOK_SECRET) {
     throw new Error(
-      "Please add WEBHOOK_SECRET from Clerk Dashboard to .env or .env.local",
+      "Please add WEBHOOK_SECRET from Clerk Dashboard to .env or .env.local"
     );
   }
 
@@ -63,7 +63,7 @@ export async function POST(req: Request) {
     // Create a new user in your database
     const mongoUser = await createUser({
       clerkId: id,
-      name: `${first_name}${last_name ? ` ${last_name}` : "Anonymous"}`,
+      name: `${first_name} ${last_name}`,
       username: username!,
       email: email_addresses[0].email_address,
       avatar: image_url,
@@ -80,7 +80,7 @@ export async function POST(req: Request) {
     const mongoUser = await updateUser({
       clerkId: id,
       updateData: {
-        name: `${first_name}${last_name ? ` ${last_name}` : "Anonymous"}`,
+        name: `${first_name} ${last_name}`,
         username: username!,
         email: email_addresses[0].email_address,
         avatar: image_url,

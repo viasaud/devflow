@@ -18,3 +18,16 @@ export const AnswerSchema = z.object({
     .min(50, "Answer is too short")
     .max(3000, "Answer is too long"),
 });
+
+export const profileSchema = z.object({
+  name: z.string().min(5, "Name is too short").max(20, "Name is too long"),
+  username: z
+    .string()
+    .min(5, "Username is too short")
+    .max(20, "Username is too long"),
+  location: z
+    .string()
+    .min(5, "Location is too short")
+    .max(20, "Location is too long"),
+  bio: z.string().max(300, "Bio is too long"),
+});

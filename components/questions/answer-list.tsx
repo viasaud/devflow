@@ -2,6 +2,7 @@ import { getAnswers } from "@/lib/actions/answer.action";
 import { getMongoUser, getTimeAgo } from "@/lib/utils";
 import { Answer } from "@/types";
 
+import DeleteItem from "../shared/delete-item";
 import ParseHTML from "../shared/parse-html";
 import UserProfileLink from "../shared/user-profile-link";
 import VoteAndSave from "../shared/vote-and-save";
@@ -28,11 +29,14 @@ const AnswerList = async ({
     <div>
       {answers?.map((answer: Answer) => (
         <div key={answer._id}>
-          <div className="flex-between py-3.5">
+          <div className="flex-start py-3.5">
             <UserProfileLink author={answer.author} />
-            <p className="text-secondary font-geistMono text-xs">
+            <p className="text-secondary ml-auto font-geistMono text-xs">
               {getTimeAgo(answer.createdAt)}
             </p>
+            {answer.author.username === mongoUser?.username && (
+              <DeleteItem type="answer" itemId={JSON.stringify(answer._id)} />
+            )}
           </div>
 
           <ParseHTML content={answer.content} />

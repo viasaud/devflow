@@ -40,9 +40,9 @@ const QuestionPage = async ({
       <SignedOut>
         <Link
           href="/sign-up"
-          className="text-primary border-primary hover:text-invert flex-center my-5 mt-3.5 cursor-pointer gap-1.5 rounded-full border py-2 text-center text-sm transition-colors duration-200 ease-linear hover:bg-zinc-900 dark:hover:bg-zinc-200"
+          className="text-primary border-primary flex-center my-5 mt-3.5 cursor-pointer gap-1.5 rounded-full border py-2 text-center text-sm transition-colors duration-200 ease-linear hover:!border-teal-500 hover:!text-teal-500"
         >
-          <p>Share your knowledge by answering this question.</p>
+          <p>Sign in to share your knowledge by responding to this question!</p>
         </Link>
       </SignedOut>
     </div>

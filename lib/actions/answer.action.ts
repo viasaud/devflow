@@ -3,6 +3,7 @@
 import { revalidatePath } from "next/cache";
 
 import Answer from "@/database/answer.model";
+import Interaction from "@/database/interaction.model";
 import Question from "@/database/question.model";
 
 import { runWithDatabase } from "../mongoose";
@@ -89,6 +90,18 @@ export const downVoteAnswer = async (params: answerVoteParams) => {
 
     if (!answer) throw new Error("Answer not found");
 
+    revalidatePath(path);
+  });
+};
+
+export const deleteAnswer = async (answerId: string, path: string) => {
+  return await runWithDatabase(async () => {
+    await Answer.deleteOne({ _id: answerId });
+    await Question.updateOne(
+      { answers: answerId },
+      { $pull: { answers: answerId } }
+    );
+    await Interaction.deleteMany({ answer: answerId });
     revalidatePath(path);
   });
 };
