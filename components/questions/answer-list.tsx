@@ -35,7 +35,9 @@ const AnswerList = async ({
               {getTimeAgo(answer.createdAt)}
             </p>
             {answer.author.username === mongoUser?.username && (
-              <DeleteItem type="answer" itemId={JSON.stringify(answer._id)} />
+              <div className="ml-3">
+                <DeleteItem type="answer" itemId={JSON.stringify(answer._id)} />
+              </div>
             )}
           </div>
 
