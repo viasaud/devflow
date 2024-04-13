@@ -6,11 +6,7 @@ import { runWithDatabase } from "../mongoose";
 
 import { getAllTagsParams, getQuestionsByTagNameParams } from "./shared.types";
 
-export const getTopInteractedTags = async ({
-  limit = 5,
-}: {
-  limit?: number;
-}) => {
+export const getPopularTags = async ({ limit = 5 }: { limit?: number }) => {
   return await runWithDatabase(async () => {
     return await Tag.find().sort({ questions: 1 }).limit(limit);
   });

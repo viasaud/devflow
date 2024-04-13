@@ -17,6 +17,7 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
+import { useToast } from "@/components/ui/use-toast";
 import { updateUser } from "@/lib/actions/user.action";
 import { profileSchema } from "@/lib/validations";
 
@@ -25,6 +26,7 @@ export function ProfileForm({ mongoUser }: { mongoUser: string }) {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const router = useRouter();
   const pathname = usePathname();
+  const { toast } = useToast();
 
   const form = useForm<z.infer<typeof profileSchema>>({
     resolver: zodResolver(profileSchema),
@@ -38,6 +40,12 @@ export function ProfileForm({ mongoUser }: { mongoUser: string }) {
 
   async function onSubmit(values: z.infer<typeof profileSchema>) {
     setIsSubmitting(true);
+    toast({
+      className:
+        "text-primary border-primary border bg-primary dark:bg-gradient-to-r dark:from-zinc-950 dark:to-zinc-900 rounded-md",
+      title: "Profile Updated",
+      description: "Your profile has been updated successfully.",
+    });
     try {
       await updateUser({
         clerkId: user.clerkId,
@@ -57,7 +65,10 @@ export function ProfileForm({ mongoUser }: { mongoUser: string }) {
 
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+      <form
+        onSubmit={form.handleSubmit(onSubmit)}
+        className="flex flex-col gap-8"
+      >
         <FormField
           control={form.control}
           name="name"

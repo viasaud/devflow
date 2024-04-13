@@ -1,11 +1,11 @@
-import { getTopInteractedTags } from "@/lib/actions/tag.action";
+import { getPopularTags } from "@/lib/actions/tag.action";
 import { getMongoUser } from "@/lib/utils";
 
 import NavContent from "../nav-content";
 
 const LeftSidebar = async () => {
   const mongoUser = await getMongoUser();
-  const tags = await getTopInteractedTags({});
+  const tags = await getPopularTags({});
   return (
     <section className="fixed left-8 top-16 w-52 shadow-zinc-300 dark:shadow-none max-xl:hidden 2xl:mr-28">
       <NavContent username={mongoUser?.username} tags={JSON.stringify(tags)} />

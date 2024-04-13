@@ -25,7 +25,8 @@ const Discover = ({ username }: { username: string }) => {
     if ((route === "/profile" || route === "/bookmarks") && !username) {
       return toast({
         className:
-          "text-primary border-primary border bg-primary dark:bg-gradient-to-r dark:from-zinc-950 dark:to-zinc-900 rounded-md",
+          "text-primary border-primary border bg-yellow-500 dark:bg-yellow-600 rounded-md",
+        title: "Sign In Required",
         description: `Sign in to be able to access ${route === "/profile" ? "your profile" : "your bookmarks"}.`,
       });
     }
@@ -102,7 +103,8 @@ const NavContent = ({ username, tags }: { username: string; tags: string }) => {
               if (!username)
                 return toast({
                   className:
-                    "text-primary border-primary border bg-primary dark:bg-gradient-to-r dark:from-zinc-950 dark:to-zinc-900 rounded-md",
+                    "text-primary border-primary border bg-yellow-500 dark:bg-yellow-600 rounded-md",
+                  title: "Sign In Required",
                   description: "Sign in to be able to ask a question.",
                 });
             }}

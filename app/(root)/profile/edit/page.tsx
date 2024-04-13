@@ -8,7 +8,7 @@ const EditProfile = async () => {
   if (!mongoUser) return redirect("/404");
 
   return (
-    <div className="text-primary w-full pt-7">
+    <div className="text-primary w-full pt-3">
       <ProfileForm mongoUser={JSON.stringify(mongoUser)} />
     </div>
   );

@@ -143,3 +143,9 @@ export const editQuestion = async (params: editQuestionParams) => {
     revalidatePath(path);
   });
 };
+
+export const getPopularQuestions = async () => {
+  return await runWithDatabase(async () => {
+    return await Question.find({}).sort({ upVotes: -1 }).limit(5);
+  });
+};

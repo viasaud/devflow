@@ -48,8 +48,9 @@ const VoteAndSave = ({
     if (!userId)
       return toast({
         className:
-          "text-primary border-primary border bg-primary dark:bg-gradient-to-r dark:from-zinc-950 dark:to-zinc-900 rounded-md",
-        description: "Sign in to be able to vote.",
+          "text-primary border-primary border bg-yellow-500 dark:bg-yellow-600 rounded-md",
+        title: "Sign In Required",
+        description: "Please sign in to your account in order to access the voting feature.",
       });
     if (type === "question") {
       if (voteType === "upVote") {
@@ -60,6 +61,12 @@ const VoteAndSave = ({
           hasDownVoted,
           path: pathname,
         });
+        return toast({
+          className:
+            "text-primary border-primary border bg-primary dark:bg-gradient-to-r dark:from-zinc-950 dark:to-zinc-900 rounded-md",
+          title: `${hasUpVoted ? "Upvote Removed" : "Upvoted"}`,
+          description: `${hasUpVoted ? "You have removed your upvote." : "You have upvoted the question."}`,
+        });
       } else if (voteType === "downVote") {
         await downVoteQuestion({
           questionId: JSON.parse(itemId),
@@ -67,6 +74,12 @@ const VoteAndSave = ({
           hasUpVoted,
           hasDownVoted,
           path: pathname,
+        });
+        return toast({
+          className:
+            "text-primary border-primary border bg-primary dark:bg-gradient-to-r dark:from-zinc-950 dark:to-zinc-900 rounded-md",
+          title: `${hasDownVoted ? "Downvote Removed" : "Downvoted"}`,
+          description: `${hasDownVoted ? "You have removed your downvote." : "You have downvoted the question."}`,
         });
       }
     } else if (type === "answer") {
@@ -78,6 +91,12 @@ const VoteAndSave = ({
           hasDownVoted,
           path: pathname,
         });
+        return toast({
+          className:
+            "text-primary border-primary border bg-primary dark:bg-gradient-to-r dark:from-zinc-950 dark:to-zinc-900 rounded-md",
+          title: `${hasUpVoted ? "Upvote Removed" : "Upvoted"}`,
+          description: `${hasUpVoted ? "You have removed your upvote." : "You have upvoted the answer."}`,
+        });
       } else if (voteType === "downVote") {
         await downVoteAnswer({
           answerId: JSON.parse(itemId),
@@ -85,6 +104,12 @@ const VoteAndSave = ({
           hasUpVoted,
           hasDownVoted,
           path: pathname,
+        });
+        return toast({
+          className:
+            "text-primary border-primary border bg-primary dark:bg-gradient-to-r dark:from-zinc-950 dark:to-zinc-900 rounded-md",
+          title: `${hasDownVoted ? "Downvote Removed" : "Downvoted"}`,
+          description: `${hasDownVoted ? "You have removed your downvote." : "You have downvoted the answer."}`,
         });
       }
     }
@@ -94,14 +119,23 @@ const VoteAndSave = ({
     if (!userId)
       return toast({
         className:
-          "text-primary border-primary border bg-primary dark:bg-gradient-to-r dark:from-zinc-950 dark:to-zinc-900 rounded-md",
-        description: "Sign in to be able to bookmark.",
+          "text-primary border-primary border bg-yellow-500 dark:bg-yellow-600 rounded-md",
+        title: "Sign In Required",
+        description: "Please sign in to your account in order to access the bookmark feature.",
       });
-    await toggleSaveQuestion({
-      questionId: JSON.parse(itemId),
-      userId: JSON.parse(userId),
-      path: pathname,
-    });
+    else {
+      await toggleSaveQuestion({
+        questionId: JSON.parse(itemId),
+        userId: JSON.parse(userId),
+        path: pathname,
+      });
+      return toast({
+        className:
+          "text-primary border-primary border bg-primary dark:bg-gradient-to-r dark:from-zinc-950 dark:to-zinc-900 rounded-md",
+        title: `${hasSaved ? "Bookmark Removed" : "Bookmarked"}`,
+        description: `${hasSaved ? "You have removed the bookmark." : "You have bookmarked the question."}`,
+      });
+    }
   };
 
   return (
