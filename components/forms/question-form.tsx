@@ -12,6 +12,7 @@ import { Button } from "@/components/ui/button";
 import {
   Form,
   FormControl,
+  FormDescription,
   FormField,
   FormItem,
   FormLabel,
@@ -209,9 +210,6 @@ const QuestionForm = ({ mongoUserId, question, edit }: Props) => {
                 <FormLabel className="text-primary flex-start">
                   Tags
                   <span className="text-teal-500">*</span>
-                  <span className="ml-2 text-xs text-gray-500">
-                    (Press Enter to add a tag)
-                  </span>
                 </FormLabel>
                 <FormControl>
                   <Input
@@ -223,6 +221,9 @@ const QuestionForm = ({ mongoUserId, question, edit }: Props) => {
                     }}
                   />
                 </FormControl>
+                <FormDescription className="text-xs text-gray-500">
+                  Press Enter to add a tag
+                </FormDescription>
                 <div className="flex items-center">
                   {field.value.map((tag: string) => (
                     <div
