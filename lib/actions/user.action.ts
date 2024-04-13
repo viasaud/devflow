@@ -104,7 +104,7 @@ export const getSavedQuestions = async (params: getSavedQuestionsParams) => {
       ? { title: { $regex: new RegExp(searchQuery, "i") } }
       : {};
 
-    const user = await User.findOne({ _id: mongoUser }).populate({
+    const user = await User.findOne({ mongoUser }).populate({
       path: "savedQuestions",
       match: query,
       options: {
