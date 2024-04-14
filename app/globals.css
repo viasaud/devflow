@@ -3,6 +3,10 @@
 @tailwind components;
 @tailwind utilities;
 
+body {
+  @apply bg-white dark:bg-black;
+}
+
 @layer utilities {
   .flex-center {
     @apply flex justify-center items-center;
