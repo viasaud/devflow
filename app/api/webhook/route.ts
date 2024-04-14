@@ -1,5 +1,6 @@
 /* eslint-disable camelcase */
 import { WebhookEvent } from "@clerk/nextjs/server";
+import { revalidatePath } from "next/cache";
 import { headers } from "next/headers";
 import { NextResponse } from "next/server";
 import { Webhook } from "svix";
@@ -68,7 +69,7 @@ export async function POST(req: Request) {
       email: email_addresses[0].email_address,
       avatar: image_url,
     });
-
+    revalidatePath("/");
     return NextResponse.json({ message: "OK", user: mongoUser });
   }
 

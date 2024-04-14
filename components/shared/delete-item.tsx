@@ -31,12 +31,12 @@ const DeleteItem = ({ type, itemId }: { type: string; itemId: string }) => {
       onClick={() => {
         toast({
           className:
-            "text-primary border-primary border bg-primary dark:bg-gradient-to-r dark:from-zinc-950 dark:to-zinc-900 rounded-md",
+            "text-primary border-primary border backdrop-blur rounded-md",
           description: `Are you sure you want to delete this ${type}?`,
           action: (
             <ToastAction
               altText={`Delete ${type}`}
-              className="bg-primary rounded-md border border-red-500 text-red-500 dark:bg-gradient-to-r dark:from-zinc-950 dark:to-zinc-900"
+              className="rounded-md border border-red-500 text-red-500 backdrop-blur"
               onClick={handleDelete()}
             >
               Delete {type}

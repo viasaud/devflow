@@ -27,7 +27,7 @@ const ContentStats = ({ answers, views, itemId, userId }: QuestionProps) => {
   }, [itemId, userId, pathname, router]);
 
   return (
-    <div className="cursor-default font-geistMono">
+    <div className="cursor-default select-none font-geistMono">
       <div className="text-primary ml-auto flex items-center gap-2">
         <div className="flex items-center rounded-md p-1">
           <RiChat1Line

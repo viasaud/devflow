@@ -25,9 +25,9 @@ const Discover = ({ username }: { username: string }) => {
     if ((route === "/profile" || route === "/bookmarks") && !username) {
       return toast({
         className:
-          "text-primary border-primary border bg-yellow-500 dark:bg-yellow-600 rounded-md",
+          "text-primary border-primary border bg-yellow-500/50 dark:bg-yellow-600/40 border-yellow-600 backdrop-blur rounded-md",
         title: "Sign In Required",
-        description: `Sign in to be able to access ${route === "/profile" ? "your profile" : "your bookmarks"}.`,
+        description: `Please sign in to your account in order to access ${route === "/profile" ? "your profile" : "your bookmarks"}.`,
       });
     }
     return router.push(route === "/profile" ? `/profile/${username}` : route);
@@ -89,7 +89,7 @@ const PopularTags = ({ tags }: { tags: string }) => {
 
 const NavContent = ({ username, tags }: { username: string; tags: string }) => {
   return (
-    <div className={`flex flex-1 flex-col`}>
+    <div className="flex flex-1 select-none flex-col">
       <Discover username={username} />
       <PopularTags tags={tags} />
       <Link
@@ -103,9 +103,10 @@ const NavContent = ({ username, tags }: { username: string; tags: string }) => {
               if (!username)
                 return toast({
                   className:
-                    "text-primary border-primary border bg-yellow-500 dark:bg-yellow-600 rounded-md",
+                    "text-primary border-primary border bg-yellow-500/50 dark:bg-yellow-600/40 border-yellow-600 backdrop-blur rounded-md",
                   title: "Sign In Required",
-                  description: "Sign in to be able to ask a question.",
+                  description:
+                    "Please sign in to your account in order to ask a question.",
                 });
             }}
           >

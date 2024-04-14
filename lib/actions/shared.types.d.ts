@@ -122,7 +122,7 @@ export interface toggleSaveQuestionParams {
 }
 
 export interface getSavedQuestionsParams {
-  mongoUser: string;
+  mongoUser: IUser;
   page?: number;
   pageSize?: number;
   filter?: string;
