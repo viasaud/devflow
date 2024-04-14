@@ -41,8 +41,7 @@ export function ProfileForm({ mongoUser }: { mongoUser: string }) {
   async function onSubmit(values: z.infer<typeof profileSchema>) {
     setIsSubmitting(true);
     toast({
-      className:
-        "text-primary border-primary border bg-primary dark:bg-gradient-to-r dark:from-zinc-950 dark:to-zinc-900 rounded-md",
+      className: "text-primary border-primary border backdrop-blur rounded-md",
       title: "Profile Updated",
       description: "Your profile has been updated successfully.",
     });

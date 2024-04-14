@@ -6,7 +6,7 @@ import { Question } from "@/types";
 
 const BookmarksPage = async () => {
   const mongoUser = await getMongoUser();
-  const questions = await getSavedQuestions(mongoUser);
+  const questions = await getSavedQuestions({ mongoUser });
   return (
     <main className="text-primary border-primary w-full">
       <Filter type="bookmarks" />

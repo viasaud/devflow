@@ -48,9 +48,10 @@ const VoteAndSave = ({
     if (!userId)
       return toast({
         className:
-          "text-primary border-primary border bg-yellow-500 dark:bg-yellow-600 rounded-md",
+          "text-primary border-primary border bg-yellow-500/50 dark:bg-yellow-600/40 border-yellow-600 backdrop-blur rounded-md",
         title: "Sign In Required",
-        description: "Please sign in to your account in order to access the voting feature.",
+        description:
+          "Please sign in to your account in order to access the voting feature.",
       });
     if (type === "question") {
       if (voteType === "upVote") {
@@ -63,7 +64,7 @@ const VoteAndSave = ({
         });
         return toast({
           className:
-            "text-primary border-primary border bg-primary dark:bg-gradient-to-r dark:from-zinc-950 dark:to-zinc-900 rounded-md",
+            "text-primary border-primary border backdrop-blur rounded-md",
           title: `${hasUpVoted ? "Upvote Removed" : "Upvoted"}`,
           description: `${hasUpVoted ? "You have removed your upvote." : "You have upvoted the question."}`,
         });
@@ -77,7 +78,7 @@ const VoteAndSave = ({
         });
         return toast({
           className:
-            "text-primary border-primary border bg-primary dark:bg-gradient-to-r dark:from-zinc-950 dark:to-zinc-900 rounded-md",
+            "text-primary border-primary border backdrop-blur rounded-md",
           title: `${hasDownVoted ? "Downvote Removed" : "Downvoted"}`,
           description: `${hasDownVoted ? "You have removed your downvote." : "You have downvoted the question."}`,
         });
@@ -93,7 +94,7 @@ const VoteAndSave = ({
         });
         return toast({
           className:
-            "text-primary border-primary border bg-primary dark:bg-gradient-to-r dark:from-zinc-950 dark:to-zinc-900 rounded-md",
+            "text-primary border-primary border backdrop-blur rounded-md",
           title: `${hasUpVoted ? "Upvote Removed" : "Upvoted"}`,
           description: `${hasUpVoted ? "You have removed your upvote." : "You have upvoted the answer."}`,
         });
@@ -107,7 +108,7 @@ const VoteAndSave = ({
         });
         return toast({
           className:
-            "text-primary border-primary border bg-primary dark:bg-gradient-to-r dark:from-zinc-950 dark:to-zinc-900 rounded-md",
+            "text-primary border-primary border backdrop-blur rounded-md",
           title: `${hasDownVoted ? "Downvote Removed" : "Downvoted"}`,
           description: `${hasDownVoted ? "You have removed your downvote." : "You have downvoted the answer."}`,
         });
@@ -119,9 +120,10 @@ const VoteAndSave = ({
     if (!userId)
       return toast({
         className:
-          "text-primary border-primary border bg-yellow-500 dark:bg-yellow-600 rounded-md",
+          "text-primary border-primary border bg-yellow-500/50 dark:bg-yellow-600/40 border-yellow-600 backdrop-blur rounded-md",
         title: "Sign In Required",
-        description: "Please sign in to your account in order to access the bookmark feature.",
+        description:
+          "Please sign in to your account in order to access the bookmark feature.",
       });
     else {
       await toggleSaveQuestion({
@@ -131,7 +133,7 @@ const VoteAndSave = ({
       });
       return toast({
         className:
-          "text-primary border-primary border bg-primary dark:bg-gradient-to-r dark:from-zinc-950 dark:to-zinc-900 rounded-md",
+          "text-primary border-primary border backdrop-blur rounded-md",
         title: `${hasSaved ? "Bookmark Removed" : "Bookmarked"}`,
         description: `${hasSaved ? "You have removed the bookmark." : "You have bookmarked the question."}`,
       });
@@ -139,7 +141,7 @@ const VoteAndSave = ({
   };
 
   return (
-    <div className="flex items-center justify-end gap-3 font-geistMono">
+    <div className="flex select-none items-center justify-end gap-3 font-geistMono">
       {bookmarkButton && (
         <div
           className="border-primary hover:border-hover no-focus text-primary group flex cursor-pointer items-center rounded-md border p-1"

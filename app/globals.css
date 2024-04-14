@@ -3,6 +3,18 @@
 @tailwind components;
 @tailwind utilities;
 
+@media (prefers-color-scheme: dark) {
+  body {
+    background-color: black;
+  }
+}
+
+@media (prefers-color-scheme: light) {
+  body {
+    background-color: white;
+  }
+}
+
 @layer utilities {
   .flex-center {
     @apply flex justify-center items-center;
