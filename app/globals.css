@@ -3,8 +3,16 @@
 @tailwind components;
 @tailwind utilities;
 
-body {
-  @apply bg-white dark:bg-black;
+@media (prefers-color-scheme: dark) {
+  body {
+    background-color: black;
+  }
+}
+
+@media (prefers-color-scheme: light) {
+  body {
+    background-color: white;
+  }
 }
 
 @layer utilities {

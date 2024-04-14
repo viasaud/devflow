@@ -23,7 +23,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className="bg-primary">
+    <html lang="en">
       <body
         className={`${GeistMono.variable} ${GeistSans.variable} dark:dark-scrollbar light-scrollbar bg-primary min-h-screen scroll-smooth dark:bg-gradient-to-br dark:from-zinc-950 dark:from-20% dark:to-zinc-900`}
       >
