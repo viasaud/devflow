@@ -4,10 +4,11 @@ import {
   RiBug2Line,
   RiChat1Line,
 } from "@remixicon/react";
+import Image from "next/image";
 
 import { QUESTION_ICON_SIZE } from "@/constants/constants";
 
-import { Avatar, AvatarImage } from "../ui/avatar";
+import { Avatar } from "../ui/avatar";
 
 interface Props {
   userInfo: {
@@ -27,8 +28,13 @@ interface Props {
 const ProfileInfo = ({ userInfo }: Props) => {
   return (
     <div className="flex-center flex-col gap-3.5">
-      <Avatar className="size-32">
-        <AvatarImage src={userInfo?.user.avatar} alt="Profile Picture" />
+      <Avatar>
+        <Image
+          src={userInfo?.user.avatar}
+          alt="Profile Picture"
+          width={128}
+          height={128}
+        />
       </Avatar>
       <div className="flex-center flex-col">
         <p className="text-primary text-xl font-bold">{userInfo?.user.name}</p>

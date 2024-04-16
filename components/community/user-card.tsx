@@ -1,6 +1,7 @@
+import Image from "next/image";
 import Link from "next/link";
 
-import { Avatar, AvatarImage } from "../ui/avatar";
+import { Avatar } from "../ui/avatar";
 
 interface User {
   username: string;
@@ -12,8 +13,8 @@ const UserCard = async ({ user }: { user: User }) => {
   return (
     <Link href={`/profile/${user.username}`}>
       <div className="flex h-full flex-col items-center justify-center gap-4 p-5">
-        <Avatar className="border-primary size-28 border">
-          <AvatarImage
+        <Avatar className="border-primary border">
+          <Image
             src={user.avatar}
             width={112}
             height={112}
