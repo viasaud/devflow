@@ -28,7 +28,7 @@ const ProfileInfo = ({ userInfo }: Props) => {
   return (
     <div className="flex-center flex-col gap-3.5">
       <Avatar className="size-32">
-        <AvatarImage src={userInfo?.user.avatar} />
+        <AvatarImage src={userInfo?.user.avatar} alt="Profile Picture" />
       </Avatar>
       <div className="flex-center flex-col">
         <p className="text-primary text-xl font-bold">{userInfo?.user.name}</p>

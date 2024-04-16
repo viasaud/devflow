@@ -72,7 +72,7 @@ const PopularTags = ({ tags }: { tags: string }) => {
         href="/tags"
         className="text-primary hover:bg-hover mt-1 w-fit rounded-3xl px-5 py-2 text-xs"
       >
-        See More
+        More Tags
       </Link>
     </section>
   );
