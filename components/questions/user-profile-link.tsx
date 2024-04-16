@@ -11,7 +11,12 @@ const UserProfileLink = ({ author }: { author: Author }) => {
       className="text-hover flex-center w-fit cursor-pointer gap-2"
     >
       <Avatar>
-        <AvatarImage src={author.avatar} width={32} height={32} />
+        <AvatarImage
+          src={author.avatar}
+          width={32}
+          height={32}
+          alt="Profile Picture"
+        />
       </Avatar>
 
       <p className="text-primary text-sm">{author.name}</p>

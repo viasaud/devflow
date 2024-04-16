@@ -13,7 +13,12 @@ const UserCard = async ({ user }: { user: User }) => {
     <Link href={`/profile/${user.username}`}>
       <div className="flex h-full flex-col items-center justify-center gap-4 p-5">
         <Avatar className="border-primary size-28 border">
-          <AvatarImage src={user.avatar} width={112} height={112} />
+          <AvatarImage
+            src={user.avatar}
+            width={112}
+            height={112}
+            alt="Profile Picture"
+          />
         </Avatar>
         <div className="text-primary text-center">
           <p>{user.name}</p>
