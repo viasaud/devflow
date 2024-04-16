@@ -1,5 +1,3 @@
-import React from "react";
-
 const LoadingPage = () => {
   return (
     <div role="status" className="flex-center size-full">
