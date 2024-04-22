@@ -23,8 +23,6 @@
     "@remixicon/react": "^4.2.0",
     "@tailwindcss/typography": "^0.5.12",
     "@tinymce/tinymce-react": "^5.0.1",
-    "@vercel/analytics": "^1.2.2",
-    "@vercel/speed-insights": "^1.0.10",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.0",
     "eslint-config-prettier": "^9.1.0",

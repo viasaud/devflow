@@ -1,7 +1,7 @@
 "use client";
 
 import { zodResolver } from "@hookform/resolvers/zod";
-import { RiBardFill } from "@remixicon/react";
+import { RiSparkling2Fill } from "@remixicon/react";
 import { Editor } from "@tinymce/tinymce-react";
 import { usePathname } from "next/navigation";
 import { useRef, useState } from "react";
@@ -68,8 +68,16 @@ const AnswerForm = ({
     <Form {...form}>
       <div className="mt-5 flex items-center justify-between">
         <p className="text-primary">Your Answer</p>
-        <Button variant={"ai"} disabled={isSubmitting} onClick={() => {}}>
-          <RiBardFill size={16} />
+        <Button
+          variant={"ai"}
+          disabled={isSubmitting}
+          onClick={() => {}}
+          className="group"
+        >
+          <RiSparkling2Fill
+            size={16}
+            className="duration-300 group-hover:scale-125"
+          />
           Generate an AI answer
         </Button>
       </div>
