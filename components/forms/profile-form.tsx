@@ -1,8 +1,7 @@
 "use client";
 
 import { zodResolver } from "@hookform/resolvers/zod";
-import { revalidatePath } from "next/cache";
-import { usePathname, useRouter } from "next/navigation";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
@@ -26,7 +25,6 @@ export function ProfileForm({ mongoUser }: { mongoUser: string }) {
   const user = JSON.parse(mongoUser);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const router = useRouter();
-  const pathname = usePathname();
   const { toast } = useToast();
 
   const form = useForm<z.infer<typeof profileSchema>>({
@@ -55,9 +53,8 @@ export function ProfileForm({ mongoUser }: { mongoUser: string }) {
           location: values.location,
           bio: values.bio,
         },
-        path: pathname,
+        path: `/profile/${user.username}`,
       });
-      revalidatePath(`/profile/${user.username}`);
       router.push(`/profile/${user.username}`);
     } catch (error) {
       console.error(error);
