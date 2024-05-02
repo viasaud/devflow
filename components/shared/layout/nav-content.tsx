@@ -31,14 +31,13 @@ const Discover = ({ username }: { username: string }) => {
     <section className="text-primary">
       <h3 className="my-2 font-bold">Discover</h3>
       {sidebarLinks.map((item) => {
-        const isActive = pathname === item.route;
         return (
           <div
             key={item.route}
-            className={`${isActive ? "bg-active" : "hover:bg-hover"} flex-start cursor-pointer gap-2 rounded-md px-3.5 py-1.5`}
+            className={`${pathname === item.route ? "bg-active" : "hover:bg-hover"} flex-start cursor-pointer gap-2 rounded-md px-3.5 py-1.5`}
             onClick={handleClick(item.route)}
           >
-            {isActive ? (
+            {pathname === item.route ? (
               <item.iconFilled size={THEME_MENU_ICON_SIZE} />
             ) : (
               <item.icon size={THEME_MENU_ICON_SIZE} />
@@ -52,6 +51,7 @@ const Discover = ({ username }: { username: string }) => {
 };
 
 const PopularTags = ({ tags }: { tags: string }) => {
+  const pathname = usePathname();
   return (
     <section>
       <h3 className="text-primary mb-2 mt-4 font-bold">Popular Tags</h3>
@@ -59,7 +59,7 @@ const PopularTags = ({ tags }: { tags: string }) => {
         <Link
           href={`/tags/${tag.name}`}
           key={tag.name}
-          className={`hover:bg-hover text-primary flex-start gap-2 rounded-md px-3.5 py-1.5`}
+          className={`${pathname === `/tags/${tag.name}` ? "bg-active" : "hover:bg-hover"} text-primary flex-start cursor-pointer gap-2 rounded-md px-3.5 py-1.5`}
         >
           <RiHashtag />
           <p className="text-sm">{tag.name}</p>

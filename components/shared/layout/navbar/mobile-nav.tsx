@@ -58,6 +58,7 @@ const Discover = ({ username }: { username: string }) => {
 };
 
 const PopularTags = ({ tags }: { tags: string }) => {
+  const pathname = usePathname();
   return (
     <section>
       <h3 className="text-primary mb-2 mt-4 font-bold">Popular Tags</h3>
@@ -65,7 +66,7 @@ const PopularTags = ({ tags }: { tags: string }) => {
         <SheetClose asChild key={tag.name}>
           <Link
             href={`/tags/${tag.name}`}
-            className={`hover:bg-hover text-primary flex-start gap-2 rounded-md px-3.5 py-1.5`}
+            className={`${pathname === `/tags/${tag.name}` ? "bg-active" : "hover:bg-hover"} text-primary flex-start cursor-pointer gap-2 rounded-md px-3.5 py-1.5`}
           >
             <RiHashtag />
             <p className="text-sm">{tag.name}</p>

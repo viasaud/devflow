@@ -3,6 +3,7 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { RiCloseLine } from "@remixicon/react";
 import { Editor } from "@tinymce/tinymce-react";
+import { revalidatePath } from "next/cache";
 import { useRouter, usePathname } from "next/navigation";
 import React, { useRef, useState } from "react";
 import { useForm } from "react-hook-form";
@@ -111,7 +112,7 @@ const QuestionForm = ({ mongoUserId, question, edit }: Props) => {
           path: pathname,
         });
         setIsSubmitting(true);
-
+        revalidatePath("/");
         router.push("/");
       }
     } catch (error) {

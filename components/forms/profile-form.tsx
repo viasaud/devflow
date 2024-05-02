@@ -1,6 +1,7 @@
 "use client";
 
 import { zodResolver } from "@hookform/resolvers/zod";
+import { revalidatePath } from "next/cache";
 import { usePathname, useRouter } from "next/navigation";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
@@ -56,6 +57,7 @@ export function ProfileForm({ mongoUser }: { mongoUser: string }) {
         },
         path: pathname,
       });
+      revalidatePath(`/profile/${user.username}`);
       router.push(`/profile/${user.username}`);
     } catch (error) {
       console.error(error);
