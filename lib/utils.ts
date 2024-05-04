@@ -1,5 +1,6 @@
-import { auth } from "@clerk/nextjs";
+import { auth } from "@clerk/nextjs/server";
 import { type ClassValue, clsx } from "clsx";
+import qs from "query-string";
 import { twMerge } from "tailwind-merge";
 
 import { getUserById } from "./actions/user.action";
@@ -10,7 +11,7 @@ export function cn(...inputs: ClassValue[]) {
 
 export const formatLargeNumber = (
   firstLength: number,
-  secondLength: number = 0,
+  secondLength: number = 0
 ): string => {
   const diff = firstLength - secondLength;
   if (diff >= 1000000) {
@@ -52,4 +53,23 @@ export function getTimeAgo(date: Date) {
 export const getMongoUser = async () => {
   const { userId } = auth();
   return userId ? await getUserById({ clerkId: userId }) : undefined;
+};
+
+interface UrlQueryParams {
+  params: string;
+  key: string;
+  value: string | null;
+}
+export const formUrlQuery = ({ params, key, value }: UrlQueryParams) => {
+  const currentUrl = qs.parse(params);
+
+  currentUrl[key] = value;
+
+  return qs.stringifyUrl(
+    {
+      url: window.location.pathname,
+      query: currentUrl,
+    },
+    { skipNull: true }
+  );
 };

@@ -1,4 +1,5 @@
 import { ClerkProvider } from "@clerk/nextjs";
+import { dark } from "@clerk/themes";
 import { GeistMono } from "geist/font/mono";
 import { GeistSans } from "geist/font/sans";
 import { Metadata } from "next";
@@ -27,11 +28,7 @@ export default function RootLayout({
       >
         <ClerkProvider
           appearance={{
-            elements: {
-              formButtonPrimary:
-                "no-focus text-sm bg-teal-500 text-zinc-50 shadow-none hover:bg-teal-500/90",
-              footerActionLink: "text-teal-500 hover:text-teal-600",
-            },
+            baseTheme: dark,
           }}
         >
           <ThemeProvider>
