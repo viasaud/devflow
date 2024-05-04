@@ -62,8 +62,19 @@ export const getUserById = async ({ clerkId }: { clerkId: string }) => {
 };
 
 export const getUsers = async (params: getAllUsersParams) => {
+  const { filter } = params;
+  let sortOptions = {};
+
+  if (filter === "latest") {
+    sortOptions = { joinedAt: -1 };
+  } else if (filter === "oldest") {
+    sortOptions = { joinedAt: 1 };
+  } else {
+    sortOptions = { reputation: -1 };
+  }
+
   return await runWithDatabase(async () => {
-    return await User.find().sort({ createdAt: -1 });
+    return await User.find().sort(sortOptions);
   });
 };
 
@@ -100,7 +111,7 @@ export const getSavedQuestions = async (params: getSavedQuestionsParams) => {
   const { filter, mongoUser } = params;
   let sortOptions = {};
   let searchFilter = {};
-  if (filter === "best") {
+  if (filter === "popular") {
     sortOptions = { upVotes: -1 };
   } else if (filter === "hot") {
     sortOptions = { views: -1, upVotes: -1 };

@@ -13,8 +13,27 @@ export const getPopularTags = async ({ limit = 5 }: { limit?: number }) => {
 };
 
 export const getTags = async (params: getAllTagsParams) => {
+  const { filter } = params;
+  let sortQuery = {};
+  switch (filter) {
+    case "popular":
+      sortQuery = { questions: -1 };
+      break;
+    case "name":
+      sortQuery = { name: 1 };
+      break;
+    case "latest":
+      sortQuery = { createdAt: -1 };
+      break;
+    case "oldest":
+      sortQuery = { createdAt: 1 };
+      break;
+    default:
+      sortQuery = { questions: -1 };
+      break;
+  }
   return await runWithDatabase(async () => {
-    return await Tag.find().sort({ name: -1 });
+    return await Tag.find().sort(sortQuery);
   });
 };
 
