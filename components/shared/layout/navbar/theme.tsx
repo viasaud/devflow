@@ -20,7 +20,7 @@ const Theme = () => {
         <MenubarTrigger className="hover:bg-hover data-[state=open]:bg-active text-primary cursor-pointer rounded-3xl">
           {mode === "light" ? <RiSunFill /> : <RiMoonFill />}
         </MenubarTrigger>
-        <MenubarContent className="border-primary absolute -right-10 mt-[.70rem] min-w-28 rounded-md border backdrop-blur-lg">
+        <MenubarContent className="border-primary absolute -right-10 mt-[.70rem] min-w-28 rounded-md border backdrop-blur-3xl">
           {THEME_OPTIONS.map((theme) => (
             <MenubarItem
               key={theme.value}

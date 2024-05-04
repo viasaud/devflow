@@ -40,7 +40,7 @@ const Filter = ({ type }: { type: string }) => {
         <SelectTrigger className="text-hover hover:text-primary no-focus w-fit border-none outline-none">
           <SelectValue />
         </SelectTrigger>
-        <SelectContent className="text-primary border-primary backdrop-blur-lg">
+        <SelectContent className="text-primary border-primary backdrop-blur-3xl">
           {sortOptions?.map((option) => (
             <SelectItem
               key={option}

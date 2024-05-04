@@ -16,7 +16,7 @@ const Navbar = async () => {
   const tags = await getPopularTags({});
 
   return (
-    <nav className="flex-between border-primary fixed z-50 h-14 w-full gap-3 border-b p-4 shadow-zinc-300 backdrop-blur-sm dark:shadow-none lg:px-8">
+    <nav className="flex-between border-primary fixed z-50 h-14 w-full gap-3 border-b p-4 shadow-zinc-300 backdrop-blur-3xl dark:shadow-none lg:px-8">
       <MobileNav username={mongoUser?.username} tags={JSON.stringify(tags)} />
       <Link
         href="/"

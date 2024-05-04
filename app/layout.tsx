@@ -11,7 +11,7 @@ import "../styles/prism.css";
 import { ThemeProvider } from "@/context/ThemeProvider";
 
 export const metadata: Metadata = {
-  title: "DevFlow",
+  title: "Developer Flow",
   description: "A community of developers helping each other",
   icons: { icon: "/svg/logo.svg" },
 };

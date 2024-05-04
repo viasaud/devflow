@@ -97,19 +97,19 @@ export const getSortOptions = (type: string) => {
   let defaultSortOption;
   switch (type) {
     case "bookmarks":
-      sortOptions = ["Best", "Hot", "New", "Open"];
+      sortOptions = ["Popular", "Hot", "Latest", "Open"];
       defaultSortOption = sortOptions[2];
       break;
     case "community":
-      sortOptions = ["Top Contributors", "New Users", "Old Users"];
+      sortOptions = ["Top Contributors", "Latest", "Oldest"];
       defaultSortOption = sortOptions[0];
       break;
     case "tags":
       sortOptions = ["Popular", "Name", "Latest", "Oldest"];
-      defaultSortOption = sortOptions[1];
+      defaultSortOption = sortOptions[0];
       break;
     case "home":
-      sortOptions = ["Best", "Hot", "New", "Open"];
+      sortOptions = ["Popular", "Hot", "Latest", "Open"];
       defaultSortOption = sortOptions[2];
       break;
   }

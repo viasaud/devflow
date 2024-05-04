@@ -53,7 +53,7 @@ export const getQuestions = async (params: getQuestionsParams) => {
   const { filter } = params;
   let sortOptions = {};
   let searchFilter = {};
-  if (filter === "best") {
+  if (filter === "popular") {
     sortOptions = { upVotes: -1 };
   } else if (filter === "hot") {
     sortOptions = { views: -1, upVotes: -1 };
