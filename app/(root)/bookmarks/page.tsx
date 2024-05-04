@@ -4,16 +4,19 @@ import QuestionCard from "@/components/questions/question-card";
 import Filter from "@/components/shared/filter";
 import { getSavedQuestions } from "@/lib/actions/user.action";
 import { getMongoUser } from "@/lib/utils";
-import { Question } from "@/types";
+import { Question, SearchParamsProps } from "@/types";
 
 export const metadata: Metadata = {
   title: "Bookmarks",
   description: "Bookmarks page",
 };
 
-const BookmarksPage = async () => {
+const BookmarksPage = async ({ searchParams }: SearchParamsProps) => {
   const mongoUser = await getMongoUser();
-  const questions = await getSavedQuestions({ mongoUser });
+  const questions = await getSavedQuestions({
+    mongoUser,
+    filter: searchParams.filter,
+  });
   return (
     <main className="text-primary border-primary w-full">
       <Filter type="bookmarks" />
@@ -36,6 +39,12 @@ const BookmarksPage = async () => {
           />
         </div>
       ))}
+
+      {questions.length === 0 && (
+        <p className="text-primary mt-5 text-center text-sm">
+          No hot questions in the last 7 days
+        </p>
+      )}
     </main>
   );
 };

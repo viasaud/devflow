@@ -1,8 +1,10 @@
 "use client";
 
-import { useState } from "react";
+import { useSearchParams, useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
 
 import { getSortOptions } from "@/constants/constants";
+import { formUrlQuery } from "@/lib/utils";
 
 import {
   Select,
@@ -13,9 +15,22 @@ import {
 } from "../ui/select";
 
 const Filter = ({ type }: { type: string }) => {
+  const searchParams = useSearchParams();
+  const router = useRouter();
+
   const { sortOptions, defaultSortOption } = getSortOptions(type);
 
-  const [selectedOption, setSelectedOption] = useState(defaultSortOption);
+  const [selectedOption, setSelectedOption] = useState(defaultSortOption || "");
+
+  useEffect(() => {
+    const newUrl = formUrlQuery({
+      params: searchParams.toString(),
+      key: "filter",
+      value: selectedOption.toLowerCase(),
+    });
+
+    router.push(newUrl);
+  }, [selectedOption, router, searchParams]);
 
   const handleOptionChange = (value: string) => setSelectedOption(value);
 

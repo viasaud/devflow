@@ -50,15 +50,30 @@ export const createQuestion = async (params: createQuestionParams) => {
 };
 
 export const getQuestions = async (params: getQuestionsParams) => {
+  const { filter } = params;
+  let sortOptions = {};
+  let searchFilter = {};
+  if (filter === "best") {
+    sortOptions = { upVotes: -1 };
+  } else if (filter === "hot") {
+    sortOptions = { views: -1, upVotes: -1 };
+    searchFilter = {
+      createdAt: { $gte: new Date(Date.now() - 1000 * 60 * 60 * 24 * 7) },
+    };
+  } else if (filter === "open") {
+    searchFilter = { answers: { $size: 0 } };
+  } else {
+    sortOptions = { createdAt: -1 };
+  }
   return await runWithDatabase(async () => {
-    const questions = await Question.find({})
+    const questions = await Question.find(searchFilter)
       .populate({
         path: "tags",
         model: Tag,
         options: { sort: { name: 1 } },
       })
       .populate({ path: "author", model: User })
-      .sort({ createdAt: -1 });
+      .sort(sortOptions);
 
     return questions;
   });

@@ -1,6 +1,5 @@
 "use server";
 
-import { FilterQuery } from "mongoose";
 import { revalidatePath } from "next/cache";
 
 import Answer from "@/database/answer.model";
@@ -98,17 +97,27 @@ export const toggleSaveQuestion = async (params: toggleSaveQuestionParams) => {
 };
 
 export const getSavedQuestions = async (params: getSavedQuestionsParams) => {
+  const { filter, mongoUser } = params;
+  let sortOptions = {};
+  let searchFilter = {};
+  if (filter === "best") {
+    sortOptions = { upVotes: -1 };
+  } else if (filter === "hot") {
+    sortOptions = { views: -1, upVotes: -1 };
+    searchFilter = {
+      createdAt: { $gte: new Date(Date.now() - 1000 * 60 * 60 * 24 * 7) },
+    };
+  } else if (filter === "open") {
+    searchFilter = { answers: { $size: 0 } };
+  } else {
+    sortOptions = { createdAt: -1 };
+  }
   return await runWithDatabase(async () => {
-    const { mongoUser, searchQuery } = params;
-    const query: FilterQuery<typeof Question> = searchQuery
-      ? { title: { $regex: new RegExp(searchQuery, "i") } }
-      : {};
-
     const user = await User.findOne({ _id: mongoUser._id }).populate({
       path: "savedQuestions",
-      match: query,
+      match: searchFilter,
       options: {
-        sort: { views: -1, upVotes: -1 },
+        sort: sortOptions,
       },
       populate: [
         { path: "author", model: "User" },

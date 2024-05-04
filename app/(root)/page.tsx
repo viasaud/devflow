@@ -3,16 +3,16 @@ import { Metadata } from "next";
 import QuestionCard from "@/components/questions/question-card";
 import Filter from "@/components/shared/filter";
 import { getQuestions } from "@/lib/actions/question.action";
-import { Question } from "@/types";
+import { Question, SearchParamsProps } from "@/types";
 
 export const metadata: Metadata = {
   title: "Home",
   description: "Home page",
 };
 
-const HomePage = async () => {
-  const questions = await getQuestions({});
-
+const HomePage = async ({ searchParams }: SearchParamsProps) => {
+  const questions = await getQuestions({ filter: searchParams.filter });
+  console.log(questions);
   return (
     <main className="text-primary border-primary w-full">
       <Filter type="home" />
@@ -35,6 +35,12 @@ const HomePage = async () => {
           />
         </div>
       ))}
+
+      {questions.length === 0 && (
+        <p className="text-primary mt-5 text-center text-sm">
+          No hot questions in the last 7 days
+        </p>
+      )}
     </main>
   );
 };
