@@ -12,7 +12,6 @@ export const metadata: Metadata = {
 
 const HomePage = async ({ searchParams }: SearchParamsProps) => {
   const questions = await getQuestions({ filter: searchParams.filter });
-  console.log(questions);
   return (
     <main className="text-primary border-primary w-full">
       <Filter type="home" />
