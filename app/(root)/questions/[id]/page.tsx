@@ -1,4 +1,5 @@
 import { SignedIn, SignedOut } from "@clerk/nextjs";
+import { Metadata } from "next";
 import Link from "next/link";
 import { redirect } from "next/navigation";
 
@@ -7,6 +8,11 @@ import AnswerList from "@/components/questions/answer-list";
 import QuestionContent from "@/components/questions/question-content";
 import { getQuestionById } from "@/lib/actions/question.action";
 import { getMongoUser } from "@/lib/utils";
+
+export const metadata: Metadata = {
+  title: "Question",
+  description: "Question page",
+};
 
 const QuestionPage = async ({
   params,

@@ -1,8 +1,15 @@
+import { Metadata } from "next";
+
 import QuestionCard from "@/components/questions/question-card";
 import Filter from "@/components/shared/filter";
 import { getSavedQuestions } from "@/lib/actions/user.action";
 import { getMongoUser } from "@/lib/utils";
 import { Question } from "@/types";
+
+export const metadata: Metadata = {
+  title: "Bookmarks",
+  description: "Bookmarks page",
+};
 
 const BookmarksPage = async () => {
   const mongoUser = await getMongoUser();

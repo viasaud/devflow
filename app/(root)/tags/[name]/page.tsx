@@ -1,9 +1,12 @@
+import { Metadata } from "next";
 import { redirect } from "next/navigation";
 
 import QuestionCard from "@/components/questions/question-card";
 import Filter from "@/components/shared/filter";
 import { getQuestionsByTagName } from "@/lib/actions/tag.action";
 import { Question } from "@/types";
+
+export let metadata: Metadata;
 
 const TagPage = async ({
   params,
@@ -13,6 +16,12 @@ const TagPage = async ({
   searchParams: { [key: string]: string | undefined };
 }) => {
   const questions = await getQuestionsByTagName({ name: params.name });
+
+  metadata = {
+    title: `${params.name}`,
+    description: "Tag page",
+  };
+
   if (!questions) return redirect("/404");
   return (
     <div className="text-primary border-primary w-full">

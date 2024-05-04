@@ -1,7 +1,14 @@
+import { Metadata } from "next";
+
 import QuestionCard from "@/components/questions/question-card";
 import Filter from "@/components/shared/filter";
 import { getQuestions } from "@/lib/actions/question.action";
 import { Question } from "@/types";
+
+export const metadata: Metadata = {
+  title: "Home",
+  description: "Home page",
+};
 
 const HomePage = async () => {
   const questions = await getQuestions({});
