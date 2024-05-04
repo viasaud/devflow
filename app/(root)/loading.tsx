@@ -3,7 +3,7 @@ const LoadingPage = () => {
     <div role="status" className="flex-center size-full">
       <svg
         aria-hidden="true"
-        className="mt-96 size-8 animate-spin fill-teal-600 text-gray-200 dark:text-gray-600"
+        className="mt-96 size-8 animate-spin fill-teal-600 text-transparent"
         viewBox="0 0 100 101"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"

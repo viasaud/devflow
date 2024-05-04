@@ -1,4 +1,4 @@
-import { auth } from "@clerk/nextjs";
+import { auth } from "@clerk/nextjs/server";
 import { type ClassValue, clsx } from "clsx";
 import { twMerge } from "tailwind-merge";
 
@@ -10,7 +10,7 @@ export function cn(...inputs: ClassValue[]) {
 
 export const formatLargeNumber = (
   firstLength: number,
-  secondLength: number = 0,
+  secondLength: number = 0
 ): string => {
   const diff = firstLength - secondLength;
   if (diff >= 1000000) {
