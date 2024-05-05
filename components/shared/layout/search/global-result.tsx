@@ -75,11 +75,11 @@ const GlobalResult = () => {
                   className="hover:bg-hover flex w-full cursor-pointer items-center gap-3 rounded-md p-1 py-1.5"
                 >
                   <RiArrowDropRightLine
-                    className="text-primary"
+                    className="text-primary size-5"
                     size={SMALL_ICON_SIZE}
                   />
 
-                  <div className="text-primary flex flex-col text-sm">
+                  <div className="text-primary flex w-full flex-col text-sm">
                     <p>{item.title}</p>
                     <p className="text-secondary text-xs uppercase">
                       {item.type}
