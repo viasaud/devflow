@@ -58,9 +58,7 @@ const GlobalResult = () => {
       <GlobalFilters />
 
       <div className="mt-4 space-y-5">
-        <p className="text-primary border-primary border-t pt-4 text-xs uppercase">
-          Top matches
-        </p>
+        <p className="text-primary text-xs uppercase">Top matches</p>
 
         {isLoading ? (
           <div className="flex-center text-secondary flex-col px-5">
