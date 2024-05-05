@@ -28,7 +28,7 @@ interface Props {
 const ProfileInfo = ({ userInfo }: Props) => {
   return (
     <div className="flex-center flex-col gap-3.5">
-      <Avatar className="size-32">
+      <Avatar className="border-primary size-32 border-2">
         <Image
           src={userInfo?.user.avatar}
           alt="Profile Picture"
