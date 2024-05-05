@@ -37,7 +37,9 @@ const ProfileInfo = ({ userInfo }: Props) => {
         />
       </Avatar>
       <div className="flex-center flex-col">
-        <p className="text-primary text-xl font-bold">{userInfo?.user.name}</p>
+        <p className="text-primary text-xl font-semibold">
+          {userInfo?.user.name}
+        </p>
         <p className="text-secondary font-geistMono text-sm">
           @{userInfo?.user.username}
         </p>

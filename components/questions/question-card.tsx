@@ -32,7 +32,7 @@ const QuestionCard = async ({
       </header>
 
       <Link href={`/questions/${_id}`}>
-        <p className="py-4 text-base font-bold">{title}</p>
+        <p className="py-4 text-base font-semibold">{title}</p>
       </Link>
 
       <footer className="flex items-center justify-between">

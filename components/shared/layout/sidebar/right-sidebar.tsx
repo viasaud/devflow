@@ -9,7 +9,7 @@ const RightSidebar = async () => {
   return (
     <section className="border-primary fixed right-8 top-20 h-fit rounded-md border p-4 shadow shadow-zinc-100 dark:shadow-none max-2xl:hidden lg:w-80">
       <div>
-        <h3 className="text-primary mb-4 text-lg font-bold">
+        <h3 className="text-primary mb-4 text-lg font-semibold">
           Popular Questions
         </h3>
         <div className="flex w-full flex-col gap-5">

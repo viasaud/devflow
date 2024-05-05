@@ -37,7 +37,7 @@ const QuestionContent = ({
         )}
       </div>
 
-      <h2 className="text-primary mb-1 mt-3.5 text-xl font-bold">
+      <h2 className="text-primary mb-1 mt-3.5 text-xl font-semibold">
         {question.title}
       </h2>
       <ParseHTML content={question.content} />

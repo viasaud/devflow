@@ -29,7 +29,7 @@ const Discover = ({ username }: { username: string }) => {
 
   return (
     <section className="text-primary">
-      <h3 className="my-2 font-bold">Discover</h3>
+      <h3 className="my-2 font-semibold">Discover</h3>
       {sidebarLinks.map((item) => {
         return (
           <div
@@ -54,7 +54,7 @@ const PopularTags = ({ tags }: { tags: string }) => {
   const pathname = usePathname();
   return (
     <section>
-      <h3 className="text-primary mb-2 mt-4 font-bold">Popular Tags</h3>
+      <h3 className="text-primary mb-2 mt-4 font-semibold">Popular Tags</h3>
       {JSON.parse(tags).map((tag: Tag) => (
         <Link
           href={`/tags/${tag.name}`}
