@@ -29,17 +29,19 @@ const UserActivityTabs = async ({
       <TabsList className="border-primary flex-center mx-auto w-fit border">
         <TabsTrigger
           value="questions"
-          className="data-[state=active]:bg-active data-[state=active]:text-primary gap-1"
+          className="data-[state=active]:bg-active data-[state=active]:text-primary flex-center gap-1 text-sm"
         >
           <RiBug2Line size={QUESTION_ICON_SIZE} />
-          Questions
+          <p>{questions?.questions.length}</p>
+          <p>Questions</p>
         </TabsTrigger>
         <TabsTrigger
           value="answers"
           className="data-[state=active]:bg-active data-[state=active]:text-primary gap-1"
         >
           <RiChat1Line size={QUESTION_ICON_SIZE} />
-          Answers
+          <p>{answers?.answers.length}</p>
+          <p>Answers</p>
         </TabsTrigger>
       </TabsList>
       <TabsContent value="questions">
