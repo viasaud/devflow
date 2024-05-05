@@ -60,10 +60,11 @@ const AnswerList = async ({
           </div>
         </div>
       ))}
-
-      <div className="my-10">
-        <Pagination pageNumber={page ?? 1} hasNext={answers.hasNext} />
-      </div>
+      {answers?.answers.length >= 10 && (
+        <div className="my-10">
+          <Pagination pageNumber={page ?? 1} hasNext={answers.hasNext} />
+        </div>
+      )}
     </div>
   );
 };
