@@ -23,7 +23,7 @@ const UserActivityTabs = async ({
     username: pathUsername,
     page,
   });
-  const answers = await getUserAnswers({ username: pathUsername });
+  const answers = await getUserAnswers({ username: pathUsername, page });
   return (
     <Tabs defaultValue="questions" className="text-secondary w-full">
       <TabsList className="border-primary flex-center mx-auto w-fit border">
@@ -68,24 +68,29 @@ const UserActivityTabs = async ({
         </main>
       </TabsContent>
       <TabsContent value="answers">
-        {answers?.map((answer: AnsweredQuestions) => (
-          <div
-            className="border-primary text-primary hover:bg-question-hover border-b p-5"
-            key={answer.question._id}
-          >
-            <QuestionCard
-              _id={answer.question._id}
-              title={answer.question.title}
-              tags={answer.question.tags}
-              author={answer.question.author}
-              upVotes={answer.question.upVotes}
-              downVotes={answer.question.downVotes}
-              views={answer.question.views}
-              answers={answer.question.answers}
-              createdAt={answer.question.createdAt}
-            />
+        <main>
+          {answers?.answers.map((answer: AnsweredQuestions) => (
+            <div
+              className="border-primary text-primary hover:bg-question-hover border-b p-5"
+              key={answer.question._id}
+            >
+              <QuestionCard
+                _id={answer.question._id}
+                title={answer.question.title}
+                tags={answer.question.tags}
+                author={answer.question.author}
+                upVotes={answer.question.upVotes}
+                downVotes={answer.question.downVotes}
+                views={answer.question.views}
+                answers={answer.question.answers}
+                createdAt={answer.question.createdAt}
+              />
+            </div>
+          ))}
+          <div className="my-10">
+            <Pagination pageNumber={page} hasNext={answers.hasNext} />
           </div>
-        ))}
+        </main>
       </TabsContent>
     </Tabs>
   );

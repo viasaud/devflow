@@ -215,7 +215,16 @@ export const getUserQuestions = async ({
   });
 };
 
-export const getUserAnswers = async ({ username }: { username: string }) => {
+export const getUserAnswers = async ({
+  username,
+  page = 1,
+  pageSize = 20,
+}: {
+  username: string;
+  page?: number;
+  pageSize?: number;
+}) => {
+  const skip = (page - 1) * pageSize;
   return await runWithDatabase(async () => {
     const user = await User.findOne({ username });
     if (!user) throw new Error("User not found in getUserInfo()");
@@ -223,6 +232,8 @@ export const getUserAnswers = async ({ username }: { username: string }) => {
     const answers = await Answer.find({
       author: user._id,
     })
+      .skip(skip)
+      .limit(pageSize)
       .sort({ createdAt: -1 })
       .populate({
         path: "question",
@@ -233,6 +244,11 @@ export const getUserAnswers = async ({ username }: { username: string }) => {
         ],
       });
 
-    return answers;
+    const totalAnswers = await Answer.countDocuments({
+      author: user._id,
+    });
+    const hasNext = totalAnswers > page * pageSize;
+
+    return { answers, hasNext };
   });
 };
