@@ -26,13 +26,14 @@ const TagsPage = async ({ searchParams }: SearchParamsProps) => {
           <Tag name={tag.name} key={tag.name} />
         ))}
       </div>
-
-      <div className="my-10">
-        <Pagination
-          pageNumber={searchParams?.page ? +searchParams.page : 1}
-          hasNext={tags.hasNext}
-        />
-      </div>
+      {tags?.tags.length >= 100 && (
+        <div className="my-10">
+          <Pagination
+            pageNumber={searchParams?.page ? +searchParams.page : 1}
+            hasNext={tags.hasNext}
+          />
+        </div>
+      )}
     </div>
   );
 };

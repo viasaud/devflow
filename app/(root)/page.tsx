@@ -37,12 +37,14 @@ const HomePage = async ({ searchParams }: SearchParamsProps) => {
           No hot questions in the last 7 days
         </p>
       ) : (
-        <div className="my-10">
-          <Pagination
-            pageNumber={searchParams?.page ? +searchParams.page : 1}
-            hasNext={questions.hasNext}
-          />
-        </div>
+        questions?.questions.length >= 20 && (
+          <div className="my-10">
+            <Pagination
+              pageNumber={searchParams?.page ? +searchParams.page : 1}
+              hasNext={questions.hasNext}
+            />
+          </div>
+        )
       )}
     </main>
   );

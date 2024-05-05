@@ -13,7 +13,7 @@ export const getPopularTags = async ({ limit = 5 }: { limit?: number }) => {
 };
 
 export const getTags = async (params: getAllTagsParams) => {
-  const { filter, page = 1, pageSize = 150 } = params;
+  const { filter, page = 1, pageSize = 100 } = params;
 
   const skip = (page - 1) * pageSize;
 

@@ -62,9 +62,11 @@ const UserActivityTabs = async ({
               />
             </div>
           ))}
-          <div className="my-10">
-            <Pagination pageNumber={page} hasNext={questions.hasNext} />
-          </div>
+          {questions?.questions.length >= 20 && (
+            <div className="my-10">
+              <Pagination pageNumber={page} hasNext={questions.hasNext} />
+            </div>
+          )}
         </main>
       </TabsContent>
       <TabsContent value="answers">
@@ -87,9 +89,11 @@ const UserActivityTabs = async ({
               />
             </div>
           ))}
-          <div className="my-10">
-            <Pagination pageNumber={page} hasNext={answers.hasNext} />
-          </div>
+          {answers?.answers.length >= 20 && (
+            <div className="my-10">
+              <Pagination pageNumber={page} hasNext={answers.hasNext} />
+            </div>
+          )}
         </main>
       </TabsContent>
     </Tabs>

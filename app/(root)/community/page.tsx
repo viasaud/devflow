@@ -32,13 +32,14 @@ const CommunityPage = async ({ searchParams }: SearchParamsProps) => {
           </div>
         ))}
       </div>
-
-      <div className="my-10">
-        <Pagination
-          pageNumber={searchParams?.page ? +searchParams.page : 1}
-          hasNext={users.hasNext}
-        />
-      </div>
+      {users?.users.length >= 40 && (
+        <div className="my-10">
+          <Pagination
+            pageNumber={searchParams?.page ? +searchParams.page : 1}
+            hasNext={users.hasNext}
+          />
+        </div>
+      )}
     </div>
   );
 };
