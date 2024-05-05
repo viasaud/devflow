@@ -68,7 +68,7 @@ const GlobalSearch = () => {
 
   return (
     <div className="relative w-full xl:w-2/5" ref={searchContainerRef}>
-      <div className="border-primary relative flex h-8 grow items-center gap-1 rounded-lg border-[1.5px] px-4 ">
+      <div className="border-primary relative flex h-8 grow items-center gap-1 rounded-lg border px-4 ">
         <RiSearch2Line
           size={20}
           className="cursor-pointer text-zinc-900 dark:text-zinc-300"
