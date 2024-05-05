@@ -62,9 +62,11 @@ export const getUserById = async ({ clerkId }: { clerkId: string }) => {
 };
 
 export const getUsers = async (params: getAllUsersParams) => {
-  const { filter } = params;
-  let sortOptions = {};
+  const { filter, page = 1, pageSize = 40 } = params;
 
+  const skip = (page - 1) * pageSize;
+
+  let sortOptions = {};
   if (filter === "latest") {
     sortOptions = { joinedAt: -1 };
   } else if (filter === "oldest") {
@@ -74,7 +76,13 @@ export const getUsers = async (params: getAllUsersParams) => {
   }
 
   return await runWithDatabase(async () => {
-    return await User.find().sort(sortOptions);
+    const users = await User.find()
+      .skip(skip)
+      .limit(pageSize)
+      .sort(sortOptions);
+    const totalUsers = await User.countDocuments();
+    const hasNext = totalUsers > page * pageSize;
+    return { users, hasNext };
   });
 };
 
