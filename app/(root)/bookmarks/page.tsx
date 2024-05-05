@@ -42,18 +42,18 @@ const BookmarksPage = async ({ searchParams }: SearchParamsProps) => {
         </div>
       ))}
 
-      {questions.length === 0 && (
+      {questions?.questions.length === 0 ? (
         <p className="text-primary mt-5 text-center text-sm">
           No hot questions in the last 7 days
         </p>
+      ) : (
+        <div className="my-10">
+          <Pagination
+            pageNumber={searchParams?.page ? +searchParams.page : 1}
+            hasNext={questions.hasNext}
+          />
+        </div>
       )}
-
-      <div className="my-10">
-        <Pagination
-          pageNumber={searchParams?.page ? +searchParams.page : 1}
-          hasNext={questions.hasNext}
-        />
-      </div>
     </main>
   );
 };

@@ -3,6 +3,7 @@ import { redirect } from "next/navigation";
 
 import QuestionCard from "@/components/questions/question-card";
 import Filter from "@/components/shared/filter";
+import Pagination from "@/components/shared/pagination";
 import { getQuestionsByTagName } from "@/lib/actions/tag.action";
 import { Question } from "@/types";
 
@@ -15,7 +16,11 @@ const TagPage = async ({
   params: { name: string };
   searchParams: { [key: string]: string | undefined };
 }) => {
-  const questions = await getQuestionsByTagName({ name: params.name });
+  const questions = await getQuestionsByTagName({
+    name: params.name,
+    filter: searchParams?.filter,
+    page: searchParams?.page ? +searchParams.page : 1,
+  });
 
   metadata = {
     title: `${params.name}`,
@@ -26,7 +31,7 @@ const TagPage = async ({
   return (
     <div className="text-primary border-primary w-full">
       <Filter type="home" />
-      {questions?.map((question: Question) => (
+      {questions?.questions.map((question: Question) => (
         <div
           className="border-primary text-primary hover:bg-question-hover border-b p-5"
           key={question._id}
@@ -45,6 +50,19 @@ const TagPage = async ({
           />
         </div>
       ))}
+
+      {questions?.questions.length === 0 ? (
+        <p className="text-primary mt-5 text-center text-sm">
+          No hot questions in the last 7 days
+        </p>
+      ) : (
+        <div className="my-10">
+          <Pagination
+            pageNumber={searchParams?.page ? +searchParams.page : 1}
+            hasNext={questions.hasNext}
+          />
+        </div>
+      )}
     </div>
   );
 };

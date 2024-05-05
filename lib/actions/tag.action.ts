@@ -48,17 +48,39 @@ export const getTags = async (params: getAllTagsParams) => {
 export const getQuestionsByTagName = async (
   params: getQuestionsByTagNameParams
 ) => {
-  const { name, searchQuery } = params;
+  const { name, filter, searchQuery, page = 1, pageSize = 20 } = params;
+
+  const skip = (page - 1) * pageSize;
+
+  let sortOptions = {};
+  let searchFilter = {};
+  if (filter === "popular") {
+    sortOptions = { upVotes: -1 };
+  } else if (filter === "hot") {
+    sortOptions = { views: -1, upVotes: -1 };
+    searchFilter = {
+      createdAt: { $gte: new Date(Date.now() - 1000 * 60 * 60 * 24 * 7) },
+    };
+  } else if (filter === "open") {
+    searchFilter = { answers: { $size: 0 } };
+  } else {
+    sortOptions = { createdAt: -1 };
+  }
   return await runWithDatabase(async () => {
     const tag = await Tag.findOne({ name })
       .populate({
         path: "questions",
         model: Question,
-        match: searchQuery
-          ? { title: { $regex: searchQuery, $options: "i" } }
-          : {},
+        match: {
+          ...searchFilter,
+          ...(searchQuery
+            ? { title: { $regex: searchQuery, $options: "i" } }
+            : {}),
+        },
         options: {
-          sort: { createdAt: -1 },
+          sort: sortOptions,
+          skip,
+          limit: pageSize,
         },
         populate: [
           {
@@ -73,6 +95,12 @@ export const getQuestionsByTagName = async (
 
     const questions = tag.questions;
 
-    return questions;
+    const totalQuesations = await Question.countDocuments({
+      tags: tag._id,
+      ...searchFilter,
+    });
+    const hasNext = totalQuesations > page * pageSize;
+
+    return { questions, hasNext };
   });
 };

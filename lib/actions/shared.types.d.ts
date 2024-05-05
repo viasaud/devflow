@@ -92,6 +92,7 @@ export interface getQuestionsByTagNameParams {
   page?: number;
   pageSize?: number;
   searchQuery?: string;
+  filter?: string;
 }
 
 export interface createUserParams {
