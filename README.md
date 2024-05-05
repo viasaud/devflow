@@ -1,4 +1,29 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Modern StackOverflow Clone: DevOverflow
+
+DevOverflow is a modern StackOverflow clone that offers advanced features, including:
+  - Asking, deleting, and answering questions
+  - Implementing upvoting and bookmarking systems
+  - Creating, updating, and deleting profiles
+  - Community and bookmarks pages
+  - A recommendation system
+  - Global data fetching
+  - AI-generated answers
+  - Light and dark mode options
+
+## Technologies Used
+
+- Next.js 14 <img height="14" width="14" src="https://cdn.simpleicons.org/nextdotjs/white" />
+- TypeScript <img height="14" width="14" src="https://cdn.simpleicons.org/typescript" />
+- TailwindCSS <img height="14" width="14" src="https://cdn.simpleicons.org/tailwindcss" />
+- MongoDB <img height="14" width="14" src="https://cdn.simpleicons.org/mongodb/green" />
+- Clerk Authentication <img height="14" width="14" src="https://cdn.simpleicons.org/clerk" />
+- Zod <img height="14" width="14" src="https://cdn.simpleicons.org/zod" />
+- ESLint <img height="14" width="14" src="https://cdn.simpleicons.org/eslint" />
+- Prettier <img height="14" width="14" src="https://cdn.simpleicons.org/prettier" />
+
+## Deployment
+
+Deployed with [Vercel](https://vercel.com) <img height="14" width="14" src="https://cdn.simpleicons.org/vercel/white" />
 
 ## Getting Started
 
@@ -6,31 +31,9 @@ First, run the development server:
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
-
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Live Version
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+Access the live version at https://devflow.saud.gg
