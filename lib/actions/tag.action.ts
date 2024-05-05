@@ -13,7 +13,10 @@ export const getPopularTags = async ({ limit = 5 }: { limit?: number }) => {
 };
 
 export const getTags = async (params: getAllTagsParams) => {
-  const { filter } = params;
+  const { filter, page = 1, pageSize = 150 } = params;
+
+  const skip = (page - 1) * pageSize;
+
   let sortQuery = {};
   switch (filter) {
     case "popular":
@@ -33,7 +36,12 @@ export const getTags = async (params: getAllTagsParams) => {
       break;
   }
   return await runWithDatabase(async () => {
-    return await Tag.find().sort(sortQuery);
+    const tags = await Tag.find().skip(skip).limit(pageSize).sort(sortQuery);
+
+    const totalTags = await Tag.countDocuments();
+    const hasNext = totalTags > page * pageSize;
+
+    return { tags, hasNext };
   });
 };
 
