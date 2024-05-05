@@ -20,7 +20,10 @@ const ProfilePage = async ({
   return (
     <div>
       <ProfileCard pathUsername={params.username} />
-      <UserActivityTabs pathUsername={params.username} />
+      <UserActivityTabs
+        pathUsername={params.username}
+        page={searchParams.page ? +searchParams.page : 1}
+      />
     </div>
   );
 };

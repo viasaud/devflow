@@ -179,7 +179,16 @@ export const getUserInfo = async ({ username }: { username: string }) => {
   });
 };
 
-export const getUserQuestions = async ({ username }: { username: string }) => {
+export const getUserQuestions = async ({
+  username,
+  page = 1,
+  pageSize = 20,
+}: {
+  username: string;
+  page?: number;
+  pageSize?: number;
+}) => {
+  const skip = (page - 1) * pageSize;
   return await runWithDatabase(async () => {
     const user = await User.findOne({ username });
     if (!user) throw new Error("User not found in getUserInfo()");
@@ -187,6 +196,8 @@ export const getUserQuestions = async ({ username }: { username: string }) => {
     const questions = await Question.find({
       author: user._id,
     })
+      .skip(skip)
+      .limit(pageSize)
       .sort({ createdAt: -1 })
       .populate({
         path: "tags",
@@ -195,7 +206,12 @@ export const getUserQuestions = async ({ username }: { username: string }) => {
       })
       .populate({ path: "author", model: User });
 
-    return questions;
+    const totalQuestions = await Question.countDocuments({
+      author: user._id,
+    });
+    const hasNext = totalQuestions > page * pageSize;
+
+    return { questions, hasNext };
   });
 };
 
