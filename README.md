@@ -17,6 +17,7 @@ DevOverflow is a modern StackOverflow clone that offers advanced features, inclu
 - TailwindCSS <img height="14" width="14" src="https://cdn.simpleicons.org/tailwindcss" />
 - MongoDB <img height="14" width="14" src="https://cdn.simpleicons.org/mongodb/green" />
 - Clerk Authentication <img height="14" width="14" src="https://cdn.simpleicons.org/clerk" />
+- OpenAI <img height="14" width="14" src="https://cdn.simpleicons.org/openai/white" />
 - Zod <img height="14" width="14" src="https://cdn.simpleicons.org/zod" />
 - ESLint <img height="14" width="14" src="https://cdn.simpleicons.org/eslint" />
 - Prettier <img height="14" width="14" src="https://cdn.simpleicons.org/prettier" />
