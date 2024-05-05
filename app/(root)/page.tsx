@@ -2,6 +2,7 @@ import { Metadata } from "next";
 
 import QuestionCard from "@/components/questions/question-card";
 import Filter from "@/components/shared/filter";
+import Pagination from "@/components/shared/pagination";
 import { getQuestions } from "@/lib/actions/question.action";
 import { Question, SearchParamsProps } from "@/types";
 
@@ -11,12 +12,15 @@ export const metadata: Metadata = {
 };
 
 const HomePage = async ({ searchParams }: SearchParamsProps) => {
-  const questions = await getQuestions({ filter: searchParams.filter });
+  const questions = await getQuestions({
+    filter: searchParams.filter,
+    page: searchParams?.page ? +searchParams.page : 1,
+  });
   return (
     <main className="text-primary border-primary w-full">
       <Filter type="home" />
 
-      {questions?.map((question: Question) => (
+      {questions?.questions.map((question: Question) => (
         <div
           className="border-primary text-primary hover:bg-question-hover border-b p-5"
           key={question._id}
@@ -35,10 +39,17 @@ const HomePage = async ({ searchParams }: SearchParamsProps) => {
         </div>
       ))}
 
-      {questions.length === 0 && (
+      {questions?.questions.length === 0 ? (
         <p className="text-primary mt-5 text-center text-sm">
           No hot questions in the last 7 days
         </p>
+      ) : (
+        <div className="my-10">
+          <Pagination
+            pageNumber={searchParams?.page ? +searchParams.page : 1}
+            hasNext={questions.hasNext}
+          />
+        </div>
       )}
     </main>
   );

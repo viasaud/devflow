@@ -3,6 +3,7 @@ import { getMongoUser, getTimeAgo } from "@/lib/utils";
 import { Answer } from "@/types";
 
 import DeleteItem from "../shared/delete-item";
+import Pagination from "../shared/pagination";
 import ParseHTML from "../shared/parse-html";
 import UserProfileLink from "../shared/user-profile-link";
 import VoteAndSave from "../shared/vote-and-save";
@@ -22,12 +23,15 @@ const AnswerList = async ({
   page,
   filter,
 }: Props) => {
-  const answers = await getAnswers({ questionId: JSON.parse(questionId) });
+  const answers = await getAnswers({
+    questionId: JSON.parse(questionId),
+    page,
+  });
   const mongoUser = await getMongoUser();
 
   return (
     <div>
-      {answers?.map((answer: Answer) => (
+      {answers?.answers.map((answer: Answer) => (
         <div key={answer._id}>
           <div className="flex-start py-3.5">
             <UserProfileLink author={answer.author} />
@@ -56,6 +60,10 @@ const AnswerList = async ({
           </div>
         </div>
       ))}
+
+      <div className="my-10">
+        <Pagination pageNumber={page ?? 1} hasNext={answers.hasNext} />
+      </div>
     </div>
   );
 };

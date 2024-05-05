@@ -32,13 +32,19 @@ export const createAnswer = async (params: createAnswerParams) => {
 };
 
 export const getAnswers = async (params: getAnswersParams) => {
-  const { questionId } = params;
+  const { questionId, page = 1, pageSize = 10 } = params;
+  const skip = (page - 1) * pageSize;
   return await runWithDatabase(async () => {
     const answers = await Answer.find({ question: questionId })
+      .skip(skip)
+      .limit(pageSize)
       .populate("author")
       .sort({ createdAt: -1 });
 
-    return answers;
+    const totalAnswers = await Answer.countDocuments({ question: questionId });
+    const hasNext = totalAnswers > page * pageSize;
+
+    return { answers, hasNext };
   });
 };
 

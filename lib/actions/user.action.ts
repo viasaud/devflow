@@ -62,9 +62,11 @@ export const getUserById = async ({ clerkId }: { clerkId: string }) => {
 };
 
 export const getUsers = async (params: getAllUsersParams) => {
-  const { filter } = params;
-  let sortOptions = {};
+  const { filter, page = 1, pageSize = 40 } = params;
 
+  const skip = (page - 1) * pageSize;
+
+  let sortOptions = {};
   if (filter === "latest") {
     sortOptions = { joinedAt: -1 };
   } else if (filter === "oldest") {
@@ -74,7 +76,13 @@ export const getUsers = async (params: getAllUsersParams) => {
   }
 
   return await runWithDatabase(async () => {
-    return await User.find().sort(sortOptions);
+    const users = await User.find()
+      .skip(skip)
+      .limit(pageSize)
+      .sort(sortOptions);
+    const totalUsers = await User.countDocuments();
+    const hasNext = totalUsers > page * pageSize;
+    return { users, hasNext };
   });
 };
 
@@ -108,7 +116,10 @@ export const toggleSaveQuestion = async (params: toggleSaveQuestionParams) => {
 };
 
 export const getSavedQuestions = async (params: getSavedQuestionsParams) => {
-  const { filter, mongoUser } = params;
+  const { filter, mongoUser, page = 1, pageSize = 20 } = params;
+
+  const skip = (page - 1) * pageSize;
+
   let sortOptions = {};
   let searchFilter = {};
   if (filter === "popular") {
@@ -128,6 +139,8 @@ export const getSavedQuestions = async (params: getSavedQuestionsParams) => {
       path: "savedQuestions",
       match: searchFilter,
       options: {
+        skip,
+        limit: pageSize,
         sort: sortOptions,
       },
       populate: [
@@ -135,9 +148,17 @@ export const getSavedQuestions = async (params: getSavedQuestionsParams) => {
         { path: "tags", model: "Tag" },
       ],
     });
+
     if (!user) throw new Error("User not found");
 
-    return user.savedQuestions;
+    const totalQuestions = await User.findOne({ _id: mongoUser._id }).then(
+      (user) => {
+        return user?.savedQuestions.length;
+      }
+    );
+    const hasNext = totalQuestions > page * pageSize;
+
+    return { savedQuestions: user.savedQuestions, hasNext };
   });
 };
 
@@ -158,7 +179,16 @@ export const getUserInfo = async ({ username }: { username: string }) => {
   });
 };
 
-export const getUserQuestions = async ({ username }: { username: string }) => {
+export const getUserQuestions = async ({
+  username,
+  page = 1,
+  pageSize = 20,
+}: {
+  username: string;
+  page?: number;
+  pageSize?: number;
+}) => {
+  const skip = (page - 1) * pageSize;
   return await runWithDatabase(async () => {
     const user = await User.findOne({ username });
     if (!user) throw new Error("User not found in getUserInfo()");
@@ -166,6 +196,8 @@ export const getUserQuestions = async ({ username }: { username: string }) => {
     const questions = await Question.find({
       author: user._id,
     })
+      .skip(skip)
+      .limit(pageSize)
       .sort({ createdAt: -1 })
       .populate({
         path: "tags",
@@ -174,11 +206,25 @@ export const getUserQuestions = async ({ username }: { username: string }) => {
       })
       .populate({ path: "author", model: User });
 
-    return questions;
+    const totalQuestions = await Question.countDocuments({
+      author: user._id,
+    });
+    const hasNext = totalQuestions > page * pageSize;
+
+    return { questions, hasNext };
   });
 };
 
-export const getUserAnswers = async ({ username }: { username: string }) => {
+export const getUserAnswers = async ({
+  username,
+  page = 1,
+  pageSize = 20,
+}: {
+  username: string;
+  page?: number;
+  pageSize?: number;
+}) => {
+  const skip = (page - 1) * pageSize;
   return await runWithDatabase(async () => {
     const user = await User.findOne({ username });
     if (!user) throw new Error("User not found in getUserInfo()");
@@ -186,6 +232,8 @@ export const getUserAnswers = async ({ username }: { username: string }) => {
     const answers = await Answer.find({
       author: user._id,
     })
+      .skip(skip)
+      .limit(pageSize)
       .sort({ createdAt: -1 })
       .populate({
         path: "question",
@@ -196,6 +244,11 @@ export const getUserAnswers = async ({ username }: { username: string }) => {
         ],
       });
 
-    return answers;
+    const totalAnswers = await Answer.countDocuments({
+      author: user._id,
+    });
+    const hasNext = totalAnswers > page * pageSize;
+
+    return { answers, hasNext };
   });
 };

@@ -50,7 +50,10 @@ export const createQuestion = async (params: createQuestionParams) => {
 };
 
 export const getQuestions = async (params: getQuestionsParams) => {
-  const { filter } = params;
+  const { filter, page = 1, pageSize = 20 } = params;
+
+  const skip = (page - 1) * pageSize;
+
   let sortOptions = {};
   let searchFilter = {};
   if (filter === "popular") {
@@ -73,9 +76,14 @@ export const getQuestions = async (params: getQuestionsParams) => {
         options: { sort: { name: 1 } },
       })
       .populate({ path: "author", model: User })
+      .skip(skip)
+      .limit(pageSize)
       .sort(sortOptions);
 
-    return questions;
+    const totalQuestions = await Question.countDocuments(searchFilter);
+    const hasNext = totalQuestions > page * pageSize;
+
+    return { questions, hasNext };
   });
 };
 
