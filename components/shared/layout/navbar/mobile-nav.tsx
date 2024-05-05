@@ -1,5 +1,6 @@
 "use client";
 
+import { SignedIn, UserButton } from "@clerk/nextjs";
 import { RiHashtag, RiMenuFill } from "@remixicon/react";
 import Image from "next/image";
 import Link from "next/link";
@@ -126,12 +127,27 @@ const MobileNav = ({ username, tags }: { username: string; tags: string }) => {
         <RiMenuFill className="text-primary xl:hidden" />
       </SheetTrigger>
       <SheetContent side="left" className="bg-primary border-none">
-        <Link href="/" className="flex items-center gap-1">
-          <Image src="/svg/logo.svg" alt="DevFlow" width={24} height={24} />
-          <p className="text-primary ml-1 font-geistSans text-lg font-semibold max-lg:hidden">
-            DevOverflow
-          </p>
-        </Link>
+        <section className="flex items-center justify-between">
+          <Link href="/" className="flex items-center gap-1">
+            <Image src="/svg/logo.svg" alt="DevFlow" width={24} height={24} />
+            <p className="text-primary ml-1 font-geistSans text-lg font-semibold max-lg:hidden">
+              DevOverflow
+            </p>
+          </Link>
+          <div className="sm:hidden">
+            <SignedIn>
+              <UserButton
+                afterSignOutUrl="/"
+                appearance={{
+                  elements: {
+                    avatarBox: "h-8 w-8",
+                  },
+                  variables: { colorPrimary: "#ff7000" },
+                }}
+              />
+            </SignedIn>
+          </div>
+        </section>
         <div className="flex h-full flex-col pb-12 pt-3.5">
           <NavContent username={username} tags={tags} />
         </div>

@@ -20,7 +20,7 @@ const Navbar = async () => {
       <MobileNav username={mongoUser?.username} tags={JSON.stringify(tags)} />
       <Link
         href="/"
-        className="flex size-16 items-center gap-1 lg:w-72 xl:w-48"
+        className="flex size-10 items-center gap-1 lg:w-72 xl:w-48"
       >
         <Image src="/svg/logo.svg" alt="DevFlow" width={24} height={24} />
         <p className="text-primary ml-1 font-geistSans text-lg font-semibold max-lg:hidden">
@@ -28,24 +28,26 @@ const Navbar = async () => {
         </p>
       </Link>
       <GlobalSearch />
-      <div className="flex w-32 justify-end gap-3 xl:w-48">
+      <div className="flex items-center justify-end gap-3 xl:w-48">
         <Theme />
         <SignedOut>
           <Link href="/sign-in">
             <Button variant="default">Sign in</Button>
           </Link>
         </SignedOut>
-        <SignedIn>
-          <UserButton
-            afterSignOutUrl="/"
-            appearance={{
-              elements: {
-                avatarBox: "h-10 w-10",
-              },
-              variables: { colorPrimary: "#ff7000" },
-            }}
-          />
-        </SignedIn>
+        <div className="max-sm:hidden">
+          <SignedIn>
+            <UserButton
+              afterSignOutUrl="/"
+              appearance={{
+                elements: {
+                  avatarBox: "h-8 w-8",
+                },
+                variables: { colorPrimary: "#ff7000" },
+              }}
+            />
+          </SignedIn>
+        </div>
       </div>
     </nav>
   );
