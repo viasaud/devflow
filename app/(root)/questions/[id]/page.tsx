@@ -33,6 +33,7 @@ const QuestionPage = async ({
         totalAnswers={question.answers.length}
         authorId={JSON.stringify(mongoUser?._id)}
         questionId={JSON.stringify(question._id)}
+        page={searchParams.page ? +searchParams.page : 1}
       />
 
       <SignedIn>
