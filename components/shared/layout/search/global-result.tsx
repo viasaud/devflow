@@ -41,7 +41,6 @@ const GlobalResult = () => {
   }, [q, type]);
 
   const renderLink = (type: string, id: string, name: string) => {
-    console.log(id);
     switch (type) {
       case "question":
         return `/questions/${id}`;
