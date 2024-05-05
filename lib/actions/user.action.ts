@@ -116,7 +116,10 @@ export const toggleSaveQuestion = async (params: toggleSaveQuestionParams) => {
 };
 
 export const getSavedQuestions = async (params: getSavedQuestionsParams) => {
-  const { filter, mongoUser } = params;
+  const { filter, mongoUser, page = 1, pageSize = 20 } = params;
+
+  const skip = (page - 1) * pageSize;
+
   let sortOptions = {};
   let searchFilter = {};
   if (filter === "popular") {
@@ -136,6 +139,8 @@ export const getSavedQuestions = async (params: getSavedQuestionsParams) => {
       path: "savedQuestions",
       match: searchFilter,
       options: {
+        skip,
+        limit: pageSize,
         sort: sortOptions,
       },
       populate: [
@@ -143,9 +148,17 @@ export const getSavedQuestions = async (params: getSavedQuestionsParams) => {
         { path: "tags", model: "Tag" },
       ],
     });
+
     if (!user) throw new Error("User not found");
 
-    return user.savedQuestions;
+    const totalQuestions = await User.findOne({ _id: mongoUser._id }).then(
+      (user) => {
+        return user?.savedQuestions.length;
+      }
+    );
+    const hasNext = totalQuestions > page * pageSize;
+
+    return { savedQuestions: user.savedQuestions, hasNext };
   });
 };
 
