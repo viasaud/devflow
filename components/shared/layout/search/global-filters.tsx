@@ -39,7 +39,7 @@ const GlobalFilters = () => {
   };
 
   return (
-    <div className="flex items-center gap-5 max-md:hidden">
+    <div className="flex items-center gap-5 max-md:hidden md:mb-4">
       <p className="text-primary text-xs uppercase">Filters</p>
       <div className="flex items-center gap-2">
         {GlobalSearchFilters.map((item) => (
