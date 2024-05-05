@@ -11,7 +11,7 @@ const buttonVariants = cva(
     variants: {
       variant: {
         default:
-          "no-focus w-full rounded-full bg-gradient-to-r from-teal-600 to-teal-700 text-sm text-white shadow-lg transition-all duration-1000 hover:cursor-pointer hover:shadow-teal-500/50 hover:drop-shadow-lg",
+          "no-focus hover:drop-shadow-l h-8 w-full rounded-full bg-gradient-to-r from-teal-600 to-teal-700 text-sm text-white shadow-lg transition-all duration-1000 hover:cursor-pointer hover:shadow-teal-500/50",
         default_small:
           "no-focus mx-auto w-fit rounded-full bg-gradient-to-r from-teal-600 to-teal-700 !px-8 text-sm text-white shadow-lg transition-all duration-1000 hover:cursor-pointer hover:shadow-teal-500/50 hover:drop-shadow-lg",
         destructive:

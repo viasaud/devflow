@@ -54,7 +54,7 @@ const QuestionContent = ({
           hasSaved={mongoUser?.savedQuestions.includes(question._id)}
           bookmarkButton
         />
-        <div className="flex-start gap-1">
+        <div className="flex-start gap-1 max-md:hidden">
           {question.tags.map((tag: { name: string }) => (
             <Tag key={tag.name} name={tag.name} />
           ))}

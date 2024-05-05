@@ -17,7 +17,7 @@ const Theme = () => {
   return (
     <Menubar className="relative border-none shadow-none">
       <MenubarMenu>
-        <MenubarTrigger className="hover:bg-hover data-[state=open]:bg-active text-primary cursor-pointer rounded-3xl">
+        <MenubarTrigger className="hover:bg-hover data-[state=open]:bg-active text-primary cursor-pointer rounded-full p-1">
           {mode === "light" ? <RiSunFill /> : <RiMoonFill />}
         </MenubarTrigger>
         <MenubarContent className="border-primary bg-primary absolute -right-10 mt-[.70rem] min-w-28 rounded-md border">

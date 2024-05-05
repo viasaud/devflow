@@ -16,7 +16,7 @@ const Navbar = async () => {
   const tags = await getPopularTags({});
 
   return (
-    <nav className="flex-between border-primary bg-primary fixed z-50 h-14 w-full gap-3 border-b p-4 shadow-zinc-300 dark:shadow-none lg:px-8">
+    <nav className="flex-between border-primary bg-primary fixed z-50 h-14 w-full gap-2 border-b p-4 shadow-zinc-300 dark:shadow-none lg:px-8">
       <MobileNav username={mongoUser?.username} tags={JSON.stringify(tags)} />
       <Link
         href="/"
@@ -28,14 +28,14 @@ const Navbar = async () => {
         </p>
       </Link>
       <GlobalSearch />
-      <div className="flex items-center justify-end gap-3 xl:w-48">
+      <div className="flex items-center justify-end gap-2 xl:w-48">
         <Theme />
-        <SignedOut>
-          <Link href="/sign-in">
-            <Button variant="default">Sign in</Button>
-          </Link>
-        </SignedOut>
-        <div className="max-sm:hidden">
+        <div className="max-md:hidden">
+          <SignedOut>
+            <Link href="/sign-in">
+              <Button variant="default">Sign in</Button>
+            </Link>
+          </SignedOut>
           <SignedIn>
             <UserButton
               afterSignOutUrl="/"

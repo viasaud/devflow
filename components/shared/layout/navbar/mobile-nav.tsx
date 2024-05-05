@@ -1,6 +1,6 @@
 "use client";
 
-import { SignedIn, UserButton } from "@clerk/nextjs";
+import { SignedIn, SignedOut, UserButton } from "@clerk/nextjs";
 import { RiHashtag, RiMenuFill } from "@remixicon/react";
 import Image from "next/image";
 import Link from "next/link";
@@ -134,7 +134,12 @@ const MobileNav = ({ username, tags }: { username: string; tags: string }) => {
               DevOverflow
             </p>
           </Link>
-          <div className="sm:hidden">
+          <div className="flex items-center md:hidden">
+            <SignedOut>
+              <Link href="/sign-in">
+                <Button variant="default">Sign in</Button>
+              </Link>
+            </SignedOut>
             <SignedIn>
               <UserButton
                 afterSignOutUrl="/"
