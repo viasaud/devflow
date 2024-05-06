@@ -45,6 +45,15 @@ export const createQuestion = async (params: createQuestionParams) => {
       $push: { tags: { $each: tagDocs } },
     });
 
+    await Interaction.create({
+      user: author,
+      question: question._id,
+      action: "ask",
+      tags: tagDocs,
+    });
+
+    await User.findByIdAndUpdate(author, { $inc: { reputation: 5 } });
+
     revalidatePath(path);
   });
 };
@@ -117,6 +126,14 @@ export const upVoteQuestion = async (params: questionVoteParams) => {
 
     if (!question) throw new Error("Question not found");
 
+    await User.findByIdAndUpdate(userId, {
+      $inc: { reputation: hasUpVoted ? -2 : 2 },
+    });
+
+    await User.findByIdAndUpdate(question.author, {
+      $inc: { reputation: hasUpVoted ? -10 : 10 },
+    });
+
     revalidatePath(path);
   });
 };
@@ -142,6 +159,13 @@ export const downVoteQuestion = async (params: questionVoteParams) => {
 
     if (!question) throw new Error("Question not found");
 
+    await User.findByIdAndUpdate(userId, {
+      $inc: { reputation: hasDownVoted ? -2 : 2 },
+    });
+
+    await User.findByIdAndUpdate(question.author, {
+      $inc: { reputation: hasDownVoted ? 10 : -10 },
+    });
     revalidatePath(path);
   });
 };
