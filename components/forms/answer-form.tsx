@@ -34,6 +34,7 @@ const AnswerForm = ({
   const editorRef = useRef(null);
   const { mode } = useTheme();
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isSubmittingAI, setIsSubmittingAI] = useState(false);
 
   const form = useForm<z.infer<typeof AnswerSchema>>({
     resolver: zodResolver(AnswerSchema),
@@ -64,21 +65,51 @@ const AnswerForm = ({
     }
   };
 
+  const generateAIAnswer = async () => {
+    if (!authorId) return;
+    setIsSubmittingAI(true);
+
+    try {
+      const response = await fetch(
+        `${process.env.NEXT_PUBLIC_SERVER_URL}/api/chatgpt`,
+        {
+          method: "POST",
+          body: JSON.stringify({
+            question,
+          }),
+        }
+      );
+
+      const data = await response.json();
+      console.log(data);
+
+      const formattedAnswer = data.reply.replace(/<br>/g, "\n");
+      if (editorRef.current) {
+        // @ts-ignore
+        editorRef.current.setContent(formattedAnswer);
+      }
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setIsSubmittingAI(false);
+    }
+  };
+
   return (
     <Form {...form}>
       <div className="mt-5 flex items-center justify-between">
         <p className="text-primary">Your Answer</p>
         <Button
           variant={"ai"}
-          disabled={isSubmitting}
-          onClick={() => {}}
+          disabled={isSubmittingAI}
+          onClick={generateAIAnswer}
           className="group"
         >
           <RiSparkling2Fill
             size={16}
             className="duration-300 group-hover:scale-125"
           />
-          Generate an AI answer
+          {isSubmittingAI ? "Generating..." : "Generate an AI answer"}
         </Button>
       </div>
       <form
