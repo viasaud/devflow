@@ -15,7 +15,7 @@ const ProfileCard = async ({ pathUsername }: { pathUsername: string }) => {
       <div className="flex-center flex-col gap-3.5">
         <ProfileInfo userInfo={userInfo} />
 
-        <ProfileMedals />
+        <ProfileMedals reputation={userInfo.user.reputation} />
 
         <EditProfileButton pathUsername={pathUsername} />
       </div>

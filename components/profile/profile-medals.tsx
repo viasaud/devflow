@@ -1,24 +1,16 @@
-import { RiMedalLine } from "@remixicon/react";
+import { RiAwardLine } from "@remixicon/react";
 
 import { THEME_MENU_ICON_SIZE } from "@/constants/constants";
 
-const ProfileMedals = () => {
+const ProfileMedals = ({ reputation }: { reputation: number }) => {
   return (
     <div className="text-secondary flex-center w-full gap-4">
       <div className="flex-center gap-1">
-        <RiMedalLine size={THEME_MENU_ICON_SIZE} className="text-orange-600" />
-        <p className="font-geistMono text-sm">0</p>
-      </div>
-      <div className="flex-center gap-1">
-        <RiMedalLine
+        <RiAwardLine
           size={THEME_MENU_ICON_SIZE}
-          className=" dark:text-zinc-200"
+          className="text-yellow-600 dark:text-yellow-500"
         />
-        <p className="font-geistMono text-sm">0</p>
-      </div>
-      <div className="flex-center gap-1">
-        <RiMedalLine size={THEME_MENU_ICON_SIZE} className="text-yellow-500" />
-        <p className="font-geistMono text-sm">0</p>
+        <p className="font-geistMono text-sm">{reputation}</p>
       </div>
     </div>
   );
