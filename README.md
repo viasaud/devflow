@@ -5,7 +5,6 @@ DevOverflow is a modern StackOverflow clone that offers advanced features, inclu
   - Implementing upvoting and bookmarking systems
   - Creating, updating, and deleting profiles
   - Community and bookmarks pages
-  - A recommendation system
   - Global data fetching
   - AI-generated answers
   - Light and dark mode options
