@@ -1,7 +1,7 @@
 "use client";
 
 import { zodResolver } from "@hookform/resolvers/zod";
-import { RiSparkling2Fill } from "@remixicon/react";
+import { RiLoaderLine, RiSparkling2Fill } from "@remixicon/react";
 import { Editor } from "@tinymce/tinymce-react";
 import { usePathname } from "next/navigation";
 import { useRef, useState } from "react";
@@ -100,13 +100,20 @@ const AnswerForm = ({
           variant={"ai"}
           disabled={isSubmittingAI}
           onClick={generateAIAnswer}
-          className="group"
+          className="group disabled:cursor-not-allowed disabled:opacity-70"
         >
-          <RiSparkling2Fill
-            size={16}
-            className="duration-300 group-hover:scale-125"
-          />
-          {isSubmittingAI ? "Generating..." : "Generate an AI answer"}
+          {isSubmittingAI ? (
+            <RiLoaderLine
+              size={16}
+              className="animate-spin duration-1000 group-hover:scale-125"
+            />
+          ) : (
+            <RiSparkling2Fill
+              size={16}
+              className="duration-300 group-hover:scale-125"
+            />
+          )}
+          Generate an AI answer
         </Button>
       </div>
       <form
