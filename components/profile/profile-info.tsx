@@ -34,6 +34,7 @@ const ProfileInfo = ({ user }: Props) => {
           alt="Profile Picture"
           width={128}
           height={128}
+          priority={true}
         />
       </Avatar>
       <div className="flex-center flex-col">

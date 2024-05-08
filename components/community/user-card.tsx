@@ -19,6 +19,7 @@ const UserCard = async ({ user }: { user: User }) => {
             width={112}
             height={112}
             alt="Profile Picture"
+            priority={true}
           />
         </Avatar>
         <div className="text-primary text-center">
