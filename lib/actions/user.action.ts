@@ -61,14 +61,13 @@ export const getUserById = async ({ clerkId }: { clerkId: string }) => {
 
     const params = new URLSearchParams();
 
-    params.set("height", "120");
-    params.set("width", "120");
-    params.set("quality", "40");
+    params.set("height", "32");
+    params.set("width", "32");
     params.set("fit", "crop");
 
     user.avatar = `${user.avatar}?${params.toString()}`;
 
-    return { user };
+    return user;
   });
 };
 
@@ -94,9 +93,8 @@ export const getUsers = async (params: getAllUsersParams) => {
 
     const params = new URLSearchParams();
 
-    params.set("height", "120");
-    params.set("width", "120");
-    params.set("quality", "40");
+    params.set("height", "112");
+    params.set("width", "112");
     params.set("fit", "crop");
 
     users.forEach((user) => {
@@ -190,9 +188,8 @@ export const getUserData = async ({ username }: { username: string }) => {
 
     const params = new URLSearchParams();
 
-    params.set("height", "120");
-    params.set("width", "120");
-    params.set("quality", "40");
+    params.set("height", "128");
+    params.set("width", "128");
     params.set("fit", "crop");
 
     user.avatar = `${user.avatar}?${params.toString()}`;
