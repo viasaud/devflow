@@ -57,7 +57,18 @@ export const deleteUser = async ({ clerkId }: { clerkId: string }) => {
 
 export const getUserById = async ({ clerkId }: { clerkId: string }) => {
   return await runWithDatabase(async () => {
-    return await User.findOne({ clerkId });
+    const user = await User.findOne({ clerkId });
+
+    const params = new URLSearchParams();
+
+    params.set("height", "120");
+    params.set("width", "120");
+    params.set("quality", "40");
+    params.set("fit", "crop");
+
+    user.avatar = `${user.avatar}?${params.toString()}`;
+
+    return { user };
   });
 };
 
@@ -80,6 +91,18 @@ export const getUsers = async (params: getAllUsersParams) => {
       .skip(skip)
       .limit(pageSize)
       .sort(sortOptions);
+
+    const params = new URLSearchParams();
+
+    params.set("height", "120");
+    params.set("width", "120");
+    params.set("quality", "40");
+    params.set("fit", "crop");
+
+    users.forEach((user) => {
+      user.avatar = `${user.avatar}?${params.toString()}`;
+    });
+
     const totalUsers = await User.countDocuments();
     const hasNext = totalUsers > page * pageSize;
     return { users, hasNext };
@@ -164,6 +187,15 @@ export const getUserData = async ({ username }: { username: string }) => {
   return await runWithDatabase(async () => {
     const user = await User.findOne({ username });
     if (!user) throw new Error("User not found in getUserInfo()");
+
+    const params = new URLSearchParams();
+
+    params.set("height", "120");
+    params.set("width", "120");
+    params.set("quality", "40");
+    params.set("fit", "crop");
+
+    user.avatar = `${user.avatar}?${params.toString()}`;
 
     const totalQuestions = await Question.countDocuments({
       author: user._id,
