@@ -1,23 +1,19 @@
 import { SignedIn } from "@clerk/nextjs";
 import { RiPencilLine } from "@remixicon/react";
 import Link from "next/link";
-import React from "react";
 
 import { SMALL_ICON_SIZE } from "@/constants/constants";
-import { getMongoUser } from "@/lib/utils";
 
 import { Button } from "../ui/button";
 
 const EditProfileButton = async ({
-  pathUsername,
+  isUserProfile,
 }: {
-  pathUsername: string;
+  isUserProfile: boolean;
 }) => {
-  const mongoUser = await getMongoUser();
-
   return (
     <SignedIn>
-      {pathUsername === mongoUser?.username && (
+      {isUserProfile && (
         <Link href="/profile/edit" className="flex-center">
           <Button variant={"outline"}>
             <RiPencilLine size={SMALL_ICON_SIZE} />

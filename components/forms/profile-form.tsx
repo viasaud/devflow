@@ -18,11 +18,12 @@ import {
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { useToast } from "@/components/ui/use-toast";
+import { IUser } from "@/database/user.model";
 import { updateUser } from "@/lib/actions/user.action";
 import { profileSchema } from "@/lib/validations";
 
-export function ProfileForm({ mongoUser }: { mongoUser: string }) {
-  const user = JSON.parse(mongoUser);
+export function ProfileForm({ user }: { user: string }) {
+  const userData = JSON.parse(user) as IUser;
   const [isSubmitting, setIsSubmitting] = useState(false);
   const router = useRouter();
   const { toast } = useToast();
@@ -30,10 +31,10 @@ export function ProfileForm({ mongoUser }: { mongoUser: string }) {
   const form = useForm<z.infer<typeof profileSchema>>({
     resolver: zodResolver(profileSchema),
     defaultValues: {
-      name: user.name || "",
-      username: user.username || "",
-      location: user.location || "",
-      bio: user.bio || "",
+      name: userData.name,
+      username: userData.username,
+      location: userData.location,
+      bio: userData.bio,
     },
   });
 
@@ -46,16 +47,16 @@ export function ProfileForm({ mongoUser }: { mongoUser: string }) {
     });
     try {
       await updateUser({
-        clerkId: user.clerkId,
+        clerkId: userData.clerkId,
         updateData: {
           name: values.name,
           username: values.username,
           location: values.location,
           bio: values.bio,
         },
-        path: `/profile/${user.username}`,
+        path: `/profile/${userData.username}`,
       });
-      router.push(`/profile/${user.username}`);
+      router.push(`/profile/${userData.username}`);
     } catch (error) {
       console.error(error);
     }

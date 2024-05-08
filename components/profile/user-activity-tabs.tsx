@@ -13,17 +13,17 @@ interface AnsweredQuestions extends Answer {
 }
 
 const UserActivityTabs = async ({
-  pathUsername,
+  username,
   page,
 }: {
-  pathUsername: string;
+  username: string;
   page: number;
 }) => {
   const questions = await getUserQuestions({
-    username: pathUsername,
+    username,
     page,
   });
-  const answers = await getUserAnswers({ username: pathUsername, page });
+  const answers = await getUserAnswers({ username, page });
   return (
     <Tabs defaultValue="questions" className="text-secondary w-full">
       <TabsList className="border-primary flex-center mx-auto w-fit border">

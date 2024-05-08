@@ -1,15 +1,17 @@
+import { auth } from "@clerk/nextjs/server";
 import { redirect } from "next/navigation";
 
 import { ProfileForm } from "@/components/forms/profile-form";
-import { getMongoUser } from "@/lib/utils";
+import { getUserById } from "@/lib/actions/user.action";
 
 const EditProfile = async () => {
-  const mongoUser = await getMongoUser();
-  if (!mongoUser) return redirect("/404");
+  const { userId } = auth();
+  if (!userId) return redirect("/404");
+  const user = userId ? await getUserById({ clerkId: userId }) : undefined;
 
   return (
     <div className="text-primary w-full pt-3">
-      <ProfileForm mongoUser={JSON.stringify(mongoUser)} />
+      <ProfileForm user={JSON.stringify(user)} />
     </div>
   );
 };

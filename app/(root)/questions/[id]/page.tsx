@@ -1,4 +1,5 @@
 import { SignedIn, SignedOut } from "@clerk/nextjs";
+import { auth } from "@clerk/nextjs/server";
 import { Metadata } from "next";
 import Link from "next/link";
 import { redirect } from "next/navigation";
@@ -7,7 +8,7 @@ import AnswerForm from "@/components/forms/answer-form";
 import AnswerList from "@/components/questions/answer-list";
 import QuestionContent from "@/components/questions/question-content";
 import { getQuestionById } from "@/lib/actions/question.action";
-import { getMongoUser } from "@/lib/utils";
+import { getUserById } from "@/lib/actions/user.action";
 
 export const metadata: Metadata = {
   title: "Question",
@@ -23,22 +24,22 @@ const QuestionPage = async ({
 }) => {
   const question = await getQuestionById({ questionId: params.id });
   if (!question) return redirect("/404");
-  const mongoUser = await getMongoUser();
+  const { userId } = auth();
+  const user = userId ? await getUserById({ clerkId: userId }) : undefined;
 
   return (
     <div className="pt-2 max-md:px-5">
-      <QuestionContent question={question} mongoUser={mongoUser} />
+      <QuestionContent question={question} user={user} />
 
       <AnswerList
-        totalAnswers={question.answers.length}
-        authorId={JSON.stringify(mongoUser?._id)}
         questionId={JSON.stringify(question._id)}
+        user={user}
         page={searchParams.page ? +searchParams.page : 1}
       />
 
       <SignedIn>
         <AnswerForm
-          authorId={JSON.stringify(mongoUser?._id)}
+          authorId={JSON.stringify(user?._id)}
           questionId={JSON.stringify(question._id)}
           question={question.content}
         />

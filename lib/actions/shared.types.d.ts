@@ -123,7 +123,7 @@ export interface toggleSaveQuestionParams {
 }
 
 export interface getSavedQuestionsParams {
-  mongoUser: IUser;
+  clerkId: string;
   page?: number;
   pageSize?: number;
   filter?: string;

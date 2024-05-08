@@ -3,21 +3,18 @@ import Image from "next/image";
 import Link from "next/link";
 
 import { Button } from "@/components/ui/button";
-import { getPopularTags } from "@/lib/actions/tag.action";
-import { getMongoUser } from "@/lib/utils";
+import { ITag } from "@/database/tag.model";
+import { IUser } from "@/database/user.model";
 
 import GlobalSearch from "../search/global-search";
 
 import { MobileNav } from "./mobile-nav";
 import Theme from "./theme";
 
-const Navbar = async () => {
-  const mongoUser = await getMongoUser();
-  const tags = await getPopularTags({});
-
+const Navbar = async ({ user, tags }: { user: IUser; tags: ITag }) => {
   return (
     <nav className="flex-between border-primary bg-primary fixed z-50 h-14 w-full gap-2 border-b p-4 shadow-zinc-300 dark:shadow-none lg:px-8">
-      <MobileNav username={mongoUser?.username} tags={JSON.stringify(tags)} />
+      <MobileNav username={user?.username} tags={JSON.stringify(tags)} />
       <Link
         href="/"
         className="flex size-10 items-center gap-1 lg:w-72 xl:w-48"

@@ -1,10 +1,11 @@
+import { auth } from "@clerk/nextjs/server";
 import { Metadata } from "next";
+import { redirect } from "next/navigation";
 
 import QuestionCard from "@/components/questions/question-card";
 import Filter from "@/components/shared/filter";
 import Pagination from "@/components/shared/pagination";
 import { getSavedQuestions } from "@/lib/actions/user.action";
-import { getMongoUser } from "@/lib/utils";
 import { Question, SearchParamsProps } from "@/types";
 
 export const metadata: Metadata = {
@@ -13,9 +14,10 @@ export const metadata: Metadata = {
 };
 
 const BookmarksPage = async ({ searchParams }: SearchParamsProps) => {
-  const mongoUser = await getMongoUser();
+  const { userId } = auth();
+  if (!userId) return redirect("/404");
   const questions = await getSavedQuestions({
-    mongoUser,
+    clerkId: userId,
     filter: searchParams.filter,
     page: searchParams?.page ? +searchParams.page : 1,
   });

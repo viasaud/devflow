@@ -1,5 +1,6 @@
+import { IUser } from "@/database/user.model";
 import { getAnswers } from "@/lib/actions/answer.action";
-import { getMongoUser, getTimeAgo } from "@/lib/utils";
+import { getTimeAgo } from "@/lib/utils";
 import { Answer } from "@/types";
 
 import DeleteItem from "../shared/delete-item";
@@ -10,24 +11,15 @@ import VoteAndSave from "../shared/vote-and-save";
 
 interface Props {
   questionId: string;
-  authorId: string;
-  totalAnswers: number;
   page?: number;
-  filter?: number;
+  user: IUser;
 }
 
-const AnswerList = async ({
-  questionId,
-  authorId,
-  totalAnswers,
-  page,
-  filter,
-}: Props) => {
+const AnswerList = async ({ questionId, page, user }: Props) => {
   const answers = await getAnswers({
     questionId: JSON.parse(questionId),
     page,
   });
-  const mongoUser = await getMongoUser();
 
   return (
     <div>
@@ -38,7 +30,7 @@ const AnswerList = async ({
             <p className="text-secondary ml-auto font-geistMono text-xs">
               {getTimeAgo(answer.createdAt)}
             </p>
-            {answer.author.username === mongoUser?.username && (
+            {answer.author.username === user?.username && (
               <div className="ml-3">
                 <DeleteItem type="answer" itemId={JSON.stringify(answer._id)} />
               </div>
@@ -53,9 +45,9 @@ const AnswerList = async ({
               downVotes={answer.downVotes.length}
               type={"answer"}
               itemId={JSON.stringify(answer._id)}
-              userId={JSON.stringify(mongoUser?._id)}
-              hasUpVoted={answer.upVotes.includes(mongoUser?._id)}
-              hasDownVoted={answer.downVotes.includes(mongoUser?._id)}
+              userId={JSON.stringify(user?._id)}
+              hasUpVoted={answer.upVotes.includes(user?._id)}
+              hasDownVoted={answer.downVotes.includes(user?._id)}
             />
           </div>
         </div>

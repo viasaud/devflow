@@ -116,7 +116,7 @@ export const toggleSaveQuestion = async (params: toggleSaveQuestionParams) => {
 };
 
 export const getSavedQuestions = async (params: getSavedQuestionsParams) => {
-  const { filter, mongoUser, page = 1, pageSize = 20 } = params;
+  const { filter, clerkId, page = 1, pageSize = 20 } = params;
 
   const skip = (page - 1) * pageSize;
 
@@ -135,7 +135,7 @@ export const getSavedQuestions = async (params: getSavedQuestionsParams) => {
     sortOptions = { createdAt: -1 };
   }
   return await runWithDatabase(async () => {
-    const user = await User.findOne({ _id: mongoUser._id }).populate({
+    const user = await User.findOne({ clerkId }).populate({
       path: "savedQuestions",
       match: searchFilter,
       options: {
@@ -151,18 +151,16 @@ export const getSavedQuestions = async (params: getSavedQuestionsParams) => {
 
     if (!user) throw new Error("User not found");
 
-    const totalQuestions = await User.findOne({ _id: mongoUser._id }).then(
-      (user) => {
-        return user?.savedQuestions.length;
-      }
-    );
+    const totalQuestions = await User.findOne({ clerkId }).then((user) => {
+      return user?.savedQuestions.length;
+    });
     const hasNext = totalQuestions > page * pageSize;
 
     return { savedQuestions: user.savedQuestions, hasNext };
   });
 };
 
-export const getUserInfo = async ({ username }: { username: string }) => {
+export const getUserData = async ({ username }: { username: string }) => {
   return await runWithDatabase(async () => {
     const user = await User.findOne({ username });
     if (!user) throw new Error("User not found in getUserInfo()");

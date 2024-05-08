@@ -16,10 +16,10 @@ interface Content extends Question {
 
 const QuestionContent = ({
   question,
-  mongoUser,
+  user,
 }: {
   question: Content;
-  mongoUser: { _id: string; savedQuestions: string[]; username: string };
+  user: { _id: string; savedQuestions: string[]; username: string };
 }) => {
   return (
     <div>
@@ -28,7 +28,7 @@ const QuestionContent = ({
         <p className="text-secondary ml-auto font-geistMono text-xs">
           {getTimeAgo(question.createdAt)}
         </p>
-        {question.author.username === mongoUser?.username && (
+        {question.author.username === user?.username && (
           <div className="flex-center ml-3 gap-1">
             <EditQuestion questionId={JSON.stringify(question._id)} />
 
@@ -48,10 +48,10 @@ const QuestionContent = ({
           downVotes={question.downVotes.length}
           type={"question"}
           itemId={JSON.stringify(question._id)}
-          userId={JSON.stringify(mongoUser?._id)}
-          hasUpVoted={question.upVotes.includes(mongoUser?._id)}
-          hasDownVoted={question.downVotes.includes(mongoUser?._id)}
-          hasSaved={mongoUser?.savedQuestions.includes(question._id)}
+          userId={JSON.stringify(user?._id)}
+          hasUpVoted={question.upVotes.includes(user?._id)}
+          hasDownVoted={question.downVotes.includes(user?._id)}
+          hasSaved={user?.savedQuestions.includes(question._id)}
           bookmarkButton
         />
         <div className="flex-start gap-1 max-md:hidden">
@@ -64,7 +64,7 @@ const QuestionContent = ({
             answers={question.answers.length}
             views={question.views}
             itemId={JSON.stringify(question._id)}
-            userId={JSON.stringify(mongoUser?._id)}
+            userId={JSON.stringify(user?._id)}
           />
         </div>
       </section>

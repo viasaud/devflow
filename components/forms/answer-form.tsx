@@ -78,7 +78,6 @@ const AnswerForm = ({
       });
 
       const data = await response.json();
-      console.log(data);
 
       const formattedAnswer = data.reply.replace(/<br>/g, "\n");
       if (editorRef.current) {

@@ -25,12 +25,12 @@ import { createQuestion, editQuestion } from "@/lib/actions/question.action";
 import { QuestionSchema } from "@/lib/validations";
 
 interface Props {
-  mongoUserId: string;
+  userId: string;
   question?: string;
   edit?: boolean;
 }
 
-const QuestionForm = ({ mongoUserId, question, edit }: Props) => {
+const QuestionForm = ({ userId, question, edit }: Props) => {
   const { mode } = useTheme();
   const editorRef = useRef(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -108,7 +108,7 @@ const QuestionForm = ({ mongoUserId, question, edit }: Props) => {
           title: values.title,
           content: values.description,
           tags: values.tags,
-          author: JSON.parse(mongoUserId),
+          author: JSON.parse(userId),
           path: pathname,
         });
         setIsSubmitting(true);

@@ -1,9 +1,6 @@
-import { auth } from "@clerk/nextjs/server";
 import { type ClassValue, clsx } from "clsx";
 import qs from "query-string";
 import { twMerge } from "tailwind-merge";
-
-import { getUserById } from "./actions/user.action";
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
@@ -49,11 +46,6 @@ export function getTimeAgo(date: Date) {
     return `${seconds} second${seconds > 1 ? "s" : ""} ago`;
   }
 }
-
-export const getMongoUser = async () => {
-  const { userId } = auth();
-  return userId ? await getUserById({ clerkId: userId }) : undefined;
-};
 
 interface UrlQueryParams {
   params: string;

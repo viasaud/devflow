@@ -11,7 +11,7 @@ import { QUESTION_ICON_SIZE } from "@/constants/constants";
 import { Avatar } from "../ui/avatar";
 
 interface Props {
-  userInfo: {
+  user: {
     user: {
       avatar: string;
       name: string;
@@ -25,46 +25,46 @@ interface Props {
   };
 }
 
-const ProfileInfo = ({ userInfo }: Props) => {
+const ProfileInfo = ({ user }: Props) => {
   return (
     <div className="flex-center flex-col gap-3.5">
       <Avatar className="border-primary size-32 border-2">
         <Image
-          src={userInfo?.user.avatar}
+          src={user?.user.avatar}
           alt="Profile Picture"
           width={128}
           height={128}
+          quality={40}
+          priority={true}
         />
       </Avatar>
       <div className="flex-center flex-col">
-        <p className="text-primary text-xl font-semibold">
-          {userInfo?.user.name}
-        </p>
+        <p className="text-primary text-xl font-semibold">{user?.user.name}</p>
         <p className="text-secondary font-geistMono text-sm">
-          @{userInfo?.user.username}
+          @{user?.user.username}
         </p>
       </div>
-      <p className="text-primary text-center text-sm">{userInfo?.user.bio}</p>
+      <p className="text-primary text-center text-sm">{user?.user.bio}</p>
       <div className="text-secondary flex-center w-full gap-4">
         <div className="flex-center gap-1">
           <RiCalendar2Line size={QUESTION_ICON_SIZE} />
           <p className="font-geistMono text-xs">
-            Joined {userInfo?.user.joinedAt.toLocaleDateString()}
+            Joined {user?.user.joinedAt.toLocaleDateString()}
           </p>
         </div>
         <div className="flex-center gap-1">
           <RiMapPinLine size={QUESTION_ICON_SIZE} />
           <p className="font-geistMono text-xs">
-            {userInfo?.user.location ?? "Earth"}
+            {user?.user.location ?? "Earth"}
           </p>
         </div>
         <div className="flex-center gap-1">
           <RiBug2Line size={QUESTION_ICON_SIZE} />
-          <p className="font-geistMono text-xs">{userInfo?.totalQuestions}</p>
+          <p className="font-geistMono text-xs">{user?.totalQuestions}</p>
         </div>
         <div className="flex-center gap-1">
           <RiChat1Line size={QUESTION_ICON_SIZE} />
-          <p className="font-geistMono text-xs">{userInfo?.totalAnswers}</p>
+          <p className="font-geistMono text-xs">{user?.totalAnswers}</p>
         </div>
       </div>
     </div>
