@@ -2,13 +2,12 @@
 
 import { RiDeleteBinLine } from "@remixicon/react";
 import { usePathname, useRouter } from "next/navigation";
+import React from "react";
+import { toast } from "sonner";
 
 import { QUESTION_ICON_SIZE } from "@/constants/constants";
 import { deleteAnswer } from "@/lib/actions/answer.action";
 import { deleteQuestion } from "@/lib/actions/question.action";
-
-import { ToastAction } from "../ui/toast";
-import { toast } from "../ui/use-toast";
 
 const DeleteItemButton = ({
   type,
@@ -24,11 +23,13 @@ const DeleteItemButton = ({
     if (type === "question") {
       return async () => {
         await deleteQuestion(JSON.parse(itemId), pathname);
+        toast.success("Question deleted successfully");
         router.push("/");
       };
     } else if (type === "answer") {
       return async () => {
         await deleteAnswer(JSON.parse(itemId), pathname);
+        toast.success("Answer deleted successfully");
         router.push(pathname);
       };
     }
@@ -38,18 +39,14 @@ const DeleteItemButton = ({
     <div
       className="border-primary hover:border-hover no-focus text-primary group flex cursor-pointer items-center rounded-md border p-1"
       onClick={() => {
-        toast({
-          className:
-            "text-primary border-primary border backdrop-blur rounded-md",
-          description: `Are you sure you want to delete this ${type}?`,
+        toast.error(`Confirm deleting the ${type}`, {
           action: (
-            <ToastAction
-              altText={`Delete ${type}`}
-              className="rounded-md border border-red-500 text-red-500 backdrop-blur"
+            <button
+              className="ml-auto rounded-md bg-red-700 p-1 px-2 text-red-100 hover:brightness-90"
               onClick={handleDelete()}
             >
-              Delete {type}
-            </ToastAction>
+              Delete
+            </button>
           ),
         });
       }}

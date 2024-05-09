@@ -3,8 +3,8 @@
 import { RiHashtag } from "@remixicon/react";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
+import { toast } from "sonner";
 
-import { toast, useToast } from "@/components/ui/use-toast";
 import { THEME_MENU_ICON_SIZE, sidebarLinks } from "@/constants/constants";
 import { Tag } from "@/types";
 
@@ -12,17 +12,11 @@ import { Button } from "../../ui/button";
 
 const Discover = ({ username }: { username: string }) => {
   const pathname = usePathname();
-  const { toast } = useToast();
   const router = useRouter();
 
   const handleClick = (route: string) => () => {
     if ((route === "/profile" || route === "/bookmarks") && !username) {
-      return toast({
-        className:
-          "text-primary border-primary border bg-yellow-500/50 dark:bg-yellow-600/40 border-yellow-600 backdrop-blur rounded-md",
-        title: "Sign In Required",
-        description: `Please sign in to your account in order to access ${route === "/profile" ? "your profile" : "your bookmarks"}.`,
-      });
+      return toast.error("Sign in required to access this page");
     }
     return router.push(route === "/profile" ? `/profile/${username}` : route);
   };
@@ -97,13 +91,7 @@ const SidebarContent = ({
           variant="default"
           onClick={() => {
             if (!username)
-              return toast({
-                className:
-                  "text-primary border-primary border bg-yellow-500/50 dark:bg-yellow-600/40 border-yellow-600 backdrop-blur rounded-md",
-                title: "Sign In Required",
-                description:
-                  "Please sign in to your account in order to ask a question.",
-              });
+              return toast.error("Sign in required to access this page");
           }}
         >
           Ask a Question

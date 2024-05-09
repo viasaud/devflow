@@ -5,6 +5,7 @@ import { RiLoaderLine, RiSparkling2Fill } from "@remixicon/react";
 import { usePathname } from "next/navigation";
 import { useRef, useState } from "react";
 import { useForm } from "react-hook-form";
+import { toast } from "sonner";
 import { z } from "zod";
 
 import { createAnswer } from "@/lib/actions/answer.action";
@@ -51,6 +52,7 @@ const AnswerForm = ({
         // @ts-ignore
         editorRef.current.setContent("");
       }
+      toast.success("Answer submitted successfully");
     } catch (error) {
       console.log(error);
     } finally {

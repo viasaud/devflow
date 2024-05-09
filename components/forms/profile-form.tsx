@@ -4,11 +4,11 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
+import { toast } from "sonner";
 import { z } from "zod";
 
 import { Button } from "@/components/ui/button";
 import { Form } from "@/components/ui/form";
-import { useToast } from "@/components/ui/use-toast";
 import { IUser } from "@/database/user.model";
 import { updateUser } from "@/lib/actions/user.action";
 import { profileSchema } from "@/lib/validations";
@@ -19,7 +19,6 @@ export function ProfileForm({ user }: { user: string }) {
   const userData = JSON.parse(user) as IUser;
   const [isSubmitting, setIsSubmitting] = useState(false);
   const router = useRouter();
-  const { toast } = useToast();
 
   const form = useForm<z.infer<typeof profileSchema>>({
     resolver: zodResolver(profileSchema),
@@ -33,11 +32,7 @@ export function ProfileForm({ user }: { user: string }) {
 
   async function onSubmit(values: z.infer<typeof profileSchema>) {
     setIsSubmitting(true);
-    toast({
-      className: "text-primary border-primary border backdrop-blur rounded-md",
-      title: "Profile Updated",
-      description: "Your profile has been updated successfully.",
-    });
+    toast.success("Profile Updated Successfully");
     try {
       await updateUser({
         clerkId: userData.clerkId,

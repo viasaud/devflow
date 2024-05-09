@@ -7,8 +7,8 @@ import {
   RiArrowDownDoubleLine,
 } from "@remixicon/react";
 import { usePathname } from "next/navigation";
+import { toast } from "sonner";
 
-import { useToast } from "@/components/ui/use-toast";
 import { QUESTION_ICON_SIZE } from "@/constants/constants";
 import { upVoteAnswer, downVoteAnswer } from "@/lib/actions/answer.action";
 import {
@@ -42,17 +42,9 @@ const VoteAndSave = ({
   bookmarkButton,
 }: Props) => {
   const pathname = usePathname();
-  const { toast } = useToast();
 
   const handleVote = async (voteType: string) => {
-    if (!userId)
-      return toast({
-        className:
-          "text-primary border-primary border bg-yellow-500/50 dark:bg-yellow-600/40 border-yellow-600 backdrop-blur rounded-md",
-        title: "Sign In Required",
-        description:
-          "Please sign in to your account in order to access the voting feature.",
-      });
+    if (!userId) return toast.error("Sing in required to vote");
     if (type === "question") {
       if (voteType === "upVote") {
         await upVoteQuestion({
@@ -62,12 +54,7 @@ const VoteAndSave = ({
           hasDownVoted,
           path: pathname,
         });
-        return toast({
-          className:
-            "text-primary border-primary border backdrop-blur rounded-md",
-          title: `${hasUpVoted ? "Upvote Removed" : "Upvoted"}`,
-          description: `${hasUpVoted ? "You have removed your upvote." : "You have upvoted the question."}`,
-        });
+        return toast.success(`${hasUpVoted ? "Upvote Removed" : "Upvoted"}`);
       } else if (voteType === "downVote") {
         await downVoteQuestion({
           questionId: JSON.parse(itemId),
@@ -76,12 +63,9 @@ const VoteAndSave = ({
           hasDownVoted,
           path: pathname,
         });
-        return toast({
-          className:
-            "text-primary border-primary border backdrop-blur rounded-md",
-          title: `${hasDownVoted ? "Downvote Removed" : "Downvoted"}`,
-          description: `${hasDownVoted ? "You have removed your downvote." : "You have downvoted the question."}`,
-        });
+        return toast.success(
+          `${hasDownVoted ? "Downvote Removed" : "Downvoted"}`
+        );
       }
     } else if (type === "answer") {
       if (voteType === "upVote") {
@@ -92,12 +76,7 @@ const VoteAndSave = ({
           hasDownVoted,
           path: pathname,
         });
-        return toast({
-          className:
-            "text-primary border-primary border backdrop-blur rounded-md",
-          title: `${hasUpVoted ? "Upvote Removed" : "Upvoted"}`,
-          description: `${hasUpVoted ? "You have removed your upvote." : "You have upvoted the answer."}`,
-        });
+        return toast.success(`${hasUpVoted ? "Upvote Removed" : "Upvoted"}`);
       } else if (voteType === "downVote") {
         await downVoteAnswer({
           answerId: JSON.parse(itemId),
@@ -106,37 +85,22 @@ const VoteAndSave = ({
           hasDownVoted,
           path: pathname,
         });
-        return toast({
-          className:
-            "text-primary border-primary border backdrop-blur rounded-md",
-          title: `${hasDownVoted ? "Downvote Removed" : "Downvoted"}`,
-          description: `${hasDownVoted ? "You have removed your downvote." : "You have downvoted the answer."}`,
-        });
+        return toast.success(
+          `${hasDownVoted ? "Downvote Removed" : "Downvoted"}`
+        );
       }
     }
   };
 
   const handleSave = async () => {
-    if (!userId)
-      return toast({
-        className:
-          "text-primary border-primary border bg-yellow-500/50 dark:bg-yellow-600/40 border-yellow-600 backdrop-blur rounded-md",
-        title: "Sign In Required",
-        description:
-          "Please sign in to your account in order to access the bookmark feature.",
-      });
+    if (!userId) return toast.error("Sign in required to bookmark");
     else {
       await toggleSaveQuestion({
         questionId: JSON.parse(itemId),
         userId: JSON.parse(userId),
         path: pathname,
       });
-      return toast({
-        className:
-          "text-primary border-primary border backdrop-blur rounded-md",
-        title: `${hasSaved ? "Bookmark Removed" : "Bookmarked"}`,
-        description: `${hasSaved ? "You have removed the bookmark." : "You have bookmarked the question."}`,
-      });
+      return toast.success(`${hasSaved ? "Bookmark Removed" : "Bookmarked"}`);
     }
   };
 

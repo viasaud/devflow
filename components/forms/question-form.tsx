@@ -5,6 +5,7 @@ import { RiCloseLine } from "@remixicon/react";
 import { useRouter } from "next/navigation";
 import React, { useRef, useState } from "react";
 import { useForm } from "react-hook-form";
+import { toast } from "sonner";
 import { z } from "zod";
 
 import { Button } from "@/components/ui/button";
@@ -99,7 +100,7 @@ const QuestionForm = ({ userId, question, edit }: Props) => {
           path: "/",
         });
         setIsSubmitting(true);
-
+        toast.success("Question Edited Successfully");
         router.push(`/questions/${parsedQuestion._id}`);
       } else {
         await createQuestion({
@@ -110,7 +111,7 @@ const QuestionForm = ({ userId, question, edit }: Props) => {
           path: "/",
         });
         setIsSubmitting(true);
-
+        toast.success("Question Posted Successfully");
         router.push("/");
       }
     } catch (error) {
