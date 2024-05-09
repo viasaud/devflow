@@ -1,7 +1,7 @@
 "use client";
 
-import { SignedIn, SignedOut, UserButton } from "@clerk/nextjs";
-import { RiHashtag, RiMenuFill } from "@remixicon/react";
+import { SignOutButton, SignedIn, SignedOut } from "@clerk/nextjs";
+import { RiHashtag, RiLogoutCircleLine, RiMenuFill } from "@remixicon/react";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
@@ -135,15 +135,9 @@ const MobileNav = ({ username, tags }: { username: string; tags: string }) => {
               </Link>
             </SignedOut>
             <SignedIn>
-              <UserButton
-                afterSignOutUrl="/"
-                appearance={{
-                  elements: {
-                    avatarBox: "h-8 w-8",
-                  },
-                  variables: { colorPrimary: "#ff7000" },
-                }}
-              />
+              <SignOutButton>
+                <RiLogoutCircleLine className="cursor-pointer text-red-500 hover:opacity-90" />
+              </SignOutButton>
             </SignedIn>
           </div>
         </section>

@@ -34,15 +34,7 @@ const Navbar = async ({ user, tags }: { user: IUser; tags: ITag }) => {
             </Link>
           </SignedOut>
           <SignedIn>
-            <UserButton
-              afterSignOutUrl="/"
-              appearance={{
-                elements: {
-                  avatarBox: "h-8 w-8",
-                },
-                variables: { colorPrimary: "#ff7000" },
-              }}
-            />
+            <UserButton afterSignOutUrl="/" />
           </SignedIn>
         </div>
       </div>

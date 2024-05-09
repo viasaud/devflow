@@ -1,5 +1,3 @@
-import { ClerkProvider } from "@clerk/nextjs";
-import { dark } from "@clerk/themes";
 import { Analytics } from "@vercel/analytics/react";
 import { GeistMono } from "geist/font/mono";
 import { GeistSans } from "geist/font/sans";
@@ -26,16 +24,10 @@ export default function RootLayout({
       <body
         className={`${GeistMono.variable} ${GeistSans.variable} dark:dark-scrollbar light-scrollbar bg-primary min-h-screen scroll-smooth dark:bg-gradient-to-br dark:from-zinc-950 dark:from-20% dark:to-zinc-900`}
       >
-        <ClerkProvider
-          appearance={{
-            baseTheme: dark,
-          }}
-        >
-          <ThemeProvider>
-            {children}
-            <Analytics />
-          </ThemeProvider>
-        </ClerkProvider>
+        <ThemeProvider>
+          {children}
+          <Analytics />
+        </ThemeProvider>
       </body>
     </html>
   );

@@ -184,7 +184,7 @@ export const getSavedQuestions = async (params: getSavedQuestionsParams) => {
 export const getUserData = async ({ username }: { username: string }) => {
   return await runWithDatabase(async () => {
     const user = await User.findOne({ username });
-    if (!user) throw new Error("User not found in getUserInfo()");
+    if (!user) throw new Error("User not found in getUserData()");
 
     const params = new URLSearchParams();
 

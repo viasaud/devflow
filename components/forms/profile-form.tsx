@@ -34,17 +34,18 @@ export function ProfileForm({ user }: { user: string }) {
     setIsSubmitting(true);
     toast.success("Profile Updated Successfully");
     try {
+      const updateData = {
+        name: values.name,
+        username: values.username,
+        location: values.location,
+        bio: values.bio,
+      };
       await updateUser({
         clerkId: userData.clerkId,
-        updateData: {
-          name: values.name,
-          username: values.username,
-          location: values.location,
-          bio: values.bio,
-        },
-        path: `/profile/${userData.username}`,
+        updateData,
+        path: `/`,
       });
-      router.push(`/profile/${userData.username}`);
+      router.push(`/`);
     } catch (error) {
       console.error(error);
     }
