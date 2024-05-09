@@ -1,7 +1,7 @@
 "use client";
 
 import { RiDeleteBinLine } from "@remixicon/react";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 
 import { QUESTION_ICON_SIZE } from "@/constants/constants";
 import { deleteAnswer } from "@/lib/actions/answer.action";
@@ -10,17 +10,26 @@ import { deleteQuestion } from "@/lib/actions/question.action";
 import { ToastAction } from "../ui/toast";
 import { toast } from "../ui/use-toast";
 
-const DeleteItem = ({ type, itemId }: { type: string; itemId: string }) => {
+const DeleteItemButton = ({
+  type,
+  itemId,
+}: {
+  type: string;
+  itemId: string;
+}) => {
   const pathname = usePathname();
+  const router = useRouter();
 
   const handleDelete = () => {
     if (type === "question") {
       return async () => {
         await deleteQuestion(JSON.parse(itemId), pathname);
+        router.push("/");
       };
     } else if (type === "answer") {
       return async () => {
         await deleteAnswer(JSON.parse(itemId), pathname);
+        router.push(pathname);
       };
     }
   };
@@ -53,4 +62,4 @@ const DeleteItem = ({ type, itemId }: { type: string; itemId: string }) => {
   );
 };
 
-export default DeleteItem;
+export default DeleteItemButton;

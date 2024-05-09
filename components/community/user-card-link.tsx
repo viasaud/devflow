@@ -9,7 +9,7 @@ interface User {
   name: string;
 }
 
-const UserCard = async ({ user }: { user: User }) => {
+const UserCardLink = async ({ user }: { user: User }) => {
   return (
     <Link href={`/profile/${user.username}`}>
       <div className="flex h-full flex-col items-center justify-center gap-4 p-5">
@@ -33,4 +33,4 @@ const UserCard = async ({ user }: { user: User }) => {
   );
 };
 
-export default UserCard;
+export default UserCardLink;

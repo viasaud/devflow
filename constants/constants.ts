@@ -116,9 +116,3 @@ export const getSortOptions = (type: string) => {
 
   return { sortOptions, defaultSortOption };
 };
-
-export const GlobalSearchFilters = [
-  { name: "Question", value: "question" },
-  { name: "User", value: "user" },
-  { name: "Tag", value: "tag" },
-];

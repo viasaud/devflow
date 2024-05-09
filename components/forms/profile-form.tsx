@@ -7,20 +7,13 @@ import { useForm } from "react-hook-form";
 import { z } from "zod";
 
 import { Button } from "@/components/ui/button";
-import {
-  Form,
-  FormControl,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
+import { Form } from "@/components/ui/form";
 import { useToast } from "@/components/ui/use-toast";
 import { IUser } from "@/database/user.model";
 import { updateUser } from "@/lib/actions/user.action";
 import { profileSchema } from "@/lib/validations";
+
+import InputField from "./input-field";
 
 export function ProfileForm({ user }: { user: string }) {
   const userData = JSON.parse(user) as IUser;
@@ -68,81 +61,29 @@ export function ProfileForm({ user }: { user: string }) {
         onSubmit={form.handleSubmit(onSubmit)}
         className="flex flex-col gap-8"
       >
-        <FormField
-          control={form.control}
+        <InputField
           name="name"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>
-                Name<span className="text-teal-500">*</span>
-              </FormLabel>
-              <FormControl>
-                <Input
-                  placeholder="e.g. Saud Alshehri"
-                  className="border-primary text-primary no-focus w-full border bg-transparent outline-none"
-                  {...field}
-                />
-              </FormControl>
-              <FormMessage className="text-red-500" />
-            </FormItem>
-          )}
+          label="Name"
+          placeholder="e.g. Saud Alshehri"
+          form={form}
         />
-        <FormField
-          control={form.control}
+        <InputField
           name="username"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>
-                Username<span className="text-teal-500">*</span>
-              </FormLabel>
-              <FormControl>
-                <Input
-                  placeholder="e.g. viasaud"
-                  className="border-primary text-primary no-focus w-full border bg-transparent outline-none"
-                  {...field}
-                />
-              </FormControl>
-              <FormMessage className="text-red-500" />
-            </FormItem>
-          )}
+          label="Username"
+          placeholder="e.g. viasaud"
+          form={form}
         />
-        <FormField
-          control={form.control}
+        <InputField
           name="location"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>
-                Location<span className="text-teal-500">*</span>
-              </FormLabel>
-              <FormControl>
-                <Input
-                  placeholder="e.g. Saudi Arabia"
-                  className="border-primary text-primary no-focus w-full border bg-transparent outline-none"
-                  {...field}
-                />
-              </FormControl>
-              <FormMessage className="text-red-500" />
-            </FormItem>
-          )}
+          label="Location"
+          placeholder="e.g. Saudi Arabia"
+          form={form}
         />
-        <FormField
-          control={form.control}
+        <InputField
           name="bio"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>
-                Bio<span className="text-teal-500">*</span>
-              </FormLabel>
-              <FormControl>
-                <Textarea
-                  placeholder="e.g. I am a software engineer..."
-                  className="border-primary text-primary no-focus w-full border bg-transparent outline-none"
-                  {...field}
-                />
-              </FormControl>
-              <FormMessage className="text-red-500" />
-            </FormItem>
-          )}
+          label="Bio"
+          placeholder="e.g. I am a software engineer..."
+          form={form}
         />
 
         <Button type="submit" variant="default_small" disabled={isSubmitting}>

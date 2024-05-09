@@ -5,9 +5,9 @@ import { getUserById } from "@/lib/actions/user.action";
 import { getTimeAgo } from "@/lib/utils";
 import { Question } from "@/types";
 
-import ContentStats from "../shared/content-stats";
+import AuthorProfileLink from "../shared/author-profile-link";
+import Stats from "../shared/stats";
 import Tag from "../shared/tag";
-import UserProfileLink from "../shared/user-profile-link";
 import VoteAndSave from "../shared/vote-and-save";
 
 const QuestionCard = async ({
@@ -27,7 +27,7 @@ const QuestionCard = async ({
   return (
     <div className="flex flex-col">
       <header className="flex items-center">
-        <UserProfileLink author={author} />
+        <AuthorProfileLink author={author} />
         <p className="text-secondary ml-auto font-geistMono text-xs">
           {getTimeAgo(createdAt)}
         </p>
@@ -57,7 +57,7 @@ const QuestionCard = async ({
         </div>
 
         <div className="flex items-center justify-center gap-2">
-          <ContentStats
+          <Stats
             answers={answers.length}
             views={views}
             itemId={JSON.stringify(_id)}

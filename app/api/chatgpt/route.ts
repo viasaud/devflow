@@ -16,7 +16,7 @@ export const POST = async (request: Request) => {
         },
         {
           role: "user",
-          content: `Answer this: ${question}. NEVER surround the answer.`,
+          content: `Answer this: ${question}. NEVER surround the answer. Only respond in HTML format. No need to start with \`\`\`html.`,
         },
       ],
       model: "gpt-3.5-turbo",

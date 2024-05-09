@@ -2,24 +2,18 @@
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import { RiLoaderLine, RiSparkling2Fill } from "@remixicon/react";
-import { Editor } from "@tinymce/tinymce-react";
 import { usePathname } from "next/navigation";
 import { useRef, useState } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 
-import { useTheme } from "@/context/ThemeProvider";
 import { createAnswer } from "@/lib/actions/answer.action";
 import { AnswerSchema } from "@/lib/validations";
 
 import { Button } from "../ui/button";
-import {
-  Form,
-  FormControl,
-  FormField,
-  FormItem,
-  FormMessage,
-} from "../ui/form";
+import { Form } from "../ui/form";
+
+import TinyEditor from "./tiny-editor";
 
 const AnswerForm = ({
   authorId,
@@ -32,7 +26,6 @@ const AnswerForm = ({
 }) => {
   const pathname = usePathname();
   const editorRef = useRef(null);
-  const { mode } = useTheme();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmittingAI, setIsSubmittingAI] = useState(false);
 
@@ -119,55 +112,7 @@ const AnswerForm = ({
         className="mb-20 mt-1 flex max-w-full flex-col gap-10 lg:w-screen"
         onSubmit={form.handleSubmit(handleCreateAnswer)}
       >
-        <FormField
-          control={form.control}
-          name="answer"
-          render={({ field }) => (
-            <FormItem className="flex w-full flex-col">
-              <FormControl>
-                <Editor
-                  apiKey={process.env.NEXT_PUBLIC_TINYMCE_API_KEY}
-                  onInit={(
-                    evt,
-                    editor // @ts-ignore
-                  ) => (editorRef.current = editor)}
-                  onEditorChange={(content) => form.setValue("answer", content)}
-                  init={{
-                    height: 350,
-                    menubar: false,
-                    plugins: [
-                      "advlist",
-                      "autolink",
-                      "lists",
-                      "link",
-                      "image",
-                      "charmap",
-                      "preview",
-                      "anchor",
-                      "searchreplace",
-                      "visualblocks",
-                      "codesample",
-                      "fullscreen",
-                      "insertdatetime",
-                      "media",
-                      "table",
-                    ],
-                    toolbar:
-                      "undo redo | blocks | " +
-                      "codesample | bold italic forecolor | alignleft aligncenter |" +
-                      "alignright alignjustify | bullist numlist",
-                    content_style: "body { font-size:14px }",
-                    skin: mode === "dark" ? "oxide-dark" : "oxide",
-                    content_css: mode === "dark" ? "dark" : "default",
-                  }}
-                />
-
-                {/* Tiptap text editor is better for styling reasons */}
-              </FormControl>
-              <FormMessage className="text-red-500" />
-            </FormItem>
-          )}
-        />
+        <TinyEditor name="answer" form={form} editorRef={editorRef} />
         <Button type="submit" variant="default_small" disabled={isSubmitting}>
           {isSubmitting ? "Submitting..." : "Submit Answer"}
         </Button>

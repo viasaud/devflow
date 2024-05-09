@@ -6,11 +6,11 @@ import { useSearchParams } from "next/navigation";
 import React, { useEffect, useState } from "react";
 
 import { SMALL_ICON_SIZE } from "@/constants/constants";
-import { globalSearch } from "@/lib/actions/general.action";
+import { Search } from "@/lib/actions/general.action";
 
-import GlobalFilters from "./global-filters";
+import SearchFilters from "./search-filters";
 
-const GlobalResult = () => {
+const SearchResults = () => {
   const searchParams = useSearchParams();
 
   const [isLoading, setIsLoading] = useState(false);
@@ -25,7 +25,7 @@ const GlobalResult = () => {
       setIsLoading(true);
 
       try {
-        const res = await globalSearch({ query: q, type });
+        const res = await Search({ query: q, type });
 
         setResult(JSON.parse(res));
       } catch (error) {
@@ -55,7 +55,7 @@ const GlobalResult = () => {
 
   return (
     <div className="border-primary bg-primary absolute top-full z-10 mt-3 w-full rounded-lg border p-4">
-      <GlobalFilters />
+      <SearchFilters />
 
       <div className="space-y-5">
         <p className="text-primary text-xs uppercase">Top matches</p>
@@ -101,4 +101,4 @@ const GlobalResult = () => {
   );
 };
 
-export default GlobalResult;
+export default SearchResults;

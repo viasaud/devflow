@@ -7,9 +7,9 @@ import { useRef, useState, useEffect } from "react";
 import { Input } from "@/components/ui/input";
 import { formUrlQuery, removeKeysFromQuery } from "@/lib/utils";
 
-import GlobalResult from "./global-result";
+import SearchResults from "./search-results";
 
-const GlobalSearch = () => {
+const Search = () => {
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
@@ -86,9 +86,9 @@ const GlobalSearch = () => {
           }}
         />
       </div>
-      {isOpen && <GlobalResult />}
+      {isOpen && <SearchResults />}
     </div>
   );
 };
 
-export default GlobalSearch;
+export default Search;

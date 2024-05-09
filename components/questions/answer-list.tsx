@@ -3,10 +3,10 @@ import { getAnswers } from "@/lib/actions/answer.action";
 import { getTimeAgo } from "@/lib/utils";
 import { Answer } from "@/types";
 
-import DeleteItem from "../shared/delete-item";
+import AuthorProfileLink from "../shared/author-profile-link";
+import DeleteItemButton from "../shared/delete-item-button";
 import Pagination from "../shared/pagination";
 import ParseHTML from "../shared/parse-html";
-import UserProfileLink from "../shared/user-profile-link";
 import VoteAndSave from "../shared/vote-and-save";
 
 interface Props {
@@ -26,13 +26,16 @@ const AnswerList = async ({ questionId, page, user }: Props) => {
       {answers?.answers.map((answer: Answer) => (
         <div key={answer._id}>
           <div className="flex-start py-3.5">
-            <UserProfileLink author={answer.author} />
+            <AuthorProfileLink author={answer.author} />
             <p className="text-secondary ml-auto font-geistMono text-xs">
               {getTimeAgo(answer.createdAt)}
             </p>
             {answer.author.username === user?.username && (
               <div className="ml-3">
-                <DeleteItem type="answer" itemId={JSON.stringify(answer._id)} />
+                <DeleteItemButton
+                  type="answer"
+                  itemId={JSON.stringify(answer._id)}
+                />
               </div>
             )}
           </div>

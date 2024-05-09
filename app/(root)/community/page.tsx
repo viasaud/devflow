@@ -1,6 +1,6 @@
 import { Metadata } from "next";
 
-import UserCard from "@/components/community/user-card";
+import UserCardLink from "@/components/community/user-card-link";
 import Filter from "@/components/shared/filter";
 import Pagination from "@/components/shared/pagination";
 import { getUsers } from "@/lib/actions/user.action";
@@ -27,7 +27,7 @@ const CommunityPage = async ({ searchParams }: SearchParamsProps) => {
             className="border-primary hover:bg-hover w-40 cursor-pointer rounded border"
             key={user.username}
           >
-            <UserCard user={user} />
+            <UserCardLink user={user} />
           </div>
         ))}
       </div>

@@ -3,10 +3,15 @@
 import { useRouter, useSearchParams } from "next/navigation";
 import React, { useState } from "react";
 
-import { GlobalSearchFilters } from "@/constants/constants";
 import { formUrlQuery } from "@/lib/utils";
 
-const GlobalFilters = () => {
+const filters = [
+  { name: "Question", value: "question" },
+  { name: "User", value: "user" },
+  { name: "Tag", value: "tag" },
+];
+
+const SearchFilters = () => {
   const router = useRouter();
   const searchParams = useSearchParams();
 
@@ -42,7 +47,7 @@ const GlobalFilters = () => {
     <div className="flex items-center gap-5 max-md:hidden md:mb-4">
       <p className="text-primary text-xs uppercase">Filters</p>
       <div className="flex items-center gap-2">
-        {GlobalSearchFilters.map((item) => (
+        {filters.map((item) => (
           <button
             type="button"
             key={item.value}
@@ -59,4 +64,4 @@ const GlobalFilters = () => {
   );
 };
 
-export default GlobalFilters;
+export default SearchFilters;

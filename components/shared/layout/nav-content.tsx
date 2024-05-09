@@ -78,7 +78,13 @@ const PopularTags = ({ tags }: { tags: string }) => {
   );
 };
 
-const NavContent = ({ username, tags }: { username: string; tags: string }) => {
+const SidebarContent = ({
+  username,
+  tags,
+}: {
+  username: string;
+  tags: string;
+}) => {
   return (
     <div className="flex flex-1 select-none flex-col">
       <Discover username={username} />
@@ -107,4 +113,4 @@ const NavContent = ({ username, tags }: { username: string; tags: string }) => {
   );
 };
 
-export default NavContent;
+export default SidebarContent;

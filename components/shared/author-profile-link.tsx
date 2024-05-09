@@ -5,24 +5,24 @@ import { Author } from "@/types";
 
 import { Avatar } from "../ui/avatar";
 
-const UserProfileLink = ({ author }: { author: Author }) => {
+const AuthorProfileLink = ({ author }: { author: Author }) => {
   return (
     <Link
       href={`/profile/${author.username}`}
-      className="text-hover flex-center w-fit cursor-pointer gap-2"
+      className="text-hover flex cursor-pointer items-center gap-2"
     >
       <Avatar>
         <Image
           src={author.avatar}
-          width={32}
-          height={32}
+          width={24}
+          height={24}
           alt="Profile Picture"
         />
       </Avatar>
 
-      <p className="text-primary text-sm">{author.name}</p>
+      <p className="text-xs">{author.name}</p>
     </Link>
   );
 };
 
-export default UserProfileLink;
+export default AuthorProfileLink;

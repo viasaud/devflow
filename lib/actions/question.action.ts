@@ -180,6 +180,8 @@ export const deleteQuestion = async (questionId: string, path: string) => {
       { $pull: { questions: questionId } }
     );
 
+    await Tag.deleteMany({ questions: { $size: 0 } });
+
     revalidatePath(path);
   });
 };

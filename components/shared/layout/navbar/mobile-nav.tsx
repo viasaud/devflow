@@ -89,7 +89,13 @@ const PopularTags = ({ tags }: { tags: string }) => {
   );
 };
 
-const NavContent = ({ username, tags }: { username: string; tags: string }) => {
+const SidebarContent = ({
+  username,
+  tags,
+}: {
+  username: string;
+  tags: string;
+}) => {
   return (
     <div className="flex flex-1 select-none flex-col">
       <Discover username={username} />
@@ -154,11 +160,11 @@ const MobileNav = ({ username, tags }: { username: string; tags: string }) => {
           </div>
         </section>
         <div className="flex h-full flex-col pb-12 pt-3.5">
-          <NavContent username={username} tags={tags} />
+          <SidebarContent username={username} tags={tags} />
         </div>
       </SheetContent>
     </Sheet>
   );
 };
 
-export { MobileNav, NavContent };
+export { MobileNav, SidebarContent };

@@ -15,7 +15,7 @@ interface QuestionProps {
   userId: string;
 }
 
-const ContentStats = ({ answers, views, itemId, userId }: QuestionProps) => {
+const Stats = ({ answers, views, itemId, userId }: QuestionProps) => {
   const pathname = usePathname();
   const router = useRouter();
 
@@ -48,4 +48,4 @@ const ContentStats = ({ answers, views, itemId, userId }: QuestionProps) => {
   );
 };
 
-export default ContentStats;
+export default Stats;

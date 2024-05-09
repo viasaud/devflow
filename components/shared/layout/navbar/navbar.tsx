@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button";
 import { ITag } from "@/database/tag.model";
 import { IUser } from "@/database/user.model";
 
-import GlobalSearch from "../search/global-search";
+import Search from "../search/search";
 
 import { MobileNav } from "./mobile-nav";
 import Theme from "./theme";
@@ -24,7 +24,7 @@ const Navbar = async ({ user, tags }: { user: IUser; tags: ITag }) => {
           DevOverflow
         </p>
       </Link>
-      <GlobalSearch />
+      <Search />
       <div className="flex items-center justify-end gap-2 xl:w-48">
         <Theme />
         <div className="max-md:hidden">

@@ -8,7 +8,7 @@ import { runWithDatabase } from "../mongoose";
 
 import { searchParams } from "./shared.types";
 
-export async function globalSearch(params: searchParams) {
+export async function Search(params: searchParams) {
   const { query, type } = params;
   const typeLowered = type?.toLowerCase();
   const regexQuery = { $regex: query, $options: "i" };

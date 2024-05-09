@@ -1,14 +1,14 @@
 import { getTimeAgo } from "@/lib/utils";
 import { Question } from "@/types";
 
-import ContentStats from "../shared/content-stats";
-import DeleteItem from "../shared/delete-item";
+import DeleteItemButton from "../shared/delete-item-button";
 import ParseHTML from "../shared/parse-html";
+import Stats from "../shared/stats";
 import Tag from "../shared/tag";
 import VoteAndSave from "../shared/vote-and-save";
 
+import AuthorProfileLink from "./author-profile-link";
 import EditQuestion from "./edit-question";
-import UserProfileLink from "./user-profile-link";
 
 interface Content extends Question {
   content: string;
@@ -24,7 +24,7 @@ const QuestionContent = ({
   return (
     <div>
       <div className="flex-start">
-        <UserProfileLink author={question.author} />
+        <AuthorProfileLink author={question.author} />
         <p className="text-secondary ml-auto font-geistMono text-xs">
           {getTimeAgo(question.createdAt)}
         </p>
@@ -32,7 +32,10 @@ const QuestionContent = ({
           <div className="flex-center ml-3 gap-1">
             <EditQuestion questionId={JSON.stringify(question._id)} />
 
-            <DeleteItem type="question" itemId={JSON.stringify(question._id)} />
+            <DeleteItemButton
+              type="question"
+              itemId={JSON.stringify(question._id)}
+            />
           </div>
         )}
       </div>
@@ -60,7 +63,7 @@ const QuestionContent = ({
           ))}
         </div>
         <div className="flex-center ml-auto gap-2">
-          <ContentStats
+          <Stats
             answers={question.answers.length}
             views={question.views}
             itemId={JSON.stringify(question._id)}
