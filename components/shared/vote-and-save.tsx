@@ -44,7 +44,7 @@ const VoteAndSave = ({
   const pathname = usePathname();
 
   const handleVote = async (voteType: string) => {
-    if (!userId) return toast.error("Sing in required to vote");
+    if (!userId) return toast.error("Sign in required to vote");
     if (type === "question") {
       if (voteType === "upVote") {
         await upVoteQuestion({
