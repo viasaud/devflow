@@ -34,7 +34,7 @@ const Navbar = async ({ user, tags }: { user: IUser; tags: ITag }) => {
             </Link>
           </SignedOut>
           <SignedIn>
-            <UserButton afterSignOutUrl="/" />
+            <UserButton />
           </SignedIn>
         </div>
       </div>
