@@ -64,6 +64,7 @@ export const getUserById = async ({ clerkId }: { clerkId: string }) => {
     params.set("height", "32");
     params.set("width", "32");
     params.set("fit", "crop");
+    params.set("quality", "50");
 
     user.avatar = `${user.avatar}?${params.toString()}`;
 
@@ -96,6 +97,7 @@ export const getUsers = async (params: getAllUsersParams) => {
     params.set("height", "112");
     params.set("width", "112");
     params.set("fit", "crop");
+    params.set("quality", "90");
 
     users.forEach((user) => {
       user.avatar = `${user.avatar}?${params.toString()}`;
@@ -191,6 +193,7 @@ export const getUserData = async ({ username }: { username: string }) => {
     params.set("height", "128");
     params.set("width", "128");
     params.set("fit", "crop");
+    params.set("quality", "90");
 
     user.avatar = `${user.avatar}?${params.toString()}`;
 
