@@ -1,5 +1,3 @@
-import { revalidatePath } from "next/cache";
-
 import QuestionCard from "@/components/questions/question-card";
 import Filter from "@/components/shared/filter";
 import Pagination from "@/components/shared/pagination";
@@ -11,8 +9,6 @@ const HomePage = async ({ searchParams }: SearchParamsProps) => {
     filter: searchParams.filter,
     page: searchParams?.page ? +searchParams.page : 1,
   });
-
-  revalidatePath("/");
 
   return (
     <main className="text-primary border-primary w-full">

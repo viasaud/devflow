@@ -70,6 +70,7 @@ export async function POST(req: Request) {
       avatar: image_url,
     });
     revalidatePath("/");
+    revalidatePath(`/profile/${username}`);
     return NextResponse.json({ message: "OK", user: mongoUser });
   }
 
