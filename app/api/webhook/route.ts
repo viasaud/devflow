@@ -69,8 +69,7 @@ export async function POST(req: Request) {
       email: email_addresses[0].email_address,
       avatar: image_url,
     });
-    revalidatePath("/");
-    revalidatePath(`/profile/${username}`);
+    revalidatePath("/(root)", "layout");
     return NextResponse.json({ message: "OK", user: mongoUser });
   }
 
