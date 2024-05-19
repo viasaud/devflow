@@ -98,7 +98,7 @@ export async function POST(req: Request) {
     const deletedUser = await deleteUser({
       clerkId: id!,
     });
-
+    revalidatePath("/(root)", "layout");
     return NextResponse.json({ message: "OK", user: deletedUser });
   }
 
