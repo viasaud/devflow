@@ -44,7 +44,7 @@ const TinyEditor = ({
           )}
           <FormControl>
             <Editor
-              apiKey={process.env.TINYMCE_API_KEY}
+              apiKey={process.env.NEXT_PUBLIC_TINYMCE_API_KEY}
               onInit={(
                 evt,
                 editor // @ts-ignore
