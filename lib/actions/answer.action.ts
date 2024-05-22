@@ -49,7 +49,7 @@ export const getAnswers = async (params: getAnswersParams) => {
       .skip(skip)
       .limit(pageSize)
       .populate("author")
-      .sort({ createdAt: -1 });
+      .sort({ createdAt: 1 });
 
     const totalAnswers = await Answer.countDocuments({ question: questionId });
     const hasNext = totalAnswers > page * pageSize;

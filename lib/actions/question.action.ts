@@ -77,8 +77,10 @@ export const getQuestions = async (params: getQuestionsParams) => {
   } else {
     sortOptions = { createdAt: -1 };
   }
+
   return await runWithDatabase(async () => {
     const questions = await Question.find(searchFilter)
+      .sort(sortOptions)
       .populate({
         path: "tags",
         model: Tag,
@@ -86,8 +88,7 @@ export const getQuestions = async (params: getQuestionsParams) => {
       })
       .populate({ path: "author", model: User })
       .skip(skip)
-      .limit(pageSize)
-      .sort(sortOptions);
+      .limit(pageSize);
 
     const totalQuestions = await Question.countDocuments(searchFilter);
     const hasNext = totalQuestions > page * pageSize;
@@ -195,6 +196,10 @@ export const editQuestion = async (params: editQuestionParams) => {
 
 export const getPopularQuestions = async () => {
   return await runWithDatabase(async () => {
-    return await Question.find({}).sort({ upVotes: -1 }).limit(5);
+    return await Question.aggregate([
+      { $addFields: { upVotesCount: { $size: "$upVotes" } } },
+      { $sort: { upVotesCount: -1 } },
+      { $limit: 5 },
+    ]);
   });
 };
