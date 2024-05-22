@@ -3,7 +3,7 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { RiLoaderLine, RiSparkling2Fill } from "@remixicon/react";
 import { revalidatePath } from "next/cache";
-import { usePathname, useRouter } from "next/navigation";
+import { usePathname } from "next/navigation";
 import { useRef, useState } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
@@ -28,7 +28,6 @@ const AnswerForm = ({
 }) => {
   const pathname = usePathname();
   const editorRef = useRef(null);
-  const router = useRouter();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmittingAI, setIsSubmittingAI] = useState(false);
 
@@ -54,8 +53,7 @@ const AnswerForm = ({
         // @ts-ignore
         editorRef.current.setContent("");
       }
-      revalidatePath("/(root)", "layout");
-      router.push(pathname);
+      revalidatePath(pathname);
       toast.success("Answer submitted successfully");
     } catch (error) {
       console.log(error);

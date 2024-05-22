@@ -23,16 +23,8 @@ export const createAnswer = async (params: createAnswerParams) => {
       content,
     });
 
-    const questionObject = await Question.findByIdAndUpdate(question, {
+    await Question.findByIdAndUpdate(question, {
       $push: { answers: newAnswer._id },
-    });
-
-    await Interaction.create({
-      user: author,
-      answer: newAnswer._id,
-      question,
-      action: "answer",
-      tags: questionObject.tags,
     });
 
     await User.findByIdAndUpdate(author, { $inc: { reputation: 10 } });
