@@ -105,7 +105,7 @@ const VoteAndSave = ({
   };
 
   return (
-    <div className="flex select-none items-center justify-end gap-3 font-geistMono">
+    <div className="flex select-none items-center justify-start gap-3 font-geistMono">
       {bookmarkButton && (
         <div
           className="border-primary hover:border-hover no-focus text-primary group flex cursor-pointer items-center rounded-md border p-1"
