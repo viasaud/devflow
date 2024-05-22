@@ -54,7 +54,7 @@ const AnswerForm = ({
         // @ts-ignore
         editorRef.current.setContent("");
       }
-      revalidatePath(pathname);
+      revalidatePath("/(root)", "layout");
       router.push(pathname);
       toast.success("Answer submitted successfully");
     } catch (error) {
