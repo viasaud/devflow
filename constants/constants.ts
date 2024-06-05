@@ -98,7 +98,7 @@ export const getSortOptions = (type: string) => {
   switch (type) {
     case "bookmarks":
       sortOptions = ["Hot", "Latest", "Open"]; // "popular" has been removed
-      defaultSortOption = sortOptions[2];
+      defaultSortOption = sortOptions[1];
       break;
     case "community":
       sortOptions = ["Top Contributors", "Latest", "Oldest"];
@@ -110,7 +110,7 @@ export const getSortOptions = (type: string) => {
       break;
     case "home":
       sortOptions = ["Hot", "Latest", "Open"]; // "popular" has been removed
-      defaultSortOption = sortOptions[2];
+      defaultSortOption = sortOptions[1];
       break;
   }
 
