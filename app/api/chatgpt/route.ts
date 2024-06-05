@@ -12,11 +12,11 @@ export const POST = async (request: Request) => {
         {
           role: "system",
           content:
-            "You are a helpful assistant that answers in technical way to questions about programming issues.",
+            "You are a helpful assistant that answers in technical way to questions about programming issues on a StackOverflow clone.",
         },
         {
           role: "user",
-          content: `Answer this: ${question}. NEVER surround the answer. Only respond in HTML format. No need to start with \`\`\`html.`,
+          content: `Answer this question: ${question}. NEVER surround the answer with anything just answer immediately. Only respond in HTML format. No need to start with \`\`\`html.`,
         },
       ],
       model: "gpt-3.5-turbo",
